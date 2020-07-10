@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: OpenShift Starter Guides</title>
+    <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/mlbparks-debugging.html">
+    <meta name="generator" content="Antora 2.3.3">
+    <link rel="stylesheet" href="../_/css/site.css">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="http://redhat-scholars.github.io/openshift-starter-guides">OpenShift Starter Guides</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="rhs-openshift-starter-guides" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">OpenShift Starter Guides</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-workshop-summary.html">Workshop Summary</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-environment.html">OCP architecture</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-parksmap-architecture.html">Parksmap Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-explore.html">Command Line Interface</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-docker.html">Parksmap App</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-scaling.html">Background: Deployment Configurations and Replication Controllers</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-routes.html">Background: Routes</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-logging.html">Background: Container Logs</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-permissions.html">Background: Permissions</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-rsh.html">Background: Connecting to a Container</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nationalparks-java.html">Nationalparks Java App</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nationalparks-java-databases.html">Connecting to a Database</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nationalparks-application-health.html">Application Healthchecks</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nationalparks-java-pipeline.html">Jenkins Pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html">Continuous Integration and Pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">xref:mlbparks-templates.adoc</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">xref:mlbparks-binary-build.adoc</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">xref:mlbparks-debugging.adoc</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">xref:common-further-resources.adoc</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">xref:common-workshop-links.adoc</span>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">OpenShift Starter Guides</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">OpenShift Starter Guides</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-starter-guides/edit/master/documentation/modules/ROOT/pages/mlbparks-debugging.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<div class="sect1">
+<h2 id="_background_port_forwarding_and_debugging"><a class="anchor" href="#_background_port_forwarding_and_debugging"></a>Background: Port Forwarding and Debugging</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Just as we did before with remote shelling into our pods, we can also set up a port-forward between our local machine
+and our pod. The is useful for operations like connecting to a database running in a pod, viewing an administrative web
+interface we don&#8217;t want to expose to the public, or, in our case, attaching a debugger to the JVM running our application
+server.</p>
+</div>
+<div class="paragraph">
+<p>You can read more about port-forwarding from the
+<a href="https://{{DOCS_URL}}/dev_guide/port_forwarding.html">developer documentation</a>.</p>
+</div>
+<div class="paragraph">
+<p>By port forwarding the debugging port for the application server, we can attach the debugger from our IDE and actually
+step through the code in the pod as it is running in real time. By default EAP is not in debug mode, therefore we first
+need to turn on the debug ports</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercise_enabling_debugging_in_eap_on_openshift"><a class="anchor" href="#_exercise_enabling_debugging_in_eap_on_openshift"></a>Exercise: Enabling Debugging in EAP on OpenShift</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>It is very simple to turn on debugging. The EAP S2I container we are using is looking for an environment variable to
+control whether or not to enable the debug port. All we need to do is set an environment variable for the deployment.</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc set env dc/mlbparks DEBUG=true</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will force a redeploy of our MLBparks pod, this time with the JDWT transport enabled and serving on port 8787.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercise_port_forwarding_from_the_pod_to_our_local_machine"><a class="anchor" href="#_exercise_port_forwarding_from_the_pod_to_our_local_machine"></a>Exercise: Port-Forwarding from the pod to our local machine</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>It is quite simple to do port-forwarding.</p>
+</div>
+<div class="paragraph">
+<p>First get the pods:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pods</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                             READY   STATUS      RESTARTS   AGE
+jenkins-1-deploy                 0/1     Completed   0          4d19h
+jenkins-1-l2g2c                  1/1     Running     0          4d19h
+mlbparks-1-build                 0/1     Completed   0          4d
+mlbparks-1-deploy                0/1     Completed   0          4d
+mlbparks-1-hook-post             0/1     Completed   0          4d
+mlbparks-2-build                 0/1     Completed   0          10m
+mlbparks-2-deploy                0/1     Completed   0          9m49s
+mlbparks-2-hook-post             0/1     Completed   0          8m59s
+mlbparks-3-deploy                1/1     Running     0          25s
+mlbparks-3-hcd8g                 0/1     Running     0          10s
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now we can set to set up the port-forward:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc port-forward mlbparks-3-hcd8g 8787:8787</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We said to port-forward from port 8787 on the pod to 8787 on the local machine. Now we can attach a remote debugger.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+To stop port-forwarding just hit ctrl-c in the terminal window where you did the port forward command
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_setting_up_remote_debug_in_intellij"><a class="anchor" href="#_setting_up_remote_debug_in_intellij"></a>Setting up Remote Debug in IntelliJ</h3>
+<div class="paragraph">
+<p>Setting up remote debugging is quite easy in IntelliJ. First edit the run/debug configurations.
+Under the Run menu (alt-u), choose edit configurations. This will bring up the new configuration dialog.</p>
+</div>
+<div class="paragraph">
+<p>Click the plus in the top left corner, scroll down, and choose remote.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/mlbparks-debugging-intellij-debug-new.png" alt="IntelliJ New Configuration">
+</div>
+</div>
+<div class="paragraph">
+<p>On the resulting dialog page, change the name at the top to "on OpenShift" or whatever is informative to you. Then
+towards the bottom right, change the port number to 8787. When you have done that click "OK".</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/mlbparks-debugging-intellij-debug-info.png" alt="IntelliJ New Configuration">
+</div>
+</div>
+<div class="paragraph">
+<p>Now when you click the Debug icon in IntelliJ, it will open the debugger and attach to JVM in the pod on OpenShift. Go
+ahead and set a break point in any class you want and it will do normal debugging - just like you know and love!</p>
+</div>
+</div>
+</div>
+</div>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

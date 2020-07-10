@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: OpenShift Starter Guides</title>
+    <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/parksmap-logging.html">
+    <link rel="prev" href="parksmap-routes.html">
+    <link rel="next" href="parksmap-permissions.html">
+    <meta name="generator" content="Antora 2.3.3">
+    <link rel="stylesheet" href="../_/css/site.css">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="http://redhat-scholars.github.io/openshift-starter-guides">OpenShift Starter Guides</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="rhs-openshift-starter-guides" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">OpenShift Starter Guides</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-workshop-summary.html">Workshop Summary</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-environment.html">OCP architecture</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-parksmap-architecture.html">Parksmap Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-explore.html">Command Line Interface</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-docker.html">Parksmap App</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-scaling.html">Background: Deployment Configurations and Replication Controllers</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-routes.html">Background: Routes</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="parksmap-logging.html">Background: Container Logs</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-permissions.html">Background: Permissions</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-rsh.html">Background: Connecting to a Container</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nationalparks-java.html">Nationalparks Java App</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nationalparks-java-databases.html">Connecting to a Database</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nationalparks-application-health.html">Application Healthchecks</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nationalparks-java-pipeline.html">Jenkins Pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html">Continuous Integration and Pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">xref:mlbparks-templates.adoc</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">xref:mlbparks-binary-build.adoc</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">xref:mlbparks-debugging.adoc</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">xref:common-further-resources.adoc</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">xref:common-workshop-links.adoc</span>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">OpenShift Starter Guides</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">OpenShift Starter Guides</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Starter Guides</a></li>
+    <li><a href="parksmap-logging.html">Background: Container Logs</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-starter-guides/edit/master/documentation/modules/ROOT/pages/parksmap-logging.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<div class="paragraph">
+<p>OpenShift provides some convenient mechanisms for viewing application logs.
+First and foremost is the ability to examine a <strong>Pod</strong>'s logs directly from the
+web console or via the command line.</p>
+</div>
+<div class="sect1">
+<h2 id="_background_container_logs"><a class="anchor" href="#_background_container_logs"></a>Background: Container Logs</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>OpenShift is constructed in such a way that it expects containers to log all
+information to <code>STDOUT</code>. In this way, both regular and error information is
+captured via standardized Docker mechanisms. When exploring the <strong>Pod</strong>'s logs
+directly, you are essentially going through the Docker daemon to access the
+container&#8217;s logs, through OpenShift&#8217;s API.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>In some cases, applications may not have been designed to send all of their
+information to <code>STDOUT</code> and <code>STDERR</code>. In many cases, multiple local log files
+are used. While OpenShift cannot parse any information from these files, nothing
+prevents them from being created, either. In other cases, log information is
+sent to some external system. Here, too, OpenShift does not prohibit these
+behaviors. If you have an application that does not log to <code>STDOUT</code>, either because it
+already sends log information to some "external" system or because it writes
+various log information to various files, fear not.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercise_examining_logs"><a class="anchor" href="#_exercise_examining_logs"></a>Exercise: Examining Logs</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Since we already deployed our application, we can take some time to examine its
+logs. In the Developer Perspective, from Topology view, click the <code>parksmap</code> entry and then the <strong>Resources</strong> tab. You should see a <strong>View Logs</strong> link next to the <strong>Pod</strong> entry.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parksmap-view-logs-link.png" alt="View Logs for Pod">
+</div>
+</div>
+<div class="paragraph">
+<p>Click the <strong>View Logs</strong> link and you should see a nice view of the <strong>Pod</strong>'s logs:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parksmap-logging-console-logs.png" alt="Application Logs">
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+If you notice some errors in the log, that&#8217;s okay. We&#8217;ll remedy those in a little bit.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You also have the option of viewing logs from the command line. Get the name of
+your <strong>Pod</strong>:</p>
+</div>
+<div class="listingblock execute-1">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pods</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME               READY     STATUS    RESTARTS   AGE
+parksmap-1-hx0kv   1/1       Running   0          5h</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And then use the <code>logs</code> command to view this <strong>Pod</strong>'s logs:</p>
+</div>
+<div class="listingblock copy-and-edit">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc logs parksmap-1-hx0kv</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You will see all of the application logs scroll on your screen:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">2019-05-22 19:37:01.433  INFO 1 --- [           main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2019-05-22 19:37:01.465  INFO 1 --- [           main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8080 (http)
+2019-05-22 19:37:01.468  INFO 1 --- [           main] c.o.evg.roadshow.ParksMapApplication     : Started ParksMapApplication in 3.97 seconds (JVM running
+ for 4.418)
+2019-05-22 19:38:00.762  INFO 1 --- [MessageBroker-1] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(
+0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)]
+, stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active
+ threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]
+2019-05-22 19:44:11.517  INFO 1 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2019-05-22 19:44:11.517  INFO 1 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization sta
+rted
+2019-05-22 19:44:11.533  INFO 1 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization com
+pleted in 16 ms
+2019-05-22 19:44:13.395  INFO 1 --- [nio-8080-exec-2] c.o.e.roadshow.rest.BackendsController   : Backends: getAll</code></pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+If you scroll through the logs, you may notice an error that mentions a service account. What&#8217;s that?  Never fear, we will cover that shortly.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercise_aggregated_pod_logs"><a class="anchor" href="#_exercise_aggregated_pod_logs"></a>Exercise: Aggregated Pod Logs</h2>
+<div class="sectionbody">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+This section is only relevant if the aggregated logging
+capability is available in the OpenShift cluster, as this capability is optional.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>When your application consists of only one <strong>Pod</strong> and it never fails, restarts,
+or has other issues, these ways to view logs may not be so bad. However in a
+scaled-out application where <strong>Pods</strong> may have restarted, been scaled up or down,
+or if you just want to get historical information, these mechanisms may be
+insufficient.</p>
+</div>
+<div class="paragraph">
+<p>Fortunately, OpenShift provides an optional system for log aggregation that uses
+Elasticsearch, Fluentd, and Kibana (EFK).</p>
+</div>
+<div class="paragraph">
+<p>In the Administrator perspective, click <strong>Monitoring &#8594; Logging</strong> from the left navigation.</p>
+</div>
+<div class="paragraph">
+<p>Clicking this link takes you to the Kibana web interface. This interface is
+secured with OpenShift&#8217;s role-based access controls, so you can only see logs
+for projects that you have access to. You will need to accept the SSL certificate. If you are prompted to authenticate, use the same credentials as with OpenShift.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parksmap-logging-kibana.png" alt="Kibana Interface">
+</div>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+In the following Kibana search(es), replace the pod_name to match the name of your pod.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock copyandedit">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">kubernetes.pod_name:"parksmap-1-mrxfq" AND kubernetes.namespace_name:"{{ project_namespace }}"</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If your search returns no hits, try changing the time-picker in the top right-hand corner from the default "Last 15 miutes" to something else, like "The day so far" or "Last 1 hour"</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>If you want to see all the historical logs for this <strong>Project</strong>, simply remove the
+pod name reference and click the magnifying glass or press the enter key.</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">kubernetes.namespace_name:"{{ project_namespace }}"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you click "add" for <code>kubernetes.pod_name</code> in the left bar, you&#8217;ll then see your old <strong>Pod</strong>'s logs,
+too. Remember, we scaled them down before coming here, so you can see how the
+log system is keeping a historical record.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parksmap-logging-kibana-parksmap-headers.png" alt="Kibana Interface">
+</div>
+</div>
+<div class="paragraph">
+<p>Try the following search string ensuring that you use the correct name for your project:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">kubernetes.namespace_name:"{{ project_namespace }}" AND message:"Failure executing"</code></pre>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="parksmap-routes.html">Background: Routes</a></span>
+  <span class="next"><a href="parksmap-permissions.html">Background: Permissions</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: OpenShift Starter Guides</title>
+    <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/parksmap-permissions.html">
+    <link rel="prev" href="parksmap-logging.html">
+    <link rel="next" href="parksmap-rsh.html">
+    <meta name="generator" content="Antora 2.3.3">
+    <link rel="stylesheet" href="../_/css/site.css">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="http://redhat-scholars.github.io/openshift-starter-guides">OpenShift Starter Guides</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="rhs-openshift-starter-guides" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">OpenShift Starter Guides</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-workshop-summary.html">Workshop Summary</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-environment.html">OCP architecture</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-parksmap-architecture.html">Parksmap Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-explore.html">Command Line Interface</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-docker.html">Parksmap App</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-scaling.html">Background: Deployment Configurations and Replication Controllers</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-routes.html">Background: Routes</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-logging.html">Background: Container Logs</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="parksmap-permissions.html">Background: Permissions</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-rsh.html">Background: Connecting to a Container</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nationalparks-java.html">Nationalparks Java App</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nationalparks-java-databases.html">Connecting to a Database</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nationalparks-application-health.html">Application Healthchecks</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nationalparks-java-pipeline.html">Jenkins Pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html">Continuous Integration and Pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">xref:mlbparks-templates.adoc</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">xref:mlbparks-binary-build.adoc</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">xref:mlbparks-debugging.adoc</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">xref:common-further-resources.adoc</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">xref:common-workshop-links.adoc</span>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">OpenShift Starter Guides</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">OpenShift Starter Guides</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Starter Guides</a></li>
+    <li><a href="parksmap-permissions.html">Background: Permissions</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-starter-guides/edit/master/documentation/modules/ROOT/pages/parksmap-permissions.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<div class="paragraph">
+<p>Almost every interaction with an OpenShift environment that you can think of
+requires going through the OpenShift&#8217;s control plane API. All API interactions are both authenticated (AuthN - who are you?) and authorized (AuthZ - are you allowed to do what you are asking?).</p>
+</div>
+<div class="paragraph">
+<p>In the log aggregation lab we saw that there was an
+error in reference to a <strong>Service Account</strong>.</p>
+</div>
+<div class="paragraph">
+<p>As OpenShift is a declarative platform, some actions will be performed by the platform and not by the end user (when he or she issues a command). These actions are performed using a <strong>Service Account</strong> which is a special type of <code>user</code> that the platform will use internally.</p>
+</div>
+<div class="paragraph">
+<p>OpenShift automatically creates a few special service accounts in every project.
+The <strong>default</strong> service account is the one taking the responsibility of running the pods, and OpenShift uses and injects this service account into
+every pod that is launched. By changing the permissions for that service
+account, we can do interesting things.</p>
+</div>
+<div class="paragraph">
+<p>You can view current permissions in the web console, go to the Topology view in the Developer Perspective, click the <code>parksmap</code> entry, go to the <strong>Overview</strong> tab, and then click the <strong>Namespace</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parksmap-permissions-namespace.png" alt="Namespace">
+</div>
+</div>
+<div class="paragraph">
+<p>Then, click <strong>Role Bindings</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parksmap-permissions-membership.png" alt="Membership">
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercise_grant_service_account_view_permissions"><a class="anchor" href="#_exercise_grant_service_account_view_permissions"></a>Exercise: Grant Service Account View Permissions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The parksmap application wants to talk to the OpenShift API to learn about other
+<strong>Pods</strong>, <strong>Services</strong>, and resources within the <strong>Project</strong>. You&#8217;ll soon learn why!</p>
+</div>
+<div class="listingblock execute-1">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc project {{ project_namespace }}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then:</p>
+</div>
+<div class="listingblock execute-1">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc policy add-role-to-user view -z default</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>oc policy</code> command above is giving a defined <em>role</em> (<code>view</code>) to a user. But
+we are using a special flag, <code>-z</code>. What does this flag do? From the <code>-h</code> output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">-z, --serviceaccount=[]: service account in the current namespace to use as a user</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>-z</code> syntax is a special one that saves us from having to type out the
+entire string, which, in this case, is
+<code>system:serviceaccount:{{ project_namespace }}:default</code>. It&#8217;s a nifty shortcut.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The <code>-z</code> flag will only work for service accounts in the <strong>current</strong> project.
+If you&#8217;re referring to a service account in a different project, use the `-n &lt;project&gt;`switch.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Now that the <code>default</code> <strong>Service Account</strong> now has <strong>view</strong> access, so now it can query the API to see what resources are within the <strong>Project</strong>. This also has the added benefit of suppressing the error message! Although, in reality, we fixed the application.</p>
+</div>
+<div class="paragraph">
+<p>Another way you could have done the same is by using the OpenShift console. Once you&#8217;re on the
+<strong>Workloads &#8594; Deployment Configs</strong> page, click on the <strong>Namespace</strong>, then <strong>Role Bindings</strong> and then the <strong>Create Binding</strong> button.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parksmap-permissions-membership-serviceaccount-list.png" alt="Service account list">
+</div>
+</div>
+<div class="paragraph">
+<p>Select <strong>view</strong> for the Role Binding Name <strong>{{ project_namespace }}</strong> for the Namespace, <strong>view</strong> for the Role Name, <strong>Service Account</strong> for the Subject, <strong>{{ project_namespace }}</strong> for the Subject Namespace, and <strong>default</strong> for the Subject Name.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parksmap-permissions-membership-serviceaccount-edit.png" alt="Service account edit">
+</div>
+</div>
+<div class="paragraph">
+<p>Once you&#8217;re finished editing permissions, click on the <strong>Create</strong> button.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parksmap-permissions-membership-serviceaccount-done.png" alt="Service account changed">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercise_redeploy_application"><a class="anchor" href="#_exercise_redeploy_application"></a>Exercise: Redeploy Application</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>One more step is required. We need to re-deploy the <code>parksmap</code> application because it&#8217;s
+given up trying to query the API.</p>
+</div>
+<div class="paragraph">
+<p>This time we&#8217;ll use the web console. In the Developer Perspective, in Topology view, click the <code>parksmap</code> entry. Then, in the <strong>Actions</strong> dropdown menu, select <strong>Start Rollout</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parksmap-permissions-start-rollout.png" alt="Start rollout">
+</div>
+</div>
+<div class="paragraph">
+<p>A new deployment is immediately started. Return to Topology view and click the <code>parksmap</code> entry again to watch it happen. You might not be fast enough! But it will be reflected in the <strong>Latest Version</strong> number.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parksmap-permissions-redeployed.png" alt="Application deployed">
+</div>
+</div>
+<div class="paragraph">
+<p>If you look at the logs for the application now, you should see no errors.  That&#8217;s great.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercise_grant_user_view_permissions"><a class="anchor" href="#_exercise_grant_user_view_permissions"></a>Exercise: Grant User View Permissions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you create a project, you are that project&#8217;s administrator. This means that
+you can grant access to other users, too. If you like, give your neighbor view
+access to your project using the following command:</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+In the following command(s), replace <code>{{ project_namespace  }}</code> with the user name of the person to whom you want to grant access.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock copy-and-edit">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc policy add-role-to-user view {{ project_namespace  }}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Have them go to the project view by clicking the <strong>Projects</strong> button and verify
+that they can see your project and its resources. This type of arrangement (view
+but not edit) might be ideal for a developer getting visibility into a
+production application&#8217;s project.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="parksmap-logging.html">Background: Container Logs</a></span>
+  <span class="next"><a href="parksmap-rsh.html">Background: Connecting to a Container</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

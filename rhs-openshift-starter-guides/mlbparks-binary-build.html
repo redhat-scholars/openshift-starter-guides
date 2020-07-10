@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: OpenShift Starter Guides</title>
+    <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/mlbparks-binary-build.html">
+    <meta name="generator" content="Antora 2.3.3">
+    <link rel="stylesheet" href="../_/css/site.css">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="http://redhat-scholars.github.io/openshift-starter-guides">OpenShift Starter Guides</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="rhs-openshift-starter-guides" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">OpenShift Starter Guides</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-workshop-summary.html">Workshop Summary</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-environment.html">OCP architecture</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-parksmap-architecture.html">Parksmap Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-explore.html">Command Line Interface</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-docker.html">Parksmap App</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-scaling.html">Background: Deployment Configurations and Replication Controllers</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-routes.html">Background: Routes</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-logging.html">Background: Container Logs</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-permissions.html">Background: Permissions</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-rsh.html">Background: Connecting to a Container</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nationalparks-java.html">Nationalparks Java App</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nationalparks-java-databases.html">Connecting to a Database</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nationalparks-application-health.html">Application Healthchecks</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nationalparks-java-pipeline.html">Jenkins Pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html">Continuous Integration and Pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">xref:mlbparks-templates.adoc</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">xref:mlbparks-binary-build.adoc</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">xref:mlbparks-debugging.adoc</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">xref:common-further-resources.adoc</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">xref:common-workshop-links.adoc</span>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">OpenShift Starter Guides</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">OpenShift Starter Guides</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-starter-guides/edit/master/documentation/modules/ROOT/pages/mlbparks-binary-build.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<div class="sect1">
+<h2 id="_moving_on_from_s2i"><a class="anchor" href="#_moving_on_from_s2i"></a>Moving on From S2I</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As you saw before S2I is a great way to get from source code to a container, but the process is a bit too slow for daily fast iterative
+development. For example, if you want to change some CSS or change one method in a class you don&#8217;t want to go through
+a full git commit and build cycle. In this lab we are going to show you a more efficient method for quick iteration. While
+we are at it we will also show you how to debug your code.</p>
+</div>
+<div class="paragraph">
+<p>Now that we built the MLB parks service let&#8217;s go ahead and make some quick changes.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_fast_iterative_code_change_using_binary_deploy"><a class="anchor" href="#_fast_iterative_code_change_using_binary_deploy"></a>Fast Iterative Code Change Using Binary Deploy</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The OpenShift command line has the ability to do a deployment from your local machine. In this case we are going to use S2I,
+but we are going to tell OpenShift to just take the war file from our local machine and bake it in the image.</p>
+</div>
+<div class="paragraph">
+<p>Doing this pattern of development lets us do quick builds on our local machine (benefitting from our local cache and
+all the horsepower on our machine) and then just quickly send up the war file.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You could also use this pattern to actually send up your working directory to the S2I builder to have it do the Maven build
+on OpenShift. Using the local directory would relieve you from having Maven or any of the Java toolchain on your local
+machine AND would also not require git commit with a push. Read more in the
+<a href="https://{{DOCS_URL}}/dev_guide/dev_tutorials/binary_builds.html">official documentation</a>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercise_using_binary_deployment"><a class="anchor" href="#_exercise_using_binary_deployment"></a>Exercise: Using Binary Deployment</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_clone_source"><a class="anchor" href="#_clone_source"></a>Clone source</h3>
+<div class="paragraph">
+<p>The first step is to clone the MLB source code from GitHub to your workshop environment:</p>
+</div>
+<div class="listingblock execute-1">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git clone https://github.com/openshift-roadshow/mlbparks.git</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+We are using Intellij here in the guide for screenshots but this should work regardless of your tool chain. JBoss
+Developer Studio and JBoss Developer Tools have built in functionality that makes this close to seamless right from the IDE.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_setup_the_build_of_the_war_file"><a class="anchor" href="#_setup_the_build_of_the_war_file"></a>Setup the Build of the war file</h3>
+<div class="paragraph">
+<p>If you have Maven all set up on your machine, then you can <code>cd</code> into the <code>mlbparks</code> directory and run <code>mvn package</code></p>
+</div>
+<div class="listingblock execute-1">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd mlbparks
+mvn package</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Pay attention to the output location for the ROOT.war, we will need that directory later.</p>
+</div>
+<div class="paragraph">
+<p>If you&#8217;re using IntelliJ or eclipse/JBoss Developer Studio package the maven artifact using the IDE.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_code_change"><a class="anchor" href="#_code_change"></a>Code Change</h3>
+<div class="paragraph">
+<p>Time for a source code change! Go to src/main/java/com/openshift/evg/roadshow/rest/BackendController.java. This is the REST endpoint
+that gives basic info on the service and can be reached at:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">http://mlbparks-{{ project_namespace  }}.{{cluster_subdomain}}/ws/info/</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Please change line 23 to add a <em>AMAZING</em> in front of "MLB Parks" look like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">return new Backend("mlbparks", "AMAZING MLB Parks", new Coordinates("39.82", "-98.57"), 5);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Don&#8217;t forget to save the file and run <code>mvn package</code> again.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_doing_the_binary_build"><a class="anchor" href="#_doing_the_binary_build"></a>Doing the Binary Build</h3>
+<div class="paragraph">
+<p>Alright we have our war file built, time to kick off a build using it.</p>
+</div>
+<div class="paragraph">
+<p>If you built your war with Maven:</p>
+</div>
+<div class="listingblock execute-1">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc start-build bc/mlbparks --from-file=target/ROOT.war --follow</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The --follow is optional if you want to follow the build output in your terminal.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Using labels and a recreate deployment strategy, as soon as the new deployment finishes the map name will be updated. Under a recreate deployment strategy we first tear down the pod before doing our new deployment.
+When the pod is torn down, the parksmap service removes the MLBParks map from the layers. When it comes back up, the layer
+automatically gets added back with our new title.  This would not have happened with a rolling deployment because
+rolling spins up the new version of the pod before it takes down the old one. Rolling strategy enables a zero-downtime deployment.</p>
+</div>
+<div class="paragraph">
+<p>When the deployment is finished and the container is deployed you will see the new content at:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">http://mlbparks-{{ project_namespace  }}.{{cluster_subdomain}}/ws/info/</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>So now you have seen how we can speed up the build and deploy process.</p>
+</div>
+</div>
+</div>
+</div>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: OpenShift Starter Guides</title>
+    <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/common-using-homeroom.html">
+    <meta name="generator" content="Antora 2.3.3">
+    <link rel="stylesheet" href="../_/css/site.css">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="http://redhat-scholars.github.io/openshift-starter-guides">OpenShift Starter Guides</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="rhs-openshift-starter-guides" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">OpenShift Starter Guides</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-workshop-summary.html">Workshop Summary</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-environment.html">OCP architecture</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-parksmap-architecture.html">Parksmap Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-explore.html">Command Line Interface</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-docker.html">Parksmap App</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-scaling.html">Background: Deployment Configurations and Replication Controllers</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-routes.html">Background: Routes</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-logging.html">Background: Container Logs</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-permissions.html">Background: Permissions</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-rsh.html">Background: Connecting to a Container</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nationalparks-java.html">Nationalparks Java App</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nationalparks-java-databases.html">Connecting to a Database</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nationalparks-application-health.html">Application Healthchecks</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nationalparks-java-pipeline.html">Jenkins Pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html">Continuous Integration and Pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">xref:mlbparks-templates.adoc</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">xref:mlbparks-binary-build.adoc</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">xref:mlbparks-debugging.adoc</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">xref:common-further-resources.adoc</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">xref:common-workshop-links.adoc</span>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">OpenShift Starter Guides</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">OpenShift Starter Guides</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-starter-guides/edit/master/documentation/modules/ROOT/pages/common-using-homeroom.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<div class="paragraph">
+<p>Access to the workshop is provided by <a href="https://github.com/openshift-homeroom">Homeroom</a>, an interactive training environment you can use in your web browser without needing to install anything on your local machine.</p>
+</div>
+<div class="paragraph">
+<p>The Homeroom dashboard provides you access to the workshop content and one or more terminals.</p>
+</div>
+<div class="paragraph">
+<p>The interactive shells are hosted in a container running inside of OpenShift. Any special command line programs you need are already pre-installed.</p>
+</div>
+<div class="paragraph">
+<p>As you work through the workshop content you will encounter commands that you need to run in the terminals. These will appear as:</p>
+</div>
+<div class="listingblock execute-1">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">date</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Where a command appears like this with the play symbol <span class="fas fa-play-circle"></span> to the right side of the command, you do not need to type the command into the terminal yourself. Instead, click anywhere on the command and it will be run automatically in the terminal for you.</p>
+</div>
+<div class="paragraph">
+<p>Try clicking on the above command if you have not done so already.</p>
+</div>
+<div class="paragraph">
+<p>Use this method of running the commands as it will save you time and avoid mistakes.</p>
+</div>
+<div class="paragraph">
+<p>Usually the command will be run in the terminal at the top, but in some cases it will be run in the bottom terminal. You do not have to worry about which, the command when clicked will be run where it needs to be.</p>
+</div>
+<div class="paragraph">
+<p>Try clicking the command below and it should go the terminal at the bottom.</p>
+</div>
+<div class="listingblock execute-2">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">sleep 3600</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you encounter a command block showing <code>&lt;ctrl-c&gt;</code>, this is treated in a special way:</p>
+</div>
+<div class="listingblock execute-2">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">&lt;ctrl-c&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Click on this and you will see that it will send an interrupt to the command running in the terminal. You could also have used <code>&lt;ctrl-c&gt;</code> yourself in the terminal.</p>
+</div>
+<div class="paragraph">
+<p>At times, instead of running a command, you may need to copy the value and paste it into the terminal or other web page. This will be indicated using the copy symbol <span class="fas fa-copy"></span>.</p>
+</div>
+<div class="listingblock copy">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">{{username}}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Clicking on the displayed value in this case will copy it into the system paste buffer ready to paste to whatever location the workshop instructions tell you to.</p>
+</div>
+<div class="paragraph">
+<p>Usually the workshop content will display the correct command or value, even if based on your user name or the name of the project you are using. This is because you will get a personalised version of the workshop content.</p>
+</div>
+<div class="paragraph">
+<p>If when copying the value, you need to first edit the value before being used, this will be indicated using the user edit symbol <span class="fas fa-user-edit"></span>.</p>
+</div>
+<div class="listingblock copy-and-edit">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">change-this-to-your-username</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Clicking on the displayed value will again copy it into the system paste buffer and you can then paste it to the required location. Before the value is used though, you should make any changes as instructed.</p>
+</div>
+<div class="paragraph">
+<p>How to paste a value into the terminals will depend on the operating system and browser being used. For macOS you should be able to use <code>&lt;command-v&gt;</code>. On Linux and Windows, try <code>&lt;ctrl-v&gt;</code> or <code>&lt;ctrl-shift-v&gt;</code>.</p>
+</div>
+<div class="paragraph">
+<p>If at any time a glitch occurs and the workshop content does not display properly because of a network issue, and so an error is displayed, or it shows as a white page, select the dropdown hamburger menu top right in the banner above the terminals and select "Reload Workshop". That menu item will reload just the workshop content and leave you on the same page.</p>
+</div>
+<div class="paragraph">
+<p>Similarly, if the terminals stop working or show as closed, select "Reload Terminal" from the dropdown hamburger menu.</p>
+</div>
+<div class="paragraph">
+<p>Do not use the ability of the browser to reload the whole browser page as you will lose your progress in the workshop content. Also do not use the "Restart Session" menu item unless specifically directed to as you will lose all your work.</p>
+</div>
+<div class="paragraph">
+<p>If you have any issues which using the reload menu items do not solve, ask the workshop instructor.</p>
+</div>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

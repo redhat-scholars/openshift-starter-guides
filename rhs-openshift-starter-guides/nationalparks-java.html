@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: OpenShift Starter Guides</title>
+    <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/nationalparks-java.html">
+    <link rel="prev" href="parksmap-rsh.html">
+    <link rel="next" href="nationalparks-java-databases.html">
+    <meta name="generator" content="Antora 2.3.3">
+    <link rel="stylesheet" href="../_/css/site.css">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="http://redhat-scholars.github.io/openshift-starter-guides">OpenShift Starter Guides</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="rhs-openshift-starter-guides" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">OpenShift Starter Guides</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-workshop-summary.html">Workshop Summary</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-environment.html">OCP architecture</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-parksmap-architecture.html">Parksmap Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-explore.html">Command Line Interface</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-docker.html">Parksmap App</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-scaling.html">Background: Deployment Configurations and Replication Controllers</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-routes.html">Background: Routes</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-logging.html">Background: Container Logs</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-permissions.html">Background: Permissions</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-rsh.html">Background: Connecting to a Container</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="nationalparks-java.html">Nationalparks Java App</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nationalparks-java-databases.html">Connecting to a Database</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nationalparks-application-health.html">Application Healthchecks</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nationalparks-java-pipeline.html">Jenkins Pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html">Continuous Integration and Pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">xref:mlbparks-templates.adoc</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">xref:mlbparks-binary-build.adoc</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">xref:mlbparks-debugging.adoc</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">xref:common-further-resources.adoc</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">xref:common-workshop-links.adoc</span>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">OpenShift Starter Guides</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">OpenShift Starter Guides</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Starter Guides</a></li>
+    <li><a href="nationalparks-java.html">Nationalparks Java App</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-starter-guides/edit/master/documentation/modules/ROOT/pages/nationalparks-java.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<div class="paragraph">
+<p>In this section, we&#8217;re going to deploy a backend service, developed in Java that will expose 2 main REST endpoints to the visualizer
+application (<code>parksmap</code> web component that was deployed in the previous labs).
+The application will query for national parks information (including its
+coordinates) that is stored in a MongoDB database.  This application will also
+provide an external access point, so that the API provided can be directly used
+by the end user.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="_images/roadshow-app-architecture-nationalparks-1.png" alt="Application architecture" width="800">
+</div>
+</div>
+<div class="sect1">
+<h2 id="_background_source_to_image_s2i"><a class="anchor" href="#_background_source_to_image_s2i"></a>Background: Source-to-Image (S2I)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In a previous lab, we learned how to deploy a pre-existing image
+image. Now we will expand on that by learning how OpenShift builds
+container images using source code from an existing repository.  This is accomplished using the Source-to-Image project.</p>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/openshift/source-to-image">Source-to-Image (S2I)</a> is a
+open source project sponsored by Red Hat that has the following goal:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code>Source-to-image (S2I) is a tool for building reproducible container images. S2I
+produces ready-to-run images by injecting source code into a container image and
+assembling a new container image which incorporates the builder image and built
+source. The result is then ready to use with docker run. S2I supports
+incremental builds which re-use previously downloaded dependencies, previously
+built artifacts, etc.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>OpenShift is S2I-enabled and can use S2I as one of its build mechanisms (in
+addition to building container images from Dockerfiles, and "custom" builds).</p>
+</div>
+<div class="paragraph">
+<p>OpenShift runs the S2I process inside a special <strong>Pod</strong>, called a Build
+Pod, and thus builds are subject to quotas, limits, resource scheduling, and
+other aspects of OpenShift.</p>
+</div>
+<div class="paragraph">
+<p>A full discussion of S2I is beyond the scope of this class, but you can find
+more information about it either in the
+<a href="https://{{DOCS_URL}}/creating_images/s2i.html">OpenShift S2I documentation</a>
+or on <a href="https://github.com/openshift/source-to-image">GitHub</a>. The only key concept you need to
+remember about S2I is that it&#8217;s magic.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercise_creating_a_java_application"><a class="anchor" href="#_exercise_creating_a_java_application"></a>Exercise: Creating a Java application</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The backend service that we will be deploying as part of this exercise is
+called <code>nationalparks</code>.  This is a Java Spring Boot application that performs 2D
+geo-spatial queries against a MongoDB database to locate and return map
+coordinates of all National Parks in the world. That was just a fancy way of
+saying that we are going to deploy a webservice that returns a JSON list of
+places.</p>
+</div>
+<div class="sect2">
+<h3 id="_add_to_project"><a class="anchor" href="#_add_to_project"></a>Add to Project</h3>
+<div class="paragraph">
+<p>Because the <code>nationalparks</code> component is a backend to serve data that our
+existing frontend (parksmap) will consume, we are going to build it inside the existing
+project that we have been working with. To illustrate how you can interact with OpenShift via the CLI or the web console, we will deploy the nationalparks component using the web console.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_application_code_on_an_embedded_git_server"><a class="anchor" href="#_using_application_code_on_an_embedded_git_server"></a>Using Application Code on an Embedded Git Server</h3>
+<div class="paragraph">
+<p>OpenShift can work with any accessible Git repository. This could be GitHub,
+GitLab, or any other server that speaks Git. You can even register webhooks in
+your Git server to initiate OpenShift builds triggered by any update to the
+application code!</p>
+</div>
+<div class="paragraph">
+<p>The repository that we are going to use is already cloned in the internal Gogs repository
+and located at the following URL:</p>
+</div>
+<div class="paragraph">
+<p>Your Gogs credentials are:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">username: {{username}}
+password: {{GOGS_PASSWORD}}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><a href="http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks.git">Gogs Repository</a></p>
+</div>
+<div class="paragraph">
+<p>Later in the lab, we want you to make a code change and then rebuild your
+application. This is a fairly simple Spring framework Java application.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_build_the_code_on_openshift"><a class="anchor" href="#_build_the_code_on_openshift"></a>Build the Code on OpenShift</h3>
+<div class="paragraph">
+<p>Similar to how we used <strong>+Add</strong> before with an existing image, we
+can do the same for specifying a source code repository. Since for this lab you
+have your own git repository, let&#8217;s use it with a simple Java S2I image.</p>
+</div>
+<div class="paragraph">
+<p>In the Developer Perspective, click <strong>+Add</strong> in the left navigation and then choose "From Git"</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-show-add-options.png" alt="Add to Project">
+</div>
+</div>
+<div class="paragraph">
+<p>The <strong>Import from Git</strong> workflow will guide you through the process of deploying your app based on a few selections.</p>
+</div>
+<div class="paragraph">
+<p>Enter the following for Git Repo URL:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code>http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks.git</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Select Java as your Builder Image, and be sure to select version 8.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-import-from-git-url-builder.png" alt="Import from Git">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+All of these runtimes shown are made available via <strong>Templates</strong> and
+<strong>ImageStreams</strong>, which will be discussed in a later lab.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Scroll down to the <strong>General</strong> section. Select <code>workshop</code> as your application, and <code>nationalparks</code> as the name.</p>
+</div>
+<div class="paragraph">
+<p>In <strong>Resources</strong> section, select <strong>Deployment Config</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Expand the Labels section and add 3 labels:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><em>app</em>=workshop</strong>  (the name we will be giving to the app)</p>
+</li>
+<li>
+<p><strong><em>component</em>=nationalparks</strong>  (the name of this deployment)</p>
+</li>
+<li>
+<p><strong><em>role</em>=backend</strong> (the role this component plays in the overall application)</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-configure-service.png" alt="Runtimes">
+</div>
+</div>
+<div class="paragraph">
+<p>To see the build logs, in Topology view, click the <code>nationalparks</code> entry, then click on <strong>View Logs</strong> in the <strong>Builds</strong> section of the <strong>Resources</strong> tab.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-java-new-java-build.png" alt="Nationalparks build">
+</div>
+</div>
+<div class="paragraph">
+<p>This is a Java-based application that uses Maven as the build and dependency system.  For this reason, the initial build
+will take a few minutes as Maven downloads all of the dependencies needed for
+the application. You can see all of this happening in real time!</p>
+</div>
+<div class="paragraph">
+<p>From the command line, you can also see the <strong>Builds</strong>:</p>
+</div>
+<div class="listingblock execute-1">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get builds</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You&#8217;ll see output like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME              TYPE      FROM          STATUS     STARTED              DURATION
+nationalparks-1   Source    Git@b052ae6   Running    About a minute ago   1m2s</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also view the build logs with the following command:</p>
+</div>
+<div class="listingblock execute-1">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc logs -f builds/nationalparks-1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After the build has completed and successfully:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The S2I process will push the resulting image to the internal OpenShift registry</p>
+</li>
+<li>
+<p>The <strong>DeploymentConfiguration</strong> (DC) will detect that the image has changed, and this
+will cause a new deployment to happen.</p>
+</li>
+<li>
+<p>A <strong>ReplicationController</strong> (RC) will be spawned for this new deployment.</p>
+</li>
+<li>
+<p>The RC will detect no <strong>Pods</strong> are running and will cause one to be deployed, as our default replica count is just 1.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In the end, when issuing the <code>oc get pods</code> command, you will see that the build Pod
+has finished (exited) and that an application <strong>Pod</strong> is in a ready and running state:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                    READY     STATUS      RESTARTS   AGE
+nationalparks-1-tkid3   1/1       Running     3          2m
+nationalparks-1-build   0/1       Completed   0          3m
+parksmap-1-4hbtk        1/1       Running     0          2h</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you look again at the web console, you will notice that, when you create the
+application this way, OpenShift also creates a <strong>Route</strong> for you. You can see the
+URL in the web console, or via the command line:</p>
+</div>
+<div class="listingblock execute-1">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get routes</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Where you should see something like the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME            HOST/PORT                                                   PATH      SERVICES        PORT       TERMINATION
+nationalparks   nationalparks-{{ project_namespace  }}.{{cluster_subdomain}}             nationalparks   8080-tcp
+parksmap        parksmap-{{ project_namespace  }}.{{cluster_subdomain}}                  parksmap        8080-tcp</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the above example, the URL is:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">http://nationalparks-{{ project_namespace  }}.{{cluster_subdomain}}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Since this is a backend application, it doesn&#8217;t actually have a web interface.
+However, it can still be used with a browser. All backends that work with the parksmap
+frontend are required to implement a <code>/ws/info/</code> endpoint. To test, visit this URL in your browser:</p>
+</div>
+<div class="paragraph">
+<p><a href="http://nationalparks-{{project_namespace}}.{{cluster_subdomain}}/ws/info/">National Parks Info Page</a></p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+The trailing slash is <strong>required</strong>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You will see a simple JSON string:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{"id":"nationalparks","displayName":"National Parks","center":{"latitude":"47.039304","longitude":"14.505178"},"zoom":4}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Earlier we said:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">This is a Java Spring Boot application that performs 2D geo-spatial queries
+against a MongoDB database</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>But we don&#8217;t have a database. Yet.</p>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="parksmap-rsh.html">Background: Connecting to a Container</a></span>
+  <span class="next"><a href="nationalparks-java-databases.html">Connecting to a Database</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

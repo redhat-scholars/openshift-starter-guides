@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: OpenShift Starter Guides</title>
+    <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/nationalparks-java-pipeline.html">
+    <link rel="prev" href="nationalparks-application-health.html">
+    <link rel="next" href="nationalparks-java-pipeline-codechanges-gogs.html">
+    <meta name="generator" content="Antora 2.3.3">
+    <link rel="stylesheet" href="../_/css/site.css">
+<link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" href="http://redhat-scholars.github.io/openshift-starter-guides">OpenShift Starter Guides</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="#">Books</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">CheatSheets</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">CheatSheet A</a>
+            <a class="navbar-item" href="#">CheatSheet B</a>
+            <a class="navbar-item" href="#">CheatSheet C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Upcoming Events</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Event A</a>
+            <a class="navbar-item" href="#">Event B</a>
+            <a class="navbar-item" href="#">Event C</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Tutorial A</a>
+            <a class="navbar-item" href="#">Tutorial B</a>
+            <a class="navbar-item" href="#">Tutorial C</a>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <span class="control">
+            <a class="button is-primary" href="#">Download</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="rhs-openshift-starter-guides" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">OpenShift Starter Guides</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-workshop-summary.html">Workshop Summary</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-environment.html">OCP architecture</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-parksmap-architecture.html">Parksmap Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-explore.html">Command Line Interface</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-docker.html">Parksmap App</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-scaling.html">Background: Deployment Configurations and Replication Controllers</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-routes.html">Background: Routes</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-logging.html">Background: Container Logs</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-permissions.html">Background: Permissions</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="parksmap-rsh.html">Background: Connecting to a Container</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nationalparks-java.html">Nationalparks Java App</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nationalparks-java-databases.html">Connecting to a Database</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nationalparks-application-health.html">Application Healthchecks</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="nationalparks-java-pipeline.html">Jenkins Pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html">Continuous Integration and Pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">xref:mlbparks-templates.adoc</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">xref:mlbparks-binary-build.adoc</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">xref:mlbparks-debugging.adoc</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">xref:common-further-resources.adoc</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">xref:common-workshop-links.adoc</span>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">OpenShift Starter Guides</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">OpenShift Starter Guides</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Starter Guides</a></li>
+    <li><a href="nationalparks-java-pipeline.html">Jenkins Pipelines</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-starter-guides/edit/master/documentation/modules/ROOT/pages/nationalparks-java-pipeline.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<div class="paragraph">
+<p>In this lab you will learn about pipelines and how to configure a pipeline in OpenShift so
+that it will take care of the application lifecycle.</p>
+</div>
+<div class="sect1">
+<h2 id="_background_continuous_integration_and_pipelines"><a class="anchor" href="#_background_continuous_integration_and_pipelines"></a>Background: Continuous Integration and Pipelines</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A continuous delivery (CD) pipeline is an automated expression of your process for getting software
+from version control right through to your users and customers.
+Every change to your software (committed in source control) goes through a complex process on
+its way to being released. This process involves building the software in a reliable and repeatable
+manner, as well as progressing the built software (called a "build") through multiple stages of
+testing and deployment.</p>
+</div>
+<div class="paragraph">
+<p>Pipeline provides an extensible set of tools for modeling simple-to-complex delivery pipelines
+"as code" via the <a href="https://jenkins.io/doc/book/pipeline/syntax">Pipeline domain-specific language (DSL)</a>
+syntax. OpenShift provides also an <a href="https://github.com/openshift/jenkins-client-plugin">OpenShift Jenkins Pipeline DSL</a>
+for interacting with the platform from within a Jenkins pipeline in a fluent manner.</p>
+</div>
+<div class="paragraph">
+<p>The definition of a Jenkins Pipeline is written into a text file (called a Jenkinsfile) which
+in turn can be committed to a project’s source control repository. This is the foundation of
+"Pipeline-as-code"; treating the CD pipeline a part of the application to be versioned
+and reviewed like any other code.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devops-pipeline-flow.png" alt="Pipelines">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_set_up_your_pipeline"><a class="anchor" href="#_set_up_your_pipeline"></a>Set Up Your Pipeline</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A deployment configuration in OpenShift can contain
+<a href="https://{{DOCS_URL}}/dev_guide/deployments/basic_deployment_operations.html#triggers">triggers</a>, which tells OpenShift to automatically redeploy the pod whenever a new image is built for that service or configuration changes.</p>
+</div>
+<div class="paragraph">
+<p>As we want the Jenkins pipeline to control when builds and deployments happen, we need to disable the ability
+on the current Deployment to automatically trigger when there is a new image or a configuration change.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configure_manual_deployments_on_dev_application"><a class="anchor" href="#_configure_manual_deployments_on_dev_application"></a>Configure Manual Deployments on Dev Application</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In the {{project_namespace}} project, click on the <code>nationalparks</code> component from Topology view. From the side panel, click on <strong>Actions &#8594; Edit Deployment Config</strong>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devops-pipeline-deployment-edit.png" alt="Edit pipeline">
+</div>
+</div>
+<div class="paragraph">
+<p>In the YAML for the deployment config, find the <code>triggers</code> section, delete it, and then click the blue <strong>Save</strong> button.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devops-pipeline-deployment-triggers.png" alt="Remove triggers">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_create_your_pipeline"><a class="anchor" href="#_create_your_pipeline"></a>Create Your Pipeline</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As pipelines provide the ability to promote applications between different stages of the delivery cycle, Jenkins, which is our Continuous Integration server that will execute our pipelines, will be deployed on a project with a Continuous Integration role. Pipelines executed in this project will have permissions to interact with all the projects modeling the different stages of our delivery cycle.</p>
+</div>
+<div class="paragraph">
+<p>We&#8217;re going to deploy a Jenkins instance to this project to configure and run our pipelines. As we want our Jenkins instance to be able to survive restarts (in case we need to update any plugin configuration) we will select the Jenkins persistent template from the Developer Catalog.</p>
+</div>
+<div class="paragraph">
+<p>In the left navigation menu, click <strong>+Add</strong> and then <strong>From Catalog</strong>. In the Developer Catalog, search for <strong>Jenkins</strong>. Select the one named <strong>Jenkins</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devops-pipeline-catalog-search.png" alt="Empty CICD project">
+</div>
+</div>
+<div class="paragraph">
+<p>We will be prompted with the configuration screens for deploying our Jenkins server instance. Click the blue <strong>Instantiate Template</strong> button to get started.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devops-jenkins-template.png" alt="Jenkins template">
+</div>
+</div>
+<div class="paragraph">
+<p>Change <strong>Disable memory intensive administrative monitors</strong> to <strong>true</strong> to speed up the deployment time in the workshop, and leave the defaults for all parameters and click the blue <strong>Create</strong> button.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devops-jenkins-template-config.png" alt="Jenkins template config">
+</div>
+</div>
+<div class="paragraph">
+<p>Jenkins will now be provisioned on the background. Click <strong>Topology</strong> in the left navigation to see your Jenkins service in Topology view. It may take a couple minutes for the provisioning to complete. You can click and drag the Jenkins service into your workshop application grouping.</p>
+</div>
+<div class="paragraph">
+<p>We will see now Jenkins being provisioned on our project. Click on the Jenkins service component to view the provisioning status. Once provisioning is finished, we should see a similar screen to this:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devops-jenkins-deployed.png" alt="Jenkins deployed">
+</div>
+</div>
+<div class="paragraph">
+<p>We could have done the same as we just did by using one single command on the OpenShift CLI. This command will deploy the service Jenkins with a persistent configuration in your {{project_namespace}} project.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+If you have successfully deployed Jenkins, do NOT execute this command.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">oc new-app jenkins-persistent -n {{project_namespace}}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_store_your_pipeline_definition_in_git"><a class="anchor" href="#_store_your_pipeline_definition_in_git"></a>Store Your Pipeline Definition in Git</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For this example, we&#8217;re going to store our pipeline in the same Gogs repository where we have our code. In a more real scenario, and in order to honor <a href="https://en.wikipedia.org/wiki/Infrastructure_as_Code">infrastructure as code</a> principles, we would store all the pipeline definitions along with every OpenShift resources definitions we would use.</p>
+</div>
+<div class="paragraph">
+<p>Log into your <code>nationalparks</code> repository in Git as we are going to store in this repository our Jenkinsfile, that is, our pipeline definition.</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devops-pipeline-gogs-nationalparks.png" alt="Nationalparks project">
+</div>
+</div>
+<div class="paragraph">
+<p>We are going to create a Jenkinsfile to build and deploy our <code>nationalparks</code> application.</p>
+</div>
+<div class="paragraph">
+<p>Create a file called <code>Jenkinsfile.workshop</code> with the following content:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">pipeline {
+  agent {
+      label 'maven'
+  }
+  stages {
+    stage('Build JAR') {
+      steps {
+        git url: 'http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks'
+        sh "cp .settings.xml ~/.m2/settings.xml"
+        sh "mvn package"
+      }
+    }
+    stage('Archive JAR') {
+      steps {
+        sh "mvn deploy -DskipTests"
+      }
+    }
+    stage('Build Image') {
+      steps {
+        script {
+          openshift.withCluster() {
+            openshift.withProject() {
+              openshift.startBuild("nationalparks",
+                                   "--from-file=target/nationalparks.jar",
+                                   "--wait")
+            }
+          }
+        }
+      }
+    }
+    stage('Deploy') {
+      steps {
+        script {
+          openshift.withCluster() {
+            openshift.withProject() {
+              def result, dc = openshift.selector("dc", "nationalparks")
+              dc.rollout().latest()
+              timeout(10) {
+                  result = dc.rollout().status("-w")
+              }
+              if (result.status != 0) {
+                  error(result.err)
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And commit the changes into the git server.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devops-pipeline-gogs-add-jenkinsfile.png" alt="Nationalparks project">
+</div>
+</div>
+<div class="paragraph">
+<p>As we can see now, the Jenkinsfile is already stored in our version control system.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devops-pipeline-gogs-jenkinsfile-list.png" alt="Nationalparks project">
+</div>
+</div>
+<div class="paragraph">
+<p>A <strong>Pipeline</strong> is a user-defined model of a CD pipeline. A Pipeline’s code defines your entire build process, which typically includes stages for building an application, testing it and then delivering it.</p>
+</div>
+<div class="paragraph">
+<p>A <strong>stage</strong> block defines a conceptually distinct subset of tasks performed through the entire Pipeline (e.g. <em>Build</em>, <em>Test</em> and <em>Deploy</em> stages), which is used by many plugins to visualize or present Jenkins Pipeline status/progress.</p>
+</div>
+<div class="paragraph">
+<p><strong>Step</strong> is a single task. Fundamentally, a step tells Jenkins what to do at a particular point in time (or "step" in the process).</p>
+</div>
+<div class="paragraph">
+<p>This pipeline has 4 stages defined:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Build JAR</strong>: will clone our source repository for nationalparks and will use maven&#8217;s package goal to create a .jar file.</p>
+</li>
+<li>
+<p><strong>Archive JAR</strong>: will upload our .jar file to nexus repository, to have it under control.</p>
+</li>
+<li>
+<p><strong>Build Image</strong>: will build an image using a binary file as input in OpenShift. The build will use the .jar file that was created.</p>
+</li>
+<li>
+<p><strong>Deploy</strong>: it will deploy the created image on OpenShift using the DeploymentConfig named <code>nationalparks</code> we created in the previous lab.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_create_your_pipeline_definition_on_openshift"><a class="anchor" href="#_create_your_pipeline_definition_on_openshift"></a>Create Your Pipeline Definition on OpenShift</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Create the OpenShift pipeline definition to use the Jenkins file. This is a regular OpenShift BuildConfig with a <strong>JenkinsPipeline</strong> strategy.</p>
+</div>
+<div class="paragraph">
+<p>From the Developer perspective click <strong>+Add</strong> in the left navigation menu and then select <strong>YAML</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devops-pipeline-add-yaml-menu.png" alt="Add yaml to project - Menu">
+</div>
+</div>
+<div class="paragraph">
+<p>Now, copy the following code into the YAML input box and click <strong>Create</strong> to create a pipeline that uses the <code>Jenkinsfile.workshop</code> from your Gogs repository.</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: nationalparks-build
+spec:
+  runPolicy: Serial
+  source:
+    git:
+      ref: master
+      uri: "http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks"
+    type: Git
+  strategy:
+    jenkinsPipelineStrategy:
+      env:
+        - name: NEXUS_URL
+          value: "http://nexus.{{INFRA_PROJECT}}.svc:8081"
+      jenkinsfilePath: Jenkinsfile.workshop
+    type: JenkinsPipeline
+  triggers:
+    - github:
+        secret: CqPGlXcKJXXqKxW4Ye6z
+      type: GitHub
+    - generic:
+        secret: 4LXwMdx9vhQY4WXbLcFR
+      type: Generic
+    - type: ConfigChange</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Click the <strong>Builds</strong> tab, then <strong>nationalparks-build-1</strong> to see the pipeline you just created.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devops-pipeline-running.png" alt="Pipeline running">
+</div>
+</div>
+<div class="paragraph">
+<p>The pipeline will start automatically and execute all stages that are defined in the Jenkinsfile
+in the git repository.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+the first time you are running it might take a little while before the pipeline starts. The reason for that is
+that you are using the built-in <a href="https://plugins.jenkins.io/kubernetes">Kubernetes Jenkins Plugin</a> which dynamically provisions
+a Jenkins slave pod to run the pipeline. The dynamic provisioning allows scaling the pipeline execution to many concurrent jobs. The
+first time that pipeline runs, it will pull the jenkins slave image from the registry and therefore it might take a little bit of time.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>As the pipeline is running, you can watch the build logs. Click on the <code>view Logs</code> link in the appropriate build and you will be directed to Jenkins. In order to grant you access, Jenkins is configured to use Single Sign On with OpenShift, and you&#8217;ll need to log in with OpenShift credentials.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devops-pipeline-jenkins-sso.png" alt="Jenkins SSO">
+</div>
+</div>
+<div class="paragraph">
+<p>You need to authorize your user account to access Jenkins.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devops-pipeline-jenkins-sso-authorize.png" alt="Jenkins SSO">
+</div>
+</div>
+<div class="paragraph">
+<p>You will see the output of your maven build as it&#8217;s running in Jenkins.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devops-pipeline-jenkins-log.png" alt="Jenkins logs">
+</div>
+</div>
+<div class="paragraph">
+<p>After a little while, it will finish, hopefully with success.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devops-pipeline-finished.png" alt="Pipeline finished">
+</div>
+</div>
+<div class="paragraph">
+<p>Once the pipeline has finished, click <code>nationalparks</code> from Topology view. You should notice that the <strong>Latest Version</strong> number of the has increased.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devops-pipeline-nationalparks-deployed.png" alt="Nationalparks component deployed">
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="nationalparks-application-health.html">Application Healthchecks</a></span>
+  <span class="next"><a href="nationalparks-java-pipeline-codechanges-gogs.html">Continuous Integration and Pipelines</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
