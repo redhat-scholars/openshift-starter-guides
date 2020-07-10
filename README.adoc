@@ -1,1 +1,11 @@
-Check the build courseware https://redhat-scholars.github.io/build-course[documentation]  on how folder structure, how to use macros and other gotchas
+# OpenShift Starter Guides
+
+![docs](https://github.com/redhat-scholars/openshift-starter-guides/workflows/docs/badge.svg)
+
+**Work in Progress**
+
+## Documentation
+
+HTML docs https://redhat-scholars.github.io/openshift-starter-guides/
+
+ 
