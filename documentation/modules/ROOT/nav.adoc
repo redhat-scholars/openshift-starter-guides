@@ -1,7 +1,20 @@
-* xref:01-setup.adoc[1. Setup]
-** xref:01-setup.adoc#prerequisite[Prerequisites]
-** xref:01-setup.adoc#minikube[Setup Minikube]
-
-* xref:02-deploy.adoc[2. Deploy Service]
-** xref:02-deploy.adoc#package[Build Service]
-** xref:02-deploy.adoc#deploy[Deploy Dervice]
+* xref:common-workshop-summary.adoc[Workshop Summary]
+* xref:common-environment.adoc[OCP architecture]
+* xref:common-parksmap-architecture.adoc[Parksmap Architecture]
+* xref:common-explore.adoc[Command Line Interface]
+* xref:parksmap-docker.adoc[Parksmap App]
+* xref:parksmap-scaling.adoc[Background: Deployment Configurations and Replication Controllers]
+* xref:parksmap-routes.adoc[Background: Routes]
+* xref:parksmap-logging.adoc[Background: Container Logs]
+* xref:parksmap-permissions.adoc[Background: Permissions]
+* xref:parksmap-rsh.adoc[Background: Connecting to a Container]
+* xref:nationalparks-java.adoc[Nationalparks Java App]
+* xref:nationalparks-java-databases.adoc[Connecting to a Database]
+* xref:nationalparks-application-health.adoc[Application Healthchecks]
+* xref:nationalparks-java-pipeline.adoc[Jenkins Pipelines]
+* xref:nationalparks-java-pipeline-codechanges-gogs.adoc[Continuous Integration and Pipelines]
+* xref:mlbparks-templates.adoc
+* xref:mlbparks-binary-build.adoc
+* xref:mlbparks-debugging.adoc
+* xref:common-further-resources.adoc
+* xref:common-workshop-links.adoc

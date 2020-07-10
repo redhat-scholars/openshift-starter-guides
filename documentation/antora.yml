@@ -1,5 +1,5 @@
-name: template-tutorial
-title: Template Tutorial
+name: rhs-openshift-starter-guides
+title: OpenShift Starter Guides
 version: master
 nav:
   - modules/ROOT/nav.adoc

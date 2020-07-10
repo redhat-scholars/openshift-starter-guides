@@ -2,9 +2,9 @@ runtime:
   cache_dir: ./.cache/antora
 
 site:
-  title: Template Tutorial(Dev Mode)
-  url: http://localhost:3000/rhs-build-course/index.html
-  start_page: template-tutorial::index.adoc
+  title: OpenShift Starter Guides(Dev Mode)
+  url: http://localhost:3000/rhs-openshift-starter-guides/index.html
+  start_page: rhs-openshift-starter-guides::index.adoc
 
 content:
   sources:
@@ -13,7 +13,12 @@ content:
       start_path: documentation
 asciidoc:
   attributes:
-    title: Template Tutorial(Dev Mode)
+    title: OpenShift Starter Guides(Dev Mode)
+    workshop-domain: rhscholars.devx.red
+    kubernetes-version: v1.18.0
+    release-version: master
+    openshift-console-url: https://console-openshift-console.apps.example.com
+    etherpad-url: http://example.com
   extensions:
     - ./lib/remote-include-processor.js
     - ./lib/tab-block.js

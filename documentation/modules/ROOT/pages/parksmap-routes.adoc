@@ -1,0 +1,85 @@
+In this lab, we're going to make our application visible to the end users, so they can access it.
+
+image::roadshow-app-architecture-parksmap-2.png[Application architecture,800,align="center"]
+
+== Background: Routes
+
+While *Services* provide internal abstraction and load balancing within an
+OpenShift environment, sometimes clients (users, systems, devices, etc.)
+**outside** of OpenShift need to access an application. The way that external
+clients are able to access applications running in OpenShift is through the
+OpenShift routing layer. And the data object behind that is a *Route*.
+
+The default OpenShift router (HAProxy) uses the HTTP header of the incoming
+request to determine where to proxy the connection. You can optionally define
+security, such as TLS, for the *Route*. If you want your *Services*, and, by
+extension, your *Pods*, to be accessible from the outside world, you need to
+create a *Route*.
+
+== Exercise: Creating a Route
+
+You may remember that when we deployed the `parksmap` application, we un-checked the checkbox to 
+create a *Route*. Normally it would have been created for us automatically. Fortunately, creating a *Route* is a pretty straight-forward process. You simply `expose` the *Service* via the command line. Or, via the Administrator Perspective, just click *Networking -> Routes* and then the *Create Route* button. Choose the *Service* you want to expose and enter values as shown in the following image:
+
+image::parksmap-route-create.png[Create Route,align="center"]
+
+When creating a *Route*, some other options can be provided, like the hostname for the *Route* or the TLS configuration for the *Route*.
+
+When using the command line, we can first verify that we don't already have any existing *Routes*:
+
+[source,bash,role=execute-1]
+----
+oc get routes
+----
+
+[source,bash]
+----
+No resources found.
+----
+
+Now we need to get the *Service* name to expose:
+
+[source,bash,role=execute-1]
+----
+oc get services
+----
+
+[source,bash]
+----
+NAME       CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+parksmap   172.30.169.213   <none>        8080/TCP   5h
+----
+
+Once we know the *Service* name, creating a *Route* is a simple one-command task:
+
+[source,bash,role=execute-1]
+----
+oc expose service parksmap
+----
+
+[source,bash]
+----
+route.route.openshift.io/parksmap exposed
+----
+
+Verify the *Route* was created with the following command:
+
+[source,bash,role=execute-1]
+----
+oc get route
+----
+
+[source,bash]
+----
+NAME       HOST/PORT                            PATH      SERVICES   PORT       TERMINATION
+parksmap   parksmap-{{project_namespace}}.{{cluster_subdomain}}             parksmap   8080-tcp
+----
+
+You can also verify the *Route* in the Developer Perspective under the *Resources* tab for your `parksmap` deployment configuration. Also note that there is a decorator icon on the `parksmap` visualization now. If you click that, it will open the URL for your *Route* in a browser.
+
+image::parksmap-route-created.png[Route created]
+
+This application is now available at the URL shown in the Developer Perspective. Click the link and you will see:
+
+image::parksmap-route-empty-map.png[Empty map]
+
