@@ -1,0 +1,7 @@
+name: template-tutorial
+title: Template Tutorial
+version: master
+nav:
+  - modules/ROOT/nav.adoc
+
+start_page: ROOT:index.adoc
