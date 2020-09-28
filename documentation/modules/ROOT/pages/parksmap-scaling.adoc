@@ -9,7 +9,7 @@ somehow die/exit are not automatically restarted. *ReplicationControllers* are
 how OpenShift "self heals".
 
 A *DeploymentConfiguration* (DC) defines how something in OpenShift should be
-deployed. From the https://{{DOCS_URL}}/applications/deployments/what-deployments-are.html[deployments documentation]:
+deployed. From the https://%DOCS_URL%/applications/deployments/what-deployments-are.html[deployments documentation]:
 
 [quote]
 __
@@ -43,7 +43,7 @@ oc get dc
 [source,bash]
 ----
 NAME       REVISION   DESIRED   CURRENT   TRIGGERED BY
-parksmap   1          1         1         config,image(parksmap:{{PARKSMAP_VERSION}})
+parksmap   1          1         1         config,image(parksmap:%PARKSMAP_VERSION%)
 ----
 
 To get more details, we can look into the *ReplicationController* (*RC*).
@@ -70,7 +70,7 @@ OpenShift's *HorizontalPodAutoscaler* effectively monitors the CPU usage of a
 set of instances and then manipulates the RCs accordingly.
 
 You can learn more about the CPU-based
-https://{{DOCS_URL}}/nodes/pods/nodes-pods-autoscaling.html#nodes-pods-autoscaling-about_nodes-pods-autoscaling[Horizontal Pod Autoscaler here]
+https://%DOCS_URL%/nodes/pods/nodes-pods-autoscaling.html#nodes-pods-autoscaling-about_nodes-pods-autoscaling[Horizontal Pod Autoscaler here]
 
 == Exercise: Scaling the Application
 
@@ -82,7 +82,7 @@ the `scale` command. You could also do this by incrementing the Desired Count in
 oc scale --replicas=2 dc/parksmap
 ----
 
-You can also scale up to two pods in the Developer Perspective. From the Topology view, first click the `parksmap` deployment config and select the *Overview* tab:
+You can also scale up to two pods in the Developer Perspective. From the Topology view, first click the `parksmap` deployment config and select the *Details* tab:
 
 image::parksmap-scaleup.png[Scaling]
 
@@ -220,7 +220,7 @@ application instance wasn't alive, it would kill the instance and then restart
 it, always ensuring that the desired number of replicas was in place.
 
 More information on probing applications is available in the
-https://{{DOCS_URL}}/nodes/containers/nodes-containers-health.html[Application
+https://%DOCS_URL%/nodes/containers/nodes-containers-health.html[Application
 Health] section of the documentation and later in this guide.
 
 == Exercise: Scale Down

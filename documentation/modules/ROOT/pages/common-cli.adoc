@@ -21,7 +21,7 @@ You should see the following (or something similar):
 
 [source,bash]
 ----
-{{OC_VERSION}}
+%OC_VERSION%
 ----
 
 If the `oc` doesn't exist or you have an older version of the OpenShift CLI, follow
@@ -32,7 +32,7 @@ next lab.
 
 == Download and Install OpenShift CLI on Linux
 
-Download the the OpenShift CLI tool for link:{{DOWNLOAD_CLIENT_LIN64}}[Linux 64]
+Download the the OpenShift CLI tool for link:%DOWNLOAD_CLIENT_LIN64%[Linux 64]
 
 Once the file has been downloaded, you will need to extract the contents as it
 is a compressed archive. I would suggest saving this file to the following
@@ -74,7 +74,7 @@ You should see the following (or something similar):
 
 [source,bash]
 ----
-{{OC_VERSION}}
+%OC_VERSION%
 ----
 
 If you get an error message, you have not updated your path correctly. If you
@@ -82,7 +82,7 @@ need help, raise your hand and the instructor will assist.
 
 == Download and Install OpenShift CLI on Mac
 
-Download the the OpenShift CLI tool for link:{{DOWNLOAD_CLIENT_MAC}}[Mac]
+Download the the OpenShift CLI tool for link:%DOWNLOAD_CLIENT_MAC%[Mac]
 
 Once the file has been downloaded, you will need to extract the contents as it
 is a compressed archive. I would suggest saving this file to the following
@@ -125,7 +125,7 @@ You should see the following (or something similar):
 
 [source,bash]
 ----
-{{OC_VERSION}}
+%OC_VERSION%
 ----
 
 If you get an error message, you have not updated your path correctly. If you

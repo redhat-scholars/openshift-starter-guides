@@ -35,7 +35,7 @@ other aspects of OpenShift.
 
 A full discussion of S2I is beyond the scope of this class, but you can find
 more information about it either in the
-https://{{DOCS_URL}}/creating_images/s2i.html[OpenShift S2I documentation]
+https://%DOCS_URL%/creating_images/s2i.html[OpenShift S2I documentation]
 or on https://github.com/openshift/source-to-image[GitHub]. The only key concept you need to
 remember about S2I is that it's magic.
 
@@ -67,11 +67,11 @@ Your Gogs credentials are:
 
 [source,bash]
 ----
-username: {{username}}
-password: {{GOGS_PASSWORD}}
+username: %username%
+password: %GOGS_PASSWORD%
 ----
 
-link:http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks.git[Gogs Repository]
+link:http://gogs-%INFRA_PROJECT%.%cluster_subdomain%/%username%/nationalparks.git[Gogs Repository]
 
 
 Later in the lab, we want you to make a code change and then rebuild your
@@ -93,17 +93,23 @@ Enter the following for Git Repo URL:
 
 [source,role=copypaste]
 ----
-http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks.git
+http://gogs-%INFRA_PROJECT%.%cluster_subdomain%/%username%/nationalparks.git
 ----
 
-Select Java as your Builder Image, and be sure to select version 8.
+In *Git Type* select *Other*.
+
+Select *Java* as your Builder Image, and be sure to select version *11*.
 
 image::nationalparks-import-from-git-url-builder.png[Import from Git]
 
 NOTE: All of these runtimes shown are made available via *Templates* and
 *ImageStreams*, which will be discussed in a later lab.
 
-Scroll down to the *General* section. Select `workshop` as your application, and `nationalparks` as the name.
+Scroll down to the *General* section. Select:
+
+* *Application Name* : workshop
+* *Name* : nationalparks
+
 
 In *Resources* section, select *Deployment Config*.
 
@@ -126,7 +132,8 @@ the application. You can see all of this happening in real time!
 
 From the command line, you can also see the *Builds*:
 
-[source,bash,role=execute-1]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc get builds
 ----
@@ -141,7 +148,8 @@ nationalparks-1   Source    Git@b052ae6   Running    About a minute ago   1m2s
 
 You can also view the build logs with the following command:
 
-[source,bash,role=execute-1]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc logs -f builds/nationalparks-1
 ----
@@ -169,7 +177,8 @@ If you look again at the web console, you will notice that, when you create the
 application this way, OpenShift also creates a *Route* for you. You can see the
 URL in the web console, or via the command line:
 
-[source,bash,role=execute-1]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc get routes
 ----
@@ -179,22 +188,23 @@ Where you should see something like the following:
 [source,bash]
 ----
 NAME            HOST/PORT                                                   PATH      SERVICES        PORT       TERMINATION
-nationalparks   nationalparks-{{ project_namespace  }}.{{cluster_subdomain}}             nationalparks   8080-tcp
-parksmap        parksmap-{{ project_namespace  }}.{{cluster_subdomain}}                  parksmap        8080-tcp
+nationalparks   nationalparks-%project_namespace%.%cluster_subdomain%             nationalparks   8080-tcp
+parksmap        parksmap-%project_namespace%.%cluster_subdomain%                  parksmap        8080-tcp
 ----
 
 In the above example, the URL is:
 
-[source,bash,role=copypaste]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
-http://nationalparks-{{ project_namespace  }}.{{cluster_subdomain}}
+http://nationalparks-%project_namespace%.%cluster_subdomain%
 ----
 
 Since this is a backend application, it doesn't actually have a web interface.
 However, it can still be used with a browser. All backends that work with the parksmap
 frontend are required to implement a `/ws/info/` endpoint. To test, visit this URL in your browser:
 
-link:http://nationalparks-{{project_namespace}}.{{cluster_subdomain}}/ws/info/[National Parks Info Page]
+link:http://nationalparks-%project_namespace%.%cluster_subdomain%/ws/info/[National Parks Info Page]
 
 WARNING: The trailing slash is *required*.
 

@@ -132,6 +132,6 @@ when OpenShift launches a container its user is actually randomized.
 If you want or need to allow OpenShift users to deploy container images that do
 expect to run as root (or any specific user), a small configuration change is
 needed. You can learn more about the
-https://{{DOCS_URL}}/openshift_images/create-images.html#images-create-guide-general_create-images[container image guidelines]
+https://%DOCS_URL%/openshift_images/create-images.html#images-create-guide-general_create-images[container image guidelines]
 for OpenShift.
 ====

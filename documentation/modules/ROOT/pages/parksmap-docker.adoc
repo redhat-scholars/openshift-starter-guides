@@ -8,7 +8,7 @@ Let's start by doing the simplest thing possible - get a plain old
 Docker-formatted image to run on OpenShift. This is incredibly simple to do.
 With OpenShift it can be done directly from the web console.
 
-Return to the http://console-openshift-console.{{cluster_subdomain}}/k8s/cluster/projects[Web Console].
+Return to the http://console-openshift-console.%cluster_subdomain%/k8s/cluster/projects[Web Console].
 
 If you're no longer on the *Topology* view in the Developer perspective, return there now. Click *Container Image* to open a dialog that will allow you to specify the information for the image you want to deploy.
 
@@ -18,7 +18,7 @@ In the *Image Name* field, copy/paste the following into the box:
 
 [source,role=copy]
 ----
-docker.io/openshiftroadshow/{{PARKSMAP_IMAGENAME}}:{{PARKSMAP_VERSION}}
+quay.io/openshiftroadshow/%PARKSMAP_IMAGENAME%:%PARKSMAP_VERSION%
 ----
 
 Either press *enter* or click on the magnifying glass. OpenShift will then go
@@ -29,7 +29,14 @@ Your screen will end up looking something like this:
 image::parksmap-image.png[Explore Project]
 
 
-Make sure to have the correct values in the *Application Name* and *Name* fields, and pick *Deployment Config* from *Resource* section.
+Make sure to have the correct values in:
+
+* *Application Name* : workshop
+* *Name* : parksmap
+
+Pick *Deployment Config* from *Resource* section.
+
+Un-check the checkbox next to "Create a route to the application". For learning purposes, we will create a *Route* for the application later in the workshop.
 
 image::parksmap-image-options.png[Explore Project]
 
@@ -55,9 +62,6 @@ And finally, the role this component plays in the overall application.
 ----
 role=frontend
 ----
-
-Un-check the checkbox next to "Create a route to the application". For learning purposes, we will create a *Route* for the application later in the workshop.
-
 
 Next, click the blue *Create* button. You will be directed to the *Topology* page, where you should see the visualization for the `parksmap` deployment config in the `workshop` application.
 
@@ -187,9 +191,9 @@ Whenever OpenShift asks the node's CRI (Container Runtime Interface) runtime (Do
 If it doesn't, it will pull it from the specified registry.
 
 There are a number of ways to customize this behavior. They are documented in
-https://{{DOCS_URL}}/applications/application-life-cycle-management/creating-new-applications.html#applications-create-using-cli-image-creating-new-applications[specifying an image]
+https://%DOCS_URL%/applications/application-life-cycle-management/creating-new-applications.html#applications-create-using-cli-image-creating-new-applications[specifying an image]
 as well as
-https://{{DOCS_URL}}/dev_guide/managing_images.html#image-pull-policy[image pull policy].
+https://%DOCS_URL%/dev_guide/managing_images.html#image-pull-policy[image pull policy].
 
 == Background: Services
 
@@ -212,7 +216,7 @@ The way that a *Service* maps to a set of *Pods* is via a system of *Labels* and
 protocols can be mapped.
 
 There is a lot more information about
-https://{{DOCS_URL}}/architecture/understanding-development.html#understanding-kubernetes-pods[Services],
+https://%DOCS_URL%/architecture/understanding-development.html#understanding-kubernetes-pods[Services],
 including the YAML format to make one by hand, in the official documentation.
 
 Now that we understand the basics of what a *Service* is, let's take a look at

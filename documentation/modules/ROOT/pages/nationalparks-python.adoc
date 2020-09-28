@@ -36,7 +36,7 @@ other aspects of OpenShift.
 
 A full discussion of S2I is beyond the scope of this class, but you can find
 more information about it either in the
-https://{{DOCS_URL}}/creating_images/s2i.html[OpenShift S2I documentation]
+https://%DOCS_URL%/creating_images/s2i.html[OpenShift S2I documentation]
 or on https://github.com/openshift/source-to-image[GitHub]. The only key concept you need to
 remember about S2I is that it's magic.
 
@@ -64,14 +64,14 @@ application code!
 The repository that we are going to use is already cloned in the internal Gogs repository
 and located at the following URL:
 
-link:http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks.git[Gogs Repository]
+link:http://gogs-%INFRA_PROJECT%.%cluster_subdomain%/%username%/nationalparks-py.git[Gogs Repository]
 
 Your Gogs credentials are:
 
 [source,bash]
 ----
-username: {{username}}
-password: {{GOGS_PASSWORD}}
+username: %username%
+password: %GOGS_PASSWORD%
 ----
 
 
@@ -95,7 +95,7 @@ Enter the following for Git Repo URL:
 
 [source,role=copypaste]
 ----
-http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks.git
+http://gogs-%INFRA_PROJECT%.%cluster_subdomain%/%username%/nationalparks.git
 ----
 
 Select Python as your Builder Image.
@@ -180,22 +180,22 @@ Where you should see something like the following:
 [source,bash]
 ----
 NAME            HOST/PORT                                                   PATH      SERVICES        PORT       TERMINATION
-nationalparks   nationalparks-{{ project_namespace  }}.{{cluster_subdomain}}             nationalparks   8080-tcp
-parksmap        parksmap-{{ project_namespace  }}.{{cluster_subdomain}}                  parksmap        8080-tcp
+nationalparks   nationalparks-%project_namespace%.%cluster_subdomain%             nationalparks   8080-tcp
+parksmap        parksmap-%project_namespace%.%cluster_subdomain%                  parksmap        8080-tcp
 ----
 
 In the above example, the URL is:
 
 [source,bash,role=copypaste]
 ----
-http://nationalparks-{{ project_namespace  }}.{{cluster_subdomain}}
+http://nationalparks-%project_namespace%.%cluster_subdomain%
 ----
 
 Since this is a backend application, it doesn't actually have a web interface.
 However, it can still be used with a browser. All backends that work with the parksmap
 frontend are required to implement a `/ws/info/` endpoint. To test, visit this URL in your browser:
 
-link:http://nationalparks-{{project_namespace}}.{{cluster_subdomain}}/ws/info/[National Parks Info Page]
+link:http://nationalparks-%project_namespace%.%cluster_subdomain%/ws/info/[National Parks Info Page]
 ----
 
 WARNING: The trailing slash is *required*.

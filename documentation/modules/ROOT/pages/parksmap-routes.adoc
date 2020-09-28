@@ -72,7 +72,7 @@ oc get route
 [source,bash]
 ----
 NAME       HOST/PORT                            PATH      SERVICES   PORT       TERMINATION
-parksmap   parksmap-{{project_namespace}}.{{cluster_subdomain}}             parksmap   8080-tcp
+parksmap   parksmap-%project_namespace%.%cluster_subdomain%             parksmap   8080-tcp
 ----
 
 You can also verify the *Route* in the Developer Perspective under the *Resources* tab for your `parksmap` deployment configuration. Also note that there is a decorator icon on the `parksmap` visualization now. If you click that, it will open the URL for your *Route* in a browser.

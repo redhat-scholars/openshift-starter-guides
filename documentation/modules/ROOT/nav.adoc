@@ -13,8 +13,8 @@
 * xref:nationalparks-application-health.adoc[Application Healthchecks]
 * xref:nationalparks-java-pipeline.adoc[Jenkins Pipelines]
 * xref:nationalparks-java-pipeline-codechanges-gogs.adoc[Continuous Integration and Pipelines]
-* xref:mlbparks-templates.adoc
-* xref:mlbparks-binary-build.adoc
-* xref:mlbparks-debugging.adoc
-* xref:common-further-resources.adoc
-* xref:common-workshop-links.adoc
+* xref:mlbparks-templates.adoc[Templates]
+* xref:mlbparks-binary-build.adoc[Binary Builds]
+* xref:mlbparks-debugging.adoc[Debugging Apps]
+* xref:common-further-resources.adoc[Further Resources]
+* xref:common-workshop-links.adoc[Workshop Links]

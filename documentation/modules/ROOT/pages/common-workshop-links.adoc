@@ -2,34 +2,34 @@ You can find all urls, hostnames, usernames and passwords that are needed during
 
 == OpenShift cluster URL
 
-Console Address: http://console-openshift-console.{{cluster_subdomain}} +
-API Address: https://api.{{cluster_subdomain}}:6443 +
+Console Address: http://console-openshift-console.%cluster_subdomain% +
+API Address: https://api.%cluster_subdomain%:6443 +
 
-Username: `{{ username}}` + 
+Username: `%username%` + 
 Password: `openshift` +
 
 
 
 == Workshop Guides
 
-Web: http://starter-guides-{{ INFRA_PROJECT }}.{{cluster_subdomain}}
+Web: http://starter-guides-%INFRA_PROJECT%.%cluster_subdomain%
 
 
 == Web terminal
 
-Web: http://terminal-{{ INFRA_PROJECT }}.{{cluster_subdomain}}
+Web: http://terminal-%INFRA_PROJECT%.%cluster_subdomain%
 
 == Git Server
 
-Web: http://gogs-{{ INFRA_PROJECT }}.{{cluster_subdomain}}
+Web: http://gogs-%INFRA_PROJECT%.%cluster_subdomain%
 
-Username: `{{username}}` + 
-Password: `{{ GOGS_PASSWORD }}` + 
+Username: `%username%` + 
+Password: `%GOGS_PASSWORD%` + 
 
 == Nexus Maven repository
 
-Web: http://nexus-{{ INFRA_PROJECT }}.{{cluster_subdomain}}
+Web: http://nexus-%INFRA_PROJECT%.%cluster_subdomain%
 
 == OpenShift Ops View
 
-Web: http://ocp-ops-view-{{ INFRA_PROJECT }}.{{cluster_subdomain}}
+Web: http://ocp-ops-view-%INFRA_PROJECT%.%cluster_subdomain%

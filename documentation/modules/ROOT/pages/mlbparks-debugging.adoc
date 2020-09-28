@@ -5,7 +5,7 @@ interface we don't want to expose to the public, or, in our case, attaching a de
 server.
 
 You can read more about port-forwarding from the
-https://{{DOCS_URL}}/dev_guide/port_forwarding.html[developer documentation].
+https://%DOCS_URL%/dev_guide/port_forwarding.html[developer documentation].
 
 By port forwarding the debugging port for the application server, we can attach the debugger from our IDE and actually
 step through the code in the pod as it is running in real time. By default EAP is not in debug mode, therefore we first

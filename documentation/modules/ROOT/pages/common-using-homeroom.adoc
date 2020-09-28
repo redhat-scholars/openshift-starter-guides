@@ -39,7 +39,7 @@ At times, instead of running a command, you may need to copy the value and paste
 
 [source,text,role=copy]
 ----
-{{username}}
+%username%
 ----
 
 Clicking on the displayed value in this case will copy it into the system paste buffer ready to paste to whatever location the workshop instructions tell you to.

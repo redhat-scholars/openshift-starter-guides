@@ -104,7 +104,7 @@ CAUTION: In the following Kibana search(es), replace the pod_name to match the n
 
 [source,bash,role=copyandedit]
 ----
-kubernetes.pod_name:"parksmap-1-mrxfq" AND kubernetes.namespace_name:"{{ project_namespace }}"
+kubernetes.pod_name:"parksmap-1-mrxfq" AND kubernetes.namespace_name:"%project_namespace%"
 ----
 
 [NOTE]
@@ -118,7 +118,7 @@ pod name reference and click the magnifying glass or press the enter key.
 
 [source,bash,role=copypaste]
 ----
-kubernetes.namespace_name:"{{ project_namespace }}"
+kubernetes.namespace_name:"%project_namespace%"
 ----
 
 If you click "add" for `kubernetes.pod_name` in the left bar, you'll then see your old *Pod*'s logs,
@@ -131,5 +131,5 @@ Try the following search string ensuring that you use the correct name for your 
 
 [source,bash,role=copypaste]
 ----
-kubernetes.namespace_name:"{{ project_namespace }}" AND message:"Failure executing"
+kubernetes.namespace_name:"%project_namespace%" AND message:"Failure executing"
 ----

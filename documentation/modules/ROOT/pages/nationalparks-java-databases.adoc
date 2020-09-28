@@ -38,8 +38,10 @@ persistent storage!). The image will ensure that:
 - A user exists with the specified name
 - The user can access the specified database with the specified password
 
-In the Developer Perspective in your `{{ project_namespace }}` project,
+In the Developer Perspective in your `%project_namespace%` project,
 click *+Add* and then *Database*. In the Databases view, you can click *Mongo* to filter for just MongoDB.
+
+NOTE: Make sure to uncheck *Operator Backed* option from *Type* section
 
 image::nationalparks-databases-catalog-databases.png[Data Stores]
 
@@ -117,7 +119,7 @@ can verify this by looking at the output of `oc get dc`:
 NAME                    REVISION   DESIRED   CURRENT   TRIGGERED BY
 mongodb-nationalparks   1          1         1         config,image(mongodb:3.6)
 nationalparks           2          1         1         config,image(nationalparks:master)
-parksmap                2          1         1         config,image(parksmap:{{PARKSMAP_VERSION}}))
+parksmap                2          1         1         config,image(parksmap:%PARKSMAP_VERSION%))
 ----
 
 Something that increments the version of a *DeploymentConfiguration*, by default,
@@ -146,7 +148,7 @@ service to query for data:
 
 [source,bash,role=copypaste]
 ----
-http://nationalparks-{{ project_namespace }}.{{cluster_subdomain}}/ws/data/all
+http://nationalparks-%project_namespace%.%cluster_subdomain%/ws/data/all
 ----
 
 And the result?
@@ -164,7 +166,7 @@ The application provides an endpoint to do just that:
 
 [source,bash,role=copypaste]
 ----
-http://nationalparks-{{ project_namespace }}.{{cluster_subdomain}}/ws/data/load
+http://nationalparks-%project_namespace%.%cluster_subdomain%/ws/data/load
 ----
 
 And the result?
@@ -182,7 +184,7 @@ a browser problem, and the application is working properly.
 
 [source,bash,role=copypaste]
 ----
-http://parksmap-{{ project_namespace }}.{{cluster_subdomain}}
+http://parksmap-%project_namespace%.%cluster_subdomain%
 ----
 
 Hmm... There's just one thing. The main map **STILL** isn't displaying the parks.
@@ -225,7 +227,7 @@ API and asking about the *Routes* and *Services* in the project. If any of them 
 *Label* that is `type=parksmap-backend`, the application knows to interrogate
 the endpoints to look for map data.
 You can see the code that does this
-link:https://github.com/openshift-roadshow/parksmap-web/blob/{{PARKSMAP_VERSION}}/src/main/java/com/openshift/evg/roadshow/rest/RouteWatcher.java#L20[here].
+link:https://github.com/openshift-roadshow/parksmap-web/blob/%PARKSMAP_VERSION%/src/main/java/com/openshift/evg/roadshow/rest/RouteWatcher.java#L20[here].
 
 
 Fortunately, the command line provides a convenient way for us to manipulate
@@ -239,7 +241,7 @@ oc describe route nationalparks
 [source,bash]
 ----
 Name:                   nationalparks
-Namespace:              {{ project_namespace }}
+Namespace:              %project_namespace%
 Created:                2 hours ago
 Labels:                 app=workshop
                         app.kubernetes.io/component=nationalparks
@@ -251,7 +253,7 @@ Labels:                 app=workshop
                         component=nationalparks
                         role=backend  
 Annotations:            openshift.io/host.generated=true                          
-Requested Host:         nationalparks-{{ project_namespace }}.{{cluster_subdomain}}
+Requested Host:         nationalparks-%project_namespace%.%cluster_subdomain%
                         exposed on router router 2 hours ago
 Path:                   <none>
 TLS Termination:        <none>
@@ -281,7 +283,7 @@ If you check your browser now:
 
 [source,bash,role=copypaste]
 ----
-http://parksmap-{{ project_namespace }}.{{cluster_subdomain}}/
+http://parksmap-%project_namespace%.%cluster_subdomain%/
 ----
 
 image::nationalparks-databases-new-parks.png[MongoDB]
