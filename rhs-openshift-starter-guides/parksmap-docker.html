@@ -199,7 +199,7 @@ With OpenShift it can be done directly from the web console.</p>
 <div class="paragraph">
 <p>In the <strong>Image Name</strong> field, copy/paste the following into the box:</p>
 </div>
-<div class="listingblock copy">
+<div class="listingblock copypaste">
 <div class="content">
 <pre class="highlightjs highlight"><code>quay.io/openshiftroadshow/%PARKSMAP_IMAGENAME%:%PARKSMAP_VERSION%</code></pre>
 </div>
@@ -246,7 +246,7 @@ out to the container registry specified and interrogate the image.</p>
 <div class="paragraph">
 <p>We will add 3 labels. After you enter the name=value pair for each label, press <strong>enter</strong> before typing the next. First the name to be given to the application.</p>
 </div>
-<div class="listingblock copy">
+<div class="listingblock copypaste">
 <div class="content">
 <pre class="highlightjs highlight"><code>app=workshop</code></pre>
 </div>
@@ -254,7 +254,7 @@ out to the container registry specified and interrogate the image.</p>
 <div class="paragraph">
 <p>Next the name of this deployment.</p>
 </div>
-<div class="listingblock copy">
+<div class="listingblock copypaste">
 <div class="content">
 <pre class="highlightjs highlight"><code>component=parksmap</code></pre>
 </div>
@@ -262,7 +262,7 @@ out to the container registry specified and interrogate the image.</p>
 <div class="paragraph">
 <p>And finally, the role this component plays in the overall application.</p>
 </div>
-<div class="listingblock copy">
+<div class="listingblock copypaste">
 <div class="content">
 <pre class="highlightjs highlight"><code>role=frontend</code></pre>
 </div>
@@ -349,7 +349,7 @@ happens to be the <code>parksmap</code> application - a simple Spring Boot/Java 
 <div class="paragraph">
 <p>You can also examine <strong>Pods</strong> from the command line:</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pods</code></pre>
 </div>
@@ -357,9 +357,9 @@ happens to be the <code>parksmap</code> application - a simple Spring Boot/Java 
 <div class="paragraph">
 <p>You should see output that looks similar to:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">NAME                READY   STATUS      RESTARTS   AGE
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                READY   STATUS      RESTARTS   AGE
 parksmap-1-deploy   0/1     Completed   0          4m56s
 parksmap-1-gxbgq    1/1     Running     0          4m48s</code></pre>
 </div>
@@ -383,7 +383,7 @@ Make sure you use the correct <strong>Pod</strong> name from your output.
 </tr>
 </table>
 </div>
-<div class="listingblock copy-and-edit">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pod parksmap-1-gxbgq -o yaml</code></pre>
 </div>
@@ -496,7 +496,7 @@ including the YAML format to make one by hand, in the official documentation.</p
 the <strong>Service</strong> that was created for the image that we just deployed. In order to
 view the <strong>Services</strong> defined in your <strong>Project</strong>, enter in the following command:</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get services</code></pre>
 </div>
@@ -504,7 +504,7 @@ view the <strong>Services</strong> defined in your <strong>Project</strong>, ent
 <div class="paragraph">
 <p>You should see output similar to the following:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME       TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
 parksmap   ClusterIP   172.30.22.209  &lt;none&gt;        8080/TCP   3h</code></pre>
@@ -528,7 +528,7 @@ fixed and never change for the life of the <strong>Service</strong>.</p>
 <p>You can also get more detailed information about a <strong>Service</strong> by using the
 following command to display the data in YAML:</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get service parksmap -o yaml</code></pre>
 </div>
@@ -536,7 +536,7 @@ following command to display the data in YAML:</p>
 <div class="paragraph">
 <p>You should see output similar to the following:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">apiVersion: v1
 kind: Service
@@ -588,7 +588,7 @@ status:
 wires components together. For example, run the following command to get the
 name of your <code>parksmap</code> <strong>Pod</strong>:</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pods</code></pre>
 </div>
@@ -596,7 +596,7 @@ name of your <code>parksmap</code> <strong>Pod</strong>:</p>
 <div class="paragraph">
 <p>You should see output similar to the following:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                READY   STATUS      RESTARTS   AGE
 parksmap-1-deploy   0/1     Completed   0          12m
@@ -606,7 +606,7 @@ parksmap-1-gxbgq    1/1     Running     0          12m</code></pre>
 <div class="paragraph">
 <p>Now you can view the detailed data for your <strong>Pod</strong> with the following command:</p>
 </div>
-<div class="listingblock copy-and-edit">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pod parksmap-1-gxbgq -o yaml</code></pre>
 </div>
@@ -614,7 +614,7 @@ parksmap-1-gxbgq    1/1     Running     0          12m</code></pre>
 <div class="paragraph">
 <p>Under the <code>metadata</code> section you should see the following:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">  labels:
     app: parksmap
@@ -650,7 +650,7 @@ parksmap-1-gxbgq    1/1     Running     0          12m</code></pre>
 matches the <strong>Selector</strong> will be associated with the <strong>Service</strong>. To see this in
 action, issue the following command:</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc describe service parksmap</code></pre>
 </div>
@@ -658,7 +658,7 @@ action, issue the following command:</p>
 <div class="paragraph">
 <p>You should see something like the following output:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">Name:              parksmap
 Namespace:         lab-getting-started-starter-workshop-apb-test-user1
