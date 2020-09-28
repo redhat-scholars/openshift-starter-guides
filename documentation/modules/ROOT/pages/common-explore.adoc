@@ -13,7 +13,8 @@ This lab environment has the `oc` command line tool installed, and your lab user
 
 Issue the following command to see help information:
 
-[source,bash,role=execute-1]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc help
 ----
@@ -37,7 +38,8 @@ If you had multiple projects, the first thing you would want to do is to switch
 to the *%project_namespace%* project to make sure you're on the correct project from now on.
 You can do this with the following command:
 
-[source,bash,role=execute-1]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc project %project_namespace%
 ----
@@ -51,8 +53,10 @@ To get a feel for how the web console works, click on this http://console-opensh
 
 On the login screen, enter the following credentials:
 
+[source,role="copypaste"]
 Username: `%username%`
 
+[source,role="copypaste"]
 Password: `openshift`
 
 The first time you access the web console, you will most likely be in the Administrator perspective. You will be presented with the list of Projects that you can access, and you will see something that looks like the following image:

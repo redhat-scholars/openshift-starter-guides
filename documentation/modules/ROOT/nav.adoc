@@ -11,7 +11,7 @@
 * xref:nationalparks-java.adoc[Nationalparks Java App]
 * xref:nationalparks-java-databases.adoc[Connecting to a Database]
 * xref:nationalparks-application-health.adoc[Application Healthchecks]
-* xref:nationalparks-java-pipeline.adoc[Jenkins Pipelines]
+* xref:nationalparks-java-pipeline.adoc[Tekton Pipelines]
 * xref:nationalparks-java-pipeline-codechanges-gogs.adoc[Continuous Integration and Pipelines]
 * xref:mlbparks-templates.adoc[Templates]
 * xref:mlbparks-binary-build.adoc[Binary Builds]

@@ -34,6 +34,7 @@ First get the pods:
 oc get pods
 ----
 
+[.console-output]
 [source,bash]
 ----
 NAME                             READY   STATUS      RESTARTS   AGE
@@ -52,7 +53,8 @@ mlbparks-3-hcd8g                 0/1     Running     0          10s
 
 Now we can set to set up the port-forward:
 
-[source,bash,role=copypaste]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc port-forward mlbparks-3-hcd8g 8787:8787
 ----

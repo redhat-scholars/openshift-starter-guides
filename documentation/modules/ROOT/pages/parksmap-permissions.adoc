@@ -11,7 +11,7 @@ The **default** service account is the one taking the responsibility of running 
 every pod that is launched. By changing the permissions for that service
 account, we can do interesting things.
 
-You can view current permissions in the web console, go to the Topology view in the Developer Perspective, click the `parksmap` entry, go to the *Overview* tab, and then click the *Namespace*. 
+You can view current permissions in the web console, go to the Topology view in the Developer Perspective, click the `parksmap` entry, go to the *Details* tab, and then click the *Namespace*. 
 
 image::parksmap-permissions-namespace.png[Namespace]
 
@@ -23,14 +23,16 @@ image::parksmap-permissions-membership.png[Membership]
 The parksmap application wants to talk to the OpenShift API to learn about other
 *Pods*, *Services*, and resources within the *Project*. You'll soon learn why!
 
-[source,bash,role=execute-1]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc project %project_namespace%
 ----
 
 Then:
 
-[source,bash,role=execute-1]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc policy add-role-to-user view -z default
 ----
@@ -89,7 +91,8 @@ access to your project using the following command:
 
 CAUTION: In the following command(s), replace `%project_namespace%` with the user name of the person to whom you want to grant access.
 
-[source,bash,role=copy-and-edit]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc policy add-role-to-user view %project_namespace%
 ----

@@ -25,7 +25,8 @@ https://%DOCS_URL%/dev_guide/dev_tutorials/binary_builds.html[official documenta
 === Clone source
 The first step is to clone the MLB source code from GitHub to your workshop environment:
 
-[source,bash,role=execute-1]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 git clone https://github.com/openshift-roadshow/mlbparks.git
 ----
@@ -37,7 +38,8 @@ Developer Studio and JBoss Developer Tools have built in functionality that make
 If you have Maven all set up on your machine, then you can `cd` into the `mlbparks` directory and run `mvn package`
 
 
-[source,bash,role=execute-1]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 cd mlbparks
 mvn package
@@ -50,7 +52,7 @@ Pay attention to the output location for the ROOT.war, we will need that directo
 Time for a source code change! Go to `src/main/java/com/openshift/evg/roadshow/rest/BackendController.java`.and edit it with `vi` or `nano`.
 This is the REST endpoint that gives basic info on the service and can be reached at:
 
-[source,bash,role=copypaste]
+[source,bash,role="copypaste"]
 ----
 http://mlbparks-%project_namespace%.%cluster_subdomain%/ws/info/
 ----
@@ -64,7 +66,8 @@ return new Backend("mlbparks", "AMAZING MLB Parks", new Coordinates("39.82", "-9
 
 Don't forget to save the file and run `mvn package` again:
 
-[source,bash,role=execute-1]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 cd /opt/app-root/src/mlbparks
 mvn package
@@ -76,7 +79,8 @@ Alright we have our war file built, time to kick off a build using it.
 
 If you built your war with Maven:
 
-[source,bash,role=execute-1]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc start-build bc/mlbparks --from-file=target/ROOT.war --follow
 ----
@@ -90,7 +94,7 @@ rolling spins up the new version of the pod before it takes down the old one. Ro
 
 You can follow the deployment in progress from Topology view, and when it is completed, you will see the new content at:
 
-[source,bash,role=copypaste]
+[source,bash,role="copypaste"]
 ----
 http://mlbparks-%project_namespace%.%cluster_subdomain%/ws/info/
 ----

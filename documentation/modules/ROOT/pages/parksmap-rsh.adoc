@@ -11,13 +11,15 @@ need to run an SSH service inside each container. In order to establish an
 interactive session inside a container, you can use the `oc rsh` command. First
 get the list of available pods:
 
-[source,bash,role=execute-1]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc get pods
 ----
 
 You should an output similar to the following:
 
+[.console-output]
 [source,bash]
 ----
 NAME                READY   STATUS      RESTARTS   AGE
@@ -28,13 +30,15 @@ parksmap-2-mcjsw    1/1     Running     0          172m
 
 Now you can establish a remote shell session into the pod by using the pod name:
 
-[source,bash,role=copy-and-edit]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc rsh parksmap-2-mcjsw
 ----
 
 You would see the following output:
 
+[.console-output]
 [source,bash]
 ----
 sh-4.2$
@@ -49,11 +53,13 @@ can be specified after the pod name in the issued command.
 
 Run the following command to list the files in the top folder:
 
-[source,bash,role=execute-1]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 ls /
 ----
 
+[.console-output]
 [source,bash]
 ----
 anaconda-post.log  bin  dev  etc  home  lib  lib64  lost+found  media  mnt  opt  parksmap.jar  proc  root  run  sbin  srv  sys  tmp  usr  var
@@ -76,7 +82,8 @@ Go ahead and execute the same commands you did when using the CLI to see how the
 
 Before proceeding, close the connection to the pod.
 
-[source,bash,role=execute-1]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 exit
 ----
@@ -90,13 +97,15 @@ the executable path.
 
 In order to show just the JAR file, run the following:
 
-[source,bash,role=copy-and-edit]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc exec parksmap-2-mcjsw -- ls -l /parksmap.jar
 ----
 
 You would see something like the following:
 
+[.console-output]
 [source,bash]
 ----
 -rw-r--r--. 1 root root 39138901 Apr  1 16:54 /parksmap.jar
@@ -112,13 +121,15 @@ end and where the actual command to execute begins. Take a look at `oc exec
 
 You can also specify the shell commands to run directly with the *oc rsh* command:
 
-[source,bash,role=copy-and-edit]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc rsh parksmap-2-mcjsw whoami
 ----
 
 You would see something like:
 
+[.console-output]
 [source,bash]
 ----
 1000580000

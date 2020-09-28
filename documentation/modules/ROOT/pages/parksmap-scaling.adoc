@@ -35,11 +35,13 @@ Now that we know the background of what a *ReplicatonController* and
 look at the *DeploymentConfig* (DC) that was created for you when you told
 OpenShift to stand up the `parksmap` image:
 
-[source,bash,role=execute-1]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc get dc
 ----
 
+[.console-output]
 [source,bash]
 ----
 NAME       REVISION   DESIRED   CURRENT   TRIGGERED BY
@@ -51,11 +53,13 @@ To get more details, we can look into the *ReplicationController* (*RC*).
 Take a look at the *ReplicationController* (RC) that was created for you when
 you told OpenShift to stand up the `parksmap` image:
 
-[source,bash,role=execute-1]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc get rc
 ----
 
+[.console-output]
 [source,bash]
 ----
 NAME         DESIRED   CURRENT   READY     AGE
@@ -77,26 +81,29 @@ https://%DOCS_URL%/nodes/pods/nodes-pods-autoscaling.html#nodes-pods-autoscaling
 Let's scale our parksmap "application" up to 2 instances. We can do this with
 the `scale` command. You could also do this by incrementing the Desired Count in the OpenShift web console. Pick one of these methods; it's your choice.
 
-[source,bash,role=execute-1]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc scale --replicas=2 dc/parksmap
 ----
 
 You can also scale up to two pods in the Developer Perspective. From the Topology view, first click the `parksmap` deployment config and select the *Details* tab:
 
-image::parksmap-scaleup.png[Scaling]
+image::parksmap-details.png[Details]
 
 Next, click the *^* icon next to the Pod visualization to scale up to 2 pods.
 
-image::parksmap-scaled.png[Scaled Up]
+image::parksmap-scaleup.png[Scaling Up]
 
 To verify that we changed the number of replicas, issue the following command:
 
-[source,bash,role=execute-1]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc get rc
 ----
 
+[.console-output]
 [source,bash]
 ----
 NAME         DESIRED   CURRENT   READY     AGE
@@ -106,11 +113,13 @@ parksmap-1   2         2         0         4h
 You can see that we now have 2 replicas. Let's verify the number of pods with
 the `oc get pods` command:
 
-[source,bash,role=execute-1]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc get pods
 ----
 
+[.console-output]
 [source,bash]
 ----
 NAME                READY   STATUS      RESTARTS   AGE
@@ -122,13 +131,15 @@ parksmap-1-j2lw9    1/1     Running     0          31m
 And lastly, let's verify that the *Service* that we learned about in the
 previous lab accurately reflects two endpoints:
 
-[source,bash,role=execute-1]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc describe svc parksmap
 ----
 
 You will see something like the following output:
 
+[.console-output]
 [source,bash]
 ----
 Name:              parksmap
@@ -152,13 +163,15 @@ Events:            <none>
 
 Another way to look at a *Service*'s endpoints is with the following:
 
-[source,bash,role=execute-1]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc get endpoints parksmap
 ----
 
 And you will see something like the following:
 
+[.console-output]
 [source,bash]
 ----
 NAME       ENDPOINTS                           AGE
@@ -171,7 +184,7 @@ many pods are behind a service.
 
 You can also see that both *Pods* are running in the Developer Perspective:
 
-image::parksmap-scaled.png[Scaling]
+image::parksmap-scaled.png[Scaled]
 
 Overall, that's how simple it is to scale an application (*Pods* in a
 *Service*). Application scaling can happen extremely quickly because OpenShift
@@ -188,11 +201,13 @@ Since we have two *Pods* running right now, let's see what happens if we
 "accidentally" kill one. Run the `oc get pods` command again, and choose a *Pod*
 name. Then, do the following:
 
-[source,bash,role=copy-and-edit]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc delete pod parksmap-1-2fp7t && oc get pods
 ----
 
+[.console-output]
 [source,bash]
 ----
 pod "parksmap-1-2fp7t" deleted

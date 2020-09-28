@@ -27,11 +27,13 @@ When creating a *Route*, some other options can be provided, like the hostname f
 
 When using the command line, we can first verify that we don't already have any existing *Routes*:
 
-[source,bash,role=execute-1]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc get routes
 ----
 
+[.console-output]
 [source,bash]
 ----
 No resources found.
@@ -39,11 +41,13 @@ No resources found.
 
 Now we need to get the *Service* name to expose:
 
-[source,bash,role=execute-1]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc get services
 ----
 
+[.console-output]
 [source,bash]
 ----
 NAME       CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
@@ -52,11 +56,13 @@ parksmap   172.30.169.213   <none>        8080/TCP   5h
 
 Once we know the *Service* name, creating a *Route* is a simple one-command task:
 
-[source,bash,role=execute-1]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc expose service parksmap
 ----
 
+[.console-output]
 [source,bash]
 ----
 route.route.openshift.io/parksmap exposed
@@ -64,11 +70,13 @@ route.route.openshift.io/parksmap exposed
 
 Verify the *Route* was created with the following command:
 
-[source,bash,role=execute-1]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc get route
 ----
 
+[.console-output]
 [source,bash]
 ----
 NAME       HOST/PORT                            PATH      SERVICES   PORT       TERMINATION

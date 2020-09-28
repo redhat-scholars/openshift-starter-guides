@@ -38,11 +38,13 @@ WARNING: If you notice some errors in the log, that's okay. We'll remedy those i
 You also have the option of viewing logs from the command line. Get the name of
 your *Pod*:
 
-[source,bash,role=execute-1]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc get pods
 ----
 
+[.console-output]
 [source,bash]
 ----
 NAME               READY     STATUS    RESTARTS   AGE
@@ -51,13 +53,15 @@ parksmap-1-hx0kv   1/1       Running   0          5h
 
 And then use the `logs` command to view this *Pod*'s logs:
 
-[source,bash,role=copy-and-edit]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc logs parksmap-1-hx0kv
 ----
 
 You will see all of the application logs scroll on your screen:
 
+[.console-output]
 [source,bash]
 ----
 2019-05-22 19:37:01.433  INFO 1 --- [           main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
@@ -102,7 +106,8 @@ image::parksmap-logging-kibana.png[Kibana Interface]
 
 CAUTION: In the following Kibana search(es), replace the pod_name to match the name of your pod.
 
-[source,bash,role=copyandedit]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 kubernetes.pod_name:"parksmap-1-mrxfq" AND kubernetes.namespace_name:"%project_namespace%"
 ----
@@ -116,7 +121,7 @@ If you want to see all the historical logs for this *Project*, simply remove the
 pod name reference and click the magnifying glass or press the enter key.
 
 
-[source,bash,role=copypaste]
+[source,bash,role="copypaste"]
 ----
 kubernetes.namespace_name:"%project_namespace%"
 ----
@@ -129,7 +134,7 @@ image::parksmap-logging-kibana-parksmap-headers.png[Kibana Interface]
 
 Try the following search string ensuring that you use the correct name for your project:
 
-[source,bash,role=copypaste]
+[source,bash,role="copypaste"]
 ----
 kubernetes.namespace_name:"%project_namespace%" AND message:"Failure executing"
 ----

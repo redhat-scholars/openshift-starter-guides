@@ -16,7 +16,7 @@ image::parksmap-devconsole-container-image.png[Add from Container Image]
 
 In the *Image Name* field, copy/paste the following into the box:
 
-[source,role=copy]
+[source,role=copypaste]
 ----
 quay.io/openshiftroadshow/%PARKSMAP_IMAGENAME%:%PARKSMAP_VERSION%
 ----
@@ -38,30 +38,30 @@ Pick *Deployment Config* from *Resource* section.
 
 Un-check the checkbox next to "Create a route to the application". For learning purposes, we will create a *Route* for the application later in the workshop.
 
-image::parksmap-image-options.png[Explore Project]
-
 At the bottom of the page, click *Labels* in the Advanced Options section and add some labels to better identify this deployment later. Labels will help us identify and filter components in the web console and in the command line.
 
 We will add 3 labels. After you enter the name=value pair for each label, press *enter* before typing the next. First the name to be given to the application.
 
-[source,role=copy]
+[source,role=copypaste]
 ----
 app=workshop
 ----
 
 Next the name of this deployment.
 
-[source,role=copy]
+[source,role=copypaste]
 ----
 component=parksmap
 ----
 
 And finally, the role this component plays in the overall application.
 
-[source,role=copy]
+[source,role=copypaste]
 ----
 role=frontend
 ----
+
+image::parksmap-image-options.png[Deploy image]
 
 Next, click the blue *Create* button. You will be directed to the *Topology* page, where you should see the visualization for the `parksmap` deployment config in the `workshop` application.
 
@@ -110,14 +110,16 @@ happens to be the `parksmap` application - a simple Spring Boot/Java application
 
 You can also examine *Pods* from the command line:
 
-[source,bash,role=execute-1]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc get pods
 ----
 
 You should see output that looks similar to:
 
-[source,text]
+[.console-output]
+[source,bash]
 ----
 NAME                READY   STATUS      RESTARTS   AGE
 parksmap-1-deploy   0/1     Completed   0          4m56s
@@ -132,7 +134,8 @@ following syntax:
 
 NOTE: Make sure you use the correct *Pod* name from your output.
 
-[source,bash,role=copy-and-edit]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc get pod parksmap-1-gxbgq -o yaml
 ----
@@ -191,9 +194,9 @@ Whenever OpenShift asks the node's CRI (Container Runtime Interface) runtime (Do
 If it doesn't, it will pull it from the specified registry.
 
 There are a number of ways to customize this behavior. They are documented in
-https://%DOCS_URL%/applications/application-life-cycle-management/creating-new-applications.html#applications-create-using-cli-image-creating-new-applications[specifying an image]
+https://%DOCS_URL%/applications/application_life_cycle_management/creating-applications-using-cli.html#applications-create-using-cli-image_creating-applications-using-cli[specifying an image]
 as well as
-https://%DOCS_URL%/dev_guide/managing_images.html#image-pull-policy[image pull policy].
+https://%DOCS_URL%/openshift_images/managing_images/image-pull-policy.html[image pull policy].
 
 == Background: Services
 
@@ -223,13 +226,15 @@ Now that we understand the basics of what a *Service* is, let's take a look at
 the *Service* that was created for the image that we just deployed. In order to
 view the *Services* defined in your *Project*, enter in the following command:
 
-[source,bash,role=execute-1]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc get services
 ----
 
 You should see output similar to the following:
 
+[.console-output]
 [source,bash]
 ----
 NAME       TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
@@ -248,13 +253,15 @@ image::parksmap-serviceslist.png[Services list]
 You can also get more detailed information about a *Service* by using the
 following command to display the data in YAML:
 
-[source,bash,role=execute-1]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc get service parksmap -o yaml
 ----
 
 You should see output similar to the following:
 
+[.console-output]
 [source,text]
 ----
 apiVersion: v1
@@ -301,13 +308,15 @@ It is also of interest to view the YAML of the *Pod* to understand how OpenShift
 wires components together. For example, run the following command to get the
 name of your `parksmap` *Pod*:
 
-[source,bash,role=execute-1]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc get pods
 ----
 
 You should see output similar to the following:
 
+[.console-output]
 [source,bash]
 ----
 NAME                READY   STATUS      RESTARTS   AGE
@@ -317,13 +326,15 @@ parksmap-1-gxbgq    1/1     Running     0          12m
 
 Now you can view the detailed data for your *Pod* with the following command:
 
-[source,bash,role=copy-and-edit]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc get pod parksmap-1-gxbgq -o yaml
 ----
 
 Under the `metadata` section you should see the following:
 
+[.console-output]
 [source,bash]
 ----
   labels:
@@ -342,13 +353,15 @@ Under the `metadata` section you should see the following:
 matches the *Selector* will be associated with the *Service*. To see this in
 action, issue the following command:
 
-[source,bash,role=execute-1]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc describe service parksmap
 ----
 
 You should see something like the following output:
 
+[.console-output]
 [source,text]
 ----
 Name:              parksmap

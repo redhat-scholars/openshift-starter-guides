@@ -12,13 +12,15 @@ programming language and is available for the following operating systems:
 You might already have the OpenShift CLI available on your environment. You can verify
 it by running an `oc` command:
 
-[source,bash,role=execute-1]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc version --short
 ----
 
 You should see the following (or something similar):
 
+[.console-output]
 [source,bash]
 ----
 %OC_VERSION%
@@ -48,16 +50,18 @@ file.  Once you are in the directory, enter in the following command:
 
 CAUTION: The name of the oc packaged archive may vary. Adjust accordingly.
 
-[source,bash,role=copyandedit]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
-$tar zxvf oc-linux.tar.gz
+tar zxvf oc-linux.tar.gz
 ----
 
 The tar.gz file name needs to be replaced by the entire name that was downloaded in the previous step.
 
 Now you can add the OpenShift CLI tools to your PATH.
 
-[source,bash,role=execute-1]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 export PATH=$PATH:~/openShift
 ----
@@ -65,13 +69,15 @@ export PATH=$PATH:~/openShift
 At this point, we should have the oc tool available for use. Let's test this
 out by printing the version of the oc command:
 
-[source,bash]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
-$ oc version
+oc version
 ----
 
 You should see the following (or something similar):
 
+[.console-output]
 [source,bash]
 ----
 %OC_VERSION%
@@ -88,7 +94,6 @@ Once the file has been downloaded, you will need to extract the contents as it
 is a compressed archive. I would suggest saving this file to the following
 directories:
 
-
 [source,bash]
 ----
 ~/openShift
@@ -99,30 +104,34 @@ file. Once you are in the directory, enter in the following command:
 
 CAUTION: The name of the oc packaged archive may vary. Adjust accordingly.
 
-[source,bash]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
-$ tar zxvf oc-macosx.tar.gz
+tar zxvf oc-macosx.tar.gz
 ----
 
 The tar.gz file name needs to be replaced by the entire name that was downloaded in the previous step.
 
 Now you can add the OpenShift CLI tools to your PATH.
 
-[source,bash]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
-$ export PATH=$PATH:~/openShift
+export PATH=$PATH:~/openShift
 ----
 
 At this point, we should have the oc tool available for use. Let's test this
 out by printing the version of the oc command:
 
-[source,bash]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
-$ oc version
+oc version
 ----
 
 You should see the following (or something similar):
 
+[.console-output]
 [source,bash]
 ----
 %OC_VERSION%
@@ -140,28 +149,31 @@ The OpenShift command line tool supports the ability to use tab completion for t
 
 If you are on the Mac operating system, you will need to ensure that you have the *bash-completion* project installed. This can be accomplished using the popular brew system:
 
-[source, bash]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
-$ brew install bash-completion
+brew install bash-completion
 ----
 
 If you're on Linux, ensure you have *bash-completion* installed using your package manager (dnf, yum apt-get,...)
 
 Once *bash-completion* package is available in your machine, to enable tab completion in your shell, you can simply enter in the following command from your terminal
 
-[source, bash]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
-$ oc completion bash >> oc_completion.sh
-$ source oc_completion.sh
+oc completion bash >> oc_completion.sh
+source oc_completion.sh
 ----
 
 Alternatively, you can add this to your .bashrc file.
 
 If you are using zsh, you can run the following command:
 
-[source, bash]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
-$ source <(oc completion zsh)
+source <(oc completion zsh)
 ----
 
 Alternatively, you can add this to your .zshrc file.
@@ -182,7 +194,8 @@ to set are:
 
 CAUTION: Replace the proxy server with the one for your environment/machine.
 
-[source,bash]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 https_proxy=http://proxy-server.mycorp.com:3128/
 HTTPS_PROXY=http://proxy-server.mycorp.com:3128/
@@ -192,20 +205,22 @@ HTTPS_PROXY=http://proxy-server.mycorp.com:3128/
 
 CAUTION: Replace the proxy server with the one for your environment/machine.
 
-[source,bash]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
-$ export https_proxy=http://proxy-server.mycorp.com:3128/
-$ export HTTPS_PROXY=http://proxy-server.mycorp.com:3128/
+export https_proxy=http://proxy-server.mycorp.com:3128/
+export HTTPS_PROXY=http://proxy-server.mycorp.com:3128/
 ----
 
 **Linux:**
 
 CAUTION: Replace the proxy server with the one for your environment/machine.
 
-[source,bash]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
-$ export https_proxy=http://proxy-server.mycorp.com:3128/
-$ export HTTPS_PROXY=http://proxy-server.mycorp.com:3128/
+export https_proxy=http://proxy-server.mycorp.com:3128/
+export HTTPS_PROXY=http://proxy-server.mycorp.com:3128/
 ----
 
 [NOTE]

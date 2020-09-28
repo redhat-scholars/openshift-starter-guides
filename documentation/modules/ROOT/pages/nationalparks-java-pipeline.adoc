@@ -61,14 +61,15 @@ As pipelines provide the ability to promote applications between different stage
 For this example, we're going to deploy our pipeline which is stored in the same Gogs repository where we have our code. In a more real scenario, and in order to honor https://en.wikipedia.org/wiki/Infrastructure_as_Code[infrastructure as code] principles, we would store all the pipeline definitions along with every OpenShift resources definitions we would use.
 
 
-[source,shell,role=execute-1]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc create -f http://gogs-%INFRA_PROJECT%.%cluster_subdomain%/%username%/nationalparks/raw/master/pipeline/nationalparks-pipeline-all.yaml -n %project_namespace%
 ----
 
 Now let's review our Tekton Pipeline:
 
-[source,shell,role=copypaste]
+[source,bash,role="copypaste"]
 ----
 ---
 apiVersion: tekton.dev/v1beta1
@@ -185,7 +186,8 @@ It is using two *Workspace*:
 
 In order to start the Pipeline, we can use a `PipelineRun` Custom Resource, representing our parameters to send to the pipeline:
 
-[source,shell,role=execute-1]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc create -f http://gogs-%INFRA_PROJECT%.%cluster_subdomain%/%username%/nationalparks/raw/master/pipeline/nationalparks-pipelinerun.yaml -n %project_namespace%
 ----

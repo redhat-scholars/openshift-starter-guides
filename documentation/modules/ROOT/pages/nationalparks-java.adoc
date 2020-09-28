@@ -65,6 +65,7 @@ and located at the following URL:
 
 Your Gogs credentials are:
 
+[.console-output]
 [source,bash]
 ----
 username: %username%
@@ -140,6 +141,7 @@ oc get builds
 
 You'll see output like:
 
+[.console-output]
 [source,bash]
 ----
 NAME              TYPE      FROM          STATUS     STARTED              DURATION
@@ -165,6 +167,7 @@ After the build has completed and successfully:
 In the end, when issuing the `oc get pods` command, you will see that the build Pod
 has finished (exited) and that an application *Pod* is in a ready and running state:
 
+[.console-output]
 [source,bash]
 ----
 NAME                    READY     STATUS      RESTARTS   AGE
@@ -185,6 +188,7 @@ oc get routes
 
 Where you should see something like the following:
 
+[.console-output]
 [source,bash]
 ----
 NAME            HOST/PORT                                                   PATH      SERVICES        PORT       TERMINATION
@@ -194,8 +198,7 @@ parksmap        parksmap-%project_namespace%.%cluster_subdomain%                
 
 In the above example, the URL is:
 
-[.console-input]
-[source,bash,subs="+attributes,macros+"]
+[source,role="copypaste"]
 ----
 http://nationalparks-%project_namespace%.%cluster_subdomain%
 ----
