@@ -189,7 +189,7 @@ programming language and is available for the following operating systems:</p>
 <p>You might already have the OpenShift CLI available on your environment. You can verify
 it by running an <code>oc</code> command:</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc version --short</code></pre>
 </div>
@@ -197,7 +197,7 @@ it by running an <code>oc</code> command:</p>
 <div class="paragraph">
 <p>You should see the following (or something similar):</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">%OC_VERSION%</code></pre>
 </div>
@@ -241,9 +241,9 @@ The name of the oc packaged archive may vary. Adjust accordingly.
 </tr>
 </table>
 </div>
-<div class="listingblock copyandedit">
+<div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$tar zxvf oc-linux.tar.gz</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">tar zxvf oc-linux.tar.gz</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -252,7 +252,7 @@ The name of the oc packaged archive may vary. Adjust accordingly.
 <div class="paragraph">
 <p>Now you can add the OpenShift CLI tools to your PATH.</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export PATH=$PATH:~/openShift</code></pre>
 </div>
@@ -261,15 +261,15 @@ The name of the oc packaged archive may vary. Adjust accordingly.
 <p>At this point, we should have the oc tool available for use. Let&#8217;s test this
 out by printing the version of the oc command:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ oc version</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc version</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>You should see the following (or something similar):</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">%OC_VERSION%</code></pre>
 </div>
@@ -312,9 +312,9 @@ The name of the oc packaged archive may vary. Adjust accordingly.
 </tr>
 </table>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ tar zxvf oc-macosx.tar.gz</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">tar zxvf oc-macosx.tar.gz</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -323,24 +323,24 @@ The name of the oc packaged archive may vary. Adjust accordingly.
 <div class="paragraph">
 <p>Now you can add the OpenShift CLI tools to your PATH.</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ export PATH=$PATH:~/openShift</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export PATH=$PATH:~/openShift</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>At this point, we should have the oc tool available for use. Let&#8217;s test this
 out by printing the version of the oc command:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ oc version</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc version</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>You should see the following (or something similar):</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">%OC_VERSION%</code></pre>
 </div>
@@ -362,9 +362,9 @@ need help, raise your hand and the instructor will assist.</p>
 <div class="paragraph">
 <p>If you are on the Mac operating system, you will need to ensure that you have the <strong>bash-completion</strong> project installed. This can be accomplished using the popular brew system:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ brew install bash-completion</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">brew install bash-completion</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -373,10 +373,10 @@ need help, raise your hand and the instructor will assist.</p>
 <div class="paragraph">
 <p>Once <strong>bash-completion</strong> package is available in your machine, to enable tab completion in your shell, you can simply enter in the following command from your terminal</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ oc completion bash &gt;&gt; oc_completion.sh
-$ source oc_completion.sh</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc completion bash &gt;&gt; oc_completion.sh
+source oc_completion.sh</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -385,9 +385,9 @@ $ source oc_completion.sh</code></pre>
 <div class="paragraph">
 <p>If you are using zsh, you can run the following command:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ source &lt;(oc completion zsh)</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">source &lt;(oc completion zsh)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -433,7 +433,7 @@ Replace the proxy server with the one for your environment/machine.
 </tr>
 </table>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">https_proxy=http://proxy-server.mycorp.com:3128/
 HTTPS_PROXY=http://proxy-server.mycorp.com:3128/</code></pre>
@@ -454,10 +454,10 @@ Replace the proxy server with the one for your environment/machine.
 </tr>
 </table>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ export https_proxy=http://proxy-server.mycorp.com:3128/
-$ export HTTPS_PROXY=http://proxy-server.mycorp.com:3128/</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export https_proxy=http://proxy-server.mycorp.com:3128/
+export HTTPS_PROXY=http://proxy-server.mycorp.com:3128/</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -475,10 +475,10 @@ Replace the proxy server with the one for your environment/machine.
 </tr>
 </table>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ export https_proxy=http://proxy-server.mycorp.com:3128/
-$ export HTTPS_PROXY=http://proxy-server.mycorp.com:3128/</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export https_proxy=http://proxy-server.mycorp.com:3128/
+export HTTPS_PROXY=http://proxy-server.mycorp.com:3128/</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
