@@ -185,7 +185,7 @@ need to run an SSH service inside each container. In order to establish an
 interactive session inside a container, you can use the <code>oc rsh</code> command. First
 get the list of available pods:</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pods</code></pre>
 </div>
@@ -193,7 +193,7 @@ get the list of available pods:</p>
 <div class="paragraph">
 <p>You should an output similar to the following:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                READY   STATUS      RESTARTS   AGE
 parksmap-1-deploy   0/1     Completed   0          3h15m
@@ -204,7 +204,7 @@ parksmap-2-mcjsw    1/1     Running     0          172m</code></pre>
 <div class="paragraph">
 <p>Now you can establish a remote shell session into the pod by using the pod name:</p>
 </div>
-<div class="listingblock copy-and-edit">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc rsh parksmap-2-mcjsw</code></pre>
 </div>
@@ -212,7 +212,7 @@ parksmap-2-mcjsw    1/1     Running     0          172m</code></pre>
 <div class="paragraph">
 <p>You would see the following output:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sh-4.2$</code></pre>
 </div>
@@ -236,12 +236,12 @@ can be specified after the pod name in the issued command.</p>
 <div class="paragraph">
 <p>Run the following command to list the files in the top folder:</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ls /</code></pre>
 </div>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">anaconda-post.log  bin  dev  etc  home  lib  lib64  lost+found  media  mnt  opt  parksmap.jar  proc  root  run  sbin  srv  sys  tmp  usr  var</code></pre>
 </div>
@@ -276,7 +276,7 @@ can be specified after the pod name in the issued command.</p>
 <div class="paragraph">
 <p>Before proceeding, close the connection to the pod.</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">exit</code></pre>
 </div>
@@ -295,7 +295,7 @@ the executable path.</p>
 <div class="paragraph">
 <p>In order to show just the JAR file, run the following:</p>
 </div>
-<div class="listingblock copy-and-edit">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc exec parksmap-2-mcjsw -- ls -l /parksmap.jar</code></pre>
 </div>
@@ -303,7 +303,7 @@ the executable path.</p>
 <div class="paragraph">
 <p>You would see something like the following:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">-rw-r--r--. 1 root root 39138901 Apr  1 16:54 /parksmap.jar</code></pre>
 </div>
@@ -327,7 +327,7 @@ end and where the actual command to execute begins. Take a look at <code>oc exec
 <div class="paragraph">
 <p>You can also specify the shell commands to run directly with the <strong>oc rsh</strong> command:</p>
 </div>
-<div class="listingblock copy-and-edit">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc rsh parksmap-2-mcjsw whoami</code></pre>
 </div>
@@ -335,7 +335,7 @@ end and where the actual command to execute begins. Take a look at <code>oc exec
 <div class="paragraph">
 <p>You would see something like:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">1000580000</code></pre>
 </div>

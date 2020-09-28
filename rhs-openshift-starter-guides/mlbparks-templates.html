@@ -228,9 +228,9 @@ deploy the MongoDB database. It also uses a <strong>Hook</strong> to call the <c
 endpoint to cause the data to be loaded into the database from a JSON file in
 the source code repository. Execute the following command:</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f https://raw.githubusercontent.com/openshift-roadshow/mlbparks/master/ose3/application-template-eap.json</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f &lt;a href="https://raw.githubusercontent.com/openshift-roadshow/mlbparks/master/ose3/application-template-eap.json" class="bare"&gt;https://raw.githubusercontent.com/openshift-roadshow/mlbparks/master/ose3/application-template-eap.json&lt;/a&gt;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -238,7 +238,7 @@ the source code repository. Execute the following command:</p>
 command is a <strong>Template</strong>. <code>create</code> simply makes the template available in
 your <strong>Project</strong>. You can see this with the following command:</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get template</code></pre>
 </div>
@@ -246,7 +246,7 @@ your <strong>Project</strong>. You can see this with the following command:</p>
 <div class="paragraph">
 <p>You will see output like the following:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mlbparks      Application template MLBParks backend running on Wildfly and using mongodb   12 (2 blank)   8</code></pre>
 </div>
@@ -254,7 +254,7 @@ your <strong>Project</strong>. You can see this with the following command:</p>
 <div class="paragraph">
 <p>Run the following command to instantiate the template:</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc new-app mlbparks -p APPLICATION_NAME=mlbparks</code></pre>
 </div>
@@ -271,7 +271,7 @@ your <strong>Project</strong>. You can see this with the following command:</p>
 provide the <strong>MAVEN_MIRROR_URL</strong> parameter with the location of the internal nexus
 repository:</p>
 </div>
-<div class="listingblock copypaste">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc new-app mlbparks --name=mlbparks -p MAVEN_MIRROR_URL=http://nexus.%INFRA_PROJECT%.svc.cluster.local:8081/repository/maven-all-public</code></pre>
 </div>
@@ -283,7 +283,7 @@ repository:</p>
 <div class="paragraph">
 <p>You will see some output similar to this:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">--&gt; Deploying template "user1/mlbparks" to project user1
 
@@ -405,7 +405,7 @@ Do not actually instantiate the template from the web console now, since you hav
 <p>As a final exercise, look at the template that was used to create the
 resources for our <strong>mlbparks</strong> application.</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get template mlbparks -o yaml</code></pre>
 </div>

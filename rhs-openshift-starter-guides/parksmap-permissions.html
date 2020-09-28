@@ -209,7 +209,7 @@ account, we can do interesting things.</p>
 <p>The parksmap application wants to talk to the OpenShift API to learn about other
 <strong>Pods</strong>, <strong>Services</strong>, and resources within the <strong>Project</strong>. You&#8217;ll soon learn why!</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc project %project_namespace%</code></pre>
 </div>
@@ -217,7 +217,7 @@ account, we can do interesting things.</p>
 <div class="paragraph">
 <p>Then:</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc policy add-role-to-user view -z default</code></pre>
 </div>
@@ -329,7 +329,7 @@ In the following command(s), replace <code>%project_namespace%</code> with the u
 </tr>
 </table>
 </div>
-<div class="listingblock copy-and-edit">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc policy add-role-to-user view %project_namespace%</code></pre>
 </div>

@@ -243,12 +243,12 @@ If you notice some errors in the log, that&#8217;s okay. We&#8217;ll remedy thos
 <p>You also have the option of viewing logs from the command line. Get the name of
 your <strong>Pod</strong>:</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pods</code></pre>
 </div>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME               READY     STATUS    RESTARTS   AGE
 parksmap-1-hx0kv   1/1       Running   0          5h</code></pre>
@@ -257,7 +257,7 @@ parksmap-1-hx0kv   1/1       Running   0          5h</code></pre>
 <div class="paragraph">
 <p>And then use the <code>logs</code> command to view this <strong>Pod</strong>'s logs:</p>
 </div>
-<div class="listingblock copy-and-edit">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc logs parksmap-1-hx0kv</code></pre>
 </div>
@@ -265,7 +265,7 @@ parksmap-1-hx0kv   1/1       Running   0          5h</code></pre>
 <div class="paragraph">
 <p>You will see all of the application logs scroll on your screen:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">2019-05-22 19:37:01.433  INFO 1 --- [           main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
 2019-05-22 19:37:01.465  INFO 1 --- [           main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8080 (http)
@@ -349,7 +349,7 @@ In the following Kibana search(es), replace the pod_name to match the name of yo
 </tr>
 </table>
 </div>
-<div class="listingblock copyandedit">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">kubernetes.pod_name:"parksmap-1-mrxfq" AND kubernetes.namespace_name:"%project_namespace%"</code></pre>
 </div>

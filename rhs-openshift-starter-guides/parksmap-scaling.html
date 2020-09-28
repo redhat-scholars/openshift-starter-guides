@@ -217,12 +217,12 @@ or a <strong>Service</strong>, and others, so feel free to ask us about them aft
 look at the <strong>DeploymentConfig</strong> (DC) that was created for you when you told
 OpenShift to stand up the <code>parksmap</code> image:</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get dc</code></pre>
 </div>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME       REVISION   DESIRED   CURRENT   TRIGGERED BY
 parksmap   1          1         1         config,image(parksmap:%PARKSMAP_VERSION%)</code></pre>
@@ -235,12 +235,12 @@ parksmap   1          1         1         config,image(parksmap:%PARKSMAP_VERSIO
 <p>Take a look at the <strong>ReplicationController</strong> (RC) that was created for you when
 you told OpenShift to stand up the <code>parksmap</code> image:</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get rc</code></pre>
 </div>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME         DESIRED   CURRENT   READY     AGE
 parksmap-1   1         1         0         4h</code></pre>
@@ -268,7 +268,7 @@ set of instances and then manipulates the RCs accordingly.</p>
 <p>Let&#8217;s scale our parksmap "application" up to 2 instances. We can do this with
 the <code>scale</code> command. You could also do this by incrementing the Desired Count in the OpenShift web console. Pick one of these methods; it&#8217;s your choice.</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc scale --replicas=2 dc/parksmap</code></pre>
 </div>
@@ -292,12 +292,12 @@ the <code>scale</code> command. You could also do this by incrementing the Desir
 <div class="paragraph">
 <p>To verify that we changed the number of replicas, issue the following command:</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get rc</code></pre>
 </div>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME         DESIRED   CURRENT   READY     AGE
 parksmap-1   2         2         0         4h</code></pre>
@@ -307,12 +307,12 @@ parksmap-1   2         2         0         4h</code></pre>
 <p>You can see that we now have 2 replicas. Let&#8217;s verify the number of pods with
 the <code>oc get pods</code> command:</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pods</code></pre>
 </div>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                READY   STATUS      RESTARTS   AGE
 parksmap-1-deploy   0/1     Completed   0          59m
@@ -324,7 +324,7 @@ parksmap-1-j2lw9    1/1     Running     0          31m</code></pre>
 <p>And lastly, let&#8217;s verify that the <strong>Service</strong> that we learned about in the
 previous lab accurately reflects two endpoints:</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc describe svc parksmap</code></pre>
 </div>
@@ -332,7 +332,7 @@ previous lab accurately reflects two endpoints:</p>
 <div class="paragraph">
 <p>You will see something like the following output:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Name:              parksmap
 Namespace:         lab-getting-started-starter-workshop-apb-test-user1
@@ -356,7 +356,7 @@ Events:            &lt;none&gt;</code></pre>
 <div class="paragraph">
 <p>Another way to look at a <strong>Service</strong>'s endpoints is with the following:</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get endpoints parksmap</code></pre>
 </div>
@@ -364,7 +364,7 @@ Events:            &lt;none&gt;</code></pre>
 <div class="paragraph">
 <p>And you will see something like the following:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME       ENDPOINTS                           AGE
 parksmap   10.128.2.90:8080,10.131.0.40:8080   45m</code></pre>
@@ -404,12 +404,12 @@ situation if it is ever not right. You would be correct!</p>
 "accidentally" kill one. Run the <code>oc get pods</code> command again, and choose a <strong>Pod</strong>
 name. Then, do the following:</p>
 </div>
-<div class="listingblock copy-and-edit">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc delete pod parksmap-1-2fp7t &amp;&amp; oc get pods</code></pre>
 </div>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pod "parksmap-1-2fp7t" deleted
 NAME                READY   STATUS              RESTARTS   AGE

@@ -256,7 +256,7 @@ and located at the following URL:</p>
 <div class="paragraph">
 <p>Your Gogs credentials are:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">username: %username%
 password: %GOGS_PASSWORD%</code></pre>
@@ -381,7 +381,7 @@ the application. You can see all of this happening in real time!</p>
 <div class="paragraph">
 <p>You&#8217;ll see output like:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME              TYPE      FROM          STATUS     STARTED              DURATION
 nationalparks-1   Source    Git@b052ae6   Running    About a minute ago   1m2s</code></pre>
@@ -419,7 +419,7 @@ will cause a new deployment to happen.</p>
 <p>In the end, when issuing the <code>oc get pods</code> command, you will see that the build Pod
 has finished (exited) and that an application <strong>Pod</strong> is in a ready and running state:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                    READY     STATUS      RESTARTS   AGE
 nationalparks-1-tkid3   1/1       Running     3          2m
@@ -440,7 +440,7 @@ URL in the web console, or via the command line:</p>
 <div class="paragraph">
 <p>Where you should see something like the following:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME            HOST/PORT                                                   PATH      SERVICES        PORT       TERMINATION
 nationalparks   nationalparks-%project_namespace%.%cluster_subdomain%             nationalparks   8080-tcp
@@ -450,9 +450,9 @@ parksmap        parksmap-%project_namespace%.%cluster_subdomain%                
 <div class="paragraph">
 <p>In the above example, the URL is:</p>
 </div>
-<div class="listingblock console-input">
+<div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">&lt;a href="http://nationalparks-%project_namespace%.%cluster_subdomain%" class="bare"&gt;http://nationalparks-%project_namespace%.%cluster_subdomain%&lt;/a&gt;</code></pre>
+<pre class="highlightjs highlight"><code>http://nationalparks-%project_namespace%.%cluster_subdomain%</code></pre>
 </div>
 </div>
 <div class="paragraph">

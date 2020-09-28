@@ -220,7 +220,7 @@ control whether or not to enable the debug port. All we need to do is set an env
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pods</code></pre>
 </div>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                             READY   STATUS      RESTARTS   AGE
 jenkins-1-deploy                 0/1     Completed   0          4d19h
@@ -239,7 +239,7 @@ mlbparks-3-hcd8g                 0/1     Running     0          10s
 <div class="paragraph">
 <p>Now we can set to set up the port-forward:</p>
 </div>
-<div class="listingblock copypaste">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc port-forward mlbparks-3-hcd8g 8787:8787</code></pre>
 </div>

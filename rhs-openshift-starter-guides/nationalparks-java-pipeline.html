@@ -291,9 +291,9 @@ on the current Deployment to automatically trigger when there is a new image or 
 <div class="paragraph">
 <p>For this example, we&#8217;re going to deploy our pipeline which is stored in the same Gogs repository where we have our code. In a more real scenario, and in order to honor <a href="https://en.wikipedia.org/wiki/Infrastructure_as_Code">infrastructure as code</a> principles, we would store all the pipeline definitions along with every OpenShift resources definitions we would use.</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">oc create -f http://gogs-%INFRA_PROJECT%.%cluster_subdomain%/%username%/nationalparks/raw/master/pipeline/nationalparks-pipeline-all.yaml -n %project_namespace%</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f &lt;a href="http://gogs-%INFRA_PROJECT%.%cluster_subdomain%/%username%/nationalparks/raw/master/pipeline/nationalparks-pipeline-all.yaml" class="bare"&gt;http://gogs-%INFRA_PROJECT%.%cluster_subdomain%/%username%/nationalparks/raw/master/pipeline/nationalparks-pipeline-all.yaml&lt;/a&gt; -n %project_namespace%</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -301,7 +301,7 @@ on the current Deployment to automatically trigger when there is a new image or 
 </div>
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">---
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">---
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
@@ -445,9 +445,9 @@ spec:
 <div class="paragraph">
 <p>In order to start the Pipeline, we can use a <code>PipelineRun</code> Custom Resource, representing our parameters to send to the pipeline:</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">oc create -f http://gogs-%INFRA_PROJECT%.%cluster_subdomain%/%username%/nationalparks/raw/master/pipeline/nationalparks-pipelinerun.yaml -n %project_namespace%</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f &lt;a href="http://gogs-%INFRA_PROJECT%.%cluster_subdomain%/%username%/nationalparks/raw/master/pipeline/nationalparks-pipelinerun.yaml" class="bare"&gt;http://gogs-%INFRA_PROJECT%.%cluster_subdomain%/%username%/nationalparks/raw/master/pipeline/nationalparks-pipelinerun.yaml&lt;/a&gt; -n %project_namespace%</code></pre>
 </div>
 </div>
 <div class="paragraph">

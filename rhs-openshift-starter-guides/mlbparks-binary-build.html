@@ -219,9 +219,9 @@ machine AND would also not require git commit with a push. Read more in the
 <div class="paragraph">
 <p>The first step is to clone the MLB source code from GitHub to your workshop environment:</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git clone https://github.com/openshift-roadshow/mlbparks.git</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git clone &lt;a href="https://github.com/openshift-roadshow/mlbparks.git" class="bare"&gt;https://github.com/openshift-roadshow/mlbparks.git&lt;/a&gt;</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -243,7 +243,7 @@ Developer Studio and JBoss Developer Tools have built in functionality that make
 <div class="paragraph">
 <p>If you have Maven all set up on your machine, then you can <code>cd</code> into the <code>mlbparks</code> directory and run <code>mvn package</code></p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd mlbparks
 mvn package</code></pre>
@@ -275,7 +275,7 @@ This is the REST endpoint that gives basic info on the service and can be reache
 <div class="paragraph">
 <p>Don&#8217;t forget to save the file and run <code>mvn package</code> again:</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd /opt/app-root/src/mlbparks
 mvn package</code></pre>
@@ -290,7 +290,7 @@ mvn package</code></pre>
 <div class="paragraph">
 <p>If you built your war with Maven:</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc start-build bc/mlbparks --from-file=target/ROOT.war --follow</code></pre>
 </div>

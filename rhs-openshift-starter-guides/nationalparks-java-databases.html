@@ -382,7 +382,7 @@ Make sure to have configured the <strong><code>MongoDB Database Name</code></str
 <div class="paragraph">
 <p>Execute the following command:</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc label dc/mongodb-nationalparks svc/mongodb-nationalparks app=workshop component=nationalparks role=database --overwrite</code></pre>
 </div>
@@ -398,7 +398,7 @@ magic happened. OpenShift decided that this was a significant enough change to
 warrant updating the internal version number of the <strong>DeploymentConfiguration</strong>. You
 can verify this by looking at the output of <code>oc get dc</code>:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                    REVISION   DESIRED   CURRENT   TRIGGERED BY
 mongodb-nationalparks   1          1         1         config,image(mongodb:3.6)
@@ -411,7 +411,7 @@ parksmap                2          1         1         config,image(parksmap:%PA
 causes a new deployment. You can verify this by looking at the output of <code>oc get
 rc</code>:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                      DESIRED   CURRENT   READY     AGE
 mongodb-nationalparks-1   1         1         1         24m
@@ -438,13 +438,13 @@ service to query for data:</p>
 </div>
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">http://nationalparks-%project_namespace%.%cluster_subdomain%/ws/data/all</code></pre>
+<pre class="highlightjs highlight"><code>http://nationalparks-%project_namespace%.%cluster_subdomain%/ws/data/all</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>And the result?</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">[]</code></pre>
 </div>
@@ -459,13 +459,13 @@ application and then deployed the database. Nothing actually loaded anything
 </div>
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">http://nationalparks-%project_namespace%.%cluster_subdomain%/ws/data/load</code></pre>
+<pre class="highlightjs highlight"><code>http://nationalparks-%project_namespace%.%cluster_subdomain%/ws/data/load</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>And the result?</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Items inserted in database: 2740</code></pre>
 </div>
@@ -489,7 +489,7 @@ a browser problem, and the application is working properly.
 </div>
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">http://parksmap-%project_namespace%.%cluster_subdomain%</code></pre>
+<pre class="highlightjs highlight"><code>http://parksmap-%project_namespace%.%cluster_subdomain%</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -514,7 +514,7 @@ here:</p>
 </div>
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">http://www.github.com/openshift-roadshow/nationalparks/blob/master/src/main/java/com/openshift/evg/roadshow/parks/db/MongoDBConnection.java#L44-l48</code></pre>
+<pre class="highlightjs highlight"><code>http://www.github.com/openshift-roadshow/nationalparks/blob/master/src/main/java/com/openshift/evg/roadshow/parks/db/MongoDBConnection.java#L44-l48</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -561,12 +561,12 @@ You can see the code that does this
 <p>Fortunately, the command line provides a convenient way for us to manipulate
 labels. <code>describe</code> the <code>nationalparks</code> service:</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc describe route nationalparks</code></pre>
 </div>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Name:                   nationalparks
 Namespace:              %project_namespace%
@@ -596,7 +596,7 @@ Endpoints:              10.1.9.8:8080</code></pre>
 <div class="paragraph">
 <p>You see that it already has some labels. Now, use <code>oc label</code>:</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc label route nationalparks type=parksmap-backend</code></pre>
 </div>
@@ -604,7 +604,7 @@ Endpoints:              10.1.9.8:8080</code></pre>
 <div class="paragraph">
 <p>You will see something like:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">route.route.openshift.io/nationalparks labeled</code></pre>
 </div>
@@ -614,7 +614,7 @@ Endpoints:              10.1.9.8:8080</code></pre>
 </div>
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">http://parksmap-%project_namespace%.%cluster_subdomain%/</code></pre>
+<pre class="highlightjs highlight"><code>http://parksmap-%project_namespace%.%cluster_subdomain%/</code></pre>
 </div>
 </div>
 <div class="imageblock">

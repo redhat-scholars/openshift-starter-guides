@@ -215,9 +215,9 @@ achieved.</p>
 <div class="paragraph">
 <p>Now let&#8217;s create them all together for our Pipeline:</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">oc create -f http://gogs-%INFRA_PROJECT%.%cluster_subdomain%/%username%/nationalparks/raw/master/pipeline/nationalparks-triggers-all.yaml -n %project_namespace%</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f &lt;a href="http://gogs-%INFRA_PROJECT%.%cluster_subdomain%/%username%/nationalparks/raw/master/pipeline/nationalparks-triggers-all.yaml" class="bare"&gt;http://gogs-%INFRA_PROJECT%.%cluster_subdomain%/%username%/nationalparks/raw/master/pipeline/nationalparks-triggers-all.yaml&lt;/a&gt; -n %project_namespace%</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -253,7 +253,7 @@ achieved.</p>
 <div class="paragraph">
 <p>Your Gogs credentials are:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">username: %username%
 password: %GOGS_PASSWORD%</code></pre>
@@ -318,7 +318,7 @@ following path:
 </tr>
 </table>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">src/main/java/com/openshift/evg/roadshow/parks/rest/</code></pre>
 </div>
@@ -367,7 +367,7 @@ triggered in OpenShift. Click <strong>Pipeline</strong> in the left navigation m
 <div class="paragraph">
 <p>or run the following command to verify:</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get PipelineRun</code></pre>
 </div>
@@ -409,7 +409,7 @@ various versions of applications.</p>
 <p>In order to perform a rollback, you need to know the name of the <strong>Deployment Config</strong>
 which has deployed the application:</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get dc</code></pre>
 </div>
@@ -417,7 +417,7 @@ which has deployed the application:</p>
 <div class="paragraph">
 <p>The output will be similar to the following:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                 REVISION   DESIRED   CURRENT   TRIGGERED BY
 mongodb              1          1         1         config,image(mongodb:3.6)
@@ -428,7 +428,7 @@ nationalparks        9          1         1         config,image(nationalparks:m
 <div class="paragraph">
 <p>Now run the following command to rollback the latest code change:</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc rollback nationalparks</code></pre>
 </div>
@@ -436,7 +436,7 @@ nationalparks        9          1         1         config,image(nationalparks:m
 <div class="paragraph">
 <p>You will see output like the following:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">#5 rolled back to nationalparks-3
 Warning: the following images triggers were disabled: nationalparks:latest
@@ -462,7 +462,7 @@ original header by viewing the application in your browser.</p>
 to prevent unwanted deployments soon after the rollback is complete. To re-enable
 the automatic deployments run this:</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc set triggers dc/nationalparks --auto</code></pre>
 </div>
@@ -485,7 +485,7 @@ even if we are going "back".</p>
 <div class="paragraph">
 <p>So, if we want to return to the "new code" version, that is deployment #4.</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc rollback nationalparks-4</code></pre>
 </div>
@@ -493,7 +493,7 @@ even if we are going "back".</p>
 <div class="paragraph">
 <p>And you will see the following:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">#6 rolled back to nationalparks-4
 Warning: the following images triggers were disabled: nationalparks
