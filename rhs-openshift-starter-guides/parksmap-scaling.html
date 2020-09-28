@@ -117,19 +117,19 @@
     <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html">Continuous Integration and Pipelines</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:mlbparks-templates.adoc</span>
+    <a class="nav-link" href="mlbparks-templates.html">Templates</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:mlbparks-binary-build.adoc</span>
+    <a class="nav-link" href="mlbparks-binary-build.html">Binary Builds</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:mlbparks-debugging.adoc</span>
+    <a class="nav-link" href="mlbparks-debugging.html">Debugging Apps</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:common-further-resources.adoc</span>
+    <a class="nav-link" href="common-further-resources.html">Further Resources</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:common-workshop-links.adoc</span>
+    <a class="nav-link" href="common-workshop-links.html">Workshop Links</a>
   </li>
 </ul>
   </li>
@@ -183,7 +183,7 @@ how OpenShift "self heals".</p>
 </div>
 <div class="paragraph">
 <p>A <strong>DeploymentConfiguration</strong> (DC) defines how something in OpenShift should be
-deployed. From the <a href="https://{{DOCS_URL}}/applications/deployments/what-deployments-are.html">deployments documentation</a>:</p>
+deployed. From the <a href="https://%DOCS_URL%/applications/deployments/what-deployments-are.html">deployments documentation</a>:</p>
 </div>
 <div class="quoteblock">
 <blockquote>
@@ -225,7 +225,7 @@ OpenShift to stand up the <code>parksmap</code> image:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME       REVISION   DESIRED   CURRENT   TRIGGERED BY
-parksmap   1          1         1         config,image(parksmap:{{PARKSMAP_VERSION}})</code></pre>
+parksmap   1          1         1         config,image(parksmap:%PARKSMAP_VERSION%)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -257,7 +257,7 @@ set of instances and then manipulates the RCs accordingly.</p>
 </div>
 <div class="paragraph">
 <p>You can learn more about the CPU-based
-<a href="https://{{DOCS_URL}}/nodes/pods/nodes-pods-autoscaling.html#nodes-pods-autoscaling-about_nodes-pods-autoscaling">Horizontal Pod Autoscaler here</a></p>
+<a href="https://%DOCS_URL%/nodes/pods/nodes-pods-autoscaling.html#nodes-pods-autoscaling-about_nodes-pods-autoscaling">Horizontal Pod Autoscaler here</a></p>
 </div>
 </div>
 </div>
@@ -274,7 +274,7 @@ the <code>scale</code> command. You could also do this by incrementing the Desir
 </div>
 </div>
 <div class="paragraph">
-<p>You can also scale up to two pods in the Developer Perspective. From the Topology view, first click the <code>parksmap</code> deployment config and select the <strong>Overview</strong> tab:</p>
+<p>You can also scale up to two pods in the Developer Perspective. From the Topology view, first click the <code>parksmap</code> deployment config and select the <strong>Details</strong> tab:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -441,7 +441,7 @@ it, always ensuring that the desired number of replicas was in place.</p>
 </div>
 <div class="paragraph">
 <p>More information on probing applications is available in the
-<a href="https://{{DOCS_URL}}/nodes/containers/nodes-containers-health.html">Application
+<a href="https://%DOCS_URL%/nodes/containers/nodes-containers-health.html">Application
 Health</a> section of the documentation and later in this guide.</p>
 </div>
 </div>

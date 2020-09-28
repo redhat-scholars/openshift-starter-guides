@@ -6,6 +6,7 @@
     <title>Untitled :: OpenShift Starter Guides</title>
     <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/nationalparks-java-pipeline-codechanges-gogs.html">
     <link rel="prev" href="nationalparks-java-pipeline.html">
+    <link rel="next" href="mlbparks-templates.html">
     <meta name="generator" content="Antora 2.3.3">
     <link rel="stylesheet" href="../_/css/site.css">
 <link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
@@ -116,19 +117,19 @@
     <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html">Continuous Integration and Pipelines</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:mlbparks-templates.adoc</span>
+    <a class="nav-link" href="mlbparks-templates.html">Templates</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:mlbparks-binary-build.adoc</span>
+    <a class="nav-link" href="mlbparks-binary-build.html">Binary Builds</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:mlbparks-debugging.adoc</span>
+    <a class="nav-link" href="mlbparks-debugging.html">Debugging Apps</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:common-further-resources.adoc</span>
+    <a class="nav-link" href="common-further-resources.html">Further Resources</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:common-workshop-links.adoc</span>
+    <a class="nav-link" href="common-workshop-links.html">Workshop Links</a>
   </li>
 </ul>
   </li>
@@ -176,8 +177,59 @@
 external source via HTTP(S) when a change in the code repository happens.
 OpenShift provides an API endpoint that supports receiving hooks from
 remote systems in order to trigger builds. By pointing the code repository&#8217;s
-hook at the OpenShift API, automated code/build/deploy pipelines can be
+hook at the OpenShift Pipelines resources, automated code/build/deploy pipelines can be
 achieved.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_adding_triggers_to_your_pipeline"><a class="anchor" href="#_adding_triggers_to_your_pipeline"></a>Adding Triggers to your Pipeline</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Tekton <strong>Triggers</strong> enable us to configure Pipelines to respond to external events (Git push events, pull requests etc) such as Web Hooks.</p>
+</div>
+<div class="paragraph">
+<p>Adding triggering support requires the creation of a <code>TriggerTemplate</code>, <code>TriggerBinding</code>, and an <code>EventListener</code> in our project.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devops-pipeline-triggers.png" alt="Triggers">
+</div>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s see each component in detail:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>TriggerTemplate</strong>: a trigger template is a template for newly created resources. It supports parameters to create specific <code>PipelineResources</code> and <code>PipelineRuns</code>.</p>
+</li>
+<li>
+<p><strong>TriggerBinding</strong>: validates events and extracts payload fields</p>
+</li>
+<li>
+<p><strong>EventListener</strong>: connects <code>TriggerBindings</code> and <code>TriggerTemplates</code> into an addressable endpoint (the event sink). It uses the extracted event parameters from each TriggerBinding (and any supplied static parameters) to create the resources specified in the corresponding TriggerTemplate. It also optionally allows an external service to pre-process the event payload via the interceptor field.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Now let&#8217;s create them all together for our Pipeline:</p>
+</div>
+<div class="listingblock execute-1">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">oc create -f http://gogs-%INFRA_PROJECT%.%cluster_subdomain%/%username%/nationalparks/raw/master/pipeline/nationalparks-triggers-all.yaml -n %project_namespace%</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will create a new Pod with a Route that we can use to setup our Webhook on Gogs to trigger the automatic start of the Pipeline.</p>
+</div>
+<div class="paragraph">
+<p>From left side menu, click on <strong>Topology</strong> to verify if a new Deployment <strong>el-nationalparks</strong> for the <code>EventListener</code> has ben created:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devops-pipeline-triggers-eventlistener.png" alt="EventListener created">
+</div>
 </div>
 </div>
 </div>
@@ -185,30 +237,26 @@ achieved.</p>
 <h2 id="_exercise_configuring_gogs_web_hooks"><a class="anchor" href="#_exercise_configuring_gogs_web_hooks"></a>Exercise: Configuring Gogs Web Hooks</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this lab you can use a build webhook to trigger a pipeline execution every time there is a change in the nationalparks Gogs repository. In the Developer Perspective, click <strong>Builds</strong> in the left navigation menu. Click <code>nationalparks-build</code> and scroll down to the Webhooks section.</p>
-</div>
-<div class="paragraph">
-<p>On this screen you will see two webhook URLs as shown in the following image:</p>
+<p>Click on the Deployment, go into <strong>Routes</strong> section and and copy the <strong>el-nationparks</strong> Route URL.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/nationalparks-pipeline-codechanges-webhook-config.png" alt="Webhook">
+<img src="_images/devops-pipeline-triggers-route.png" alt="EventListener created">
 </div>
 </div>
 <div class="paragraph">
-<p>Click <strong>Copy URL with Secret</strong> for the Generic webhook. Once you have the URL copied to your clipboard, navigate to the code repository
-that you have on Gogs:</p>
+<p>Once you have the URL copied to your clipboard, navigate to the code repository that you have on Gogs:</p>
 </div>
 <div class="paragraph">
-<p><a href="http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks">Gogs Repository</a></p>
+<p><a href="http://gogs-%INFRA_PROJECT%.%cluster_subdomain%/%username%/nationalparks">Gogs Repository</a></p>
 </div>
 <div class="paragraph">
 <p>Your Gogs credentials are:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">username: {{username}}
-password: {{GOGS_PASSWORD}}</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">username: %username%
+password: %GOGS_PASSWORD%</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -233,7 +281,7 @@ secret token field blank&#8201;&#8212;&#8201;the secret is already in the URL an
 to be in the payload.</p>
 </div>
 <div class="paragraph">
-<p>Change the <code>Content Type</code> to <code>application/x-www-form-urlencoded</code>.</p>
+<p>Change the <code>Content Type</code> to <code>application/json</code>.</p>
 </div>
 <div class="paragraph">
 <p>Finally, click on <strong>Add Webhook</strong>.</p>
@@ -308,8 +356,8 @@ hand corner as shown here:</p>
 message.</p>
 </div>
 <div class="paragraph">
-<p>Once you have committed your changes, a  <strong>Build</strong> should almost instantaneously be
-triggered in OpenShift. Click <strong>Builds</strong> in the left navigation menu then <code>nationalparks-build</code>, then the <strong>Builds</strong> tab. You should see a new build running:</p>
+<p>Once you have committed your changes, a new <strong>PipelineRun</strong> should almost instantaneously be
+triggered in OpenShift. Click <strong>Pipeline</strong> in the left navigation menu then <code>nationalparks-pipeline</code>. You should see a new one running:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -317,33 +365,18 @@ triggered in OpenShift. Click <strong>Builds</strong> in the left navigation men
 </div>
 </div>
 <div class="paragraph">
-<p>or run the
-following command to verify:</p>
+<p>or run the following command to verify:</p>
 </div>
 <div class="listingblock execute-1">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get builds</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get PipelineRun</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>You should see that a new build is running:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                    TYPE              FROM          STATUS     STARTED          DURATION
-nationalparks-1         Source            Git@b052ae6   Complete   18 hours ago     36s
-nationalparks-2         Source            Git@3b26e1a   Complete   35 minutes ago
-nationalparks-3         Binary            Git@3a56cb1   Running    43 seconds ago
-nationalparks-build-1   JenkinsPipeline   Git@master    Complete   35 minutes ago
-nationalparks-build-2   JenkinsPipeline   Git@master    Running    58 seconds ago</code></pre>
-</div>
+<p>Once the build and deploy has finished, verify your new image was automatically deployed by viewing the application in your browser:</p>
 </div>
 <div class="paragraph">
-<p>Once the build and deploy has finished, verify your new image was
-automatically deployed by viewing the application in your browser:</p>
-</div>
-<div class="paragraph">
-<p><a href="http://nationalparks-{{project_namespace}}.{{cluster_subdomain}}/ws/info/">National Parks Info Page</a></p>
+<p><a href="http://nationalparks-%project_namespace%.%cluster_subdomain%/ws/info/">National Parks Info Page</a></p>
 </div>
 <div class="paragraph">
 <p>You should now see the new name you have set in the JSON string returned.</p>
@@ -388,7 +421,7 @@ which has deployed the application:</p>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                 REVISION   DESIRED   CURRENT   TRIGGERED BY
 mongodb              1          1         1         config,image(mongodb:3.6)
-parksmap             2          1         1         config,image(parksmap:{{PARKSMAP_VERSION}})
+parksmap             2          1         1         config,image(parksmap:%PARKSMAP_VERSION%)
 nationalparks        9          1         1         config,image(nationalparks:master)</code></pre>
 </div>
 </div>
@@ -415,7 +448,7 @@ Warning: the following images triggers were disabled: nationalparks:latest
 original header by viewing the application in your browser.</p>
 </div>
 <div class="paragraph">
-<p><a href="http://nationalparks-{{project_namespace}}.{{cluster_subdomain}}/ws/info/">National Parks Info Page</a></p>
+<p><a href="http://nationalparks-%project_namespace%.%cluster_subdomain%/ws/info/">National Parks Info Page</a></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -475,6 +508,7 @@ National Parks".</p>
 </div>
 <nav class="pagination">
   <span class="prev"><a href="nationalparks-java-pipeline.html">Jenkins Pipelines</a></span>
+  <span class="next"><a href="mlbparks-templates.html">Templates</a></span>
 </nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">

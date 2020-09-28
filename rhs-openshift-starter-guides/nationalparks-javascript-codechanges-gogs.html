@@ -115,19 +115,19 @@
     <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html">Continuous Integration and Pipelines</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:mlbparks-templates.adoc</span>
+    <a class="nav-link" href="mlbparks-templates.html">Templates</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:mlbparks-binary-build.adoc</span>
+    <a class="nav-link" href="mlbparks-binary-build.html">Binary Builds</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:mlbparks-debugging.adoc</span>
+    <a class="nav-link" href="mlbparks-debugging.html">Debugging Apps</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:common-further-resources.adoc</span>
+    <a class="nav-link" href="common-further-resources.html">Further Resources</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:common-workshop-links.adoc</span>
+    <a class="nav-link" href="common-workshop-links.html">Workshop Links</a>
   </li>
 </ul>
   </li>
@@ -195,15 +195,15 @@ achieved.</p>
 that you have on Gogs:</p>
 </div>
 <div class="paragraph">
-<p><a href="http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks">Gogs Repository</a></p>
+<p><a href="http://gogs-%INFRA_PROJECT%.%cluster_subdomain%/%username%/nationalparks">Gogs Repository</a></p>
 </div>
 <div class="paragraph">
 <p>Your Gogs credentials are:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">username: {{username}}
-password: {{GOGS_PASSWORD}}</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">username: %username%
+password: %GOGS_PASSWORD%</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -327,7 +327,7 @@ nationalparks-2   Source    Git@3b26e1a   Running    43 seconds ago</code></pre>
 automatically deployed by viewing the application in your browser:</p>
 </div>
 <div class="paragraph">
-<p><a href="http://nationalparks-{{project_namespace}}.{{cluster_submdomain}}/ws/info/">National Parks Info Page</a></p>
+<p><a href="http://nationalparks-%project_namespace%.%cluster_submdomain%/ws/info/">National Parks Info Page</a></p>
 </div>
 <div class="paragraph">
 <p>You should now see the new name you have set in the JSON string returned.</p>
@@ -372,7 +372,7 @@ which has deployed the application:</p>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                 REVISION   DESIRED   CURRENT   TRIGGERED BY
 mongodb              1          1         1         config,image(mongodb:3.6)
-parksmap             2          1         1         config,image(parksmap:{{PARKSMAP_VERSION}})
+parksmap             2          1         1         config,image(parksmap:%PARKSMAP_VERSION%)
 nationalparks        9          1         1         config,image(nationalparks:master)</code></pre>
 </div>
 </div>
@@ -399,7 +399,7 @@ Warning: the following images triggers were disabled: nationalparks:live
 original header by viewing the application in your browser.</p>
 </div>
 <div class="paragraph">
-<p><a href="http://nationalparks-{{project_namespace}}.{{cluster_subdomain}}/ws/info/">National Parks Info Page</a></p>
+<p><a href="http://nationalparks-%project_namespace%.%cluster_subdomain%/ws/info/">National Parks Info Page</a></p>
 </div>
 <div class="admonitionblock note">
 <table>

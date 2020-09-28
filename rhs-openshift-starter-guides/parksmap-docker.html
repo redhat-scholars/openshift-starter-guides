@@ -117,19 +117,19 @@
     <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html">Continuous Integration and Pipelines</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:mlbparks-templates.adoc</span>
+    <a class="nav-link" href="mlbparks-templates.html">Templates</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:mlbparks-binary-build.adoc</span>
+    <a class="nav-link" href="mlbparks-binary-build.html">Binary Builds</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:mlbparks-debugging.adoc</span>
+    <a class="nav-link" href="mlbparks-debugging.html">Debugging Apps</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:common-further-resources.adoc</span>
+    <a class="nav-link" href="common-further-resources.html">Further Resources</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:common-workshop-links.adoc</span>
+    <a class="nav-link" href="common-workshop-links.html">Workshop Links</a>
   </li>
 </ul>
   </li>
@@ -186,7 +186,7 @@ Docker-formatted image to run on OpenShift. This is incredibly simple to do.
 With OpenShift it can be done directly from the web console.</p>
 </div>
 <div class="paragraph">
-<p>Return to the <a href="http://console-openshift-console.{{cluster_subdomain}}/k8s/cluster/projects">Web Console</a>.</p>
+<p>Return to the <a href="http://console-openshift-console.%cluster_subdomain%/k8s/cluster/projects">Web Console</a>.</p>
 </div>
 <div class="paragraph">
 <p>If you&#8217;re no longer on the <strong>Topology</strong> view in the Developer perspective, return there now. Click <strong>Container Image</strong> to open a dialog that will allow you to specify the information for the image you want to deploy.</p>
@@ -201,7 +201,7 @@ With OpenShift it can be done directly from the web console.</p>
 </div>
 <div class="listingblock copy">
 <div class="content">
-<pre class="highlightjs highlight"><code>docker.io/openshiftroadshow/{{PARKSMAP_IMAGENAME}}:{{PARKSMAP_VERSION}}</code></pre>
+<pre class="highlightjs highlight"><code>quay.io/openshiftroadshow/%PARKSMAP_IMAGENAME%:%PARKSMAP_VERSION%</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -217,7 +217,23 @@ out to the container registry specified and interrogate the image.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Make sure to have the correct values in the <strong>Application Name</strong> and <strong>Name</strong> fields, and pick <strong>Deployment Config</strong> from <strong>Resource</strong> section.</p>
+<p>Make sure to have the correct values in:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Application Name</strong> : workshop</p>
+</li>
+<li>
+<p><strong>Name</strong> : parksmap</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Pick <strong>Deployment Config</strong> from <strong>Resource</strong> section.</p>
+</div>
+<div class="paragraph">
+<p>Un-check the checkbox next to "Create a route to the application". For learning purposes, we will create a <strong>Route</strong> for the application later in the workshop.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -250,9 +266,6 @@ out to the container registry specified and interrogate the image.</p>
 <div class="content">
 <pre class="highlightjs highlight"><code>role=frontend</code></pre>
 </div>
-</div>
-<div class="paragraph">
-<p>Un-check the checkbox next to "Create a route to the application". For learning purposes, we will create a <strong>Route</strong> for the application later in the workshop.</p>
 </div>
 <div class="paragraph">
 <p>Next, click the blue <strong>Create</strong> button. You will be directed to the <strong>Topology</strong> page, where you should see the visualization for the <code>parksmap</code> deployment config in the <code>workshop</code> application.</p>
@@ -443,9 +456,9 @@ If it doesn&#8217;t, it will pull it from the specified registry.</p>
 </div>
 <div class="paragraph">
 <p>There are a number of ways to customize this behavior. They are documented in
-<a href="https://{{DOCS_URL}}/applications/application-life-cycle-management/creating-new-applications.html#applications-create-using-cli-image-creating-new-applications">specifying an image</a>
+<a href="https://%DOCS_URL%/applications/application-life-cycle-management/creating-new-applications.html#applications-create-using-cli-image-creating-new-applications">specifying an image</a>
 as well as
-<a href="https://{{DOCS_URL}}/dev_guide/managing_images.html#image-pull-policy">image pull policy</a>.</p>
+<a href="https://%DOCS_URL%/dev_guide/managing_images.html#image-pull-policy">image pull policy</a>.</p>
 </div>
 </div>
 </div>
@@ -475,7 +488,7 @@ protocols can be mapped.</p>
 </div>
 <div class="paragraph">
 <p>There is a lot more information about
-<a href="https://{{DOCS_URL}}/architecture/understanding-development.html#understanding-kubernetes-pods">Services</a>,
+<a href="https://%DOCS_URL%/architecture/understanding-development.html#understanding-kubernetes-pods">Services</a>,
 including the YAML format to make one by hand, in the official documentation.</p>
 </div>
 <div class="paragraph">

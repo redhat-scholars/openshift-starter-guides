@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Untitled :: OpenShift Starter Guides</title>
     <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/mlbparks-templates.html">
+    <link rel="prev" href="nationalparks-java-pipeline-codechanges-gogs.html">
+    <link rel="next" href="mlbparks-binary-build.html">
     <meta name="generator" content="Antora 2.3.3">
     <link rel="stylesheet" href="../_/css/site.css">
 <link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
@@ -114,20 +116,20 @@
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html">Continuous Integration and Pipelines</a>
   </li>
-  <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:mlbparks-templates.adoc</span>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="mlbparks-templates.html">Templates</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:mlbparks-binary-build.adoc</span>
+    <a class="nav-link" href="mlbparks-binary-build.html">Binary Builds</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:mlbparks-debugging.adoc</span>
+    <a class="nav-link" href="mlbparks-debugging.html">Debugging Apps</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:common-further-resources.adoc</span>
+    <a class="nav-link" href="common-further-resources.html">Further Resources</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:common-workshop-links.adoc</span>
+    <a class="nav-link" href="common-workshop-links.html">Workshop Links</a>
   </li>
 </ul>
   </li>
@@ -158,6 +160,10 @@
 <button class="nav-toggle"></button>
   <a href="index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Starter Guides</a></li>
+    <li><a href="mlbparks-templates.html">Templates</a></li>
+  </ul>
 </nav>
   <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-starter-guides/edit/master/documentation/modules/ROOT/pages/mlbparks-templates.adoc">Edit this Page</a></div>
   </div>
@@ -267,7 +273,7 @@ repository:</p>
 </div>
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc new-app mlbparks --name=mlbparks -p MAVEN_MIRROR_URL=http://nexus.{{INFRA_PROJECT}}.svc.cluster.local:8081/repository/maven-all-public</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc new-app mlbparks --name=mlbparks -p MAVEN_MIRROR_URL=http://nexus.%INFRA_PROJECT%.svc.cluster.local:8081/repository/maven-all-public</code></pre>
 </div>
 </div>
 </td>
@@ -279,7 +285,7 @@ repository:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">--&gt; Deploying template "user5/mlbparks" to project user5
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">--&gt; Deploying template "user1/mlbparks" to project user1
 
      MLBparks
      ---------
@@ -422,6 +428,10 @@ resources for our <strong>mlbparks</strong> application.</p>
 </div>
 </div>
 </div>
+<nav class="pagination">
+  <span class="prev"><a href="nationalparks-java-pipeline-codechanges-gogs.html">Continuous Integration and Pipelines</a></span>
+  <span class="next"><a href="mlbparks-binary-build.html">Binary Builds</a></span>
+</nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>

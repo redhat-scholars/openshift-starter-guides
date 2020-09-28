@@ -117,19 +117,19 @@
     <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html">Continuous Integration and Pipelines</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:mlbparks-templates.adoc</span>
+    <a class="nav-link" href="mlbparks-templates.html">Templates</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:mlbparks-binary-build.adoc</span>
+    <a class="nav-link" href="mlbparks-binary-build.html">Binary Builds</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:mlbparks-debugging.adoc</span>
+    <a class="nav-link" href="mlbparks-debugging.html">Debugging Apps</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:common-further-resources.adoc</span>
+    <a class="nav-link" href="common-further-resources.html">Further Resources</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:common-workshop-links.adoc</span>
+    <a class="nav-link" href="common-workshop-links.html">Workshop Links</a>
   </li>
 </ul>
   </li>
@@ -211,7 +211,7 @@ account, we can do interesting things.</p>
 </div>
 <div class="listingblock execute-1">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc project {{ project_namespace }}</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc project %project_namespace%</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -234,7 +234,7 @@ we are using a special flag, <code>-z</code>. What does this flag do? From the <
 <div class="paragraph">
 <p>The <code>-z</code> syntax is a special one that saves us from having to type out the
 entire string, which, in this case, is
-<code>system:serviceaccount:{{ project_namespace }}:default</code>. It&#8217;s a nifty shortcut.</p>
+<code>system:serviceaccount:%project_namespace%:default</code>. It&#8217;s a nifty shortcut.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -264,7 +264,7 @@ If you&#8217;re referring to a service account in a different project, use the `
 </div>
 </div>
 <div class="paragraph">
-<p>Select <strong>view</strong> for the Role Binding Name <strong>{{ project_namespace }}</strong> for the Namespace, <strong>view</strong> for the Role Name, <strong>Service Account</strong> for the Subject, <strong>{{ project_namespace }}</strong> for the Subject Namespace, and <strong>default</strong> for the Subject Name.</p>
+<p>Select <strong>view</strong> for the Role Binding Name <strong>%project_namespace%</strong> for the Namespace, <strong>view</strong> for the Role Name, <strong>Service Account</strong> for the Subject, <strong>%project_namespace%</strong> for the Subject Namespace, and <strong>default</strong> for the Subject Name.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -324,14 +324,14 @@ access to your project using the following command:</p>
 <i class="fa icon-caution" title="Caution"></i>
 </td>
 <td class="content">
-In the following command(s), replace <code>{{ project_namespace  }}</code> with the user name of the person to whom you want to grant access.
+In the following command(s), replace <code>%project_namespace%</code> with the user name of the person to whom you want to grant access.
 </td>
 </tr>
 </table>
 </div>
 <div class="listingblock copy-and-edit">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc policy add-role-to-user view {{ project_namespace  }}</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc policy add-role-to-user view %project_namespace%</code></pre>
 </div>
 </div>
 <div class="paragraph">

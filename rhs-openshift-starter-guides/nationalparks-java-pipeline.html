@@ -117,19 +117,19 @@
     <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html">Continuous Integration and Pipelines</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:mlbparks-templates.adoc</span>
+    <a class="nav-link" href="mlbparks-templates.html">Templates</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:mlbparks-binary-build.adoc</span>
+    <a class="nav-link" href="mlbparks-binary-build.html">Binary Builds</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:mlbparks-debugging.adoc</span>
+    <a class="nav-link" href="mlbparks-debugging.html">Debugging Apps</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:common-further-resources.adoc</span>
+    <a class="nav-link" href="common-further-resources.html">Further Resources</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:common-workshop-links.adoc</span>
+    <a class="nav-link" href="common-workshop-links.html">Workshop Links</a>
   </li>
 </ul>
   </li>
@@ -185,16 +185,7 @@ manner, as well as progressing the built software (called a "build") through mul
 testing and deployment.</p>
 </div>
 <div class="paragraph">
-<p>Pipeline provides an extensible set of tools for modeling simple-to-complex delivery pipelines
-"as code" via the <a href="https://jenkins.io/doc/book/pipeline/syntax">Pipeline domain-specific language (DSL)</a>
-syntax. OpenShift provides also an <a href="https://github.com/openshift/jenkins-client-plugin">OpenShift Jenkins Pipeline DSL</a>
-for interacting with the platform from within a Jenkins pipeline in a fluent manner.</p>
-</div>
-<div class="paragraph">
-<p>The definition of a Jenkins Pipeline is written into a text file (called a Jenkinsfile) which
-in turn can be committed to a project’s source control repository. This is the foundation of
-"Pipeline-as-code"; treating the CD pipeline a part of the application to be versioned
-and reviewed like any other code.</p>
+<p>OpenShift Pipelines is a cloud-native, continuous integration and delivery (CI/CD) solution for building pipelines using <a href="https://tekton.dev/">Tekton</a>. Tekton is a flexible, Kubernetes-native, open-source CI/CD framework that enables automating deployments across multiple platforms (Kubernetes, serverless, VMs, etc) by abstracting away the underlying details.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -204,14 +195,68 @@ and reviewed like any other code.</p>
 </div>
 </div>
 <div class="sect1">
+<h2 id="_understanding_tekton"><a class="anchor" href="#_understanding_tekton"></a>Understanding Tekton</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Tekton defines a number of <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">Kubernetes custom resources</a> as building blocks in order to standardize pipeline concepts and provide a terminology that is consistent across CI/CD solutions.</p>
+</div>
+<div class="paragraph">
+<p>The custom resources needed to define a pipeline are listed below:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Task</code>: a reusable, loosely coupled number of steps that perform a specific task (e.g. building a container image)</p>
+</li>
+<li>
+<p><code>Pipeline</code>: the definition of the pipeline and the <code>Tasks</code> that it should perform</p>
+</li>
+<li>
+<p><code>TaskRun</code>: the execution and result of running an instance of task</p>
+</li>
+<li>
+<p><code>PipelineRun</code>: the execution and result of running an instance of pipeline, which includes a number of <code>TaskRuns</code></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/tekton-architecture.png" alt="Tekton Architecture">
+</div>
+</div>
+<div class="paragraph">
+<p>In short, in order to create a pipeline, one does the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Create custom or install <a href="https://github.com/tektoncd/catalog">existing</a> reusable <code>Tasks</code></p>
+</li>
+<li>
+<p>Create a <code>Pipeline</code> and <code>PipelineResources</code> to define your application&#8217;s delivery pipeline</p>
+</li>
+<li>
+<p>Create a <code>PersistentVolumeClaim</code> to provide the volume/filesystem for pipeline execution or provide a <code>VolumeClaimTemplate</code> which creates a <code>PersistentVolumeClaim</code></p>
+</li>
+<li>
+<p>Create a <code>PipelineRun</code> to instantiate and invoke the pipeline</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For further details on pipeline concepts, refer to the <a href="https://github.com/tektoncd/pipeline/tree/master/docs#learn-more">Tekton documentation</a> that provides an excellent guide for understanding various parameters and attributes available for defining pipelines.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_set_up_your_pipeline"><a class="anchor" href="#_set_up_your_pipeline"></a>Set Up Your Pipeline</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>A deployment configuration in OpenShift can contain
-<a href="https://{{DOCS_URL}}/dev_guide/deployments/basic_deployment_operations.html#triggers">triggers</a>, which tells OpenShift to automatically redeploy the pod whenever a new image is built for that service or configuration changes.</p>
+<a href="https://%DOCS_URL%/applications/deployments/what-deployments-are.html#deployments-and-deploymentconfigs_what-deployments-are">Triggers</a>, which tells OpenShift to automatically redeploy the pod whenever a new image is built for that service or configuration changes.</p>
 </div>
 <div class="paragraph">
-<p>As we want the Jenkins pipeline to control when builds and deployments happen, we need to disable the ability
+<p>As we want the Tekton pipeline to control when builds and deployments happen, we need to disable the ability
 on the current Deployment to automatically trigger when there is a new image or a configuration change.</p>
 </div>
 </div>
@@ -220,7 +265,7 @@ on the current Deployment to automatically trigger when there is a new image or 
 <h2 id="_configure_manual_deployments_on_dev_application"><a class="anchor" href="#_configure_manual_deployments_on_dev_application"></a>Configure Manual Deployments on Dev Application</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In the {{project_namespace}} project, click on the <code>nationalparks</code> component from Topology view. From the side panel, click on <strong>Actions &#8594; Edit Deployment Config</strong>:</p>
+<p>In the %project_namespace% project, click on the <code>nationalparks</code> component from Topology view. From the side panel, click on <strong>Actions &#8594; Edit Deployment Config</strong>:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -241,305 +286,200 @@ on the current Deployment to automatically trigger when there is a new image or 
 <h2 id="_create_your_pipeline"><a class="anchor" href="#_create_your_pipeline"></a>Create Your Pipeline</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>As pipelines provide the ability to promote applications between different stages of the delivery cycle, Jenkins, which is our Continuous Integration server that will execute our pipelines, will be deployed on a project with a Continuous Integration role. Pipelines executed in this project will have permissions to interact with all the projects modeling the different stages of our delivery cycle.</p>
+<p>As pipelines provide the ability to promote applications between different stages of the delivery cycle, Tekton, which is our Continuous Integration server that will execute our pipelines, will be deployed on a project with a Continuous Integration role. Pipelines executed in this project will have permissions to interact with all the projects modeling the different stages of our delivery cycle.</p>
 </div>
 <div class="paragraph">
-<p>We&#8217;re going to deploy a Jenkins instance to this project to configure and run our pipelines. As we want our Jenkins instance to be able to survive restarts (in case we need to update any plugin configuration) we will select the Jenkins persistent template from the Developer Catalog.</p>
+<p>For this example, we&#8217;re going to deploy our pipeline which is stored in the same Gogs repository where we have our code. In a more real scenario, and in order to honor <a href="https://en.wikipedia.org/wiki/Infrastructure_as_Code">infrastructure as code</a> principles, we would store all the pipeline definitions along with every OpenShift resources definitions we would use.</p>
 </div>
-<div class="paragraph">
-<p>In the left navigation menu, click <strong>+Add</strong> and then <strong>From Catalog</strong>. In the Developer Catalog, search for <strong>Jenkins</strong>. Select the one named <strong>Jenkins</strong>.</p>
-</div>
-<div class="imageblock">
+<div class="listingblock execute-1">
 <div class="content">
-<img src="_images/devops-pipeline-catalog-search.png" alt="Empty CICD project">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">oc create -f http://gogs-%INFRA_PROJECT%.%cluster_subdomain%/%username%/nationalparks/raw/master/pipeline/nationalparks-pipeline-all.yaml -n %project_namespace%</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>We will be prompted with the configuration screens for deploying our Jenkins server instance. Click the blue <strong>Instantiate Template</strong> button to get started.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/devops-jenkins-template.png" alt="Jenkins template">
-</div>
-</div>
-<div class="paragraph">
-<p>Change <strong>Disable memory intensive administrative monitors</strong> to <strong>true</strong> to speed up the deployment time in the workshop, and leave the defaults for all parameters and click the blue <strong>Create</strong> button.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/devops-jenkins-template-config.png" alt="Jenkins template config">
-</div>
-</div>
-<div class="paragraph">
-<p>Jenkins will now be provisioned on the background. Click <strong>Topology</strong> in the left navigation to see your Jenkins service in Topology view. It may take a couple minutes for the provisioning to complete. You can click and drag the Jenkins service into your workshop application grouping.</p>
-</div>
-<div class="paragraph">
-<p>We will see now Jenkins being provisioned on our project. Click on the Jenkins service component to view the provisioning status. Once provisioning is finished, we should see a similar screen to this:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/devops-jenkins-deployed.png" alt="Jenkins deployed">
-</div>
-</div>
-<div class="paragraph">
-<p>We could have done the same as we just did by using one single command on the OpenShift CLI. This command will deploy the service Jenkins with a persistent configuration in your {{project_namespace}} project.</p>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-If you have successfully deployed Jenkins, do NOT execute this command.
-</td>
-</tr>
-</table>
+<p>Now let&#8217;s review our Tekton Pipeline:</p>
 </div>
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">oc new-app jenkins-persistent -n {{project_namespace}}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_store_your_pipeline_definition_in_git"><a class="anchor" href="#_store_your_pipeline_definition_in_git"></a>Store Your Pipeline Definition in Git</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>For this example, we&#8217;re going to store our pipeline in the same Gogs repository where we have our code. In a more real scenario, and in order to honor <a href="https://en.wikipedia.org/wiki/Infrastructure_as_Code">infrastructure as code</a> principles, we would store all the pipeline definitions along with every OpenShift resources definitions we would use.</p>
-</div>
-<div class="paragraph">
-<p>Log into your <code>nationalparks</code> repository in Git as we are going to store in this repository our Jenkinsfile, that is, our pipeline definition.</p>
-</div>
-<div class="listingblock copypaste">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks</code></pre>
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/devops-pipeline-gogs-nationalparks.png" alt="Nationalparks project">
-</div>
-</div>
-<div class="paragraph">
-<p>We are going to create a Jenkinsfile to build and deploy our <code>nationalparks</code> application.</p>
-</div>
-<div class="paragraph">
-<p>Create a file called <code>Jenkinsfile.workshop</code> with the following content:</p>
-</div>
-<div class="listingblock copypaste">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">pipeline {
-  agent {
-      label 'maven'
-  }
-  stages {
-    stage('Build JAR') {
-      steps {
-        git url: 'http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks'
-        sh "cp .settings.xml ~/.m2/settings.xml"
-        sh "mvn package"
-      }
-    }
-    stage('Archive JAR') {
-      steps {
-        sh "mvn deploy -DskipTests"
-      }
-    }
-    stage('Build Image') {
-      steps {
-        script {
-          openshift.withCluster() {
-            openshift.withProject() {
-              openshift.startBuild("nationalparks",
-                                   "--from-file=target/nationalparks.jar",
-                                   "--wait")
-            }
-          }
-        }
-      }
-    }
-    stage('Deploy') {
-      steps {
-        script {
-          openshift.withCluster() {
-            openshift.withProject() {
-              def result, dc = openshift.selector("dc", "nationalparks")
-              dc.rollout().latest()
-              timeout(10) {
-                  result = dc.rollout().status("-w")
-              }
-              if (result.status != 0) {
-                  error(result.err)
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>And commit the changes into the git server.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/devops-pipeline-gogs-add-jenkinsfile.png" alt="Nationalparks project">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">---
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: nationalparks-pipeline
+spec:
+  params:
+    - default: nationalparks
+      description: The application name
+      name: APP_NAME
+      type: string
+    - default: 'https://github.com/openshift-roadshow/nationalparks.git'
+      description: The application git repository url
+      name: APP_GIT_URL
+      type: string
+    - default: master
+      description: The application git repository revision
+      name: APP_GIT_REVISION
+      type: string
+  tasks:
+    - name: git-clone
+      params:
+        - name: url
+          value: $(params.APP_GIT_URL)
+        - name: revision
+          value: $(params.APP_GIT_REVISION)
+        - name: submodules
+          value: 'true'
+        - name: depth
+          value: '1'
+        - name: sslVerify
+          value: 'true'
+        - name: deleteExisting
+          value: 'true'
+      taskRef:
+        kind: ClusterTask
+        name: git-clone
+      workspaces:
+        - name: output
+          workspace: app-source
+    - name: test-and-build
+      params:
+        - name: GOALS
+          value:
+            - package
+        - name: PROXY_PROTOCOL
+          value: http
+      runAfter:
+        - git-clone
+      taskRef:
+        kind: ClusterTask
+        name: maven
+      workspaces:
+        - name: source
+          workspace: app-source
+        - name: maven-settings
+          workspace: maven-settings
+    - name: build-image
+      params:
+        - name: PATH_CONTEXT
+          value: .
+        - name: TLSVERIFY
+          value: 'false'
+        - name: OUTPUT_IMAGE_STREAM
+          value: '$(params.APP_NAME):latest'
+      runAfter:
+        - test-and-build
+      taskRef:
+        kind: Task
+        name: s2i-java-11-binary
+      workspaces:
+        - name: source
+          workspace: app-source
+    - name: redeploy
+      params:
+        - name: DEPLOYMENT_CONFIG
+          value: $(params.APP_NAME)
+      runAfter:
+        - build-image
+      taskRef:
+        kind: Task
+        name: redeploy
+  workspaces:
+    - name: app-source
+    - name: maven-settings</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>As we can see now, the Jenkinsfile is already stored in our version control system.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/devops-pipeline-gogs-jenkinsfile-list.png" alt="Nationalparks project">
-</div>
+<p>A <code>Pipeline</code> is a user-defined model of a CD pipeline. A Pipeline’s code defines your entire build process, which typically includes stages for building an application, testing it and then delivering it.</p>
 </div>
 <div class="paragraph">
-<p>A <strong>Pipeline</strong> is a user-defined model of a CD pipeline. A Pipeline’s code defines your entire build process, which typically includes stages for building an application, testing it and then delivering it.</p>
+<p>A <code>Task</code> and a <code>ClusterTask</code> contain some step to be executed. <strong>ClusterTasks</strong> are available to all user within a cluster where OpenShift Pipelines has been installed, while <strong>Tasks</strong> can be custom.</p>
 </div>
 <div class="paragraph">
-<p>A <strong>stage</strong> block defines a conceptually distinct subset of tasks performed through the entire Pipeline (e.g. <em>Build</em>, <em>Test</em> and <em>Deploy</em> stages), which is used by many plugins to visualize or present Jenkins Pipeline status/progress.</p>
-</div>
-<div class="paragraph">
-<p><strong>Step</strong> is a single task. Fundamentally, a step tells Jenkins what to do at a particular point in time (or "step" in the process).</p>
-</div>
-<div class="paragraph">
-<p>This pipeline has 4 stages defined:</p>
+<p>This pipeline has 4 Tasks defined:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Build JAR</strong>: will clone our source repository for nationalparks and will use maven&#8217;s package goal to create a .jar file.</p>
+<p><strong>git clone</strong>: this is a <code>ClusterTask</code> that will clone our source repository for nationalparks and store it to a <code>Workspace</code> <code>app-source</code> which will use the PVC created for it <code>app-source-workspace</code></p>
 </li>
 <li>
-<p><strong>Archive JAR</strong>: will upload our .jar file to nexus repository, to have it under control.</p>
+<p><strong>test-and-build</strong>: will test and build our Java application using <code>maven</code> <code>ClusterTask</code></p>
 </li>
 <li>
-<p><strong>Build Image</strong>: will build an image using a binary file as input in OpenShift. The build will use the .jar file that was created.</p>
+<p><strong>build-image</strong>: will build an image using a binary file as input in OpenShift. The build will use the .jar file that was created and a custom Task for it <code>s2i-java11-binary</code></p>
 </li>
 <li>
-<p><strong>Deploy</strong>: it will deploy the created image on OpenShift using the DeploymentConfig named <code>nationalparks</code> we created in the previous lab.</p>
+<p><strong>redeploy</strong>: it will deploy the created image on OpenShift using the DeploymentConfig named <code>nationalparks</code> we created in the previous lab, using the custom Task <code>redeploy</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>From left-side menu, click on <strong>Pipeline</strong>, then click on <strong>nationalparks-pipeline</strong> to see the pipeline you just created.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devops-pipeline-created.png" alt="Pipeline created">
+</div>
+</div>
+<div class="paragraph">
+<p>The Pipeline is parametric, with default value on the one we need to use.</p>
+</div>
+<div class="paragraph">
+<p>It is using two <strong>Workspace</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>app-source</strong>: linked to a <strong>PersistentVolumeClaim</strong> <code>app-source-pvc</code> created from the YAML template we used in previous command. This will be used to store the artifact to be used in different <strong>Task</strong></p>
+</li>
+<li>
+<p><strong>maven-settings</strong>: an <strong>EmptyDir</strong> volume for the maven cache, this can be extended also with a PVC to make subsequent Maven builds faster</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_create_your_pipeline_definition_on_openshift"><a class="anchor" href="#_create_your_pipeline_definition_on_openshift"></a>Create Your Pipeline Definition on OpenShift</h2>
+<h2 id="_run_the_pipeline"><a class="anchor" href="#_run_the_pipeline"></a>Run the Pipeline</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Create the OpenShift pipeline definition to use the Jenkins file. This is a regular OpenShift BuildConfig with a <strong>JenkinsPipeline</strong> strategy.</p>
+<p>In order to start the Pipeline, we can use a <code>PipelineRun</code> Custom Resource, representing our parameters to send to the pipeline:</p>
+</div>
+<div class="listingblock execute-1">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">oc create -f http://gogs-%INFRA_PROJECT%.%cluster_subdomain%/%username%/nationalparks/raw/master/pipeline/nationalparks-pipelinerun.yaml -n %project_namespace%</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>From the Developer perspective click <strong>+Add</strong> in the left navigation menu and then select <strong>YAML</strong>.</p>
+<p>You can follow the Pipeline execution from <strong>Pipeline</strong> section, watching all the steps in progress. Click on <strong>Pipeline Runs</strong> tab to see it running:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/devops-pipeline-add-yaml-menu.png" alt="Add yaml to project - Menu">
+<img src="_images/devops-pipeline-run-1.png" alt="Pipeline running">
 </div>
 </div>
 <div class="paragraph">
-<p>Now, copy the following code into the YAML input box and click <strong>Create</strong> to create a pipeline that uses the <code>Jenkinsfile.workshop</code> from your Gogs repository.</p>
-</div>
-<div class="listingblock copypaste">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">apiVersion: build.openshift.io/v1
-kind: BuildConfig
-metadata:
-  name: nationalparks-build
-spec:
-  runPolicy: Serial
-  source:
-    git:
-      ref: master
-      uri: "http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks"
-    type: Git
-  strategy:
-    jenkinsPipelineStrategy:
-      env:
-        - name: NEXUS_URL
-          value: "http://nexus.{{INFRA_PROJECT}}.svc:8081"
-      jenkinsfilePath: Jenkinsfile.workshop
-    type: JenkinsPipeline
-  triggers:
-    - github:
-        secret: CqPGlXcKJXXqKxW4Ye6z
-      type: GitHub
-    - generic:
-        secret: 4LXwMdx9vhQY4WXbLcFR
-      type: Generic
-    - type: ConfigChange</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Click the <strong>Builds</strong> tab, then <strong>nationalparks-build-1</strong> to see the pipeline you just created.</p>
+<p>The click on the <code>PipelineRun</code> <strong>national-parks-deploy-run-</strong>:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/devops-pipeline-running.png" alt="Pipeline running">
+<img src="_images/devops-pipeline-run-2.png" alt="Pipeline running animation">
 </div>
 </div>
 <div class="paragraph">
-<p>The pipeline will start automatically and execute all stages that are defined in the Jenkinsfile
-in the git repository.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-the first time you are running it might take a little while before the pipeline starts. The reason for that is
-that you are using the built-in <a href="https://plugins.jenkins.io/kubernetes">Kubernetes Jenkins Plugin</a> which dynamically provisions
-a Jenkins slave pod to run the pipeline. The dynamic provisioning allows scaling the pipeline execution to many concurrent jobs. The
-first time that pipeline runs, it will pull the jenkins slave image from the registry and therefore it might take a little bit of time.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>As the pipeline is running, you can watch the build logs. Click on the <code>view Logs</code> link in the appropriate build and you will be directed to Jenkins. In order to grant you access, Jenkins is configured to use Single Sign On with OpenShift, and you&#8217;ll need to log in with OpenShift credentials.</p>
+<p>Then click on the <strong>Task</strong> running to check logs:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/devops-pipeline-jenkins-sso.png" alt="Jenkins SSO">
+<img src="_images/devops-pipeline-run-3.png" alt="Pipeline Task log">
 </div>
 </div>
 <div class="paragraph">
-<p>You need to authorize your user account to access Jenkins.</p>
+<p>Verify PipelineRun has been completed with success:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/devops-pipeline-jenkins-sso-authorize.png" alt="Jenkins SSO">
-</div>
-</div>
-<div class="paragraph">
-<p>You will see the output of your maven build as it&#8217;s running in Jenkins.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/devops-pipeline-jenkins-log.png" alt="Jenkins logs">
-</div>
-</div>
-<div class="paragraph">
-<p>After a little while, it will finish, hopefully with success.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/devops-pipeline-finished.png" alt="Pipeline finished">
-</div>
-</div>
-<div class="paragraph">
-<p>Once the pipeline has finished, click <code>nationalparks</code> from Topology view. You should notice that the <strong>Latest Version</strong> number of the has increased.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/devops-pipeline-nationalparks-deployed.png" alt="Nationalparks component deployed">
+<img src="_images/devops-pipeline-run-4.png" alt="PipelineRun completed">
 </div>
 </div>
 </div>

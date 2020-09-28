@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Untitled :: OpenShift Starter Guides</title>
     <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/common-workshop-links.html">
+    <link rel="prev" href="common-further-resources.html">
     <meta name="generator" content="Antora 2.3.3">
     <link rel="stylesheet" href="../_/css/site.css">
 <link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
@@ -115,19 +116,19 @@
     <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html">Continuous Integration and Pipelines</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:mlbparks-templates.adoc</span>
+    <a class="nav-link" href="mlbparks-templates.html">Templates</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:mlbparks-binary-build.adoc</span>
+    <a class="nav-link" href="mlbparks-binary-build.html">Binary Builds</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:mlbparks-debugging.adoc</span>
+    <a class="nav-link" href="mlbparks-debugging.html">Debugging Apps</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:common-further-resources.adoc</span>
+    <a class="nav-link" href="common-further-resources.html">Further Resources</a>
   </li>
-  <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:common-workshop-links.adoc</span>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="common-workshop-links.html">Workshop Links</a>
   </li>
 </ul>
   </li>
@@ -158,6 +159,10 @@
 <button class="nav-toggle"></button>
   <a href="index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Starter Guides</a></li>
+    <li><a href="common-workshop-links.html">Workshop Links</a></li>
+  </ul>
 </nav>
   <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-starter-guides/edit/master/documentation/modules/ROOT/pages/common-workshop-links.adoc">Edit this Page</a></div>
   </div>
@@ -170,11 +175,11 @@
 <h2 id="_openshift_cluster_url"><a class="anchor" href="#_openshift_cluster_url"></a>OpenShift cluster URL</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Console Address: <a href="http://console-openshift-console.{{cluster_subdomain}}" class="bare">http://console-openshift-console.{{cluster_subdomain}}</a><br>
-API Address: <a href="https://api.{{cluster_subdomain}}:6443" class="bare">https://api.{{cluster_subdomain}}:6443</a><br></p>
+<p>Console Address: <a href="http://console-openshift-console.%cluster_subdomain%" class="bare">http://console-openshift-console.%cluster_subdomain%</a><br>
+API Address: <a href="https://api.%cluster_subdomain%:6443" class="bare">https://api.%cluster_subdomain%:6443</a><br></p>
 </div>
 <div class="paragraph">
-<p>Username: <code>{{ username}}</code><br>
+<p>Username: <code>%username%</code><br>
 Password: <code>openshift</code><br></p>
 </div>
 </div>
@@ -183,7 +188,7 @@ Password: <code>openshift</code><br></p>
 <h2 id="_workshop_guides"><a class="anchor" href="#_workshop_guides"></a>Workshop Guides</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Web: <a href="http://starter-guides-{{" class="bare">http://starter-guides-{{</a> INFRA_PROJECT }}.{{cluster_subdomain}}</p>
+<p>Web: <a href="http://starter-guides-%INFRA_PROJECT%.%cluster_subdomain%" class="bare">http://starter-guides-%INFRA_PROJECT%.%cluster_subdomain%</a></p>
 </div>
 </div>
 </div>
@@ -191,7 +196,7 @@ Password: <code>openshift</code><br></p>
 <h2 id="_web_terminal"><a class="anchor" href="#_web_terminal"></a>Web terminal</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Web: <a href="http://terminal-{{" class="bare">http://terminal-{{</a> INFRA_PROJECT }}.{{cluster_subdomain}}</p>
+<p>Web: <a href="http://terminal-%INFRA_PROJECT%.%cluster_subdomain%" class="bare">http://terminal-%INFRA_PROJECT%.%cluster_subdomain%</a></p>
 </div>
 </div>
 </div>
@@ -199,11 +204,11 @@ Password: <code>openshift</code><br></p>
 <h2 id="_git_server"><a class="anchor" href="#_git_server"></a>Git Server</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Web: <a href="http://gogs-{{" class="bare">http://gogs-{{</a> INFRA_PROJECT }}.{{cluster_subdomain}}</p>
+<p>Web: <a href="http://gogs-%INFRA_PROJECT%.%cluster_subdomain%" class="bare">http://gogs-%INFRA_PROJECT%.%cluster_subdomain%</a></p>
 </div>
 <div class="paragraph">
-<p>Username: <code>{{username}}</code><br>
-Password: <code>{{ GOGS_PASSWORD }}</code><br></p>
+<p>Username: <code>%username%</code><br>
+Password: <code>%GOGS_PASSWORD%</code><br></p>
 </div>
 </div>
 </div>
@@ -211,7 +216,7 @@ Password: <code>{{ GOGS_PASSWORD }}</code><br></p>
 <h2 id="_nexus_maven_repository"><a class="anchor" href="#_nexus_maven_repository"></a>Nexus Maven repository</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Web: <a href="http://nexus-{{" class="bare">http://nexus-{{</a> INFRA_PROJECT }}.{{cluster_subdomain}}</p>
+<p>Web: <a href="http://nexus-%INFRA_PROJECT%.%cluster_subdomain%" class="bare">http://nexus-%INFRA_PROJECT%.%cluster_subdomain%</a></p>
 </div>
 </div>
 </div>
@@ -219,10 +224,13 @@ Password: <code>{{ GOGS_PASSWORD }}</code><br></p>
 <h2 id="_openshift_ops_view"><a class="anchor" href="#_openshift_ops_view"></a>OpenShift Ops View</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Web: <a href="http://ocp-ops-view-{{" class="bare">http://ocp-ops-view-{{</a> INFRA_PROJECT }}.{{cluster_subdomain}}</p>
+<p>Web: <a href="http://ocp-ops-view-%INFRA_PROJECT%.%cluster_subdomain%" class="bare">http://ocp-ops-view-%INFRA_PROJECT%.%cluster_subdomain%</a></p>
 </div>
 </div>
 </div>
+<nav class="pagination">
+  <span class="prev"><a href="common-further-resources.html">Further Resources</a></span>
+</nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>

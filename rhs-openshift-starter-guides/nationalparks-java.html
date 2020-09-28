@@ -117,19 +117,19 @@
     <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html">Continuous Integration and Pipelines</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:mlbparks-templates.adoc</span>
+    <a class="nav-link" href="mlbparks-templates.html">Templates</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:mlbparks-binary-build.adoc</span>
+    <a class="nav-link" href="mlbparks-binary-build.html">Binary Builds</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:mlbparks-debugging.adoc</span>
+    <a class="nav-link" href="mlbparks-debugging.html">Debugging Apps</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:common-further-resources.adoc</span>
+    <a class="nav-link" href="common-further-resources.html">Further Resources</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:common-workshop-links.adoc</span>
+    <a class="nav-link" href="common-workshop-links.html">Workshop Links</a>
   </li>
 </ul>
   </li>
@@ -216,7 +216,7 @@ other aspects of OpenShift.</p>
 <div class="paragraph">
 <p>A full discussion of S2I is beyond the scope of this class, but you can find
 more information about it either in the
-<a href="https://{{DOCS_URL}}/creating_images/s2i.html">OpenShift S2I documentation</a>
+<a href="https://%DOCS_URL%/creating_images/s2i.html">OpenShift S2I documentation</a>
 or on <a href="https://github.com/openshift/source-to-image">GitHub</a>. The only key concept you need to
 remember about S2I is that it&#8217;s magic.</p>
 </div>
@@ -258,12 +258,12 @@ and located at the following URL:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">username: {{username}}
-password: {{GOGS_PASSWORD}}</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">username: %username%
+password: %GOGS_PASSWORD%</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><a href="http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks.git">Gogs Repository</a></p>
+<p><a href="http://gogs-%INFRA_PROJECT%.%cluster_subdomain%/%username%/nationalparks.git">Gogs Repository</a></p>
 </div>
 <div class="paragraph">
 <p>Later in the lab, we want you to make a code change and then rebuild your
@@ -293,11 +293,14 @@ have your own git repository, let&#8217;s use it with a simple Java S2I image.</
 </div>
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code>http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks.git</code></pre>
+<pre class="highlightjs highlight"><code>http://gogs-%INFRA_PROJECT%.%cluster_subdomain%/%username%/nationalparks.git</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Select Java as your Builder Image, and be sure to select version 8.</p>
+<p>In <strong>Git Type</strong> select <strong>Other</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Select <strong>Java</strong> as your Builder Image, and be sure to select version <strong>11</strong>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -318,7 +321,17 @@ All of these runtimes shown are made available via <strong>Templates</strong> an
 </table>
 </div>
 <div class="paragraph">
-<p>Scroll down to the <strong>General</strong> section. Select <code>workshop</code> as your application, and <code>nationalparks</code> as the name.</p>
+<p>Scroll down to the <strong>General</strong> section. Select:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Application Name</strong> : workshop</p>
+</li>
+<li>
+<p><strong>Name</strong> : nationalparks</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p>In <strong>Resources</strong> section, select <strong>Deployment Config</strong>.</p>
@@ -360,7 +373,7 @@ the application. You can see all of this happening in real time!</p>
 <div class="paragraph">
 <p>From the command line, you can also see the <strong>Builds</strong>:</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get builds</code></pre>
 </div>
@@ -377,7 +390,7 @@ nationalparks-1   Source    Git@b052ae6   Running    About a minute ago   1m2s</
 <div class="paragraph">
 <p>You can also view the build logs with the following command:</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc logs -f builds/nationalparks-1</code></pre>
 </div>
@@ -419,7 +432,7 @@ parksmap-1-4hbtk        1/1       Running     0          2h</code></pre>
 application this way, OpenShift also creates a <strong>Route</strong> for you. You can see the
 URL in the web console, or via the command line:</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get routes</code></pre>
 </div>
@@ -430,16 +443,16 @@ URL in the web console, or via the command line:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME            HOST/PORT                                                   PATH      SERVICES        PORT       TERMINATION
-nationalparks   nationalparks-{{ project_namespace  }}.{{cluster_subdomain}}             nationalparks   8080-tcp
-parksmap        parksmap-{{ project_namespace  }}.{{cluster_subdomain}}                  parksmap        8080-tcp</code></pre>
+nationalparks   nationalparks-%project_namespace%.%cluster_subdomain%             nationalparks   8080-tcp
+parksmap        parksmap-%project_namespace%.%cluster_subdomain%                  parksmap        8080-tcp</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>In the above example, the URL is:</p>
 </div>
-<div class="listingblock copypaste">
+<div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">http://nationalparks-{{ project_namespace  }}.{{cluster_subdomain}}</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">&lt;a href="http://nationalparks-%project_namespace%.%cluster_subdomain%" class="bare"&gt;http://nationalparks-%project_namespace%.%cluster_subdomain%&lt;/a&gt;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -448,7 +461,7 @@ However, it can still be used with a browser. All backends that work with the pa
 frontend are required to implement a <code>/ws/info/</code> endpoint. To test, visit this URL in your browser:</p>
 </div>
 <div class="paragraph">
-<p><a href="http://nationalparks-{{project_namespace}}.{{cluster_subdomain}}/ws/info/">National Parks Info Page</a></p>
+<p><a href="http://nationalparks-%project_namespace%.%cluster_subdomain%/ws/info/">National Parks Info Page</a></p>
 </div>
 <div class="admonitionblock warning">
 <table>

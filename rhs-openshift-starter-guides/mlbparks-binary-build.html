@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Untitled :: OpenShift Starter Guides</title>
     <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/mlbparks-binary-build.html">
+    <link rel="prev" href="mlbparks-templates.html">
+    <link rel="next" href="mlbparks-debugging.html">
     <meta name="generator" content="Antora 2.3.3">
     <link rel="stylesheet" href="../_/css/site.css">
 <link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
@@ -115,19 +117,19 @@
     <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html">Continuous Integration and Pipelines</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:mlbparks-templates.adoc</span>
+    <a class="nav-link" href="mlbparks-templates.html">Templates</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="mlbparks-binary-build.html">Binary Builds</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:mlbparks-binary-build.adoc</span>
+    <a class="nav-link" href="mlbparks-debugging.html">Debugging Apps</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:mlbparks-debugging.adoc</span>
+    <a class="nav-link" href="common-further-resources.html">Further Resources</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:common-further-resources.adoc</span>
-  </li>
-  <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:common-workshop-links.adoc</span>
+    <a class="nav-link" href="common-workshop-links.html">Workshop Links</a>
   </li>
 </ul>
   </li>
@@ -158,6 +160,10 @@
 <button class="nav-toggle"></button>
   <a href="index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Starter Guides</a></li>
+    <li><a href="mlbparks-binary-build.html">Binary Builds</a></li>
+  </ul>
 </nav>
   <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-starter-guides/edit/master/documentation/modules/ROOT/pages/mlbparks-binary-build.adoc">Edit this Page</a></div>
   </div>
@@ -198,7 +204,7 @@ all the horsepower on our machine) and then just quickly send up the war file.</
 You could also use this pattern to actually send up your working directory to the S2I builder to have it do the Maven build
 on OpenShift. Using the local directory would relieve you from having Maven or any of the Java toolchain on your local
 machine AND would also not require git commit with a push. Read more in the
-<a href="https://{{DOCS_URL}}/dev_guide/dev_tutorials/binary_builds.html">official documentation</a>
+<a href="https://%DOCS_URL%/dev_guide/dev_tutorials/binary_builds.html">official documentation</a>
 </td>
 </tr>
 </table>
@@ -246,19 +252,16 @@ mvn package</code></pre>
 <div class="paragraph">
 <p>Pay attention to the output location for the ROOT.war, we will need that directory later.</p>
 </div>
-<div class="paragraph">
-<p>If you&#8217;re using IntelliJ or eclipse/JBoss Developer Studio package the maven artifact using the IDE.</p>
-</div>
 </div>
 <div class="sect2">
 <h3 id="_code_change"><a class="anchor" href="#_code_change"></a>Code Change</h3>
 <div class="paragraph">
-<p>Time for a source code change! Go to src/main/java/com/openshift/evg/roadshow/rest/BackendController.java. This is the REST endpoint
-that gives basic info on the service and can be reached at:</p>
+<p>Time for a source code change! Go to <code>src/main/java/com/openshift/evg/roadshow/rest/BackendController.java</code>.and edit it with <code>vi</code> or <code>nano</code>.
+This is the REST endpoint that gives basic info on the service and can be reached at:</p>
 </div>
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">http://mlbparks-{{ project_namespace  }}.{{cluster_subdomain}}/ws/info/</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">http://mlbparks-%project_namespace%.%cluster_subdomain%/ws/info/</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -270,7 +273,13 @@ that gives basic info on the service and can be reached at:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Don&#8217;t forget to save the file and run <code>mvn package</code> again.</p>
+<p>Don&#8217;t forget to save the file and run <code>mvn package</code> again:</p>
+</div>
+<div class="listingblock execute-1">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd /opt/app-root/src/mlbparks
+mvn package</code></pre>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -305,11 +314,11 @@ automatically gets added back with our new title.  This would not have happened 
 rolling spins up the new version of the pod before it takes down the old one. Rolling strategy enables a zero-downtime deployment.</p>
 </div>
 <div class="paragraph">
-<p>When the deployment is finished and the container is deployed you will see the new content at:</p>
+<p>You can follow the deployment in progress from Topology view, and when it is completed, you will see the new content at:</p>
 </div>
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">http://mlbparks-{{ project_namespace  }}.{{cluster_subdomain}}/ws/info/</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">http://mlbparks-%project_namespace%.%cluster_subdomain%/ws/info/</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -318,6 +327,10 @@ rolling spins up the new version of the pod before it takes down the old one. Ro
 </div>
 </div>
 </div>
+<nav class="pagination">
+  <span class="prev"><a href="mlbparks-templates.html">Templates</a></span>
+  <span class="next"><a href="mlbparks-debugging.html">Debugging Apps</a></span>
+</nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>

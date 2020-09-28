@@ -117,19 +117,19 @@
     <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html">Continuous Integration and Pipelines</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:mlbparks-templates.adoc</span>
+    <a class="nav-link" href="mlbparks-templates.html">Templates</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:mlbparks-binary-build.adoc</span>
+    <a class="nav-link" href="mlbparks-binary-build.html">Binary Builds</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:mlbparks-debugging.adoc</span>
+    <a class="nav-link" href="mlbparks-debugging.html">Debugging Apps</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:common-further-resources.adoc</span>
+    <a class="nav-link" href="common-further-resources.html">Further Resources</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">xref:common-workshop-links.adoc</span>
+    <a class="nav-link" href="common-workshop-links.html">Workshop Links</a>
   </li>
 </ul>
   </li>
@@ -351,7 +351,7 @@ In the following Kibana search(es), replace the pod_name to match the name of yo
 </div>
 <div class="listingblock copyandedit">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">kubernetes.pod_name:"parksmap-1-mrxfq" AND kubernetes.namespace_name:"{{ project_namespace }}"</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">kubernetes.pod_name:"parksmap-1-mrxfq" AND kubernetes.namespace_name:"%project_namespace%"</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -374,7 +374,7 @@ pod name reference and click the magnifying glass or press the enter key.</p>
 </div>
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">kubernetes.namespace_name:"{{ project_namespace }}"</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">kubernetes.namespace_name:"%project_namespace%"</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -392,7 +392,7 @@ log system is keeping a historical record.</p>
 </div>
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">kubernetes.namespace_name:"{{ project_namespace }}" AND message:"Failure executing"</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">kubernetes.namespace_name:"%project_namespace%" AND message:"Failure executing"</code></pre>
 </div>
 </div>
 </div>
