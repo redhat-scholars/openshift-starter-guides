@@ -197,7 +197,7 @@ programming language and is available for the following operating systems:</p>
 <div class="paragraph">
 <p>Issue the following command to see help information:</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc help</code></pre>
 </div>
@@ -228,7 +228,7 @@ understand all of the terminology as we will cover it in detail in later labs.</
 to the <strong>%project_namespace%</strong> project to make sure you&#8217;re on the correct project from now on.
 You can do this with the following command:</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc project %project_namespace%</code></pre>
 </div>
@@ -248,11 +248,15 @@ perform various tasks via a browser.</p>
 <div class="paragraph">
 <p>On the login screen, enter the following credentials:</p>
 </div>
-<div class="paragraph">
-<p>Username: <code>%username%</code></p>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code>Username: `%username%`</code></pre>
 </div>
-<div class="paragraph">
-<p>Password: <code>openshift</code></p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code>Password: `openshift`</code></pre>
+</div>
 </div>
 <div class="paragraph">
 <p>The first time you access the web console, you will most likely be in the Administrator perspective. You will be presented with the list of Projects that you can access, and you will see something that looks like the following image:</p>
