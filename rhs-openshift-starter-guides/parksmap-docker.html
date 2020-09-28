@@ -235,18 +235,13 @@ out to the container registry specified and interrogate the image.</p>
 <div class="paragraph">
 <p>Un-check the checkbox next to "Create a route to the application". For learning purposes, we will create a <strong>Route</strong> for the application later in the workshop.</p>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/parksmap-image-options.png" alt="Explore Project">
-</div>
-</div>
 <div class="paragraph">
 <p>At the bottom of the page, click <strong>Labels</strong> in the Advanced Options section and add some labels to better identify this deployment later. Labels will help us identify and filter components in the web console and in the command line.</p>
 </div>
 <div class="paragraph">
 <p>We will add 3 labels. After you enter the name=value pair for each label, press <strong>enter</strong> before typing the next. First the name to be given to the application.</p>
 </div>
-<div class="listingblock copypaste">
+<div class="listingblock copy">
 <div class="content">
 <pre class="highlightjs highlight"><code>app=workshop</code></pre>
 </div>
@@ -254,7 +249,7 @@ out to the container registry specified and interrogate the image.</p>
 <div class="paragraph">
 <p>Next the name of this deployment.</p>
 </div>
-<div class="listingblock copypaste">
+<div class="listingblock copy">
 <div class="content">
 <pre class="highlightjs highlight"><code>component=parksmap</code></pre>
 </div>
@@ -262,9 +257,14 @@ out to the container registry specified and interrogate the image.</p>
 <div class="paragraph">
 <p>And finally, the role this component plays in the overall application.</p>
 </div>
-<div class="listingblock copypaste">
+<div class="listingblock copy">
 <div class="content">
 <pre class="highlightjs highlight"><code>role=frontend</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/images/parksmap-image-options.png" alt="Deploy image">
 </div>
 </div>
 <div class="paragraph">
