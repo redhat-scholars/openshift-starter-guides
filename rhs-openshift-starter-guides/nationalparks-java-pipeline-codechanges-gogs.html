@@ -445,7 +445,7 @@ achieved.</p>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f &lt;a href="http://gogs-%INFRA_PROJECT%.%cluster_subdomain%/%username%/nationalparks/raw/master/pipeline/nationalparks-triggers-all.yaml" class="bare"&gt;http://gogs-%INFRA_PROJECT%.%cluster_subdomain%/%username%/nationalparks/raw/master/pipeline/nationalparks-triggers-all.yaml&lt;/a&gt; -n %project_namespace%</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f &lt;a href="http://gogs-%INFRA_PROJECT%.%CLUSTER_SUBDOMAIN%/%USERNAME%/nationalparks/raw/master/pipeline/nationalparks-triggers-all.yaml" class="bare"&gt;http://gogs-%INFRA_PROJECT%.%CLUSTER_SUBDOMAIN%/%USERNAME%/nationalparks/raw/master/pipeline/nationalparks-triggers-all.yaml&lt;/a&gt; -n %PROJECT_NAMESPACE%</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -476,14 +476,14 @@ achieved.</p>
 <p>Once you have the URL copied to your clipboard, navigate to the code repository that you have on Gogs:</p>
 </div>
 <div class="paragraph">
-<p><a href="http://gogs-%INFRA_PROJECT%.%cluster_subdomain%/%username%/nationalparks">Gogs Repository</a></p>
+<p><a href="http://gogs-%INFRA_PROJECT%.%CLUSTER_SUBDOMAIN%/%USERNAME%/nationalparks">Gogs Repository</a></p>
 </div>
 <div class="paragraph">
 <p>Your Gogs credentials are:</p>
 </div>
 <div class="listingblock console-output">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">username: %username%
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">username: %USERNAME%
 password: %GOGS_PASSWORD%</code></pre>
 </div>
 </div>
@@ -604,7 +604,7 @@ triggered in OpenShift. Click <strong>Pipeline</strong> in the left navigation m
 <p>Once the build and deploy has finished, verify your new image was automatically deployed by viewing the application in your browser:</p>
 </div>
 <div class="paragraph">
-<p><a href="http://nationalparks-%project_namespace%.%cluster_subdomain%/ws/info/">National Parks Info Page</a></p>
+<p><a href="http://nationalparks-%PROJECT_NAMESPACE%.%CLUSTER_SUBDOMAIN%/ws/info/">National Parks Info Page</a></p>
 </div>
 <div class="paragraph">
 <p>You should now see the new name you have set in the JSON string returned.</p>
@@ -676,7 +676,7 @@ Warning: the following images triggers were disabled: nationalparks:latest
 original header by viewing the application in your browser.</p>
 </div>
 <div class="paragraph">
-<p><a href="http://nationalparks-%project_namespace%.%cluster_subdomain%/ws/info/">National Parks Info Page</a></p>
+<p><a href="http://nationalparks-%PROJECT_NAMESPACE%.%CLUSTER_SUBDOMAIN%/ws/info/">National Parks Info Page</a></p>
 </div>
 <div class="admonitionblock note">
 <table>

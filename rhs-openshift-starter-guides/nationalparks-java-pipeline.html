@@ -493,7 +493,7 @@ on the current Deployment to automatically trigger when there is a new image or 
 <h2 id="configure_manual_deployments_on_dev_application"><a class="anchor" href="#configure_manual_deployments_on_dev_application"></a>Configure Manual Deployments on Dev Application</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In the %project_namespace% project, click on the <code>nationalparks</code> component from Topology view. From the side panel, click on <strong>Actions &#8594; Edit Deployment Config</strong>:</p>
+<p>In the %PROJECT_NAMESPACE% project, click on the <code>nationalparks</code> component from Topology view. From the side panel, click on <strong>Actions &#8594; Edit Deployment Config</strong>:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -521,7 +521,7 @@ on the current Deployment to automatically trigger when there is a new image or 
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f &lt;a href="http://gogs-%INFRA_PROJECT%.%cluster_subdomain%/%username%/nationalparks/raw/master/pipeline/nationalparks-pipeline-all.yaml" class="bare"&gt;http://gogs-%INFRA_PROJECT%.%cluster_subdomain%/%username%/nationalparks/raw/master/pipeline/nationalparks-pipeline-all.yaml&lt;/a&gt; -n %project_namespace%</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f &lt;a href="http://gogs-%INFRA_PROJECT%.%CLUSTER_SUBDOMAIN%/%USERNAME%/nationalparks/raw/master/pipeline/nationalparks-pipeline-all.yaml" class="bare"&gt;http://gogs-%INFRA_PROJECT%.%CLUSTER_SUBDOMAIN%/%USERNAME%/nationalparks/raw/master/pipeline/nationalparks-pipeline-all.yaml&lt;/a&gt; -n %PROJECT_NAMESPACE%</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -675,7 +675,7 @@ spec:
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f &lt;a href="http://gogs-%INFRA_PROJECT%.%cluster_subdomain%/%username%/nationalparks/raw/master/pipeline/nationalparks-pipelinerun.yaml" class="bare"&gt;http://gogs-%INFRA_PROJECT%.%cluster_subdomain%/%username%/nationalparks/raw/master/pipeline/nationalparks-pipelinerun.yaml&lt;/a&gt; -n %project_namespace%</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f &lt;a href="http://gogs-%INFRA_PROJECT%.%CLUSTER_SUBDOMAIN%/%USERNAME%/nationalparks/raw/master/pipeline/nationalparks-pipelinerun.yaml" class="bare"&gt;http://gogs-%INFRA_PROJECT%.%CLUSTER_SUBDOMAIN%/%USERNAME%/nationalparks/raw/master/pipeline/nationalparks-pipelinerun.yaml&lt;/a&gt; -n %PROJECT_NAMESPACE%</code></pre>
 </div>
 </div>
 <div class="paragraph">

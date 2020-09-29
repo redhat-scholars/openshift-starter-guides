@@ -477,14 +477,14 @@ application code!</p>
 and located at the following URL:</p>
 </div>
 <div class="paragraph">
-<p><a href="http://gogs-%INFRA_PROJECT%.%cluster_subdomain%/%username%/nationalparks-py.git">Gogs Repository</a></p>
+<p><a href="http://gogs-%INFRA_PROJECT%.%CLUSTER_SUBDOMAIN%/%USERNAME%/nationalparks-py.git">Gogs Repository</a></p>
 </div>
 <div class="paragraph">
 <p>Your Gogs credentials are:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">username: %username%
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">username: %USERNAME%
 password: %GOGS_PASSWORD%</code></pre>
 </div>
 </div>
@@ -516,7 +516,7 @@ have your own git repository, let&#8217;s use it with a simple Python S2I image.
 </div>
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code>http://gogs-%INFRA_PROJECT%.%cluster_subdomain%/%username%/nationalparks.git</code></pre>
+<pre class="highlightjs highlight"><code>http://gogs-%INFRA_PROJECT%.%CLUSTER_SUBDOMAIN%/%USERNAME%/nationalparks.git</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -652,8 +652,8 @@ URL in the web console, or via the command line:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME            HOST/PORT                                                   PATH      SERVICES        PORT       TERMINATION
-nationalparks   nationalparks-%project_namespace%.%cluster_subdomain%             nationalparks   8080-tcp
-parksmap        parksmap-%project_namespace%.%cluster_subdomain%                  parksmap        8080-tcp</code></pre>
+nationalparks   nationalparks-%PROJECT_NAMESPACE%.%CLUSTER_SUBDOMAIN%             nationalparks   8080-tcp
+parksmap        parksmap-%PROJECT_NAMESPACE%.%CLUSTER_SUBDOMAIN%                  parksmap        8080-tcp</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -661,7 +661,7 @@ parksmap        parksmap-%project_namespace%.%cluster_subdomain%                
 </div>
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">http://nationalparks-%project_namespace%.%cluster_subdomain%</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">http://nationalparks-%PROJECT_NAMESPACE%.%CLUSTER_SUBDOMAIN%</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -670,7 +670,7 @@ However, it can still be used with a browser. All backends that work with the pa
 frontend are required to implement a <code>/ws/info/</code> endpoint. To test, visit this URL in your browser:</p>
 </div>
 <div class="paragraph">
-<p><a href="http://nationalparks-%project_namespace%.%cluster_subdomain%/ws/info/">National Parks Info Page</a></p>
+<p><a href="http://nationalparks-%PROJECT_NAMESPACE%.%CLUSTER_SUBDOMAIN%/ws/info/">National Parks Info Page</a></p>
 </div>
 <div class="listingblock">
 <div class="content">

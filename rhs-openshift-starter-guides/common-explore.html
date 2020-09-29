@@ -449,16 +449,16 @@ things in the environment are working as expected.  Don&#8217;t worry if you don
 understand all of the terminology as we will cover it in detail in later labs.</p>
 </div>
 <div class="paragraph">
-<p>In this lab environment, you already have access to single project: <strong>%project_namespace%</strong>.</p>
+<p>In this lab environment, you already have access to single project: <strong>%PROJECT_NAMESPACE%</strong>.</p>
 </div>
 <div class="paragraph">
 <p>If you had multiple projects, the first thing you would want to do is to switch
-to the <strong>%project_namespace%</strong> project to make sure you&#8217;re on the correct project from now on.
+to the <strong>%PROJECT_NAMESPACE%</strong> project to make sure you&#8217;re on the correct project from now on.
 You can do this with the following command:</p>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc project %project_namespace%</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc project %PROJECT_NAMESPACE%</code></pre>
 </div>
 </div>
 </div>
@@ -471,19 +471,19 @@ You can do this with the following command:</p>
 perform various tasks via a browser.</p>
 </div>
 <div class="paragraph">
-<p>To get a feel for how the web console works, click on this <a href="http://console-openshift-console.%cluster_subdomain%/k8s/cluster/projects">Web Console</a> link.</p>
+<p>To get a feel for how the web console works, click on this <a href="http://console-openshift-console.%CLUSTER_SUBDOMAIN%/k8s/cluster/projects">Web Console</a> link.</p>
 </div>
 <div class="paragraph">
 <p>On the login screen, enter the following credentials:</p>
 </div>
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code>Username: `%username%`</code></pre>
+<pre class="highlightjs highlight"><code>Username: %USERNAME%</code></pre>
 </div>
 </div>
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code>Password: `openshift`</code></pre>
+<pre class="highlightjs highlight"><code>Password: %PASSWORD%</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -495,8 +495,8 @@ perform various tasks via a browser.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Click on the <strong>%project_namespace%</strong> project link. When you click on the
-<strong>%project_namespace%</strong> project, you will be taken to the project details page,
+<p>Click on the <strong>%PROJECT_NAMESPACE%</strong> project link. When you click on the
+<strong>%PROJECT_NAMESPACE%</strong> project, you will be taken to the project details page,
 which will list some metrics and details about your project. There&#8217;s nothing there now, but that will change as you progress through the lab.</p>
 </div>
 <div class="imageblock">
