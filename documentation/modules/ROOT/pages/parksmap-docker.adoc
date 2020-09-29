@@ -97,7 +97,7 @@ server, a log analyzer, and a file service to help manage uploaded files.
 
 == Exercise: Examining the Pod
 
-If you click on the `parksmap` entry in the Topology view, you will see some information about that deployment config. The *Resources* tab may be displayed by default. If so, click on the *Overview* tab. On that panel, you will see that there is a single *Pod* that was created by your actions.
+If you click on the `parksmap` entry in the Topology view, you will see some information about that deployment config. The *Resources* tab may be displayed by default. If so, click on the *Details* tab. On that panel, you will see that there is a single *Pod* that was created by your actions.
 
 image::parksmap-overview.png[Pod overview]
 
@@ -164,7 +164,7 @@ metadata:
     openshift.io/deployment.name: parksmap-1
     openshift.io/generated-by: OpenShiftWebConsole
     openshift.io/scc: restricted
-  creationTimestamp: 2019-05-20T17:45:45Z
+  creationTimestamp: 2029-09-20T17:45:45Z
   generateName: parksmap-1-
   labels:
     app: parksmap
@@ -269,7 +269,7 @@ kind: Service
 metadata:
   annotations:
     openshift.io/generated-by: OpenShiftWebConsole
-  creationTimestamp: "2019-08-30T14:10:12Z"
+  creationTimestamp: "2020-09-30T14:10:12Z"
   labels:
     app: workshop
     app.kubernetes.io/component: parksmap
@@ -278,9 +278,9 @@ metadata:
     component: parksmap
     role: frontend
   name: parksmap
-  namespace: lab-getting-started-starter-workshop-apb-test-user1
+  namespace: user1
   resourceVersion: "1062269"
-  selfLink: /api/v1/namespaces/lab-getting-started-starter-workshop-apb-test-user1/services/parksmap
+  selfLink: /api/v1/namespaces/user1/services/parksmap
   uid: e1ff69c8-cb2f-11e9-82a1-0267eec7e1a0
 spec:
   clusterIP: 172.30.22.209
@@ -365,7 +365,7 @@ You should see something like the following output:
 [source,text]
 ----
 Name:              parksmap
-Namespace:         lab-getting-started-starter-workshop-apb-test-user1
+Namespace:         user1
 Labels:            app=workshop
                    app.kubernetes.io/component=parksmap
                    app.kubernetes.io/instance=parksmap
