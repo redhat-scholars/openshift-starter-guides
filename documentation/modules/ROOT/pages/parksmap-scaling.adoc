@@ -1,3 +1,7 @@
+= Scaling Apps
+:navtitle: Scaling Apps
+
+[#deployment_configs_and_replication_controllers]
 == Background: Deployment Configurations and Replication Controllers
 
 While *Services* provide routing and load balancing for *Pods*, which may go in and

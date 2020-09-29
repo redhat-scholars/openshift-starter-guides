@@ -1,3 +1,6 @@
+= Parksmap App
+:navtitle: Parksmap App
+
 In this lab, we're going to deploy the web component of the ParksMap application which is also called `parksmap` and uses OpenShift's service discovery mechanism to discover the backend services deployed and shows their data on the map.
 
 image::roadshow-app-architecture-parksmap-1.png[Application architecture,800,align="center"]
@@ -9,7 +12,7 @@ Let's start by doing the simplest thing possible - get a plain old
 Docker-formatted image to run on OpenShift. This is incredibly simple to do.
 With OpenShift it can be done directly from the web console.
 
-Return to the http://console-openshift-console.%cluster_subdomain%/k8s/cluster/projects[Web Console].
+Return to the http://console-openshift-console.%CLUSTER_SUBDOMAIN%/k8s/cluster/projects[Web Console].
 
 If you're no longer on the *Topology* view in the Developer perspective, return there now. Click *Container Image* to open a dialog that will allow you to specify the information for the image you want to deploy.
 

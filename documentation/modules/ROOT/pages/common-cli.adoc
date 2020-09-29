@@ -1,4 +1,5 @@
-== Command Line Interface
+= Command Line Interface
+:navtitle: Command Line Interface
 
 OpenShift ships with a feature rich web console as well as command line tools
 to provide users with a nice interface to work with applications deployed to the
@@ -6,7 +7,7 @@ platform.  The OpenShift tools are a single executable written in the Go
 programming language and is available for the following operating systems:
 
 - Microsoft Windows
-- macOS 10
+- Mac OS X
 - Linux
 
 You might already have the OpenShift CLI available on your environment. You can verify
@@ -31,7 +32,7 @@ the next sections to install or update the OpenShift CLI. Otherwise, skip to the
 next lab.
 
 
-
+[#download_and_install_openshift_cli_on_linux]
 == Download and Install OpenShift CLI on Linux
 
 Download the the OpenShift CLI tool for link:%DOWNLOAD_CLIENT_LIN64%[Linux 64]
@@ -86,6 +87,7 @@ You should see the following (or something similar):
 If you get an error message, you have not updated your path correctly. If you
 need help, raise your hand and the instructor will assist.
 
+[#download_and_install_openshift_cli_on_mac]
 == Download and Install OpenShift CLI on Mac
 
 Download the the OpenShift CLI tool for link:%DOWNLOAD_CLIENT_MAC%[Mac]
@@ -140,11 +142,17 @@ You should see the following (or something similar):
 If you get an error message, you have not updated your path correctly. If you
 need help, raise your hand and the instructor will assist.
 
+[#download_and_install_openshift_cli_on_windows]
+== Download and Install OpenShift CLI on Windows
 
+Download the the OpenShift CLI tool for link:%DOWNLOAD_CLIENT_WINDOWS%[Windows]
+
+[#tab_completion]
 == Tab Completion 
 
 The OpenShift command line tool supports the ability to use tab completion for the popular zsh and bash shells.  This suits the needs of users using either Linux or OS X.  If you are using Microsoft Windows, never fear, we will discuss some ways to get tab completion working on that operating system as well.
 
+[#tab_completion_on_mac_and_linux]
 === Tab completion on Mac and Linux
 
 If you are on the Mac operating system, you will need to ensure that you have the *bash-completion* project installed. This can be accomplished using the popular brew system:
@@ -178,12 +186,14 @@ source <(oc completion zsh)
 
 Alternatively, you can add this to your .zshrc file.
 
+[#tab_completion_on_windows]
 === Tab completion on Windows
 
 For Windows users, things become a bit more tricky.  You could of course use the Linux Subsystem for Windows but you may want to consider using a combination of babun and cmder.  For a full list of instructions, you can check out the following blog post:
 
 -  https://blog.openshift.com/openshift-3-tab-completion-for-windows/[https://blog.openshift.com/openshift-3-tab-completion-for-windows/]
 
+[#working_with_proxies]
 == Working with proxies
 It might happen that you're behind a corporate proxy to access the internet. In this case, you'll need to set
 some additional environment variables for the oc command line to work.

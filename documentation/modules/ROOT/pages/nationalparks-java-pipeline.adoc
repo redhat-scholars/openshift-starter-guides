@@ -1,7 +1,8 @@
+= Continuous Integration and Pipelines
+:navtitle: Continuous Integration and Pipelines
+
 In this lab you will learn about pipelines and how to configure a pipeline in OpenShift so
 that it will take care of the application lifecycle.
-
-== Background: Continuous Integration and Pipelines
 
 A continuous delivery (CD) pipeline is an automated expression of your process for getting software
 from version control right through to your users and customers.
@@ -49,7 +50,7 @@ on the current Deployment to automatically trigger when there is a new image or 
 [#configure_manual_deployments_on_dev_application]
 == Configure Manual Deployments on Dev Application
 
-In the %project_namespace% project, click on the `nationalparks` component from Topology view. From the side panel, click on *Actions -> Edit Deployment Config*:
+In the %PROJECT_NAMESPACE% project, click on the `nationalparks` component from Topology view. From the side panel, click on *Actions -> Edit Deployment Config*:
 
 image::devops-pipeline-deployment-edit.png[Edit pipeline]
 
@@ -68,7 +69,7 @@ For this example, we're going to deploy our pipeline which is stored in the same
 [.console-input]
 [source,bash,subs="+attributes,macros+"]
 ----
-oc create -f http://gogs-%INFRA_PROJECT%.%cluster_subdomain%/%username%/nationalparks/raw/master/pipeline/nationalparks-pipeline-all.yaml -n %project_namespace%
+oc create -f http://gogs-%INFRA_PROJECT%.%CLUSTER_SUBDOMAIN%/%USERNAME%/nationalparks/raw/master/pipeline/nationalparks-pipeline-all.yaml -n %PROJECT_NAMESPACE%
 ----
 
 Now let's review our Tekton Pipeline:
@@ -193,7 +194,7 @@ In order to start the Pipeline, we can use a `PipelineRun` Custom Resource, repr
 [.console-input]
 [source,bash,subs="+attributes,macros+"]
 ----
-oc create -f http://gogs-%INFRA_PROJECT%.%cluster_subdomain%/%username%/nationalparks/raw/master/pipeline/nationalparks-pipelinerun.yaml -n %project_namespace%
+oc create -f http://gogs-%INFRA_PROJECT%.%CLUSTER_SUBDOMAIN%/%USERNAME%/nationalparks/raw/master/pipeline/nationalparks-pipelinerun.yaml -n %PROJECT_NAMESPACE%
 ----
 
 You can follow the Pipeline execution from *Pipeline* section, watching all the steps in progress. Click on *Pipeline Runs* tab to see it running:

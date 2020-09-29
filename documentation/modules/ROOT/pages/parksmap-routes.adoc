@@ -1,7 +1,11 @@
+= Routes
+:navtitle: Routes
+
 In this lab, we're going to make our application visible to the end users, so they can access it.
 
 image::roadshow-app-architecture-parksmap-2.png[Application architecture,800,align="center"]
 
+[#routes]
 == Background: Routes
 
 While *Services* provide internal abstraction and load balancing within an
@@ -81,7 +85,7 @@ oc get route
 [source,bash]
 ----
 NAME       HOST/PORT                            PATH      SERVICES   PORT       TERMINATION
-parksmap   parksmap-%project_namespace%.%cluster_subdomain%             parksmap   8080-tcp
+parksmap   parksmap-%PROJECT_NAMESPACE%.%CLUSTER_SUBDOMAIN%             parksmap   8080-tcp
 ----
 
 You can also verify the *Route* in the Developer Perspective under the *Resources* tab for your `parksmap` deployment configuration. Also note that there is a decorator icon on the `parksmap` visualization now. If you click that, it will open the URL for your *Route* in a browser.

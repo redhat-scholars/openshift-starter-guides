@@ -64,13 +64,13 @@ application code!
 The repository that we are going to use is already cloned in the internal Gogs repository
 and located at the following URL:
 
-link:http://gogs-%INFRA_PROJECT%.%cluster_subdomain%/%username%/nationalparks-js.git[Gogs Repository]
+link:http://gogs-%INFRA_PROJECT%.%CLUSTER_SUBDOMAIN%/%USERNAME%/nationalparks-js.git[Gogs Repository]
 
 Your Gogs credentials are:
 
 [source,bash]
 ----
-username: %username%
+username: %USERNAME%
 password: %GOGS_PASSWORD%
 ----
 
@@ -93,7 +93,7 @@ Enter the following for Git Repo URL:
 
 [source,role=copypaste]
 ----
-http://gogs-%INFRA_PROJECT%.%cluster_subdomain%/%username%/nationalparks.git
+http://gogs-%INFRA_PROJECT%.%CLUSTER_SUBDOMAIN%/%USERNAME%/nationalparks.git
 ----
 
 Select Node.js as your Builder Image.
@@ -177,15 +177,15 @@ Where you should see something like the following:
 [source,bash]
 ----
 NAME            HOST/PORT                                                   PATH      SERVICES        PORT       TERMINATION
-nationalparks   nationalparks-%project_namespace%.%cluster_subdomain%             nationalparks   8080-tcp
-parksmap        parksmap-%project_namespace%.%cluster_subdomain%                  parksmap        8080-tcp
+nationalparks   nationalparks-%PROJECT_NAMESPACE%.%CLUSTER_SUBDOMAIN%             nationalparks   8080-tcp
+parksmap        parksmap-%PROJECT_NAMESPACE%.%CLUSTER_SUBDOMAIN%                  parksmap        8080-tcp
 ----
 
 In the above example, the URL is:
 
 [source,bash,role=copypaste]
 ----
-http://nationalparks-%project_namespace%.%cluster_subdomain%
+http://nationalparks-%PROJECT_NAMESPACE%.%CLUSTER_SUBDOMAIN%
 ----
 
 Since this is a back-end application, it doesn't actually have a web interface.
@@ -193,7 +193,7 @@ However, it can still be used with a browser. All backends that work with the pa
 frontend are required to implement a `/ws/info/` endpoint. To test, visit this URL in your browser:
 
 
-link:http://nationalparks-%project_namespace%.%cluster_subdomain%/ws/info/[National Parks Info Page]
+link:http://nationalparks-%PROJECT_NAMESPACE%.%CLUSTER_SUBDOMAIN%/ws/info/[National Parks Info Page]
 
 WARNING: The trailing slash is *required*.
 

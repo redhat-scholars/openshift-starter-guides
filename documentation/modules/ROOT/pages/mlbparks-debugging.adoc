@@ -1,3 +1,6 @@
+= Debugging Apps
+:navtitle: Debugging Apps
+
 [#port_forwading_and_debugging]
 == Background: Port Forwarding and Debugging
 Just as we did before with remote shelling into our pods, we can also set up a port-forward between our local machine

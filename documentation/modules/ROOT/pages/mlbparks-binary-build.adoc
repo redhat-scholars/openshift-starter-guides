@@ -1,3 +1,6 @@
+= Binary Builds
+:navtitle: Binary Builds
+
 [#moving_on_from_s2i]
 == Moving on From S2I
 As you saw before S2I is a great way to get from source code to a container, but the process is a bit too slow for daily fast iterative
@@ -59,7 +62,7 @@ This is the REST endpoint that gives basic info on the service and can be reache
 
 [source,bash,role="copypaste"]
 ----
-http://mlbparks-%project_namespace%.%cluster_subdomain%/ws/info/
+http://mlbparks-%PROJECT_NAMESPACE%.%CLUSTER_SUBDOMAIN%/ws/info/
 ----
 
 Please change line 23 to add a _AMAZING_ in front of "MLB Parks" look like this:
@@ -102,7 +105,7 @@ You can follow the deployment in progress from Topology view, and when it is com
 
 [source,bash,role="copypaste"]
 ----
-http://mlbparks-%project_namespace%.%cluster_subdomain%/ws/info/
+http://mlbparks-%PROJECT_NAMESPACE%.%CLUSTER_SUBDOMAIN%/ws/info/
 ----
 
 So now you have seen how we can speed up the build and deploy process.

@@ -1,3 +1,6 @@
+= MLBParks App
+:navtitle: MLBParks App
+
 In this lab, we're going to deploy a complete backend application, consisting of
 a REST API backend and a MongoDB database. The complete application will already
 be wired together and described as a backend for the map visualization tool, so
@@ -6,6 +9,7 @@ map.
 
 image::roadshow-app-architecture-mlbparks.png[Application architecture,800,align="center"]
 
+[#templates]
 == Background: Templates
 Running all these individual commands can be tedious and error prone.
 Fortunately for you, all of this configuration can be put together into a single

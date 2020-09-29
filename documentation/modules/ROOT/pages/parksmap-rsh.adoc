@@ -1,3 +1,6 @@
+= Connecting to a Containers
+:navtitle: Connecting to a Containers
+
 Containers are treated as immutable infrastructure and therefore it is generally
 not recommended to modify the content of a container through SSH or running custom
 commands inside the container. Nevertheless, in some use-cases, such as debugging

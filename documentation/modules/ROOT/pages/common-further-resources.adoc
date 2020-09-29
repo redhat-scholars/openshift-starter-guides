@@ -1,3 +1,6 @@
+= Further Resources
+:navtitle: Further Resources
+
 The exercices in this workshop have shown you how OpenShift can be used not only for deploying
 stateless web applications, but also applications which require persistent
 file system storage.

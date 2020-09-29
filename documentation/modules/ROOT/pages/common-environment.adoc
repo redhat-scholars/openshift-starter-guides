@@ -1,3 +1,6 @@
+= OCP architecture
+:navtitle: OCP architecture
+
 image::common-environment-ocp-architecture.png[OCP Architecture]
 
 The workshop is hosted in an OpenShift environment that is running on a
@@ -15,6 +18,6 @@ The infrastructure node is providing several services:
 * The OpenShift container registry
 * The OpenShift router
 
-You will have your own user account in the OpenShift environment. Your user name is **%username%**.
+You will have your own user account in the OpenShift environment. Your user name is **%USERNAME%**.
 
-You will also have a dedicated project namespace to work in. The name of your project namespace is **%project_namespace%**.
+You will also have a dedicated project namespace to work in. The name of your project namespace is **%PROJECT_NAMESPACE%**.

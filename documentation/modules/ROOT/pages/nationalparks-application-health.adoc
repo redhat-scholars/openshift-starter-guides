@@ -1,3 +1,6 @@
+= Application Healthchecks
+:navtitle: Application Healthchecks
+
 == Background: Readiness and Liveness Probes
 As we have seen before in the UI via warnings, there is a concept of application
 health checks in OpenShift. These come in two flavors:
