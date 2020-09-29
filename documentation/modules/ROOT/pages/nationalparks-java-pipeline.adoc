@@ -14,6 +14,7 @@ OpenShift Pipelines is a cloud-native, continuous integration and delivery (CI/C
 
 image::devops-pipeline-flow.png[Pipelines]
 
+[#understanding_tekton]
 == Understanding Tekton
 
 Tekton defines a number of https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/[Kubernetes custom resources] as building blocks in order to standardize pipeline concepts and provide a terminology that is consistent across CI/CD solutions. 
@@ -36,6 +37,7 @@ In short, in order to create a pipeline, one does the following:
 
 For further details on pipeline concepts, refer to the https://github.com/tektoncd/pipeline/tree/master/docs#learn-more[Tekton documentation] that provides an excellent guide for understanding various parameters and attributes available for defining pipelines.
 
+[#setup_your_pipeline]
 == Set Up Your Pipeline
 
 A deployment configuration in OpenShift can contain 
@@ -44,6 +46,7 @@ https://%DOCS_URL%/applications/deployments/what-deployments-are.html#deployment
 As we want the Tekton pipeline to control when builds and deployments happen, we need to disable the ability
 on the current Deployment to automatically trigger when there is a new image or a configuration change.
 
+[#configure_manual_deployments_on_dev_application]
 == Configure Manual Deployments on Dev Application
 
 In the %project_namespace% project, click on the `nationalparks` component from Topology view. From the side panel, click on *Actions -> Edit Deployment Config*:
@@ -54,6 +57,7 @@ In the YAML for the deployment config, find the `triggers` section, delete it, a
 
 image::devops-pipeline-deployment-triggers.png[Remove triggers]
 
+[#create_your_pipeline]
 == Create Your Pipeline
 
 As pipelines provide the ability to promote applications between different stages of the delivery cycle, Tekton, which is our Continuous Integration server that will execute our pipelines, will be deployed on a project with a Continuous Integration role. Pipelines executed in this project will have permissions to interact with all the projects modeling the different stages of our delivery cycle. 
@@ -181,7 +185,7 @@ It is using two *Workspace*:
 - *app-source*: linked to a *PersistentVolumeClaim* `app-source-pvc` created from the YAML template we used in previous command. This will be used to store the artifact to be used in different *Task*
 - *maven-settings*: an *EmptyDir* volume for the maven cache, this can be extended also with a PVC to make subsequent Maven builds faster
 
-
+[#run_the_pipeline]
 == Run the Pipeline
 
 In order to start the Pipeline, we can use a `PipelineRun` Custom Resource, representing our parameters to send to the pipeline:

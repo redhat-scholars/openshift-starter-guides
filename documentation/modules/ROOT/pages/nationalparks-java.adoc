@@ -7,6 +7,7 @@ by the end user.
 
 image::roadshow-app-architecture-nationalparks-1.png[Application architecture,800,align="center"]
 
+[#source_to_image]
 == Background: Source-to-Image (S2I)
 
 In a previous lab, we learned how to deploy a pre-existing image
@@ -39,6 +40,7 @@ https://%DOCS_URL%/creating_images/s2i.html[OpenShift S2I documentation]
 or on https://github.com/openshift/source-to-image[GitHub]. The only key concept you need to
 remember about S2I is that it's magic.
 
+[#creating_java_application]
 == Exercise: Creating a Java application
 
 The backend service that we will be deploying as part of this exercise is
@@ -48,11 +50,13 @@ coordinates of all National Parks in the world. That was just a fancy way of
 saying that we are going to deploy a webservice that returns a JSON list of
 places.
 
+[#add_to_project]
 === Add to Project
 Because the `nationalparks` component is a backend to serve data that our
 existing frontend (parksmap) will consume, we are going to build it inside the existing
 project that we have been working with. To illustrate how you can interact with OpenShift via the CLI or the web console, we will deploy the nationalparks component using the web console.
 
+[#using_application_code_on_git_server]
 === Using Application Code on an Embedded Git Server
 
 OpenShift can work with any accessible Git repository. This could be GitHub,
@@ -78,6 +82,7 @@ link:http://gogs-%INFRA_PROJECT%.%cluster_subdomain%/%username%/nationalparks.gi
 Later in the lab, we want you to make a code change and then rebuild your
 application. This is a fairly simple Spring framework Java application.
 
+[#build_code_on_openshift]
 === Build the Code on OpenShift
 
 Similar to how we used *+Add* before with an existing image, we

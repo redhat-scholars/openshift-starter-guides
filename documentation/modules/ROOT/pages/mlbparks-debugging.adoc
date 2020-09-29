@@ -1,3 +1,4 @@
+[#port_forwading_and_debugging]
 == Background: Port Forwarding and Debugging
 Just as we did before with remote shelling into our pods, we can also set up a port-forward between our local machine
 and our pod. The is useful for operations like connecting to a database running in a pod, viewing an administrative web
@@ -11,7 +12,7 @@ By port forwarding the debugging port for the application server, we can attach 
 step through the code in the pod as it is running in real time. By default EAP is not in debug mode, therefore we first
 need to turn on the debug ports
 
-
+[#enabling_debugging_in_eap_on_openshift]
 == Exercise: Enabling Debugging in EAP on OpenShift
 
 It is very simple to turn on debugging. The EAP S2I container we are using is looking for an environment variable to
@@ -24,6 +25,7 @@ oc set env dc/mlbparks DEBUG=true
 
 This will force a redeploy of our MLBparks pod, this time with the JDWT transport enabled and serving on port 8787.
 
+[#port-forwarding_from_pod_to_our_local_machine]
 == Exercise: Port-Forwarding from the pod to our local machine
 
 It is quite simple to do port-forwarding.
@@ -63,6 +65,7 @@ We said to port-forward from port 8787 on the pod to 8787 on the local machine. 
 
 NOTE: To stop port-forwarding just hit ctrl-c in the terminal window where you did the port forward command
 
+[#setting_up_remote_debug_in_intellij]
 === Setting up Remote Debug in IntelliJ
 
 Setting up remote debugging is quite easy in IntelliJ. First edit the run/debug configurations.

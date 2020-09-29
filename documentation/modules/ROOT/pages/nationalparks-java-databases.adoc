@@ -8,6 +8,7 @@ automatically.
 
 image::roadshow-app-architecture-nationalparks-2.png[Application architecture,800,align="center"]
 
+[#storage]
 == Background: Storage
 
 Most useful applications are "stateful" or "dynamic" in some way, and this is
@@ -23,6 +24,7 @@ OpenShift's persistent storage mechanism to attach real-world storage (NFS,
 Gluster, EBS, etc) to the *Pods* to give them a persistent place to store their
 data.
 
+[#deploy_mongodb]
 == Exercise: Deploy MongoDB
 
 As you've seen so far, the web console makes it very easy to deploy things onto
@@ -109,6 +111,7 @@ Execute the following command:
 oc label dc/mongodb-nationalparks svc/mongodb-nationalparks app=workshop component=nationalparks role=database --overwrite
 ----
 
+[#exploring_openshift_magic]
 == Exercise: Exploring OpenShift Magic
 As soon as we changed the *DeploymentConfiguration*, some
 magic happened. OpenShift decided that this was a significant enough change to
@@ -144,6 +147,7 @@ is 0. The desired and current number of instances for the "-2" deployment is 1.
 This means that OpenShift has gracefully torn down our "old" application and
 stood up a "new" instance.
 
+[#data_data_everywhere]
 == Exercise: Data, Data, Everywhere
 
 Now that we have a database deployed, we can again visit the `nationalparks` web
@@ -217,6 +221,7 @@ lifecycle environments on OpenShift without having to modify application code.
 
 ====
 
+[#working_with_labels]
 == Exercise: Working With Labels
 
 We explored how a *Label* is just a key=value pair earlier when looking at

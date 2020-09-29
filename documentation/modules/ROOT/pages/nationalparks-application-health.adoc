@@ -27,6 +27,7 @@ Readiness Probe::
 It sounds complicated, but it really isn't. We will use the web console to add
 these probes to our `nationalparks` application.
 
+[#add_health_checks]
 == Exercise: Add Health Checks
 As we are going to be implementing a realistic CI/CD pipeline, we will be doing
 some testing of the "development" version of the application. However, in order

@@ -30,6 +30,7 @@ could have used templates to deploy everything in the workshop today, remember
 that it is important for you to understand how to create, deploy, and wire
 resources together.
 
+[#instantiate_template]
 == Exercise: Instantiate a Template
 
 The front end application we've been working with this whole time will display

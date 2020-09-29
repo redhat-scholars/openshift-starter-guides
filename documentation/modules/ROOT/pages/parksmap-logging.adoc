@@ -22,6 +22,7 @@ already sends log information to some "external" system or because it writes
 various log information to various files, fear not.
 ====
 
+[#examining_logs]
 == Exercise: Examining Logs
 
 Since we already deployed our application, we can take some time to examine its
@@ -82,6 +83,7 @@ pleted in 16 ms
 
 WARNING: If you scroll through the logs, you may notice an error that mentions a service account. What's that?  Never fear, we will cover that shortly.
 
+[#aggregated_pod_logs]
 == Exercise: Aggregated Pod Logs
 
 WARNING: This section is only relevant if the aggregated logging

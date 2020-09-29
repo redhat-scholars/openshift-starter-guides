@@ -19,6 +19,7 @@ Then, click *Role Bindings*.
 
 image::parksmap-permissions-membership.png[Membership]
 
+[#grant_serviceaccount_view_permissions]
 == Exercise: Grant Service Account View Permissions
 The parksmap application wants to talk to the OpenShift API to learn about other
 *Pods*, *Services*, and resources within the *Project*. You'll soon learn why!
@@ -70,6 +71,7 @@ Once you're finished editing permissions, click on the *Create* button.
 
 image::parksmap-permissions-membership-serviceaccount-done.png[Service account changed]
 
+[#redeploy_application]
 == Exercise: Redeploy Application
 One more step is required. We need to re-deploy the `parksmap` application because it's
 given up trying to query the API.
@@ -84,6 +86,7 @@ image::parksmap-permissions-redeployed.png[Application deployed]
 
 If you look at the logs for the application now, you should see no errors.  That's great.
 
+[#grant_user_view_permissions]
 == Exercise: Grant User View Permissions
 If you create a project, you are that project's administrator. This means that
 you can grant access to other users, too. If you like, give your neighbor view

@@ -28,6 +28,7 @@ almost all of those cases, OpenShift will create all of them for you.
 There are some edge cases where you might want some *Pods* and an *RC* without a *DC*
 or a *Service*, and others, so feel free to ask us about them after the labs.
 
+[#exploring_deployment_related_objects]
 == Exercise: Exploring Deployment-related Objects
 
 Now that we know the background of what a *ReplicatonController* and
@@ -76,6 +77,7 @@ set of instances and then manipulates the RCs accordingly.
 You can learn more about the CPU-based
 https://%DOCS_URL%/nodes/pods/nodes-pods-autoscaling.html#nodes-pods-autoscaling-about_nodes-pods-autoscaling[Horizontal Pod Autoscaler here]
 
+[#scaling_the_application]
 == Exercise: Scaling the Application
 
 Let's scale our parksmap "application" up to 2 instances. We can do this with
@@ -191,6 +193,7 @@ Overall, that's how simple it is to scale an application (*Pods* in a
 is just launching new instances of an existing image, especially if that image
 is already cached on the node.
 
+[#application_self_healing]
 == Application "Self Healing"
 
 Because OpenShift's *RCs* are constantly monitoring to see that the desired number
@@ -238,6 +241,7 @@ More information on probing applications is available in the
 https://%DOCS_URL%/nodes/containers/nodes-containers-health.html[Application
 Health] section of the documentation and later in this guide.
 
+[#scale_down]
 == Exercise: Scale Down
 
 Before we continue, go ahead and scale your application down to a single

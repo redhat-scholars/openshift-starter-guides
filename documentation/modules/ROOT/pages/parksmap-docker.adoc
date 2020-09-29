@@ -2,6 +2,7 @@ In this lab, we're going to deploy the web component of the ParksMap application
 
 image::roadshow-app-architecture-parksmap-1.png[Application architecture,800,align="center"]
 
+[#deploy_your_first_image]
 == Exercise: Deploying your First Image
 
 Let's start by doing the simplest thing possible - get a plain old
@@ -74,7 +75,7 @@ port, not needing to run specifically as the *root user* or other user name, and
 
 NOTE: Providing appropriate labels is desired when deploying complex applications for organization purposes. OpenShift uses a label *app* to define and group components together in the Overview page. OpenShift will create this label with some default if the user doesn't provide it explicitly.
 
-
+[#containers_and_pods]
 == Background: Containers and Pods
 
 Before we start digging in, we need to understand how containers and *Pods* are
@@ -95,6 +96,7 @@ __
 contain a "main process" and any auxiliary services you want to run along with that process. Examples of containers you might put in a *Pod* are, an Apache HTTPD
 server, a log analyzer, and a file service to help manage uploaded files.
 
+[#examining_the_pod]
 == Exercise: Examining the Pod
 
 If you click on the `parksmap` entry in the Topology view, you will see some information about that deployment config. The *Resources* tab may be displayed by default. If so, click on the *Details* tab. On that panel, you will see that there is a single *Pod* that was created by your actions.
@@ -188,6 +190,7 @@ node does not already have it cached locally. You can check on the status of the
 image download and deployment in the *Pod* details page, or from the command
 line with the `oc get pods` command that you used before.
 
+[#customizing_image_lifecycle_behavior]
 == Background: Customizing the Image Lifecycle Behavior
 
 Whenever OpenShift asks the node's CRI (Container Runtime Interface) runtime (Docker daemon or CRI-O) to run an image, the runtime will check to make sure it has the right "version" of the image to run.
@@ -198,6 +201,7 @@ https://%DOCS_URL%/applications/application_life_cycle_management/creating-appli
 as well as
 https://%DOCS_URL%/openshift_images/managing_images/image-pull-policy.html[image pull policy].
 
+[#services]
 == Background: Services
 
 *Services* provide a convenient abstraction layer inside OpenShift to find a

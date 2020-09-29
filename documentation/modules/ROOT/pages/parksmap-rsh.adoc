@@ -4,6 +4,7 @@ commands inside the container. Nevertheless, in some use-cases, such as debuggin
 an application, it might be beneficial to get into a container and inspect the
 application.
 
+[#remote_shell_to_container_using_cli]
 == Exercise: Remote Shell Session to a Container Using the CLI
 
 OpenShift allows establishing remote shell sessions to a container without the
@@ -65,6 +66,7 @@ ls /
 anaconda-post.log  bin  dev  etc  home  lib  lib64  lost+found  media  mnt  opt  parksmap.jar  proc  root  run  sbin  srv  sys  tmp  usr  var
 ----
 
+[#remote_shell_session_to_container_using_webconsole]
 == Exercise: Remote Shell Session to a Container Using the Web Console
 
 The OpenShift Web Console also provides a convenient way to access a terminal session on the container without having to use the CLI.
@@ -88,6 +90,7 @@ Before proceeding, close the connection to the pod.
 exit
 ----
 
+[#execute_command_in_container]
 == Exercise: Execute a Command in a Container
 
 In addition to remote shell, it is also possible to run a command remotely in an

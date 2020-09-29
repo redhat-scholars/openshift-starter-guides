@@ -16,6 +16,7 @@ security, such as TLS, for the *Route*. If you want your *Services*, and, by
 extension, your *Pods*, to be accessible from the outside world, you need to
 create a *Route*.
 
+[#creating_a_route]
 == Exercise: Creating a Route
 
 You may remember that when we deployed the `parksmap` application, we un-checked the checkbox to 

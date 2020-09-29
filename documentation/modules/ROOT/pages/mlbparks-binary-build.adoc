@@ -1,3 +1,4 @@
+[#moving_on_from_s2i]
 == Moving on From S2I
 As you saw before S2I is a great way to get from source code to a container, but the process is a bit too slow for daily fast iterative
 development. For example, if you want to change some CSS or change one method in a class you don't want to go through
@@ -6,6 +7,7 @@ we are at it we will also show you how to debug your code.
 
 Now that we built the MLB parks service let's go ahead and make some quick changes.
 
+[#fast_iterative_code_change_using_binary_deploy]
 == Fast Iterative Code Change Using Binary Deploy
 
 The OpenShift command line has the ability to do a deployment from your local machine. In this case we are going to use S2I,
@@ -20,8 +22,10 @@ machine AND would also not require git commit with a push. Read more in the
 https://%DOCS_URL%/dev_guide/dev_tutorials/binary_builds.html[official documentation]
 
 
+[#using_binary_deployment]
 == Exercise: Using Binary Deployment
 
+[#clone_source]
 === Clone source
 The first step is to clone the MLB source code from GitHub to your workshop environment:
 
@@ -34,7 +38,8 @@ git clone https://github.com/openshift-roadshow/mlbparks.git
 NOTE: We are using Intellij here in the guide for screenshots but this should work regardless of your tool chain. JBoss
 Developer Studio and JBoss Developer Tools have built in functionality that makes this close to seamless right from the IDE.
 
-=== Setup the Build of the war file
+[#setup_the_build_of_the_war_file]
+=== Setup the Build of the WAR file
 If you have Maven all set up on your machine, then you can `cd` into the `mlbparks` directory and run `mvn package`
 
 
@@ -47,7 +52,7 @@ mvn package
 
 Pay attention to the output location for the ROOT.war, we will need that directory later.
 
-
+[#code_change]
 === Code Change
 Time for a source code change! Go to `src/main/java/com/openshift/evg/roadshow/rest/BackendController.java`.and edit it with `vi` or `nano`.
 This is the REST endpoint that gives basic info on the service and can be reached at:
@@ -73,6 +78,7 @@ cd /opt/app-root/src/mlbparks
 mvn package
 ----
 
+[#doing_the_binary_build]
 === Doing the Binary Build
 
 Alright we have our war file built, time to kick off a build using it.

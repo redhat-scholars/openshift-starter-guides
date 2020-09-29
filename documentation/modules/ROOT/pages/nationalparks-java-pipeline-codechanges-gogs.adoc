@@ -1,3 +1,4 @@
+[#webhooks]
 == Background: Web Hooks
 
 Most Git repository servers support the concept of web hooks -- calling to an
@@ -7,6 +8,7 @@ remote systems in order to trigger builds. By pointing the code repository's
 hook at the OpenShift Pipelines resources, automated code/build/deploy pipelines can be
 achieved.
 
+[#adding_triggers_to_your_pipeline]
 == Adding Triggers to your Pipeline
 
 Tekton *Triggers* enable us to configure Pipelines to respond to external events (Git push events, pull requests etc) such as Web Hooks.
@@ -37,7 +39,7 @@ From left side menu, click on *Topology* to verify if a new Deployment *el-natio
 
 image::devops-pipeline-triggers-eventlistener.png[EventListener created]
 
-
+[#configuring_gogs_webhooks]
 == Exercise: Configuring Gogs Web Hooks
 
 Click on the Deployment, go into *Routes* section and and copy the *el-nationparks* Route URL.
@@ -81,6 +83,7 @@ Boom! From now on, every time you commit new source code to your Gogs
 repository, a new build and deploy will occur inside of OpenShift.  Let's try
 this out.
 
+[#using_gogs_webhooks]
 == Exercise: Using Gogs Web Hooks
 Click the *Files* tab in Gogs. This is Gogs's repository view.  
 
@@ -142,6 +145,7 @@ You should now see the new name you have set in the JSON string returned.
 NOTE: To see this in the map's legend itself, you will need to scale down your parksmap to 0, then back up to 1 to force the app to refresh its cache.
 
 
+[#rollback]
 == Exercise: Rollback
 
 OpenShift allows you to move between different versions of an application
@@ -206,6 +210,7 @@ oc set triggers dc/nationalparks --auto
 ----
 ====
 
+[#rollforward]
 == Exercise: Rollforward
 
 Just like you performed a rollback, you can also perform a roll-forward using

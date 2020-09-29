@@ -1,5 +1,6 @@
 You can find all urls, hostnames, usernames and passwords that are needed during the workshop in this page. Note that the urls are also embedded inside the labs so that you don't have to go back and forth between this page and the labs.
 
+[#openshift_cluster_url]
 == OpenShift cluster URL
 
 Console Address: http://console-openshift-console.%cluster_subdomain% +
@@ -9,16 +10,17 @@ Username: `%username%` +
 Password: `openshift` +
 
 
-
+[#workshop_guides]
 == Workshop Guides
 
 Web: http://starter-guides-%INFRA_PROJECT%.%cluster_subdomain%
 
-
+[#web_terminal]
 == Web terminal
 
 Web: http://terminal-%INFRA_PROJECT%.%cluster_subdomain%
 
+[#git_server]
 == Git Server
 
 Web: http://gogs-%INFRA_PROJECT%.%cluster_subdomain%
@@ -26,10 +28,12 @@ Web: http://gogs-%INFRA_PROJECT%.%cluster_subdomain%
 Username: `%username%` + 
 Password: `%GOGS_PASSWORD%` + 
 
+[#nexus_maven_repository]
 == Nexus Maven repository
 
 Web: http://nexus-%INFRA_PROJECT%.%cluster_subdomain%
 
+[#openshift_ops_view]
 == OpenShift Ops View
 
 Web: http://ocp-ops-view-%INFRA_PROJECT%.%cluster_subdomain%
