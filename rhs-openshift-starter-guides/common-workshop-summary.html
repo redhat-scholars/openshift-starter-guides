@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>OpenShift Starter Guides :: OpenShift Starter Guides</title>
+    <title>OpenShift Starter Guides</title>
     <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/common-workshop-summary.html">
     <link rel="prev" href="index.html">
     <link rel="next" href="common-environment.html">
@@ -18,7 +18,7 @@
     <div class="navbar-brand">
       <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
           src="../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
-      <a class="navbar-item" href="http://redhat-scholars.github.io/openshift-starter-guides">OpenShift Starter Guides</a>
+      <a class="navbar-item" href="http://redhat-scholars.github.io/openshift-starter-guides"></a>
       <button class="navbar-burger" data-target="topbar-nav">
         <span></span>
         <span></span>
@@ -81,7 +81,16 @@
     <a class="nav-link" href="common-parksmap-architecture.html">Parksmap Architecture</a>
   </li>
   <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="common-explore.html">Command Line Interface</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="common-explore.html#using_a_project">Using a Project</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="common-explore.html#using_a_project">The Web Console</a>
+  </li>
+</ul>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
@@ -106,8 +115,11 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="parksmap-scaling.html">Background: Deployment Configurations and Replication Controllers</a>
+    <a class="nav-link" href="parksmap-scaling.html">Scaling Apps</a>
 <ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-scaling.html#deployment_configs_and_replication_controllers">Background: Deployment Configurations and Replication Controllers</a>
+  </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="parksmap-scaling.html#exploring_deployment_related_objects">Exercise: Exploring Deployment-related Objects</a>
   </li>
@@ -124,8 +136,11 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="parksmap-routes.html">Background: Routes</a>
+    <a class="nav-link" href="parksmap-routes.html">Routes</a>
 <ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-routes.html#routes">Background: Routes</a>
+  </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="parksmap-routes.html#creating_a_route">Exercise: Creating a Route</a>
   </li>
@@ -133,8 +148,11 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="parksmap-logging.html">Background: Container Logs</a>
+    <a class="nav-link" href="parksmap-logging.html">Logging</a>
 <ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-logging.html#container_logs">Background: Container Logs</a>
+  </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="parksmap-logging.html#examining_logs">Examining Logs</a>
   </li>
@@ -145,7 +163,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="parksmap-permissions.html">Background: Permissions</a>
+    <a class="nav-link" href="parksmap-permissions.html">Permissions</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="parksmap-permissions.html#grant_serviceaccount_view_permissions">Grant Service Account View Permissions</a>
@@ -160,7 +178,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="parksmap-rsh.html">Background: Connecting to a Container</a>
+    <a class="nav-link" href="parksmap-rsh.html">Connecting to a Container</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="parksmap-rsh.html#remote_shell_session_to_container_using_cli">Exercise: Remote Shell Session to a Container Using the CLI</a>
@@ -229,7 +247,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="nationalparks-java-pipeline.html">Tekton Pipelines</a>
+    <a class="nav-link" href="nationalparks-java-pipeline.html">Continuous Integration and Pipelines</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="nationalparks-java-pipeline.html#understanding_tekton">Understanding Tekton</a>
@@ -250,7 +268,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html">Continuous Integration and Pipelines</a>
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html">Automation with Pipelines</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html#webhooks">Web Hooks</a>
@@ -274,8 +292,11 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="mlbparks-templates.html">Templates</a>
+    <a class="nav-link" href="mlbparks-templates.html">MLBParks App</a>
 <ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mlbparks-templates.html#templates">Templates</a>
+  </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="mlbparks-templates.html#instantiate_template">Exercise: Instantiate a Template</a>
   </li>
@@ -340,7 +361,7 @@
     <a class="nav-link" href="common-workshop-links.html">Workshop Links</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="common-workshop-links.html#openshift_cluster_url">OpenShift cluster URL</a>
+    <a class="nav-link" href="common-workshop-links.html#openshift_cluster_url">OpenShift Cluster URL</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="common-workshop-links.html#workshop_guides">Workshop Guides</a>

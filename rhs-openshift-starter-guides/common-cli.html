@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: OpenShift Starter Guides</title>
+    <title>OpenShift Starter Guides</title>
     <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/common-cli.html">
     <meta name="generator" content="Antora 2.3.3">
     <link rel="stylesheet" href="../_/css/site.css">
@@ -16,7 +16,7 @@
     <div class="navbar-brand">
       <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
           src="../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
-      <a class="navbar-item" href="http://redhat-scholars.github.io/openshift-starter-guides">OpenShift Starter Guides</a>
+      <a class="navbar-item" href="http://redhat-scholars.github.io/openshift-starter-guides"></a>
       <button class="navbar-burger" data-target="topbar-nav">
         <span></span>
         <span></span>
@@ -79,7 +79,16 @@
     <a class="nav-link" href="common-parksmap-architecture.html">Parksmap Architecture</a>
   </li>
   <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="common-explore.html">Command Line Interface</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="common-explore.html#using_a_project">Using a Project</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="common-explore.html#using_a_project">The Web Console</a>
+  </li>
+</ul>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
@@ -104,8 +113,11 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="parksmap-scaling.html">Background: Deployment Configurations and Replication Controllers</a>
+    <a class="nav-link" href="parksmap-scaling.html">Scaling Apps</a>
 <ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-scaling.html#deployment_configs_and_replication_controllers">Background: Deployment Configurations and Replication Controllers</a>
+  </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="parksmap-scaling.html#exploring_deployment_related_objects">Exercise: Exploring Deployment-related Objects</a>
   </li>
@@ -122,8 +134,11 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="parksmap-routes.html">Background: Routes</a>
+    <a class="nav-link" href="parksmap-routes.html">Routes</a>
 <ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-routes.html#routes">Background: Routes</a>
+  </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="parksmap-routes.html#creating_a_route">Exercise: Creating a Route</a>
   </li>
@@ -131,8 +146,11 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="parksmap-logging.html">Background: Container Logs</a>
+    <a class="nav-link" href="parksmap-logging.html">Logging</a>
 <ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-logging.html#container_logs">Background: Container Logs</a>
+  </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="parksmap-logging.html#examining_logs">Examining Logs</a>
   </li>
@@ -143,7 +161,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="parksmap-permissions.html">Background: Permissions</a>
+    <a class="nav-link" href="parksmap-permissions.html">Permissions</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="parksmap-permissions.html#grant_serviceaccount_view_permissions">Grant Service Account View Permissions</a>
@@ -158,7 +176,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="parksmap-rsh.html">Background: Connecting to a Container</a>
+    <a class="nav-link" href="parksmap-rsh.html">Connecting to a Container</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="parksmap-rsh.html#remote_shell_session_to_container_using_cli">Exercise: Remote Shell Session to a Container Using the CLI</a>
@@ -227,7 +245,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="nationalparks-java-pipeline.html">Tekton Pipelines</a>
+    <a class="nav-link" href="nationalparks-java-pipeline.html">Continuous Integration and Pipelines</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="nationalparks-java-pipeline.html#understanding_tekton">Understanding Tekton</a>
@@ -248,7 +266,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html">Continuous Integration and Pipelines</a>
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html">Automation with Pipelines</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html#webhooks">Web Hooks</a>
@@ -272,8 +290,11 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="mlbparks-templates.html">Templates</a>
+    <a class="nav-link" href="mlbparks-templates.html">MLBParks App</a>
 <ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mlbparks-templates.html#templates">Templates</a>
+  </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="mlbparks-templates.html#instantiate_template">Exercise: Instantiate a Template</a>
   </li>
@@ -338,7 +359,7 @@
     <a class="nav-link" href="common-workshop-links.html">Workshop Links</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="common-workshop-links.html#openshift_cluster_url">OpenShift cluster URL</a>
+    <a class="nav-link" href="common-workshop-links.html#openshift_cluster_url">OpenShift Cluster URL</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="common-workshop-links.html#workshop_guides">Workshop Guides</a>
@@ -386,13 +407,16 @@
 <button class="nav-toggle"></button>
   <a href="index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="common-cli.html">OpenShift Starter Guides</a></li>
+  </ul>
 </nav>
   <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-starter-guides/edit/master/documentation/modules/ROOT/pages/common-cli.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<div class="sect1">
-<h2 id="_command_line_interface"><a class="anchor" href="#_command_line_interface"></a>Command Line Interface</h2>
+<h1 class="page">OpenShift Starter Guides</h1>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>OpenShift ships with a feature rich web console as well as command line tools
@@ -406,7 +430,7 @@ programming language and is available for the following operating systems:</p>
 <p>Microsoft Windows</p>
 </li>
 <li>
-<p>macOS 10</p>
+<p>Mac OS X</p>
 </li>
 <li>
 <p>Linux</p>
@@ -438,7 +462,7 @@ next lab.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_download_and_install_openshift_cli_on_linux"><a class="anchor" href="#_download_and_install_openshift_cli_on_linux"></a>Download and Install OpenShift CLI on Linux</h2>
+<h2 id="download_and_install_openshift_cli_on_linux"><a class="anchor" href="#download_and_install_openshift_cli_on_linux"></a>Download and Install OpenShift CLI on Linux</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Download the the OpenShift CLI tool for <a href="%DOWNLOAD_CLIENT_LIN64%">Linux 64</a></p>
@@ -509,7 +533,7 @@ need help, raise your hand and the instructor will assist.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_download_and_install_openshift_cli_on_mac"><a class="anchor" href="#_download_and_install_openshift_cli_on_mac"></a>Download and Install OpenShift CLI on Mac</h2>
+<h2 id="download_and_install_openshift_cli_on_mac"><a class="anchor" href="#download_and_install_openshift_cli_on_mac"></a>Download and Install OpenShift CLI on Mac</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Download the the OpenShift CLI tool for <a href="%DOWNLOAD_CLIENT_MAC%">Mac</a></p>
@@ -580,13 +604,21 @@ need help, raise your hand and the instructor will assist.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_tab_completion"><a class="anchor" href="#_tab_completion"></a>Tab Completion</h2>
+<h2 id="download_and_install_openshift_cli_on_windows"><a class="anchor" href="#download_and_install_openshift_cli_on_windows"></a>Download and Install OpenShift CLI on Windows</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Download the the OpenShift CLI tool for <a href="%DOWNLOAD_CLIENT_WINDOWS%">Windows</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="tab_completion"><a class="anchor" href="#tab_completion"></a>Tab Completion</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The OpenShift command line tool supports the ability to use tab completion for the popular zsh and bash shells.  This suits the needs of users using either Linux or OS X.  If you are using Microsoft Windows, never fear, we will discuss some ways to get tab completion working on that operating system as well.</p>
 </div>
 <div class="sect2">
-<h3 id="_tab_completion_on_mac_and_linux"><a class="anchor" href="#_tab_completion_on_mac_and_linux"></a>Tab completion on Mac and Linux</h3>
+<h3 id="tab_completion_on_mac_and_linux"><a class="anchor" href="#tab_completion_on_mac_and_linux"></a>Tab completion on Mac and Linux</h3>
 <div class="paragraph">
 <p>If you are on the Mac operating system, you will need to ensure that you have the <strong>bash-completion</strong> project installed. This can be accomplished using the popular brew system:</p>
 </div>
@@ -623,7 +655,7 @@ source oc_completion.sh</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_tab_completion_on_windows"><a class="anchor" href="#_tab_completion_on_windows"></a>Tab completion on Windows</h3>
+<h3 id="tab_completion_on_windows"><a class="anchor" href="#tab_completion_on_windows"></a>Tab completion on Windows</h3>
 <div class="paragraph">
 <p>For Windows users, things become a bit more tricky.  You could of course use the Linux Subsystem for Windows but you may want to consider using a combination of babun and cmder.  For a full list of instructions, you can check out the following blog post:</p>
 </div>
@@ -638,7 +670,7 @@ source oc_completion.sh</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_working_with_proxies"><a class="anchor" href="#_working_with_proxies"></a>Working with proxies</h2>
+<h2 id="working_with_proxies"><a class="anchor" href="#working_with_proxies"></a>Working with proxies</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>It might happen that you&#8217;re behind a corporate proxy to access the internet. In this case, you&#8217;ll need to set
