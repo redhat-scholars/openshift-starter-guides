@@ -692,11 +692,37 @@ spec:
 <h2 id="run_the_pipeline"><a class="anchor" href="#run_the_pipeline"></a>Run the Pipeline</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In order to start the Pipeline, we can use a <code>PipelineRun</code> Custom Resource, representing our parameters to send to the pipeline:</p>
+<p>In order to start the Pipeline, we can use a <code>PipelineRun</code> Custom Resource, representing our parameters to send to the pipeline.</p>
 </div>
-<div class="listingblock console-input">
+<div class="paragraph">
+<p>From the Developer perspective click <strong>+Add</strong> in the left navigation menu and then select <strong>YAML</strong>.</p>
+</div>
+<div class="imageblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f &lt;a href="http://gogs-%INFRA_PROJECT%.%CLUSTER_SUBDOMAIN%/%USERNAME%/nationalparks/raw/master/pipeline/nationalparks-pipelinerun.yaml" class="bare"&gt;http://gogs-%INFRA_PROJECT%.%CLUSTER_SUBDOMAIN%/%USERNAME%/nationalparks/raw/master/pipeline/nationalparks-pipelinerun.yaml&lt;/a&gt; -n %PROJECT_NAMESPACE%</code></pre>
+<img src="_images/devops-pipeline-add-yaml-menu.png" alt="Add yaml to project - Menu">
+</div>
+</div>
+<div class="paragraph">
+<p>Now, copy the following code into the YAML input box and click <strong>Create</strong> to a <strong>PipelineRun</strong> resource to start your pipeline:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: nationalparks-deploy-run-
+spec:
+  params:
+   - name: APP_GIT_URL
+     value: "http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks.git"
+  pipelineRef:
+    name: nationalparks-pipeline
+  workspaces:
+  - name: app-source
+    persistentVolumeClaim:
+      claimName: app-source-pvc
+  - name: maven-settings
+    emptyDir: {}</code></pre>
 </div>
 </div>
 <div class="paragraph">
