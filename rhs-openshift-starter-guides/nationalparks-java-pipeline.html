@@ -627,6 +627,8 @@ spec:
       params:
         - name: DEPLOYMENT_CONFIG
           value: $(params.APP_NAME)
+        - name: IMAGE_STREAM
+          value: $(params.APP_NAME):latest
       runAfter:
         - build-image
       taskRef:
