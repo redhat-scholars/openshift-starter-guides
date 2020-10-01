@@ -692,37 +692,35 @@ spec:
 <h2 id="run_the_pipeline"><a class="anchor" href="#run_the_pipeline"></a>Run the Pipeline</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In order to start the Pipeline, we can use a <code>PipelineRun</code> Custom Resource, representing our parameters to send to the pipeline.</p>
-</div>
-<div class="paragraph">
-<p>From the Developer perspective click <strong>+Add</strong> in the left navigation menu and then select <strong>YAML</strong>.</p>
+<p>We can start now the Pipeline from the Web Console. From left-side menu, click on <strong>Pipeline</strong>, then click on <strong>nationalparks-pipeline</strong>. From top-right <strong>Actions</strong> list, click on <strong>Start</strong>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/devops-pipeline-add-yaml-menu.png" alt="Add yaml to project - Menu">
+<img src="_images/devops-pipeline-start-1.png" alt="Start Pipeline">
 </div>
 </div>
 <div class="paragraph">
-<p>Now, copy the following code into the YAML input box and click <strong>Create</strong> to a <strong>PipelineRun</strong> resource to start your pipeline:</p>
+<p>You will be prompted with parameters to add the Pipeline, showing default ones.</p>
+</div>
+<div class="paragraph">
+<p>Add in <strong>APP_GIT_URL</strong> the <code>nationalparks</code> repository you have in Gogs:</p>
 </div>
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">apiVersion: tekton.dev/v1beta1
-kind: PipelineRun
-metadata:
-  generateName: nationalparks-deploy-run-
-spec:
-  params:
-   - name: APP_GIT_URL
-     value: "http://gogs-%INFRA_PROJECT%.%CLUSTER_SUBDOMAIN%/%USERNAME%/nationalparks.git"
-  pipelineRef:
-    name: nationalparks-pipeline
-  workspaces:
-  - name: app-source
-    persistentVolumeClaim:
-      claimName: app-source-pvc
-  - name: maven-settings
-    emptyDir: {}</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">---
+http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks.git"
+---</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In <strong>Workspaces</strong>&#8594; <strong>app-source</strong> select <strong>PVC</strong> from the list, then select <strong>app-source-pvc</strong>. This is the share volume used by Pipeline Tasks in your Pipeline containing the source code and compiled artifacts.</p>
+</div>
+<div class="paragraph">
+<p>Click on <strong>Start</strong> to run your Pipeline.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devops-pipeline-start-2.png" alt="Add parameters">
 </div>
 </div>
 <div class="paragraph">
