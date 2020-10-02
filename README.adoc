@@ -4,12 +4,18 @@ image::https://github.com/redhat-scholars/openshift-starter-guides/workflows/doc
 
 ## Overview
 
-| |
---- | ---
-| Audience Experience Level | Beginner |
-| Average Time to Complete | 90 minutes |
+|===
+|| 
 
-This workshop is intended to give you a hands on introduction to using OpenShift from the perspective of a developer. 
+|Audience Experience Level
+|Beginner
+
+|Average Time to Complete	
+|90 minutes
+|===
+
+
+This workshop is intended to give you a hands on introduction to using https://openshift.com[OpenShift] from the perspective of a Developer. 
 
 Containers are a standardized way to package apps with all of their dependencies to simplify deployment and speed delivery. Unlike virtual machines, containers do not bundle to the operating system. Only the application code, run time, libraries, and settings are packaged inside of containers. Thus, containers are more lightweight, portable, and efficient as compared to virtual machines.
 
