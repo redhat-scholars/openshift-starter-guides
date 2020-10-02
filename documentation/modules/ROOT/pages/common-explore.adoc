@@ -1,50 +1,5 @@
-= Command Line Interface
-:navtitle: Command Line Interface
-
-OpenShift includes a feature-rich web console with both an Administrator perspective and a Developer perspective. In addition to the web console, OpenShift includes command line tools
-to provide users with a nice interface to work with applications deployed to the
-platform.  The `oc` command line tool is an executable written in the Go
-programming language and is available for the following operating systems:
-
-- Microsoft Windows
-- Mac OS X
-- Linux
-
-This lab environment has the `oc` command line tool installed, and your lab user is already logged in to the OpenShift cluster.
-
-Issue the following command to see help information:
-
-[.console-input]
-[source,bash,subs="+attributes,macros+"]
-----
-oc help
-----
-
-[#using_a_project]
-== Using a Project
-
-Projects are a top level concept to help you organize your deployments. An
-OpenShift project allows a community of users (or a user) to organize and manage
-their content in isolation from other communities. Each project has its own
-resources, policies (who can or cannot perform actions), and constraints (quotas
-and limits on resources, etc). Projects act as a "wrapper" around all the
-application services and endpoints you (or your teams) are using for your work.
-
-During this lab, we are going to use a few different commands to make sure that
-things in the environment are working as expected.  Don't worry if you don't
-understand all of the terminology as we will cover it in detail in later labs.
-
-In this lab environment, you already have access to single project: *%PROJECT_NAMESPACE%*.
-
-If you had multiple projects, the first thing you would want to do is to switch
-to the *%PROJECT_NAMESPACE%* project to make sure you're on the correct project from now on.
-You can do this with the following command:
-
-[.console-input]
-[source,bash,subs="+attributes,macros+"]
-----
-oc project %PROJECT_NAMESPACE%
-----
+= Explore OpenShift
+:navtitle: Explore OpenShift
 
 [#the_web_console]
 == The Web Console
@@ -62,17 +17,41 @@ Username: %USERNAME%
 [source,role="copypaste"]
 Password: %PASSWORD%
 
-The first time you access the web console, you will most likely be in the Administrator perspective. You will be presented with the list of Projects that you can access, and you will see something that looks like the following image:
+The first time you access the web console, you will most likely be in the Administrator perspective. If you are also the Cluster Administrator, you will be presented with an overview of the whole Cluster status:
 
-image::explore-webconsole1sc.png[Web Console]
+image::prerequisites_overview.png[Web Console Overview]
 
-Click on the *%PROJECT_NAMESPACE%* project link. When you click on the
-*%PROJECT_NAMESPACE%* project, you will be taken to the project details page,
-which will list some metrics and details about your project. There's nothing there now, but that will change as you progress through the lab.
+
+[#projects]
+== Projects
+
+Projects are a top level concept to help you organize your deployments. An
+OpenShift project allows a community of users (or a user) to organize and manage
+their content in isolation from other communities. Each project has its own
+resources, policies (who can or cannot perform actions), and constraints (quotas
+and limits on resources, etc). Projects act as a "wrapper" around all the
+application services and endpoints you (or your teams) are using for your work.
+
+During this lab, we are going to use a few different commands to make sure that
+things in the environment are working as expected.  Don't worry if you don't
+understand all of the terminology as we will cover it in detail in later labs.
+
+[#create_your_first_project]
+=== Create your first Project
+
+Create a project named *%PROJECT_NAMESPACE%*. From left-side menu, click to *Projects*, then from top-right click
+to *Create Project*.
+
+From the form, insert the name of your project *%PROJECT_NAMESPACE%* and click to *Create*.
+
+image::prerequisites_create_project.png[Create Project]
+
+If you had multiple projects, the first thing you would want to do is to switch
+to the *%PROJECT_NAMESPACE%* project to make sure you're on the correct project from now on.
 
 image::explore-webconsole2.png[Explore Project]
 
-At the top of the left navigation menu, you can toggle between the Administrator perspective and the Developer perspective.
+At the top of the left navigation menu, you can toggle between the *Administrator* perspective and the *Developer* perspective.
 
 image::explore-perspective-toggle.png[Toggle Between Perspectives]
 

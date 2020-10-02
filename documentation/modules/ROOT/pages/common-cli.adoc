@@ -16,7 +16,7 @@ it by running an `oc` command:
 [.console-input]
 [source,bash,subs="+attributes,macros+"]
 ----
-oc version --short
+oc version
 ----
 
 You should see the following (or something similar):
@@ -24,18 +24,30 @@ You should see the following (or something similar):
 [.console-output]
 [source,bash]
 ----
-%OC_VERSION%
+Client Version: openshift-clients-4.5.0-202006231303.p0-9-ge40bd2dd9
+Server Version: 4.5.11
+Kubernetes Version: v1.18.3+b0068a8
 ----
 
 If the `oc` doesn't exist or you have an older version of the OpenShift CLI, follow
 the next sections to install or update the OpenShift CLI. Otherwise, skip to the
 next lab.
 
+[#download_openshift_cli]
+
+From top right menu bar, click to the little white question mark icon, then click to *Command Line Tools*:
+
+image::prerequisites_cli_links.png[Download CLI]
+
+
+Scroll down to *oc - OpenShift Command Line Interface (CLI)*
+
+image::prerequisites_cli_binaries.png[CLI Binaries]
+
 
 [#download_and_install_openshift_cli_on_linux]
 == Download and Install OpenShift CLI on Linux
 
-Download the the OpenShift CLI tool for link:%DOWNLOAD_CLIENT_LIN64%[Linux 64]
 
 Once the file has been downloaded, you will need to extract the contents as it
 is a compressed archive. I would suggest saving this file to the following
@@ -43,7 +55,7 @@ directories:
 
 [source,bash]
 ----
-~/openShift
+~/OpenShift
 ----
 
 Open up a terminal window and change to the directory where you downloaded the
@@ -81,7 +93,9 @@ You should see the following (or something similar):
 [.console-output]
 [source,bash]
 ----
-%OC_VERSION%
+Client Version: openshift-clients-4.5.0-202006231303.p0-9-ge40bd2dd9
+Server Version: 4.5.11
+Kubernetes Version: v1.18.3+b0068a8
 ----
 
 If you get an error message, you have not updated your path correctly. If you
@@ -90,7 +104,6 @@ need help, raise your hand and the instructor will assist.
 [#download_and_install_openshift_cli_on_mac]
 == Download and Install OpenShift CLI on Mac
 
-Download the the OpenShift CLI tool for link:%DOWNLOAD_CLIENT_MAC%[Mac]
 
 Once the file has been downloaded, you will need to extract the contents as it
 is a compressed archive. I would suggest saving this file to the following
@@ -98,7 +111,7 @@ directories:
 
 [source,bash]
 ----
-~/openShift
+~/OpenShift
 ----
 
 Open up a terminal window and change to the directory where you downloaded the
@@ -136,7 +149,9 @@ You should see the following (or something similar):
 [.console-output]
 [source,bash]
 ----
-%OC_VERSION%
+Client Version: openshift-clients-4.5.0-202006231303.p0-9-ge40bd2dd9
+Server Version: 4.5.11
+Kubernetes Version: v1.18.3+b0068a8
 ----
 
 If you get an error message, you have not updated your path correctly. If you
@@ -144,8 +159,6 @@ need help, raise your hand and the instructor will assist.
 
 [#download_and_install_openshift_cli_on_windows]
 == Download and Install OpenShift CLI on Windows
-
-Download the the OpenShift CLI tool for link:%DOWNLOAD_CLIENT_WINDOWS%[Windows]
 
 [#tab_completion]
 == Tab Completion 
