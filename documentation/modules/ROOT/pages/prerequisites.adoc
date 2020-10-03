@@ -1,11 +1,38 @@
 = Prerequisites
+:navtitle: Prerequisites
 
-== Command Line Interface
+In order to run the lab in your cluster, you need to meet the requirements discussed below.
 
-== Using a Project
+[#openshift_pipelines]
+== OpenShift Pipelines
+
+For this lab we will use *OpenShift Pipelines* based on Tekton. 
+OpenShift provides a marketplace of installable software packaged as Kubernetes Operator called https://operatorhub.io[OperatorHub] .
+You can add Kubernetes-native CI/CD to your cluster installing OpenShift Pipelines directly from OperatorHub embedded marketplace inside OpenShift.
+
+[#install_from_operatorhub]
+=== Install OpenShift Pipelines from OperatorHub
+
+From the left-side menu under Administrator perspective, go to *Operators*-> *OperatorHub*. In the search box, search for _pipelines_, then click to *OpenShift Pipelines Operator*:
+
+image::prerequisites_operatorhub.png[OperatorHub]
+
+From the description view, click *Install* to review all installation settings.
+
+image::prerequisites_operatorhub_install_pipelines.png[Install Pipelines]
+
+Leave all default settings, and click *Install* to start installing the Operator.
+
+image::prerequisites_operatorhub_install_operator.png[Install Operator]
+
+After few seconds, the installation should be completed with success and you can verify it looking at *Status* column, check if the status is *Succeeded*.
+
+image::prerequisites_operatorhub_pipelines_installed.png[Pipelines Installed]
 
 
-== The Web Console
+[#github_account]
+== GitHub Account
 
+We will demonstrate the automation capability with OpenShift Pipelines, and in order to do this, we need you to fork our Java backend app repository https://github.com/openshift-roadshow/nationalparks[NationalParks] from https://github.com[GitHub].
 
-image::explore-webconsole1sc.png[Web Console]
+If you don't have an account on GitHub, please create one https://github.com/join[here].
