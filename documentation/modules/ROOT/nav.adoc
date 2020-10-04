@@ -28,7 +28,6 @@
 * xref:parksmap-logging.adoc[Logging]
 ** xref:parksmap-logging.adoc#container_logs[Background: Container Logs]
 ** xref:parksmap-logging.adoc#examining_logs[Examining Logs]
-** xref:parksmap-logging.adoc#aggregated_pod_logs[Aggregated Pod Logs]
 * xref:parksmap-permissions.adoc[Permissions]
 ** xref:parksmap-permissions.adoc#grant_serviceaccount_view_permissions[Grant Service Account View Permissions]
 ** xref:parksmap-permissions.adoc#redeploy_application[Exercise: Redeploy Application]

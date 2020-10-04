@@ -69,7 +69,7 @@ For this example, we're going to deploy our pipeline which is stored in the same
 
 
 [.console-input]
-[source,bash,subs="+attributes,macros+"]
+[source,bash]
 ----
 oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipeline-all.yaml -n %PROJECT_NAMESPACE%
 ----
