@@ -10,7 +10,7 @@ content:
   sources:
     - url: git@github.com:redhat-scholars/openshift-starter-guides.git
       tags: []
-      branches: master
+      branches: roks
       start_path: documentation
 
 asciidoc:
