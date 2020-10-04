@@ -85,7 +85,34 @@
     <a class="nav-link" href="common-explore.html#the_web_console">The Web Console</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="common-explore.html#command_line_interface">Command Line Interface</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="common-explore.html#download_openshift_cli">Download OpenShift CLI</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="common-explore.html#download_and_install_openshift_cli_on_linux">Download and Install OpenShift CLI on Linux</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="common-explore.html#download_and_install_openshift_cli_on_mac">Download and Install OpenShift CLI on Mac OS X</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="common-explore.html#download_and_install_openshift_cli_on_win">Download and Install OpenShift CLI on Windows</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="common-explore.html#connect_to_the_cluster_with_cli">Connect to the OpenShift Cluster from CLI</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="common-explore.html#working_with_proxies">Working with proxies</a>
+  </li>
+</ul>
+  </li>
+</ul>
   </li>
 </ul>
   </li>
@@ -182,9 +209,6 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="#examining_logs">Examining Logs</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#aggregated_pod_logs">Aggregated Pod Logs</a>
   </li>
 </ul>
   </li>
@@ -569,111 +593,6 @@ If you scroll through the logs, you may notice an error that mentions a service 
 </td>
 </tr>
 </table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="aggregated_pod_logs"><a class="anchor" href="#aggregated_pod_logs"></a>Exercise: Aggregated Pod Logs</h2>
-<div class="sectionbody">
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-This section is only relevant if the aggregated logging
-capability is available in the OpenShift cluster, as this capability is optional.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>When your application consists of only one <strong>Pod</strong> and it never fails, restarts,
-or has other issues, these ways to view logs may not be so bad. However in a
-scaled-out application where <strong>Pods</strong> may have restarted, been scaled up or down,
-or if you just want to get historical information, these mechanisms may be
-insufficient.</p>
-</div>
-<div class="paragraph">
-<p>Fortunately, OpenShift provides an optional system for log aggregation that uses
-Elasticsearch, Fluentd, and Kibana (EFK).</p>
-</div>
-<div class="paragraph">
-<p>To view aggregated logging from Kibana, click to <strong>Show in Kibana</strong> link from <strong>Log</strong> tab as shown:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/parksmap-logging-show-in-kibana.png" alt="Show Logs in Kibana">
-</div>
-</div>
-<div class="paragraph">
-<p>Clicking this link takes you to the Kibana web interface. This interface is
-secured with OpenShift&#8217;s role-based access controls, so you can only see logs
-for projects that you have access to. If you are prompted to authenticate, use the same credentials as with OpenShift and when prompted the first time, authorize Access to kibana service account to access your account clicking on <strong>Allow selected permission</strong>.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/parksmap-logging-kibana.png" alt="Kibana Interface">
-</div>
-</div>
-<div class="admonitionblock caution">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-caution" title="Caution"></i>
-</td>
-<td class="content">
-In the following Kibana search(es), replace the pod_name to match the name of your pod.
-</td>
-</tr>
-</table>
-</div>
-<div class="listingblock console-input">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">kubernetes.pod_name:"parksmap-1-mrxfq" AND kubernetes.namespace_name:"%PROJECT_NAMESPACE%"</code></pre>
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>If your search returns no hits, try changing the time-picker in the top right-hand corner from the default "Last 15 miutes" to something else, like "The day so far" or "Last 1 hour"</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>If you want to see all the historical logs for this <strong>Project</strong>, simply remove the
-pod name reference and click the magnifying glass or press the enter key.</p>
-</div>
-<div class="listingblock copypaste">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">kubernetes.namespace_name:"%PROJECT_NAMESPACE%"</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If you click "add" for <code>kubernetes.pod_name</code> in the left bar, you&#8217;ll then see your old <strong>Pod</strong>'s logs,
-too. Remember, we scaled them down before coming here, so you can see how the
-log system is keeping a historical record.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/parksmap-logging-kibana-parksmap-headers.png" alt="Kibana Interface">
-</div>
-</div>
-<div class="paragraph">
-<p>Try the following search string ensuring that you use the correct name for your project:</p>
-</div>
-<div class="listingblock copypaste">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">kubernetes.namespace_name:"%PROJECT_NAMESPACE%" AND message:"Failure executing"</code></pre>
-</div>
 </div>
 </div>
 </div>

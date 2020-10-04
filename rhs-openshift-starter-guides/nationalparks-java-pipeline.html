@@ -85,7 +85,34 @@
     <a class="nav-link" href="common-explore.html#the_web_console">The Web Console</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="common-explore.html#command_line_interface">Command Line Interface</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="common-explore.html#download_openshift_cli">Download OpenShift CLI</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="common-explore.html#download_and_install_openshift_cli_on_linux">Download and Install OpenShift CLI on Linux</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="common-explore.html#download_and_install_openshift_cli_on_mac">Download and Install OpenShift CLI on Mac OS X</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="common-explore.html#download_and_install_openshift_cli_on_win">Download and Install OpenShift CLI on Windows</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="common-explore.html#connect_to_the_cluster_with_cli">Connect to the OpenShift Cluster from CLI</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="common-explore.html#working_with_proxies">Working with proxies</a>
+  </li>
+</ul>
+  </li>
+</ul>
   </li>
 </ul>
   </li>
@@ -182,9 +209,6 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="parksmap-logging.html#examining_logs">Examining Logs</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="parksmap-logging.html#aggregated_pod_logs">Aggregated Pod Logs</a>
   </li>
 </ul>
   </li>
@@ -575,7 +599,7 @@ on the current Deployment to automatically trigger when there is a new image or 
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f &lt;a href="https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipeline-all.yaml" class="bare"&gt;https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipeline-all.yaml&lt;/a&gt; -n %PROJECT_NAMESPACE%</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipeline-all.yaml -n %PROJECT_NAMESPACE%</code></pre>
 </div>
 </div>
 <div class="paragraph">

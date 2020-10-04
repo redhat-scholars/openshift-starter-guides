@@ -85,7 +85,34 @@
     <a class="nav-link" href="#the_web_console">The Web Console</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="#command_line_interface">Command Line Interface</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#download_openshift_cli">Download OpenShift CLI</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="#download_and_install_openshift_cli_on_linux">Download and Install OpenShift CLI on Linux</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="#download_and_install_openshift_cli_on_mac">Download and Install OpenShift CLI on Mac OS X</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="#download_and_install_openshift_cli_on_win">Download and Install OpenShift CLI on Windows</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#connect_to_the_cluster_with_cli">Connect to the OpenShift Cluster from CLI</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="#working_with_proxies">Working with proxies</a>
+  </li>
+</ul>
+  </li>
+</ul>
   </li>
 </ul>
   </li>
@@ -182,9 +209,6 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="parksmap-logging.html#examining_logs">Examining Logs</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="parksmap-logging.html#aggregated_pod_logs">Aggregated Pod Logs</a>
   </li>
 </ul>
   </li>
@@ -537,9 +561,8 @@ next lab.</p>
 <img src="_images/prerequisites_cli_binaries.png" alt="CLI Binaries">
 </div>
 </div>
-</div>
-<div class="sect2">
-<h3 id="download_and_install_openshift_cli_on_linux"><a class="anchor" href="#download_and_install_openshift_cli_on_linux"></a>Download and Install OpenShift CLI on Linux</h3>
+<div class="sect3">
+<h4 id="download_and_install_openshift_cli_on_linux"><a class="anchor" href="#download_and_install_openshift_cli_on_linux"></a>Download and Install OpenShift CLI on Linux</h4>
 <div class="paragraph">
 <p>Once the file has been downloaded, you will need to extract the contents as it
 is a compressed archive. I would suggest saving this file to the following
@@ -606,8 +629,8 @@ Kubernetes Version: v1.18.3+b0068a8</code></pre>
 need help, raise your hand and the instructor will assist.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="download_and_install_openshift_cli_on_mac"><a class="anchor" href="#download_and_install_openshift_cli_on_mac"></a>Download and Install OpenShift CLI on Mac</h3>
+<div class="sect3">
+<h4 id="download_and_install_openshift_cli_on_mac"><a class="anchor" href="#download_and_install_openshift_cli_on_mac"></a>Download and Install OpenShift CLI on Mac OS X</h4>
 <div class="paragraph">
 <p>Once the file has been downloaded, you will need to extract the contents as it
 is a compressed archive. I would suggest saving this file to the following
@@ -647,7 +670,7 @@ The name of the oc packaged archive may vary. Adjust accordingly.
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export PATH=$PATH:~/openShift</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export PATH=$PATH:~/OpenShift</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -674,68 +697,47 @@ Kubernetes Version: v1.18.3+b0068a8</code></pre>
 need help, raise your hand and the instructor will assist.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="download_and_install_openshift_cli_on_windows"><a class="anchor" href="#download_and_install_openshift_cli_on_windows"></a>Download and Install OpenShift CLI on Windows</h3>
+<div class="sect3">
+<h4 id="download_and_install_openshift_cli_on_windows"><a class="anchor" href="#download_and_install_openshift_cli_on_windows"></a>Download and Install OpenShift CLI on Windows</h4>
 
 </div>
+</div>
 <div class="sect2">
-<h3 id="tab_completion"><a class="anchor" href="#tab_completion"></a>Tab Completion</h3>
+<h3 id="connect_to_the_cluster_with_cli"><a class="anchor" href="#connect_to_the_cluster_with_cli"></a>Connect to the OpenShift Cluster from CLI</h3>
 <div class="paragraph">
-<p>The OpenShift command line tool supports the ability to use tab completion for the popular zsh and bash shells.  This suits the needs of users using either Linux or OS X.  If you are using Microsoft Windows, never fear, we will discuss some ways to get tab completion working on that operating system as well.</p>
+<p>Once your <code>oc</code> client is setup on your Workstation, you can connect to cluster and start working also with OpenShift CLI.</p>
 </div>
-<div class="sect3">
-<h4 id="tab_completion_on_mac_and_linux"><a class="anchor" href="#tab_completion_on_mac_and_linux"></a>Tab completion on Mac and Linux</h4>
 <div class="paragraph">
-<p>If you are on the Mac operating system, you will need to ensure that you have the <strong>bash-completion</strong> project installed. This can be accomplished using the popular brew system:</p>
+<p>From Web Console overview, go to top-right menu bar and click to the dropdown menu containing your username, then click <strong>Copy Login Command</strong>:</p>
 </div>
-<div class="listingblock console-input">
+<div class="imageblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">brew install bash-completion</code></pre>
+<img src="_images/prerequisites_copy_login_command.png" alt="Copy Login Command">
 </div>
 </div>
 <div class="paragraph">
-<p>If you&#8217;re on Linux, ensure you have <strong>bash-completion</strong> installed using your package manager (dnf, yum apt-get,&#8230;&#8203;)</p>
+<p>Click on <strong>Display Token</strong> and copy the command under <strong>Login with this token</strong>:</p>
 </div>
 <div class="paragraph">
-<p>Once <strong>bash-completion</strong> package is available in your machine, to enable tab completion in your shell, you can simply enter in the following command from your terminal</p>
+<p>Example:</p>
 </div>
-<div class="listingblock console-input">
+<div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc completion bash &gt;&gt; oc_completion.sh
-source oc_completion.sh</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc login --token=some_token --server=https://c104-e.us-east.containers.cloud.ibm.com:32208</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Alternatively, you can add this to your .bashrc file.</p>
-</div>
-<div class="paragraph">
-<p>If you are using zsh, you can run the following command:</p>
-</div>
-<div class="listingblock console-input">
+<div class="listingblock console-output">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">source &lt;(oc completion zsh)</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Alternatively, you can add this to your .zshrc file.</p>
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">oc login --token=some-token --server=https://c104-e.us-east.containers.cloud.ibm.com:32208
+Logged into "https://c104-e.us-east.containers.cloud.ibm.com:32208" as "%USERNAME%" using the token provided.
+
+You have access to 68 projects, the list has been suppressed. You can list all projects with 'oc projects'
+
+Using project "default".</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="tab_completion_on_windows"><a class="anchor" href="#tab_completion_on_windows"></a>Tab completion on Windows</h4>
-<div class="paragraph">
-<p>For Windows users, things become a bit more tricky.  You could of course use the Linux Subsystem for Windows but you may want to consider using a combination of babun and cmder.  For a full list of instructions, you can check out the following blog post:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://blog.openshift.com/openshift-3-tab-completion-for-windows/">https://blog.openshift.com/openshift-3-tab-completion-for-windows/</a></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="working_with_proxies"><a class="anchor" href="#working_with_proxies"></a>Working with proxies</h3>
+<h4 id="working_with_proxies"><a class="anchor" href="#working_with_proxies"></a>Working with proxies</h4>
 <div class="paragraph">
 <p>It might happen that you&#8217;re behind a corporate proxy to access the internet. In this case, you&#8217;ll need to set
 some additional environment variables for the oc command line to work.</p>
@@ -825,6 +827,7 @@ appropriate values:</p>
 </td>
 </tr>
 </table>
+</div>
 </div>
 </div>
 </div>
