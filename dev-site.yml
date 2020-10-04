@@ -18,6 +18,7 @@ asciidoc:
     parksmap-image: quay.io/openshiftroadshow/parksmap
     openshift-docs-url: https://docs.openshift.com/container-platform/4.5
     openshift-version: 4.5
+    project-namespace: workshop
     workshop-domain: rhscholars.devx.red
     kubernetes-version: v1.18.0
     release-version: master

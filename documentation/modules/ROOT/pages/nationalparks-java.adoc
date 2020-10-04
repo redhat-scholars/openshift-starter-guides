@@ -93,9 +93,7 @@ Enter the following for Git Repo URL:
 https://github.com/openshift-roadshow/nationalparks.git
 ----
 
-In *Git Type* select *GitHub*.
-
-Select *Java* as your Builder Image, and be sure to select version *11*.
+OpenShift will automatically guess the Git server type and the programming language used by the source code. Verify that *Java* has been selected as your Builder Image, and be sure to select version *11* to have OpenJDK 11.
 
 image::nationalparks-import-from-git-url-builder.png[Import from Git]
 
@@ -110,11 +108,28 @@ Scroll down to the *General* section. Select:
 
 In *Resources* section, select *Deployment Config*.
 
-Expand the Labels section and add 3 labels:
+Expand the Labels section and add 3 labels.
 
-- *__app__=workshop*  (the name we will be giving to the app)
-- *__component__=nationalparks*  (the name of this deployment)
-- *__role__=backend* (the role this component plays in the overall application)
+The name of the Application group:
+
+[source,role=copypaste]
+----
+app=workshop
+----
+
+Next the name of this deployment.
+
+[source,role=copypaste]
+----
+component=nationalparks
+----
+
+And finally, the role this component plays in the overall application.
+
+[source,role=copypaste]
+----
+role=backend
+----
 
 image::nationalparks-configure-service.png[Runtimes]
 
@@ -194,7 +209,7 @@ parksmap        parksmap-%PROJECT_NAMESPACE%.%CLUSTER_SUBDOMAIN%                
 
 In the above example, the URL is:
 
-[source,role="copypaste"]
+[source,text,role="copypaste"]
 ----
 http://nationalparks-%PROJECT_NAMESPACE%.%CLUSTER_SUBDOMAIN%
 ----
