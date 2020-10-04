@@ -41,6 +41,8 @@ For further details on pipeline concepts, refer to the https://github.com/tekton
 [#setup_your_pipeline]
 == Set Up Your Pipeline
 
+NOTE: Ensure you met all link:prerequisites.doc[Prerequisites] before proceeding. link:prerequisites.adoc#openshift_pipelines[OpenShift Pipelines] installed in your cluster and a link:prerequisited.adoc#github_account[GitHub account] are required.
+
 A deployment configuration in OpenShift can contain 
 https://%DOCS_URL%/applications/deployments/what-deployments-are.html#deployments-and-deploymentconfigs_what-deployments-are[Triggers], which tells OpenShift to automatically redeploy the pod whenever a new image is built for that service or configuration changes.
 
@@ -69,7 +71,7 @@ For this example, we're going to deploy our pipeline which is stored in the same
 [.console-input]
 [source,bash,subs="+attributes,macros+"]
 ----
-oc create -f http://gogs-%INFRA_PROJECT%.%CLUSTER_SUBDOMAIN%/%USERNAME%/nationalparks/raw/master/pipeline/nationalparks-pipeline-all.yaml -n %PROJECT_NAMESPACE%
+oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipeline-all.yaml -n %PROJECT_NAMESPACE%
 ----
 
 Now let's review our Tekton Pipeline:
@@ -197,11 +199,11 @@ image::devops-pipeline-start-1.png[Start Pipeline]
 
 You will be prompted with parameters to add the Pipeline, showing default ones. 
 
-Add in *APP_GIT_URL* the `nationalparks` repository you have in Gogs:
+In *APP_GIT_URL*, verify the `nationalparks` repository from GitHub:
 
 [source,bash,role=copypaste]
 ----
-http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks.git
+https://github.com/openshift-roadshow/nationalparks.git
 ----
 
 In *Workspaces*-> *app-source* select *PVC* from the list, then select *app-source-pvc*. This is the share volume used by Pipeline Tasks in your Pipeline containing the source code and compiled artifacts.

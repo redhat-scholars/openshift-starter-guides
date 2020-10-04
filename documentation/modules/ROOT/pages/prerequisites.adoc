@@ -29,7 +29,6 @@ After few seconds, the installation should be completed with success and you can
 
 image::prerequisites_operatorhub_pipelines_installed.png[Pipelines Installed]
 
-
 [#github_account]
 == GitHub Account
 

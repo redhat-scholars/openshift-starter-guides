@@ -60,26 +60,14 @@ existing frontend (parksmap) will consume, we are going to build it inside the e
 project that we have been working with. To illustrate how you can interact with OpenShift via the CLI or the web console, we will deploy the nationalparks component using the web console.
 
 [#using_application_code_on_git_server]
-=== Using Application Code on an Embedded Git Server
+=== Using Application Code on Git Server
 
 OpenShift can work with any accessible Git repository. This could be GitHub,
 GitLab, or any other server that speaks Git. You can even register webhooks in
 your Git server to initiate OpenShift builds triggered by any update to the
 application code!
 
-The repository that we are going to use is already cloned in the internal Gogs repository
-and located at the following URL:
-
-Your Gogs credentials are:
-
-[.console-output]
-[source,bash]
-----
-username: %USERNAME%
-password: %GOGS_PASSWORD%
-----
-
-link:http://gogs-%INFRA_PROJECT%.%CLUSTER_SUBDOMAIN%/%USERNAME%/nationalparks.git[Gogs Repository]
+link:https://github.com/openshift-roadshow/nationalparks.git[NationalParks GitHub Repository]
 
 
 Later in the lab, we want you to make a code change and then rebuild your
@@ -100,12 +88,12 @@ The *Import from Git* workflow will guide you through the process of deploying y
 
 Enter the following for Git Repo URL:
 
-[source,role=copypaste]
+[source,bash,role=copypaste]
 ----
-http://gogs-%INFRA_PROJECT%.%CLUSTER_SUBDOMAIN%/%USERNAME%/nationalparks.git
+https://github.com/openshift-roadshow/nationalparks.git
 ----
 
-In *Git Type* select *Other*.
+In *Git Type* select *GitHub*.
 
 Select *Java* as your Builder Image, and be sure to select version *11*.
 

@@ -33,7 +33,7 @@ Now let's create them all together for our Pipeline:
 [.console-input]
 [source,bash,subs="+attributes,macros+"]
 ----
-oc create -f http://gogs-%INFRA_PROJECT%.%CLUSTER_SUBDOMAIN%/%USERNAME%/nationalparks/raw/master/pipeline/nationalparks-triggers-all.yaml -n %PROJECT_NAMESPACE%
+oc create -f +https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-triggers-all.yaml+ -n %PROJECT_NAMESPACE%
 ----
 
 This will create a new Pod with a Route that we can use to setup our Webhook on Gogs to trigger the automatic start of the Pipeline.
@@ -42,35 +42,35 @@ From left side menu, click on *Topology* to verify if a new Deployment *el-natio
 
 image::devops-pipeline-triggers-eventlistener.png[EventListener created]
 
-[#configuring_gogs_webhooks]
-== Exercise: Configuring Gogs Web Hooks
+[#fork_repository_from_GitHub]
+== Exercise: Fork NationalParks repository from GitHub
 
-Click on the Deployment, go into *Routes* section and and copy the *el-nationparks* Route URL.
+A link:https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo[fork] is a copy of a repository. Forking a repository allows you to freely experiment with changes without affecting the original project.
+
+In this step we will fork the original `nationalparks`repository to apply our changes and automatically trigger the Pipeline through a link:https://docs.github.com/en/free-pro-team@latest/developers/webhooks-and-events/about-webhooks[GitHub Webhook] that we're going to configure.
+
+Go to link:https://github.com/openshift-roadshow/nationalparks[Nationalparks] repository. From top-right side, click to *Fork* to start forking it into your account.
+
+image::nationalparks-codechanges-github-fork-1.png[Fork Repository]
+
+Select your account, and click *Fork*
+
+image::nationalparks-codechanges-github-fork-2.png[Fork in progress]
+
+Your repository is forked now, we can start adding our automation to that.
+
+[#configuring_github_webhooks]
+== Exercise: Configuring GitHub Web Hooks
+
+From Topology, click to `el-nationalparks` Deployment, go into *Routes* section and and copy the *el-nationparks* Route URL.
 
 image::devops-pipeline-triggers-route.png[EventListener created]
 
-Once you have the URL copied to your clipboard, navigate to the code repository that you have on Gogs:
+Once you have the URL copied to your clipboard, navigate to the code repository fork that you have on GitHub.
 
+From your fork page top-right menu, click *Settings*. Then from result left-side menu, click *Webhook*, then from right side click *Add webhooks*.
 
-link:http://gogs-%INFRA_PROJECT%.%CLUSTER_SUBDOMAIN%/%USERNAME%/nationalparks[Gogs Repository]
-
-
-Your Gogs credentials are:
-
-[.console-output]
-[source,bash]
-----
-username: %USERNAME%
-password: %GOGS_PASSWORD%
-----
-
-Click the Settings link on the top right of the screen:
-
-image::nationalparks-codechanges-gogs-settings.png[Webhook]
-
-Click on *Webhooks*, then the *Add Webhook* button, and finally select *Gogs*.
-
-image::nationalparks-codechanges-gogs-add-webhook.png[Webhook]
+image::nationalparks-codechanges-github-webhook-settings.png[Add Webhook]
 
 In the next screen, paste your link into the "Payload URL" field. You can leave the
 secret token field blank -- the secret is already in the URL and does not need
@@ -80,15 +80,15 @@ Change the `Content Type` to `application/json`.
 
 Finally, click on *Add Webhook*.
 
-image::nationalparks-codechanges-gogs-config-webhook.png[Webhook]
+image::nationalparks-codechanges-github-add-webhook.png[Webhook]
 
 Boom! From now on, every time you commit new source code to your Gogs
 repository, a new build and deploy will occur inside of OpenShift.  Let's try
 this out.
 
-[#using_gogs_webhooks]
-== Exercise: Using Gogs Web Hooks
-Click the *Files* tab in Gogs. This is Gogs's repository view.  
+[#using_github_webhooks]
+== Exercise: Using GitHub Web Hooks
+Click the *Code* tab in GitHub. This is GitHub's repository view.  
 
 CAUTION: Make sure that the drop-down menu at the upper right is set for 
 the *`master`* branch. Navigate to the
@@ -105,7 +105,7 @@ Then click on the `BackendController.java` file.
 Once you have the file on the screen, click the edit button in the top right
 hand corner as shown here:
 
-image::nationalparks-codechanges-gogs-change-code.png[Webhook]
+image::nationalparks-codechanges-github-change-code.png[Webhook]
 
 Change line number 20:
 
@@ -116,7 +116,7 @@ return new Backend("nationalparks","National Parks", new Coordinates("47.039304"
 
 To
 
-[source,java]
+[source,java,role="copypaste"]
 ----
 return new Backend("nationalparks","Amazing National Parks", new Coordinates("47.039304", "14.505178"), 4);
 ----
