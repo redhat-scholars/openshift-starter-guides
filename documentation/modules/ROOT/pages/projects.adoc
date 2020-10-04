@@ -39,9 +39,9 @@ You can also create and manage project from the CLI as well. Let's use our newly
 
 [.console-input]
 [source,bash,subs="+attributes,macros+"]
----
+----
 oc project %PROJECT_NAMESPACE%
----
+----
 
 We will be using a mix of command line tooling and the web console for the labs.
 Get ready!

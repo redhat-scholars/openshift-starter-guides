@@ -205,7 +205,6 @@ oc login --token=some_token --server=https://c104-e.us-east.containers.cloud.ibm
 [.console-output]
 [source,text]
 ----
-oc login --token=some-token --server=https://c104-e.us-east.containers.cloud.ibm.com:32208
 Logged into "https://c104-e.us-east.containers.cloud.ibm.com:32208" as "%USERNAME%" using the token provided.
 
 You have access to 68 projects, the list has been suppressed. You can list all projects with 'oc projects'
@@ -231,7 +230,7 @@ https_proxy=http://proxy-server.mycorp.com:3128/
 HTTPS_PROXY=http://proxy-server.mycorp.com:3128/
 ----
 
-**macOS:**
+**Mac OS X:**
 
 CAUTION: Replace the proxy server with the one for your environment/machine.
 
