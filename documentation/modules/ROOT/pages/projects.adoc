@@ -35,5 +35,13 @@ Select *Developer* to switch to the Developer perspective. Once the Developer pe
 
 image::explore-topology-view.png[Topology View]
 
+You can also create and manage project from the CLI as well. Let's use our newly created project %PROJECT_NAMESPACE% as our default one:
+
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
+---
+oc project %PROJECT_NAMESPACE%
+---
+
 We will be using a mix of command line tooling and the web console for the labs.
 Get ready!

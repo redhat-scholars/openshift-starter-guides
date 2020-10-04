@@ -70,7 +70,7 @@ image::prerequisites_cli_binaries.png[CLI Binaries]
 
 
 [#download_and_install_openshift_cli_on_linux]
-=== Download and Install OpenShift CLI on Linux
+==== Download and Install OpenShift CLI on Linux
 
 
 Once the file has been downloaded, you will need to extract the contents as it
@@ -126,7 +126,7 @@ If you get an error message, you have not updated your path correctly. If you
 need help, raise your hand and the instructor will assist.
 
 [#download_and_install_openshift_cli_on_mac]
-=== Download and Install OpenShift CLI on Mac
+==== Download and Install OpenShift CLI on Mac OS X
 
 
 Once the file has been downloaded, you will need to extract the contents as it
@@ -156,7 +156,7 @@ Now you can add the OpenShift CLI tools to your PATH.
 [.console-input]
 [source,bash,subs="+attributes,macros+"]
 ----
-export PATH=$PATH:~/openShift
+export PATH=$PATH:~/OpenShift
 ----
 
 At this point, we should have the oc tool available for use. Let's test this
@@ -182,56 +182,39 @@ If you get an error message, you have not updated your path correctly. If you
 need help, raise your hand and the instructor will assist.
 
 [#download_and_install_openshift_cli_on_windows]
-=== Download and Install OpenShift CLI on Windows
+==== Download and Install OpenShift CLI on Windows
 
-[#tab_completion]
-=== Tab Completion 
+[#connect_to_the_cluster_with_cli]
+=== Connect to the OpenShift Cluster from CLI
 
-The OpenShift command line tool supports the ability to use tab completion for the popular zsh and bash shells.  This suits the needs of users using either Linux or OS X.  If you are using Microsoft Windows, never fear, we will discuss some ways to get tab completion working on that operating system as well.
+Once your `oc` client is setup on your Workstation, you can connect to cluster and start working also with OpenShift CLI.
 
-[#tab_completion_on_mac_and_linux]
-==== Tab completion on Mac and Linux
+From Web Console overview, go to top-right menu bar and click to the dropdown menu containing your username, then click *Copy Login Command*:
 
-If you are on the Mac operating system, you will need to ensure that you have the *bash-completion* project installed. This can be accomplished using the popular brew system:
+image::prerequisites_copy_login_command.png[Copy Login Command]
 
-[.console-input]
-[source,bash,subs="+attributes,macros+"]
+Click on *Display Token* and copy the command under *Login with this token*:
+
+Example:
+
+[source,bash]
 ----
-brew install bash-completion
-----
-
-If you're on Linux, ensure you have *bash-completion* installed using your package manager (dnf, yum apt-get,...)
-
-Once *bash-completion* package is available in your machine, to enable tab completion in your shell, you can simply enter in the following command from your terminal
-
-[.console-input]
-[source,bash,subs="+attributes,macros+"]
-----
-oc completion bash >> oc_completion.sh
-source oc_completion.sh
+oc login --token=some_token --server=https://c104-e.us-east.containers.cloud.ibm.com:32208
 ----
 
-Alternatively, you can add this to your .bashrc file.
-
-If you are using zsh, you can run the following command:
-
-[.console-input]
-[source,bash,subs="+attributes,macros+"]
+[.console-output]
+[source,text]
 ----
-source <(oc completion zsh)
+oc login --token=some-token --server=https://c104-e.us-east.containers.cloud.ibm.com:32208
+Logged into "https://c104-e.us-east.containers.cloud.ibm.com:32208" as "%USERNAME%" using the token provided.
+
+You have access to 68 projects, the list has been suppressed. You can list all projects with 'oc projects'
+
+Using project "default".
 ----
-
-Alternatively, you can add this to your .zshrc file.
-
-[#tab_completion_on_windows]
-==== Tab completion on Windows
-
-For Windows users, things become a bit more tricky.  You could of course use the Linux Subsystem for Windows but you may want to consider using a combination of babun and cmder.  For a full list of instructions, you can check out the following blog post:
-
--  https://blog.openshift.com/openshift-3-tab-completion-for-windows/[https://blog.openshift.com/openshift-3-tab-completion-for-windows/]
 
 [#working_with_proxies]
-=== Working with proxies
+==== Working with proxies
 It might happen that you're behind a corporate proxy to access the internet. In this case, you'll need to set
 some additional environment variables for the oc command line to work.
 
