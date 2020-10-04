@@ -139,7 +139,7 @@ The output will be similar to the following:
 ----
 NAME                 REVISION   DESIRED   CURRENT   TRIGGERED BY
 mongodb              1          1         1         config,image(mongodb:3.2)
-parksmap             2          1         1         config,image(parksmap:%PARKSMAP_VERSION%)
+parksmap             2          1         1         config,image(parksmap:{parksmap-version})
 nationalparks        9          1         1         config,image(nationalparks:master)
 ----
 Now run the following command to rollback the latest code change:

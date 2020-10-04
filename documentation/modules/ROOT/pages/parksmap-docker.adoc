@@ -20,9 +20,9 @@ image::parksmap-devconsole-container-image.png[Add from Container Image]
 
 In the *Image Name* field, copy/paste the following into the box:
 
-[source,role=copypaste]
+[source,role=copypaste,subs="+macros,+attributes"]
 ----
-quay.io/openshiftroadshow/%PARKSMAP_IMAGENAME%:%PARKSMAP_VERSION%
+{parksmap-image}:{parksmap-version}
 ----
 
 Either press *enter* or click on the magnifying glass. OpenShift will then go
@@ -200,9 +200,9 @@ Whenever OpenShift asks the node's CRI (Container Runtime Interface) runtime (Do
 If it doesn't, it will pull it from the specified registry.
 
 There are a number of ways to customize this behavior. They are documented in
-https://%DOCS_URL%/applications/application_life_cycle_management/creating-applications-using-cli.html#applications-create-using-cli-image_creating-applications-using-cli[specifying an image]
+{openshift-docs-url}/applications/application_life_cycle_management/creating-applications-using-cli.html#applications-create-using-cli-image_creating-applications-using-cli[specifying an image]
 as well as
-https://%DOCS_URL%/openshift_images/managing_images/image-pull-policy.html[image pull policy].
+{openshift-docs-url}/openshift_images/managing_images/image-pull-policy.html[image pull policy].
 
 [#services]
 == Background: Services
@@ -226,7 +226,7 @@ The way that a *Service* maps to a set of *Pods* is via a system of *Labels* and
 protocols can be mapped.
 
 There is a lot more information about
-https://%DOCS_URL%/architecture/understanding-development.html#understanding-kubernetes-pods[Services],
+{openshift-docs-url}/architecture/understanding-development.html#understanding-kubernetes-pods[Services],
 including the YAML format to make one by hand, in the official documentation.
 
 Now that we understand the basics of what a *Service* is, let's take a look at
