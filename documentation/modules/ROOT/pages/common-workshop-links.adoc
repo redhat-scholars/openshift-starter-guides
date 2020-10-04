@@ -6,8 +6,7 @@ You can find all urls, hostnames, usernames and passwords that are needed during
 [#openshift_cluster_url]
 == OpenShift Cluster URL
 
-Console Address: http://console-openshift-console.%CLUSTER_SUBDOMAIN% +
-API Address: https://api.%CLUSTER_SUBDOMAIN%:6443 +
+Console Address: https://console-openshift-console.%CLUSTER_SUBDOMAIN% +
 
 Username: %USERNAME% + 
 Password: %PASSWORD% +
@@ -16,12 +15,12 @@ Password: %PASSWORD% +
 [#workshop_guides]
 == Workshop Guides
 
-Web: http://starter-guides-%INFRA_PROJECT%.%CLUSTER_SUBDOMAIN%
+Web: link:index.adoc[Starter Guides]
 
 [#web_terminal]
 == Web terminal
 
-Web: http://terminal-%INFRA_PROJECT%.%CLUSTER_SUBDOMAIN%
+Web: http://terminal-%PROJECT_NAMESPACE%.%CLUSTER_SUBDOMAIN%
 
 [#git_server]
 == Git Server
