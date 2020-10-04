@@ -21,7 +21,7 @@ asciidoc:
     project-namespace: workshop
     workshop-domain: rhscholars.devx.red
     kubernetes-version: v1.18.0
-    release-version: master
+    release-version: roks
     openshift-console-url: https://console-openshift-console.apps.example.com
     etherpad-url: http://example.com
   extensions:

@@ -10,7 +10,7 @@ content:
   sources:
     - url: git@github.com:redhat-scholars/openshift-starter-guides.git
       tags: []
-      branches: master
+      branches: roks
       start_path: documentation
 
 asciidoc:
@@ -20,7 +20,7 @@ asciidoc:
     parksmap-image: quay.io/openshiftroadshow/parksmap
     openshift-docs-url: https://docs.openshift.com/container-platform/4.5
     openshift-version: 4.5
-    release-version: master
+    release-version: roks
     page-pagination: true
   extensions:
     - ./lib/tab-block.js
