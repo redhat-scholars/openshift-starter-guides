@@ -657,7 +657,7 @@ can verify this by looking at the output of <code>oc get dc</code>:</p>
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                    REVISION   DESIRED   CURRENT   TRIGGERED BY
 mongodb-nationalparks   1          1         1         config,image(mongodb:3.6)
 nationalparks           2          1         1         config,image(nationalparks:master)
-parksmap                2          1         1         config,image(parksmap:%PARKSMAP_VERSION%))</code></pre>
+parksmap                2          1         1         config,image(parksmap:1.3.0))</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -809,7 +809,7 @@ API and asking about the <strong>Routes</strong> and <strong>Services</strong> i
 <strong>Label</strong> that is <code>type=parksmap-backend</code>, the application knows to interrogate
 the endpoints to look for map data.
 You can see the code that does this
-<a href="https://github.com/openshift-roadshow/parksmap-web/blob/%PARKSMAP_VERSION%/src/main/java/com/openshift/evg/roadshow/rest/RouteWatcher.java#L20">here</a>.</p>
+<a href="https://github.com/openshift-roadshow/parksmap-web/blob/1.3.0/src/main/java/com/openshift/evg/roadshow/rest/RouteWatcher.java#L20">here</a>.</p>
 </div>
 <div class="paragraph">
 <p>Fortunately, the command line provides a convenient way for us to manipulate

@@ -454,7 +454,7 @@ all the horsepower on our machine) and then just quickly send up the war file.</
 You could also use this pattern to actually send up your working directory to the S2I builder to have it do the Maven build
 on OpenShift. Using the local directory would relieve you from having Maven or any of the Java toolchain on your local
 machine AND would also not require git commit with a push. Read more in the
-<a href="https://%DOCS_URL%/dev_guide/dev_tutorials/binary_builds.html">official documentation</a>
+<a href="https://docs.openshift.com/container-platform/4.5/builds/basic-build-operations.html#builds-basic-start-source_basic-build-operations">official documentation</a>
 </td>
 </tr>
 </table>
@@ -471,7 +471,7 @@ machine AND would also not require git commit with a push. Read more in the
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git clone &lt;a href="https://github.com/openshift-roadshow/mlbparks.git" class="bare"&gt;https://github.com/openshift-roadshow/mlbparks.git&lt;/a&gt;</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git clone https://github.com/openshift-roadshow/mlbparks.git</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -527,7 +527,7 @@ This is the REST endpoint that gives basic info on the service and can be reache
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd /opt/app-root/src/mlbparks
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd mlbparks
 mvn package</code></pre>
 </div>
 </div>
