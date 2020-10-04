@@ -13,7 +13,7 @@ somehow die/exit are not automatically restarted. *ReplicationControllers* are
 how OpenShift "self heals".
 
 A *DeploymentConfiguration* (DC) defines how something in OpenShift should be
-deployed. From the https://%DOCS_URL%/applications/deployments/what-deployments-are.html[deployments documentation]:
+deployed. From the {openshift-docs-url}/applications/deployments/what-deployments-are.html[deployments documentation]:
 
 [quote]
 __
@@ -47,10 +47,10 @@ oc get dc
 ----
 
 [.console-output]
-[source,bash]
+[source,bash,subs="+macros,+attributes"]
 ----
 NAME       REVISION   DESIRED   CURRENT   TRIGGERED BY
-parksmap   1          1         1         config,image(parksmap:%PARKSMAP_VERSION%)
+parksmap   1          1         1         config,image(parksmap:{parksmap-version})
 ----
 
 To get more details, we can look into the *ReplicationController* (*RC*).
@@ -79,7 +79,7 @@ OpenShift's *HorizontalPodAutoscaler* effectively monitors the CPU usage of a
 set of instances and then manipulates the RCs accordingly.
 
 You can learn more about the CPU-based
-https://%DOCS_URL%/nodes/pods/nodes-pods-autoscaling.html#nodes-pods-autoscaling-about_nodes-pods-autoscaling[Horizontal Pod Autoscaler here]
+{openshift-docs-url}/nodes/pods/nodes-pods-autoscaling.html#nodes-pods-autoscaling-about_nodes-pods-autoscaling[Horizontal Pod Autoscaler here]
 
 [#scaling_the_application]
 == Exercise: Scaling the Application
@@ -242,7 +242,7 @@ application instance wasn't alive, it would kill the instance and then restart
 it, always ensuring that the desired number of replicas was in place.
 
 More information on probing applications is available in the
-https://%DOCS_URL%/nodes/containers/nodes-containers-health.html[Application
+{openshift-docs-url}/nodes/containers/nodes-containers-health.html[Application
 Health] section of the documentation and later in this guide.
 
 [#scale_down]

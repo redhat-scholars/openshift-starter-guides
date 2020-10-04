@@ -26,17 +26,4 @@ Web: http://terminal-%INFRA_PROJECT%.%CLUSTER_SUBDOMAIN%
 [#git_server]
 == Git Server
 
-Web: http://gogs-%INFRA_PROJECT%.%CLUSTER_SUBDOMAIN%
-
-Username: `%USERNAME%` + 
-Password: `%GOGS_PASSWORD%` + 
-
-[#nexus_maven_repository]
-== Nexus Maven repository
-
-Web: http://nexus-%INFRA_PROJECT%.%CLUSTER_SUBDOMAIN%
-
-[#openshift_ops_view]
-== OpenShift Ops View
-
-Web: http://ocp-ops-view-%INFRA_PROJECT%.%CLUSTER_SUBDOMAIN%
+Web: https://github.com

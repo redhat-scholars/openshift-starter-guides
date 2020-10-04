@@ -121,8 +121,7 @@ To
 return new Backend("nationalparks","Amazing National Parks", new Coordinates("47.039304", "14.505178"), 4);
 ----
 
-Click on Commit changes at the bottom of the screen. Feel free to enter a commit
-message.
+Click on *Commit changes* at the bottom of the screen. Feel free to enter a commit message.
 
 Once you have committed your changes, a new *PipelineRun* should almost instantaneously be
 triggered in OpenShift. Click *Pipeline* in the left navigation menu then `nationalparks-pipeline`. You should see a new one running: 
@@ -169,11 +168,11 @@ oc get dc
 The output will be similar to the following:
 
 [.console-output]
-[source,bash]
+[source,bash,subs="+macros,+attributes"]
 ----
 NAME                 REVISION   DESIRED   CURRENT   TRIGGERED BY
 mongodb              1          1         1         config,image(mongodb:3.6)
-parksmap             2          1         1         config,image(parksmap:%PARKSMAP_VERSION%)
+parksmap             2          1         1         config,image(parksmap:{parksmap-version})
 nationalparks        9          1         1         config,image(nationalparks:master)
 ----
 Now run the following command to rollback the latest code change:

@@ -122,12 +122,12 @@ warrant updating the internal version number of the *DeploymentConfiguration*. Y
 can verify this by looking at the output of `oc get dc`:
 
 [.console-output]
-[source,bash]
+[source,bash,subs="+macros,+attributes"]
 ----
 NAME                    REVISION   DESIRED   CURRENT   TRIGGERED BY
 mongodb-nationalparks   1          1         1         config,image(mongodb:3.6)
 nationalparks           2          1         1         config,image(nationalparks:master)
-parksmap                2          1         1         config,image(parksmap:%PARKSMAP_VERSION%))
+parksmap                2          1         1         config,image(parksmap:{parksmap-version}))
 ----
 
 Something that increments the version of a *DeploymentConfiguration*, by default,
@@ -240,7 +240,7 @@ API and asking about the *Routes* and *Services* in the project. If any of them 
 *Label* that is `type=parksmap-backend`, the application knows to interrogate
 the endpoints to look for map data.
 You can see the code that does this
-link:https://github.com/openshift-roadshow/parksmap-web/blob/%PARKSMAP_VERSION%/src/main/java/com/openshift/evg/roadshow/rest/RouteWatcher.java#L20[here].
+link:https://github.com/openshift-roadshow/parksmap-web/blob/{parksmap-version}/src/main/java/com/openshift/evg/roadshow/rest/RouteWatcher.java#L20[here].
 
 
 Fortunately, the command line provides a convenient way for us to manipulate
