@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Command Line Interface</title>
+    <title>Explore OpenShift</title>
     <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/common-explore.html">
-    <link rel="prev" href="common-parksmap-architecture.html">
-    <link rel="next" href="parksmap-docker.html">
+    <link rel="prev" href="common-environment.html">
+    <link rel="next" href="prerequisites.html">
     <meta name="generator" content="Antora 2.3.3">
     <link rel="stylesheet" href="../_/css/site.css">
 <link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
@@ -77,20 +77,47 @@
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="common-environment.html">OCP architecture</a>
   </li>
-  <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="common-parksmap-architecture.html">Parksmap Architecture</a>
-  </li>
   <li class="nav-item is-current-page" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="common-explore.html">Command Line Interface</a>
+    <a class="nav-link" href="common-explore.html">Explore OpenShift</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#using_a_project">Using a Project</a>
+    <a class="nav-link" href="#the_web_console">The Web Console</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#using_a_project">The Web Console</a>
+    <a class="nav-link" href="#command_line_interface">Command Line Interface</a>
   </li>
 </ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="prerequisites.html">Prerequisites</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="prerequisites.html#openshift_pipelines">OpenShift Pipelines</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="prerequisites.html#install_openshift_pipelines_from_operatorhub">Install OpenShift Pipelines from OperatorHub</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="prerequisites.html#github_account">GitHub Account</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="projects.html">Projects</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="projects.html#create_your_first_project">Create your First Project</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-parksmap-architecture.html">Parksmap Architecture</a>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
@@ -268,25 +295,25 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html">Automation with Pipelines</a>
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html">Automation with Pipelines</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html#webhooks">Web Hooks</a>
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#webhooks">Web Hooks</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html#adding_triggers_to_your_pipeline">Adding Triggers to your Pipeline</a>
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#adding_triggers_to_your_pipeline">Adding Triggers to your Pipeline</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html#configuring_gogs_webhooks">Exercise: Configuring Gogs Web Hooks</a>
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#configuring_gogs_webhooks">Exercise: Configuring Gogs Web Hooks</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html#using_gogs_webhooks">Exercise: Using Gogs Web Hooks</a>
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#using_gogs_webhooks">Exercise: Using Gogs Web Hooks</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html#rollback">Exercise: Rollback</a>
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#rollback">Exercise: Rollback</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html#rollforward">Exercise: Rollforward</a>
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#rollforward">Exercise: Rollforward</a>
   </li>
 </ul>
   </li>
@@ -372,12 +399,6 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="common-workshop-links.html#git_server">Git Server</a>
   </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="common-workshop-links.html#nexus_maven_repository">Nexus Maven Repository</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="common-workshop-links.html#openshift_ops_view">OpenShift Ops View</a>
-  </li>
 </ul>
   </li>
 </ul>
@@ -411,79 +432,14 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">OpenShift Starter Guides</a></li>
-    <li><a href="common-explore.html">Command Line Interface</a></li>
+    <li><a href="common-explore.html">Explore OpenShift</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-starter-guides/edit/master/documentation/modules/ROOT/pages/common-explore.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-starter-guides/edit/roks/documentation/modules/ROOT/pages/common-explore.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Command Line Interface</h1>
-<div id="preamble">
-<div class="sectionbody">
-<div class="paragraph">
-<p>OpenShift includes a feature-rich web console with both an Administrator perspective and a Developer perspective. In addition to the web console, OpenShift includes command line tools
-to provide users with a nice interface to work with applications deployed to the
-platform.  The <code>oc</code> command line tool is an executable written in the Go
-programming language and is available for the following operating systems:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Microsoft Windows</p>
-</li>
-<li>
-<p>Mac OS X</p>
-</li>
-<li>
-<p>Linux</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>This lab environment has the <code>oc</code> command line tool installed, and your lab user is already logged in to the OpenShift cluster.</p>
-</div>
-<div class="paragraph">
-<p>Issue the following command to see help information:</p>
-</div>
-<div class="listingblock console-input">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc help</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="using_a_project"><a class="anchor" href="#using_a_project"></a>Using a Project</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Projects are a top level concept to help you organize your deployments. An
-OpenShift project allows a community of users (or a user) to organize and manage
-their content in isolation from other communities. Each project has its own
-resources, policies (who can or cannot perform actions), and constraints (quotas
-and limits on resources, etc). Projects act as a "wrapper" around all the
-application services and endpoints you (or your teams) are using for your work.</p>
-</div>
-<div class="paragraph">
-<p>During this lab, we are going to use a few different commands to make sure that
-things in the environment are working as expected.  Don&#8217;t worry if you don&#8217;t
-understand all of the terminology as we will cover it in detail in later labs.</p>
-</div>
-<div class="paragraph">
-<p>In this lab environment, you already have access to single project: <strong>%PROJECT_NAMESPACE%</strong>.</p>
-</div>
-<div class="paragraph">
-<p>If you had multiple projects, the first thing you would want to do is to switch
-to the <strong>%PROJECT_NAMESPACE%</strong> project to make sure you&#8217;re on the correct project from now on.
-You can do this with the following command:</p>
-</div>
-<div class="listingblock console-input">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc project %PROJECT_NAMESPACE%</code></pre>
-</div>
-</div>
-</div>
-</div>
+<h1 class="page">Explore OpenShift</h1>
 <div class="sect1">
 <h2 id="the_web_console"><a class="anchor" href="#the_web_console"></a>The Web Console</h2>
 <div class="sectionbody">
@@ -508,48 +464,374 @@ perform various tasks via a browser.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The first time you access the web console, you will most likely be in the Administrator perspective. You will be presented with the list of Projects that you can access, and you will see something that looks like the following image:</p>
+<p>The first time you access the web console, you will most likely be in the Administrator perspective. If you are also the Cluster Administrator, you will be presented with an overview of the whole Cluster status:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/explore-webconsole1sc.png" alt="Web Console">
+<img src="_images/prerequisites_overview.png" alt="Web Console Overview">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="command_line_interface"><a class="anchor" href="#command_line_interface"></a>Command Line Interface</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>OpenShift ships with a feature rich web console as well as command line tools
+to provide users with a nice interface to work with applications deployed to the
+platform.  The OpenShift tools are a single executable written in the Go
+programming language and is available for the following operating systems:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Microsoft Windows</p>
+</li>
+<li>
+<p>Mac OS X</p>
+</li>
+<li>
+<p>Linux</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You might already have the OpenShift CLI available on your environment. You can verify
+it by running an <code>oc</code> command:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc version</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Click on the <strong>%PROJECT_NAMESPACE%</strong> project link. When you click on the
-<strong>%PROJECT_NAMESPACE%</strong> project, you will be taken to the project details page,
-which will list some metrics and details about your project. There&#8217;s nothing there now, but that will change as you progress through the lab.</p>
+<p>You should see the following (or something similar):</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Client Version: openshift-clients-4.5.0-202006231303.p0-9-ge40bd2dd9
+Server Version: 4.5.11
+Kubernetes Version: v1.18.3+b0068a8</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the <code>oc</code> doesn&#8217;t exist or you have an older version of the OpenShift CLI, follow
+the next sections to install or update the OpenShift CLI. Otherwise, skip to the
+next lab.</p>
+</div>
+<div class="sect2">
+<h3 id="download_openshift_cli"><a class="anchor" href="#download_openshift_cli"></a>Download CLI</h3>
+<div class="paragraph">
+<p>From top right menu bar, click to the little white question mark icon, then click to <strong>Command Line Tools</strong>:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/explore-webconsole2.png" alt="Explore Project">
+<img src="_images/prerequisites_cli_links.png" alt="Download CLI">
 </div>
 </div>
 <div class="paragraph">
-<p>At the top of the left navigation menu, you can toggle between the Administrator perspective and the Developer perspective.</p>
+<p>Scroll down to <strong>oc - OpenShift Command Line Interface (CLI)</strong></p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/explore-perspective-toggle.png" alt="Toggle Between Perspectives">
+<img src="_images/prerequisites_cli_binaries.png" alt="CLI Binaries">
 </div>
 </div>
+</div>
+<div class="sect2">
+<h3 id="download_and_install_openshift_cli_on_linux"><a class="anchor" href="#download_and_install_openshift_cli_on_linux"></a>Download and Install OpenShift CLI on Linux</h3>
 <div class="paragraph">
-<p>Select <strong>Developer</strong> to switch to the Developer perspective. Once the Developer perspective loads, you should be in the <strong>Topology</strong> view. Right now, there are no applications or components to view, but once you begin working on the lab, you&#8217;ll be able to visualize and interact with the components in your application here.</p>
+<p>Once the file has been downloaded, you will need to extract the contents as it
+is a compressed archive. I would suggest saving this file to the following
+directories:</p>
 </div>
-<div class="imageblock">
+<div class="listingblock">
 <div class="content">
-<img src="_images/explore-topology-view.png" alt="Topology View">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">~/OpenShift</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>We will be using a mix of command line tooling and the web console for the labs.
-Get ready!</p>
+<p>Open up a terminal window and change to the directory where you downloaded the
+file.  Once you are in the directory, enter in the following command:</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+The name of the oc packaged archive may vary. Adjust accordingly.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">tar zxvf oc-linux.tar.gz</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The tar.gz file name needs to be replaced by the entire name that was downloaded in the previous step.</p>
+</div>
+<div class="paragraph">
+<p>Now you can add the OpenShift CLI tools to your PATH.</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export PATH=$PATH:~/openShift</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>At this point, we should have the oc tool available for use. Let&#8217;s test this
+out by printing the version of the oc command:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc version</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see the following (or something similar):</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Client Version: openshift-clients-4.5.0-202006231303.p0-9-ge40bd2dd9
+Server Version: 4.5.11
+Kubernetes Version: v1.18.3+b0068a8</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you get an error message, you have not updated your path correctly. If you
+need help, raise your hand and the instructor will assist.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="download_and_install_openshift_cli_on_mac"><a class="anchor" href="#download_and_install_openshift_cli_on_mac"></a>Download and Install OpenShift CLI on Mac</h3>
+<div class="paragraph">
+<p>Once the file has been downloaded, you will need to extract the contents as it
+is a compressed archive. I would suggest saving this file to the following
+directories:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">~/OpenShift</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Open up a terminal window and change to the directory where you downloaded the
+file. Once you are in the directory, enter in the following command:</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+The name of the oc packaged archive may vary. Adjust accordingly.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">tar zxvf oc-macosx.tar.gz</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The tar.gz file name needs to be replaced by the entire name that was downloaded in the previous step.</p>
+</div>
+<div class="paragraph">
+<p>Now you can add the OpenShift CLI tools to your PATH.</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export PATH=$PATH:~/openShift</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>At this point, we should have the oc tool available for use. Let&#8217;s test this
+out by printing the version of the oc command:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc version</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see the following (or something similar):</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Client Version: openshift-clients-4.5.0-202006231303.p0-9-ge40bd2dd9
+Server Version: 4.5.11
+Kubernetes Version: v1.18.3+b0068a8</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you get an error message, you have not updated your path correctly. If you
+need help, raise your hand and the instructor will assist.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="download_and_install_openshift_cli_on_windows"><a class="anchor" href="#download_and_install_openshift_cli_on_windows"></a>Download and Install OpenShift CLI on Windows</h3>
+
+</div>
+<div class="sect2">
+<h3 id="tab_completion"><a class="anchor" href="#tab_completion"></a>Tab Completion</h3>
+<div class="paragraph">
+<p>The OpenShift command line tool supports the ability to use tab completion for the popular zsh and bash shells.  This suits the needs of users using either Linux or OS X.  If you are using Microsoft Windows, never fear, we will discuss some ways to get tab completion working on that operating system as well.</p>
+</div>
+<div class="sect3">
+<h4 id="tab_completion_on_mac_and_linux"><a class="anchor" href="#tab_completion_on_mac_and_linux"></a>Tab completion on Mac and Linux</h4>
+<div class="paragraph">
+<p>If you are on the Mac operating system, you will need to ensure that you have the <strong>bash-completion</strong> project installed. This can be accomplished using the popular brew system:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">brew install bash-completion</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you&#8217;re on Linux, ensure you have <strong>bash-completion</strong> installed using your package manager (dnf, yum apt-get,&#8230;&#8203;)</p>
+</div>
+<div class="paragraph">
+<p>Once <strong>bash-completion</strong> package is available in your machine, to enable tab completion in your shell, you can simply enter in the following command from your terminal</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc completion bash &gt;&gt; oc_completion.sh
+source oc_completion.sh</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Alternatively, you can add this to your .bashrc file.</p>
+</div>
+<div class="paragraph">
+<p>If you are using zsh, you can run the following command:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">source &lt;(oc completion zsh)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Alternatively, you can add this to your .zshrc file.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="tab_completion_on_windows"><a class="anchor" href="#tab_completion_on_windows"></a>Tab completion on Windows</h4>
+<div class="paragraph">
+<p>For Windows users, things become a bit more tricky.  You could of course use the Linux Subsystem for Windows but you may want to consider using a combination of babun and cmder.  For a full list of instructions, you can check out the following blog post:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://blog.openshift.com/openshift-3-tab-completion-for-windows/">https://blog.openshift.com/openshift-3-tab-completion-for-windows/</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="working_with_proxies"><a class="anchor" href="#working_with_proxies"></a>Working with proxies</h3>
+<div class="paragraph">
+<p>It might happen that you&#8217;re behind a corporate proxy to access the internet. In this case, you&#8217;ll need to set
+some additional environment variables for the oc command line to work.</p>
+</div>
+<div class="paragraph">
+<p><strong>Windows:</strong>
+Follow previous section&#8217;s instructions on how to set an Environment Variable on Windows. The variables you&#8217;ll need
+to set are:</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Replace the proxy server with the one for your environment/machine.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">https_proxy=http://proxy-server.mycorp.com:3128/
+HTTPS_PROXY=http://proxy-server.mycorp.com:3128/</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>macOS:</strong></p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Replace the proxy server with the one for your environment/machine.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export https_proxy=http://proxy-server.mycorp.com:3128/
+export HTTPS_PROXY=http://proxy-server.mycorp.com:3128/</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Linux:</strong></p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Replace the proxy server with the one for your environment/machine.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export https_proxy=http://proxy-server.mycorp.com:3128/
+export HTTPS_PROXY=http://proxy-server.mycorp.com:3128/</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If the proxy is secured, make sure to use the following URL pattern, replacing the contents with the
+appropriate values:</p>
+</div>
+<div class="paragraph">
+<p>export https_proxy=http://USERNAME:PASSOWRD@proxy-server.mycorp.com:3128/</p>
+</div>
+<div class="paragraph">
+<p><em>Special Characters</em>: If your password contains special characters, you must replace them with ASCII codes, for example the at sign @ must be replaced by the %40 code, e.g. p@ssword = p%40ssword.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="common-parksmap-architecture.html">Parksmap Architecture</a></span>
-  <span class="next"><a href="parksmap-docker.html">Parksmap App</a></span>
+  <span class="prev"><a href="common-environment.html">OCP architecture</a></span>
+  <span class="next"><a href="prerequisites.html">Prerequisites</a></span>
 </nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">

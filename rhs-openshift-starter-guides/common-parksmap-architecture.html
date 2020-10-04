@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Parksmap Architecture</title>
     <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/common-parksmap-architecture.html">
-    <link rel="prev" href="common-environment.html">
-    <link rel="next" href="common-explore.html">
+    <link rel="prev" href="projects.html">
+    <link rel="next" href="parksmap-docker.html">
     <meta name="generator" content="Antora 2.3.3">
     <link rel="stylesheet" href="../_/css/site.css">
 <link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
@@ -77,20 +77,47 @@
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="common-environment.html">OCP architecture</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="1">
-    <a class="nav-link" href="common-parksmap-architecture.html">Parksmap Architecture</a>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="common-explore.html">Explore OpenShift</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="common-explore.html#the_web_console">The Web Console</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="common-explore.html#command_line_interface">Command Line Interface</a>
+  </li>
+</ul>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="common-explore.html">Command Line Interface</a>
+    <a class="nav-link" href="prerequisites.html">Prerequisites</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="common-explore.html#using_a_project">Using a Project</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="common-explore.html#using_a_project">The Web Console</a>
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="prerequisites.html#openshift_pipelines">OpenShift Pipelines</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="prerequisites.html#install_openshift_pipelines_from_operatorhub">Install OpenShift Pipelines from OperatorHub</a>
   </li>
 </ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="prerequisites.html#github_account">GitHub Account</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="projects.html">Projects</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="projects.html#create_your_first_project">Create your First Project</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="common-parksmap-architecture.html">Parksmap Architecture</a>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
@@ -268,25 +295,25 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html">Automation with Pipelines</a>
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html">Automation with Pipelines</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html#webhooks">Web Hooks</a>
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#webhooks">Web Hooks</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html#adding_triggers_to_your_pipeline">Adding Triggers to your Pipeline</a>
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#adding_triggers_to_your_pipeline">Adding Triggers to your Pipeline</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html#configuring_gogs_webhooks">Exercise: Configuring Gogs Web Hooks</a>
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#configuring_gogs_webhooks">Exercise: Configuring Gogs Web Hooks</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html#using_gogs_webhooks">Exercise: Using Gogs Web Hooks</a>
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#using_gogs_webhooks">Exercise: Using Gogs Web Hooks</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html#rollback">Exercise: Rollback</a>
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#rollback">Exercise: Rollback</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html#rollforward">Exercise: Rollforward</a>
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#rollforward">Exercise: Rollforward</a>
   </li>
 </ul>
   </li>
@@ -372,12 +399,6 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="common-workshop-links.html#git_server">Git Server</a>
   </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="common-workshop-links.html#nexus_maven_repository">Nexus Maven Repository</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="common-workshop-links.html#openshift_ops_view">OpenShift Ops View</a>
-  </li>
 </ul>
   </li>
 </ul>
@@ -414,7 +435,7 @@
     <li><a href="common-parksmap-architecture.html">Parksmap Architecture</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-starter-guides/edit/master/documentation/modules/ROOT/pages/common-parksmap-architecture.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-starter-guides/edit/roks/documentation/modules/ROOT/pages/common-parksmap-architecture.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
@@ -450,8 +471,8 @@
 <p>The server-side component of the ParksMap web application acts as a communication gateway to all the available backends. These backends will be dynamically discovered by using service discovery mechanisms provided by OpenShift which will be discussed in more details in the following labs.</p>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="common-environment.html">OCP architecture</a></span>
-  <span class="next"><a href="common-explore.html">Command Line Interface</a></span>
+  <span class="prev"><a href="projects.html">Projects</a></span>
+  <span class="next"><a href="parksmap-docker.html">Parksmap App</a></span>
 </nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">

@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Debugging Apps</title>
-    <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/mlbparks-debugging.html">
-    <link rel="prev" href="mlbparks-binary-build.html">
-    <link rel="next" href="common-further-resources.html">
+    <title>Automation with Pipelines</title>
+    <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/nationalparks-java-pipeline-codechanges-github.html">
+    <link rel="prev" href="nationalparks-java-pipeline.html">
+    <link rel="next" href="mlbparks-templates.html">
     <meta name="generator" content="Antora 2.3.3">
     <link rel="stylesheet" href="../_/css/site.css">
 <link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
@@ -293,27 +293,27 @@
   </li>
 </ul>
   </li>
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item is-current-page" data-depth="1">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html">Automation with Pipelines</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#webhooks">Web Hooks</a>
+    <a class="nav-link" href="#webhooks">Web Hooks</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#adding_triggers_to_your_pipeline">Adding Triggers to your Pipeline</a>
+    <a class="nav-link" href="#adding_triggers_to_your_pipeline">Adding Triggers to your Pipeline</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#configuring_gogs_webhooks">Exercise: Configuring Gogs Web Hooks</a>
+    <a class="nav-link" href="#configuring_gogs_webhooks">Exercise: Configuring Gogs Web Hooks</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#using_gogs_webhooks">Exercise: Using Gogs Web Hooks</a>
+    <a class="nav-link" href="#using_gogs_webhooks">Exercise: Using Gogs Web Hooks</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#rollback">Exercise: Rollback</a>
+    <a class="nav-link" href="#rollback">Exercise: Rollback</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#rollforward">Exercise: Rollforward</a>
+    <a class="nav-link" href="#rollforward">Exercise: Rollforward</a>
   </li>
 </ul>
   </li>
@@ -359,22 +359,22 @@
   </li>
 </ul>
   </li>
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="mlbparks-debugging.html">Debugging Apps</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#port_forwading_and_debugging">Background: Port Forwarding and Debugging</a>
+    <a class="nav-link" href="mlbparks-debugging.html#port_forwading_and_debugging">Background: Port Forwarding and Debugging</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#enabling_debugging_in_eap_on_openshift">Exercise: Enabling Debugging in EAP on OpenShift</a>
+    <a class="nav-link" href="mlbparks-debugging.html#enabling_debugging_in_eap_on_openshift">Exercise: Enabling Debugging in EAP on OpenShift</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="#port-forwarding_from_pod_to_our_local_machine">Exercise: Port-Forwarding from the pod to our local machine</a>
+    <a class="nav-link" href="mlbparks-debugging.html#port-forwarding_from_pod_to_our_local_machine">Exercise: Port-Forwarding from the pod to our local machine</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="#setting_up_remote_debug_in_intellij">Setting up Remote Debug in IntelliJ</a>
+    <a class="nav-link" href="mlbparks-debugging.html#setting_up_remote_debug_in_intellij">Setting up Remote Debug in IntelliJ</a>
   </li>
 </ul>
   </li>
@@ -432,91 +432,234 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">OpenShift Starter Guides</a></li>
-    <li><a href="mlbparks-debugging.html">Debugging Apps</a></li>
+    <li><a href="nationalparks-java-pipeline-codechanges-github.html">Automation with Pipelines</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-starter-guides/edit/roks/documentation/modules/ROOT/pages/mlbparks-debugging.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-starter-guides/edit/roks/documentation/modules/ROOT/pages/nationalparks-java-pipeline-codechanges-github.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Debugging Apps</h1>
+<h1 class="page">Automation with Pipelines</h1>
 <div class="sect1">
-<h2 id="port_forwading_and_debugging"><a class="anchor" href="#port_forwading_and_debugging"></a>Background: Port Forwarding and Debugging</h2>
+<h2 id="webhooks"><a class="anchor" href="#webhooks"></a>Background: Web Hooks</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Just as we did before with remote shelling into our pods, we can also set up a port-forward between our local machine
-and our pod. The is useful for operations like connecting to a database running in a pod, viewing an administrative web
-interface we don&#8217;t want to expose to the public, or, in our case, attaching a debugger to the JVM running our application
-server.</p>
-</div>
-<div class="paragraph">
-<p>You can read more about port-forwarding from the
-<a href="https://docs.openshift.com/container-platform/4.5/dev_guide/port_forwarding.html">developer documentation</a>.</p>
-</div>
-<div class="paragraph">
-<p>By port forwarding the debugging port for the application server, we can attach the debugger from our IDE and actually
-step through the code in the pod as it is running in real time. By default EAP is not in debug mode, therefore we first
-need to turn on the debug ports</p>
+<p>Most Git repository servers support the concept of web hooks&#8201;&#8212;&#8201;calling to an
+external source via HTTP(S) when a change in the code repository happens.
+OpenShift provides an API endpoint that supports receiving hooks from
+remote systems in order to trigger builds. By pointing the code repository&#8217;s
+hook at the OpenShift Pipelines resources, automated code/build/deploy pipelines can be
+achieved.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="enabling_debugging_in_eap_on_openshift"><a class="anchor" href="#enabling_debugging_in_eap_on_openshift"></a>Exercise: Enabling Debugging in EAP on OpenShift</h2>
+<h2 id="adding_triggers_to_your_pipeline"><a class="anchor" href="#adding_triggers_to_your_pipeline"></a>Adding Triggers to your Pipeline</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>It is very simple to turn on debugging. The EAP S2I container we are using is looking for an environment variable to
-control whether or not to enable the debug port. All we need to do is set an environment variable for the deployment.</p>
+<p>Tekton <strong>Triggers</strong> enable us to configure Pipelines to respond to external events (Git push events, pull requests etc) such as Web Hooks.</p>
 </div>
-<div class="listingblock copypaste">
+<div class="paragraph">
+<p>Adding triggering support requires the creation of a <code>TriggerTemplate</code>, <code>TriggerBinding</code>, and an <code>EventListener</code> in our project.</p>
+</div>
+<div class="imageblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc set env dc/mlbparks DEBUG=true</code></pre>
+<img src="_images/devops-pipeline-triggers.png" alt="Triggers">
 </div>
 </div>
 <div class="paragraph">
-<p>This will force a redeploy of our MLBparks pod, this time with the JDWT transport enabled and serving on port 8787.</p>
+<p>Let&#8217;s see each component in detail:</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="port-forwarding_from_pod_to_our_local_machine"><a class="anchor" href="#port-forwarding_from_pod_to_our_local_machine"></a>Exercise: Port-Forwarding from the pod to our local machine</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>It is quite simple to do port-forwarding.</p>
-</div>
-<div class="paragraph">
-<p>First get the pods:</p>
-</div>
-<div class="listingblock copypaste">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pods</code></pre>
-</div>
-</div>
-<div class="listingblock console-output">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                             READY   STATUS      RESTARTS   AGE
-jenkins-1-deploy                 0/1     Completed   0          4d19h
-jenkins-1-l2g2c                  1/1     Running     0          4d19h
-mlbparks-1-build                 0/1     Completed   0          4d
-mlbparks-1-deploy                0/1     Completed   0          4d
-mlbparks-1-hook-post             0/1     Completed   0          4d
-mlbparks-2-build                 0/1     Completed   0          10m
-mlbparks-2-deploy                0/1     Completed   0          9m49s
-mlbparks-2-hook-post             0/1     Completed   0          8m59s
-mlbparks-3-deploy                1/1     Running     0          25s
-mlbparks-3-hcd8g                 0/1     Running     0          10s
-...</code></pre>
-</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>TriggerTemplate</strong>: a trigger template is a template for newly created resources. It supports parameters to create specific <code>PipelineResources</code> and <code>PipelineRuns</code>.</p>
+</li>
+<li>
+<p><strong>TriggerBinding</strong>: validates events and extracts payload fields</p>
+</li>
+<li>
+<p><strong>EventListener</strong>: connects <code>TriggerBindings</code> and <code>TriggerTemplates</code> into an addressable endpoint (the event sink). It uses the extracted event parameters from each TriggerBinding (and any supplied static parameters) to create the resources specified in the corresponding TriggerTemplate. It also optionally allows an external service to pre-process the event payload via the interceptor field.</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>Now we can set to set up the port-forward:</p>
+<p>Now let&#8217;s create them all together for our Pipeline:</p>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc port-forward mlbparks-3-hcd8g 8787:8787</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-triggers-all.yaml -n %PROJECT_NAMESPACE%</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>We said to port-forward from port 8787 on the pod to 8787 on the local machine. Now we can attach a remote debugger.</p>
+<p>This will create a new Pod with a Route that we can use to setup our Webhook on Gogs to trigger the automatic start of the Pipeline.</p>
+</div>
+<div class="paragraph">
+<p>From left side menu, click on <strong>Topology</strong> to verify if a new Deployment <strong>el-nationalparks</strong> for the <code>EventListener</code> has ben created:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devops-pipeline-triggers-eventlistener.png" alt="EventListener created">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fork_repository_from_GitHub"><a class="anchor" href="#fork_repository_from_GitHub"></a>Exercise: Fork NationalParks repository from GitHub</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A <a href="https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo">fork</a> is a copy of a repository. Forking a repository allows you to freely experiment with changes without affecting the original project.</p>
+</div>
+<div class="paragraph">
+<p>In this step we will fork the original `nationalparks`repository to apply our changes and automatically trigger the Pipeline through a <a href="https://docs.github.com/en/free-pro-team@latest/developers/webhooks-and-events/about-webhooks">GitHub Webhook</a> that we&#8217;re going to configure.</p>
+</div>
+<div class="paragraph">
+<p>Go to <a href="https://github.com/openshift-roadshow/nationalparks">Nationalparks</a> repository. From top-right side, click to <strong>Fork</strong> to start forking it into your account.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-codechanges-github-fork-1.png" alt="Fork Repository">
+</div>
+</div>
+<div class="paragraph">
+<p>Select your account, and click <strong>Fork</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-codechanges-github-fork-2.png" alt="Fork in progress">
+</div>
+</div>
+<div class="paragraph">
+<p>Your repository is forked now, we can start adding our automation to that.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configuring_github_webhooks"><a class="anchor" href="#configuring_github_webhooks"></a>Exercise: Configuring GitHub Web Hooks</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>From Topology, click to <code>el-nationalparks</code> Deployment, go into <strong>Routes</strong> section and and copy the <strong>el-nationparks</strong> Route URL.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devops-pipeline-triggers-route.png" alt="EventListener created">
+</div>
+</div>
+<div class="paragraph">
+<p>Once you have the URL copied to your clipboard, navigate to the code repository fork that you have on GitHub.</p>
+</div>
+<div class="paragraph">
+<p>From your fork page top-right menu, click <strong>Settings</strong>. Then from result left-side menu, click <strong>Webhook</strong>, then from right side click <strong>Add webhooks</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-codechanges-github-webhook-settings.png" alt="Add Webhook">
+</div>
+</div>
+<div class="paragraph">
+<p>In the next screen, paste your link into the "Payload URL" field. You can leave the
+secret token field blank&#8201;&#8212;&#8201;the secret is already in the URL and does not need
+to be in the payload.</p>
+</div>
+<div class="paragraph">
+<p>Change the <code>Content Type</code> to <code>application/json</code>.</p>
+</div>
+<div class="paragraph">
+<p>Finally, click on <strong>Add Webhook</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-codechanges-github-add-webhook.png" alt="Webhook">
+</div>
+</div>
+<div class="paragraph">
+<p>Boom! From now on, every time you commit new source code to your Gogs
+repository, a new build and deploy will occur inside of OpenShift.  Let&#8217;s try
+this out.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="using_github_webhooks"><a class="anchor" href="#using_github_webhooks"></a>Exercise: Using GitHub Web Hooks</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Click the <strong>Code</strong> tab in GitHub. This is GitHub&#8217;s repository view.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Make sure that the drop-down menu at the upper right is set for
+the <strong><code>master</code></strong> branch. Navigate to the
+following path:
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">src/main/java/com/openshift/evg/roadshow/parks/rest/</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then click on the <code>BackendController.java</code> file.</p>
+</div>
+<div class="paragraph">
+<p>Once you have the file on the screen, click the edit button in the top right
+hand corner as shown here:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-codechanges-github-change-code.png" alt="Webhook">
+</div>
+</div>
+<div class="paragraph">
+<p>Change line number 20:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">return new Backend("nationalparks","National Parks", new Coordinates("47.039304", "14.505178"), 4);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">return new Backend("nationalparks","Amazing National Parks", new Coordinates("47.039304", "14.505178"), 4);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Click on <strong>Commit changes</strong> at the bottom of the screen. Feel free to enter a commit message.</p>
+</div>
+<div class="paragraph">
+<p>Once you have committed your changes, a new <strong>PipelineRun</strong> should almost instantaneously be
+triggered in OpenShift. Click <strong>Pipeline</strong> in the left navigation menu then <code>nationalparks-pipeline</code>. You should see a new one running:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-codechanges-pipeline-running.png" alt="Webhook">
+</div>
+</div>
+<div class="paragraph">
+<p>or run the following command to verify:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get PipelineRun</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once the build and deploy has finished, verify your new image was automatically deployed by viewing the application in your browser:</p>
+</div>
+<div class="paragraph">
+<p><a href="http://nationalparks-%PROJECT_NAMESPACE%.%CLUSTER_SUBDOMAIN%/ws/info/">National Parks Info Page</a></p>
+</div>
+<div class="paragraph">
+<p>You should now see the new name you have set in the JSON string returned.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -525,44 +668,127 @@ mlbparks-3-hcd8g                 0/1     Running     0          10s
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-To stop port-forwarding just hit ctrl-c in the terminal window where you did the port forward command
+To see this in the map&#8217;s legend itself, you will need to scale down your parksmap to 0, then back up to 1 to force the app to refresh its cache.
 </td>
 </tr>
 </table>
 </div>
-<div class="sect2">
-<h3 id="setting_up_remote_debug_in_intellij"><a class="anchor" href="#setting_up_remote_debug_in_intellij"></a>Setting up Remote Debug in IntelliJ</h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="rollback"><a class="anchor" href="#rollback"></a>Exercise: Rollback</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Setting up remote debugging is quite easy in IntelliJ. First edit the run/debug configurations.
-Under the Run menu (alt-u), choose edit configurations. This will bring up the new configuration dialog.</p>
+<p>OpenShift allows you to move between different versions of an application
+without the need to rebuild each time. Every version (past builds) of the
+application exists as an image in the OpenShift registry. Using
+the <code>oc rollback</code> and <code>oc deploy</code> commands you can move back- or forward between
+various versions of applications.</p>
 </div>
 <div class="paragraph">
-<p>Click the plus in the top left corner, scroll down, and choose remote.</p>
+<p>In order to perform a rollback, you need to know the name of the <strong>Deployment Config</strong>
+which has deployed the application:</p>
 </div>
-<div class="imageblock">
+<div class="listingblock console-input">
 <div class="content">
-<img src="_images/mlbparks-debugging-intellij-debug-new.png" alt="IntelliJ New Configuration">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get dc</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>On the resulting dialog page, change the name at the top to "on OpenShift" or whatever is informative to you. Then
-towards the bottom right, change the port number to 8787. When you have done that click "OK".</p>
+<p>The output will be similar to the following:</p>
 </div>
-<div class="imageblock">
+<div class="listingblock console-output">
 <div class="content">
-<img src="_images/mlbparks-debugging-intellij-debug-info.png" alt="IntelliJ New Configuration">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                 REVISION   DESIRED   CURRENT   TRIGGERED BY
+mongodb              1          1         1         config,image(mongodb:3.6)
+parksmap             2          1         1         config,image(parksmap:1.3.0)
+nationalparks        9          1         1         config,image(nationalparks:master)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Now when you click the Debug icon in IntelliJ, it will open the debugger and attach to JVM in the pod on OpenShift. Go
-ahead and set a break point in any class you want and it will do normal debugging - just like you know and love!</p>
+<p>Now run the following command to rollback the latest code change:</p>
 </div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc rollback nationalparks</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You will see output like the following:</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">#5 rolled back to nationalparks-3
+Warning: the following images triggers were disabled: nationalparks:latest
+  You can re-enable them with: oc set triggers dc/nationalparks --auto</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once the deploy is complete, verify that the page header is reverted to the
+original header by viewing the application in your browser.</p>
+</div>
+<div class="paragraph">
+<p><a href="http://nationalparks-%PROJECT_NAMESPACE%.%CLUSTER_SUBDOMAIN%/ws/info/">National Parks Info Page</a></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Automatic deployment of new images is disabled as part of the rollback
+to prevent unwanted deployments soon after the rollback is complete. To re-enable
+the automatic deployments run this:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc set triggers dc/nationalparks --auto</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="rollforward"><a class="anchor" href="#rollforward"></a>Exercise: Rollforward</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Just like you performed a rollback, you can also perform a roll-forward using
+the same command. You&#8217;ll notice above that when you requested a <strong>rollback</strong>, it
+caused a new deployment (#3). In essence, we always move forwards in OpenShift,
+even if we are going "back".</p>
+</div>
+<div class="paragraph">
+<p>So, if we want to return to the "new code" version, that is deployment #4.</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc rollback nationalparks-4</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And you will see the following:</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">#6 rolled back to nationalparks-4
+Warning: the following images triggers were disabled: nationalparks
+  You can re-enable them with: oc set triggers dc/nationalparks --auto</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Cool! Once the <strong>rollback</strong> is complete, verify you again see "Amazing
+National Parks".</p>
 </div>
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="mlbparks-binary-build.html">Binary Builds</a></span>
-  <span class="next"><a href="common-further-resources.html">Further Resources</a></span>
+  <span class="prev"><a href="nationalparks-java-pipeline.html">Continuous Integration and Pipelines</a></span>
+  <span class="next"><a href="mlbparks-templates.html">MLBParks App</a></span>
 </nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">

@@ -6,7 +6,7 @@
     <title>Continuous Integration and Pipelines</title>
     <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/nationalparks-java-pipeline.html">
     <link rel="prev" href="nationalparks-application-health.html">
-    <link rel="next" href="nationalparks-java-pipeline-codechanges-gogs.html">
+    <link rel="next" href="nationalparks-java-pipeline-codechanges-github.html">
     <meta name="generator" content="Antora 2.3.3">
     <link rel="stylesheet" href="../_/css/site.css">
 <link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
@@ -78,19 +78,46 @@
     <a class="nav-link" href="common-environment.html">OCP architecture</a>
   </li>
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="common-parksmap-architecture.html">Parksmap Architecture</a>
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="common-explore.html">Explore OpenShift</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="common-explore.html#the_web_console">The Web Console</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="common-explore.html#command_line_interface">Command Line Interface</a>
+  </li>
+</ul>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="common-explore.html">Command Line Interface</a>
+    <a class="nav-link" href="prerequisites.html">Prerequisites</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="common-explore.html#using_a_project">Using a Project</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="common-explore.html#using_a_project">The Web Console</a>
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="prerequisites.html#openshift_pipelines">OpenShift Pipelines</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="prerequisites.html#install_openshift_pipelines_from_operatorhub">Install OpenShift Pipelines from OperatorHub</a>
   </li>
 </ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="prerequisites.html#github_account">GitHub Account</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="projects.html">Projects</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="projects.html#create_your_first_project">Create your First Project</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-parksmap-architecture.html">Parksmap Architecture</a>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
@@ -268,25 +295,25 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html">Automation with Pipelines</a>
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html">Automation with Pipelines</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html#webhooks">Web Hooks</a>
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#webhooks">Web Hooks</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html#adding_triggers_to_your_pipeline">Adding Triggers to your Pipeline</a>
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#adding_triggers_to_your_pipeline">Adding Triggers to your Pipeline</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html#configuring_gogs_webhooks">Exercise: Configuring Gogs Web Hooks</a>
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#configuring_gogs_webhooks">Exercise: Configuring Gogs Web Hooks</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html#using_gogs_webhooks">Exercise: Using Gogs Web Hooks</a>
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#using_gogs_webhooks">Exercise: Using Gogs Web Hooks</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html#rollback">Exercise: Rollback</a>
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#rollback">Exercise: Rollback</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-gogs.html#rollforward">Exercise: Rollforward</a>
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#rollforward">Exercise: Rollforward</a>
   </li>
 </ul>
   </li>
@@ -372,12 +399,6 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="common-workshop-links.html#git_server">Git Server</a>
   </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="common-workshop-links.html#nexus_maven_repository">Nexus Maven Repository</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="common-workshop-links.html#openshift_ops_view">OpenShift Ops View</a>
-  </li>
 </ul>
   </li>
 </ul>
@@ -414,7 +435,7 @@
     <li><a href="nationalparks-java-pipeline.html">Continuous Integration and Pipelines</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-starter-guides/edit/master/documentation/modules/ROOT/pages/nationalparks-java-pipeline.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-starter-guides/edit/roks/documentation/modules/ROOT/pages/nationalparks-java-pipeline.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
@@ -500,6 +521,18 @@ testing and deployment.</p>
 <div class="sect1">
 <h2 id="setup_your_pipeline"><a class="anchor" href="#setup_your_pipeline"></a>Set Up Your Pipeline</h2>
 <div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Ensure you met all <a href="prerequisites.doc">Prerequisites</a> before proceeding. <a href="prerequisites.adoc#openshift_pipelines">OpenShift Pipelines</a> installed in your cluster and a <a href="prerequisited.adoc#github_account">GitHub account</a> are required.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>A deployment configuration in OpenShift can contain
 <a href="https://docs.openshift.com/container-platform/4.5/applications/deployments/what-deployments-are.html#deployments-and-deploymentconfigs_what-deployments-are">Triggers</a>, which tells OpenShift to automatically redeploy the pod whenever a new image is built for that service or configuration changes.</p>
@@ -542,7 +575,7 @@ on the current Deployment to automatically trigger when there is a new image or 
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f &lt;a href="http://gogs-%INFRA_PROJECT%.%CLUSTER_SUBDOMAIN%/%USERNAME%/nationalparks/raw/master/pipeline/nationalparks-pipeline-all.yaml" class="bare"&gt;http://gogs-%INFRA_PROJECT%.%CLUSTER_SUBDOMAIN%/%USERNAME%/nationalparks/raw/master/pipeline/nationalparks-pipeline-all.yaml&lt;/a&gt; -n %PROJECT_NAMESPACE%</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f &lt;a href="https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipeline-all.yaml" class="bare"&gt;https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipeline-all.yaml&lt;/a&gt; -n %PROJECT_NAMESPACE%</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -705,11 +738,11 @@ spec:
 <p>You will be prompted with parameters to add the Pipeline, showing default ones.</p>
 </div>
 <div class="paragraph">
-<p>Add in <strong>APP_GIT_URL</strong> the <code>nationalparks</code> repository you have in Gogs:</p>
+<p>In <strong>APP_GIT_URL</strong>, verify the <code>nationalparks</code> repository from GitHub:</p>
 </div>
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">http://gogs-{{INFRA_PROJECT}}.{{cluster_subdomain}}/{{username}}/nationalparks.git</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">https://github.com/openshift-roadshow/nationalparks.git</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -759,7 +792,7 @@ spec:
 </div>
 <nav class="pagination">
   <span class="prev"><a href="nationalparks-application-health.html">Application Healthchecks</a></span>
-  <span class="next"><a href="nationalparks-java-pipeline-codechanges-gogs.html">Automation with Pipelines</a></span>
+  <span class="next"><a href="nationalparks-java-pipeline-codechanges-github.html">Automation with Pipelines</a></span>
 </nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
