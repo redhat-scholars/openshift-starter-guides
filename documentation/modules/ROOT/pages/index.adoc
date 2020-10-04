@@ -6,7 +6,7 @@
 
 Developing Java Applications on OpenShift - Starter Lab
 
-[.tiles.browse]
-== Browse modules
 
-IMPORTANT: MODULE UNDER DEVELOPMENT
+Containers are a standardized way to package apps with all of their dependencies to simplify deployment and speed delivery. Unlike virtual machines, containers do not bundle to the operating system. Only the application code, run time, libraries, and settings are packaged inside of containers. Thus, containers are more lightweight, portable, and efficient as compared to virtual machines.
+
+For developers looking to kickstart their projects, OpenShift enables efficient application development through streamlined workflows and validated integrations.
