@@ -537,18 +537,28 @@ that unhealthy instances are restarted (if they fail the liveness checks).</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Click to <strong>Add Readiness Probe</strong> and add in <strong>Path</strong> field: <code>/ws/healthz/</code></p>
+<p>Click to <strong>Add Readiness Probe</strong> and add in <strong>Path</strong> field:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code>/ws/healthz/</code></pre>
+</div>
 </div>
 <div class="paragraph">
 <p>Leave all default settings like <strong>Port</strong> 8080 and <strong>Type</strong> HTTP GET. Click the little bottom-right confirmation gray tick to confirm:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/nationalparks-application-health-settings.png" alt="Add Readiness and Liveness Probe">
+<img src="_images/images/nationalparks-application-health-settings.png" alt="Add Readiness and Liveness Probe">
 </div>
 </div>
 <div class="paragraph">
-<p>Repeat the same procedure for Liveness Probe, click to <strong>Add Liveness Probe</strong> and add in <strong>Path</strong> field: <code>/ws/healthz/</code></p>
+<p>Repeat the same procedure for Liveness Probe, click to <strong>Add Liveness Probe</strong> and add in <strong>Path</strong> field:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code>/ws/healthz/</code></pre>
+</div>
 </div>
 <div class="paragraph">
 <p>Leave all default settings like <strong>Port</strong> 8080 and <strong>Type</strong> HTTP GET. Click the little bottom-right confirmation gray tick to confirm.</p>
