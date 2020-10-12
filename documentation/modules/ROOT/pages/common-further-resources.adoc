@@ -31,9 +31,6 @@ Online or other OpenShift related products and services.
 be used to install a local OpenShift cluster on your own computer, running
 in a virtual machine.
 
-* *link:https://manage.openshift.com/[OpenShift Online]* - A shared public
-hosting environment for running your applications using OpenShift.
-
 * *link:https://www.openshift.com/dedicated[OpenShift Dedicated]* - A
 dedicated hosting environment for running your applications, managed and
 supported for you by Red Hat.
@@ -47,12 +44,12 @@ cloud environments.
 The following free online eBooks are also available for download related to
 OpenShift.
 
-* *link:https://www.openshift.com/for-developers/[OpenShift
+* *link:https://developers.redhat.com/books/openshift-developers-guide-impatient-beginners/old[OpenShift
 for Developers]*
 
 image::further-resources-openshift-for-developers.png[OpenShift for Developers]
 
-* *link:https://www.openshift.com/devops-with-openshift/[DevOps with OpenShift]*
+* *link:https://developers.redhat.com/books/devops-openshift-cloud-deployments-made-easy/old[DevOps with OpenShift]*
 
 image::further-resources-devops-with-openshift.png[DevOps with OpenShift]
 

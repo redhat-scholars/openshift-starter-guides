@@ -40,7 +40,7 @@
 * xref:nationalparks-java-databases.adoc[Connecting to a Database]
 ** xref:nationalparks-java-databases.adoc#storage[Background: Storage]
 ** xref:nationalparks-java-databases.adoc#deploy_mongodb[Exercise: Deploy MongoDB]
-** xref:nationalparks-java-databases.adoc#esploring_openshift_magic[Exercise: Exploring OpenShift Magic]
+** xref:nationalparks-java-databases.adoc#exploring_openshift_magic[Exercise: Exploring OpenShift Magic]
 ** xref:nationalparks-java-databases.adoc#data_data_everywhere[Exercise: Data, Data, Everywhere]
 ** xref:nationalparks-java-databases.adoc#working_with_labels[Exercise: Working With Labels]
 * xref:nationalparks-application-health.adoc[Application Healthchecks]
