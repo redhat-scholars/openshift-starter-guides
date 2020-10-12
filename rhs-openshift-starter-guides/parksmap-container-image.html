@@ -665,7 +665,22 @@ parksmap-1-gxbgq    1/1     Running     0          4m48s</code></pre>
 </div>
 <div class="paragraph">
 <p>The above output lists all of the <strong>Pods</strong> in the current <strong>Project</strong>, including the
-<strong>Pod</strong> name, state, restarts, and uptime. Once you have a <strong>Pod</strong>'s name, you can
+<strong>Pod</strong> name, state, restarts, and uptime.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You&#8217;ll notice two <strong>Pods</strong> here, one whose name ends with <strong>-deploy</strong>, and the other one with a random string as the final part of its name. The former it&#8217;s a temporary Pod used by OpenShift just to deploy the latter, which is the Pod containing your application.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Once you have a <strong>Pod</strong>'s name, you can
 get more information about the <strong>Pod</strong> using the <code>oc get</code> command.  To make the
 output readable, I suggest changing the output type to <strong>YAML</strong> using the
 following syntax:</p>
