@@ -65,7 +65,7 @@ image::devops-pipeline-deployment-triggers.png[Remove triggers]
 
 As pipelines provide the ability to promote applications between different stages of the delivery cycle, Tekton, which is our Continuous Integration server that will execute our pipelines, will be deployed on a project with a Continuous Integration role. Pipelines executed in this project will have permissions to interact with all the projects modeling the different stages of our delivery cycle. 
 
-For this example, we're going to deploy our pipeline which is stored in the same Gogs repository where we have our code. In a more real scenario, and in order to honor https://en.wikipedia.org/wiki/Infrastructure_as_Code[infrastructure as code] principles, we would store all the pipeline definitions along with every OpenShift resources definitions we would use.
+For this example, we're going to deploy our pipeline which is stored in the same GitHub repository where we have our code. In a more real scenario, and in order to honor https://en.wikipedia.org/wiki/Infrastructure_as_Code[infrastructure as code] principles, we would store all the pipeline definitions along with every OpenShift resources definitions we would use.
 
 
 [.console-input]

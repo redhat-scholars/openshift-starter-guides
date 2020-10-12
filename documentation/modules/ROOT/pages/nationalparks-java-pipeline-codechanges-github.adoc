@@ -36,7 +36,7 @@ Now let's create them all together for our Pipeline:
 oc create -f +https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-triggers-all.yaml+ -n %PROJECT_NAMESPACE%
 ----
 
-This will create a new Pod with a Route that we can use to setup our Webhook on Gogs to trigger the automatic start of the Pipeline.
+This will create a new Pod with a Route that we can use to setup our Webhook on GitHub to trigger the automatic start of the Pipeline.
 
 From left side menu, click on *Topology* to verify if a new Deployment *el-nationalparks* for the `EventListener` has ben created:
 
@@ -82,7 +82,7 @@ Finally, click on *Add Webhook*.
 
 image::nationalparks-codechanges-github-add-webhook.png[Webhook]
 
-Boom! From now on, every time you commit new source code to your Gogs
+Boom! From now on, every time you commit new source code to your GitHub
 repository, a new build and deploy will occur inside of OpenShift.  Let's try
 this out.
 
