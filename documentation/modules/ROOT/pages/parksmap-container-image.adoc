@@ -132,7 +132,11 @@ parksmap-1-gxbgq    1/1     Running     0          4m48s
 ----
 
 The above output lists all of the *Pods* in the current *Project*, including the
-*Pod* name, state, restarts, and uptime. Once you have a *Pod*'s name, you can
+*Pod* name, state, restarts, and uptime.
+
+NOTE: You'll notice two *Pods* here, one whose name ends with *-deploy*, and the other one with a random string as the final part of its name. The former it's a temporary Pod used by OpenShift just to deploy the latter, which is the Pod containing your application. 
+
+Once you have a *Pod*'s name, you can
 get more information about the *Pod* using the `oc get` command.  To make the
 output readable, I suggest changing the output type to *YAML* using the
 following syntax:
