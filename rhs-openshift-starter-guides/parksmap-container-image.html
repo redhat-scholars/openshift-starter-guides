@@ -3,8 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled</title>
-    <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/nationalparks-javascript-databases.html">
+    <title>Parksmap App</title>
+    <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/parksmap-container-image.html">
+    <link rel="prev" href="common-parksmap-architecture.html">
+    <link rel="next" href="parksmap-scaling.html">
     <meta name="generator" content="Antora 2.3.3">
     <link rel="stylesheet" href="../_/css/site.css">
 <link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
@@ -144,24 +146,24 @@
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="common-parksmap-architecture.html">Parksmap Architecture</a>
   </li>
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item is-current-page" data-depth="1">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="parksmap-container-image.html">Parksmap App</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="parksmap-container-image.html#deploy_your_first_image">Exercise: Deploying your First Image</a>
+    <a class="nav-link" href="#deploy_your_first_image">Exercise: Deploying your First Image</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="parksmap-container-image.html#containers_and_pods">Background: Containers and Pods</a>
+    <a class="nav-link" href="#containers_and_pods">Background: Containers and Pods</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="parksmap-container-image.html#examining_the_pod">Exercise: Examining the Pod</a>
+    <a class="nav-link" href="#examining_the_pod">Exercise: Examining the Pod</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="parksmap-container-image.html#customizing_image_lifecycle_behavior">Background: Customizing the Image Lifecycle Behavior</a>
+    <a class="nav-link" href="#customizing_image_lifecycle_behavior">Background: Customizing the Image Lifecycle Behavior</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="parksmap-container-image.html#services">Background: Services</a>
+    <a class="nav-link" href="#services">Background: Services</a>
   </li>
 </ul>
   </li>
@@ -452,303 +454,131 @@
 <button class="nav-toggle"></button>
   <a href="index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Starter Guides</a></li>
+    <li><a href="parksmap-container-image.html">Parksmap App</a></li>
+  </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-starter-guides/edit/roks/documentation/modules/ROOT/pages/nationalparks-javascript-databases.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-starter-guides/edit/roks/documentation/modules/ROOT/pages/parksmap-container-image.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
+<h1 class="page">Parksmap App</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p>In this section, we&#8217;re going to deploy a MongoDB database that will be used to store
-the data for the <code>nationalparks</code> application. We will also connect the
-<code>nationalparks</code> service with the newly deployed MongoDB database, so that the
-<code>nationalparks</code> service can load and query the database for the corresponding
-information.</p>
-</div>
-<div class="paragraph">
-<p>Finally, we will mark the <code>nationalparks</code> application as a backend for the map
-visualization tool, so that it can be dynamically discovered by the <code>parksmap</code>
-component using the OpenShift discovery mechanism and the map will be displayed
-automatically.</p>
+<p>In this lab, we&#8217;re going to deploy the web component of the ParksMap application which is also called <code>parksmap</code> and uses OpenShift&#8217;s service discovery mechanism to discover the backend services deployed and shows their data on the map.</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="_images/roadshow-app-architecture-nationalparks-2.png" alt="Application architecture" width="800">
-</div>
-</div>
-<div class="sect1">
-<h2 id="_background_storage"><a class="anchor" href="#_background_storage"></a>Background: Storage</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Most useful applications are "stateful" or "dynamic" in some way, and this is
-usually achieved with a database or other data storage. In this lab we are
-going to add MongoDB to our <code>nationalparks</code> application and then rewire it to
-talk to the database using environment variables via a secret.</p>
-</div>
-<div class="paragraph">
-<p>We are going to use the MongoDB image that is included with OpenShift.</p>
-</div>
-<div class="paragraph">
-<p>By default, this will use <strong>EmptyDir</strong> for data storage, which means if the <strong>Pod</strong>
-disappears the data does as well. In a real application you would use
-OpenShift&#8217;s persistent storage mechanism to attach real-world storage (NFS,
-Gluster, EBS, etc) to the <strong>Pods</strong> to give them a persistent place to store their
-data.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_exercise_deploy_mongodb"><a class="anchor" href="#_exercise_deploy_mongodb"></a>Exercise: Deploy MongoDB</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>As you&#8217;ve seen so far, the web console makes it very easy to deploy things onto
-OpenShift. When we deploy the database, we pass in some values for configuration.
-These values are used to set the username, password, and name of
-the database.</p>
-</div>
-<div class="paragraph">
-<p>The database image is built in a way that it will automatically configure itself
-using the supplied information (assuming there is no data already present in the
-persistent storage!). The image will ensure that:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>A database exists with the specified name</p>
-</li>
-<li>
-<p>A user exists with the specified name</p>
-</li>
-<li>
-<p>The user can access the specified database with the specified password</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>In the Developer Perspective in your <code>%PROJECT_NAMESPACE%</code> project,
-click <strong>+Add</strong> and then <strong>Database</strong>. In the Databases view, you can click <strong>Mongo</strong> to filter for just MongoDB.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/nationalparks-databases-catalog-databases.png" alt="Data Stores">
-</div>
-</div>
-<div class="paragraph">
-<p>Alternatively, you could type <code>mongodb</code> in the search box. Once you have drilled down to see MongoDB, find the <strong>MongoDB (Ephemeral)</strong> template and select it.  You will notice that there are multiple
-MongoDB templates available.  We do not need a database with persistent storage, so the ephemeral Mongo
-template is what you should choose.  Go ahead and select the ephemeral template and click the <strong>Instantiate Template</strong> button.</p>
-</div>
-<div class="paragraph">
-<p>When we performed the application build, there was no template. Rather, we selected the
-builder image directly and OpenShift presented only the standard build workflow.
-Now we are using a template - a preconfigured set of resources that includes
-parameters that can be customized. In our case, the parameters we are concerned
-with are&#8201;&#8212;&#8201;user, password, database, and
-admin password.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/nationalparks-databases-catalog-databases-mongodb-config.png" alt="MongoDB Deploy">
-</div>
-</div>
-<div class="admonitionblock caution">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-caution" title="Caution"></i>
-</td>
-<td class="content">
-Make sure you name your database service name <strong>mongodb-nationalparks</strong>
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>You can see that some of the fields say <strong>"generated if empty"</strong>. This is a
-feature of <strong>Templates</strong> in OpenShift. For
-now, be sure to use the following values in their respective fields:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>Database Service Name</code> : <code>mongodb-nationalparks</code></p>
-</li>
-<li>
-<p><code>MongoDB Connection Username</code> : <code>mongodb</code></p>
-</li>
-<li>
-<p><code>MongoDB Connection Password</code> : <code>mongodb</code></p>
-</li>
-<li>
-<p><code>MongoDB Database Name</code>: <code>mongodb</code></p>
-</li>
-<li>
-<p><code>MongoDB Admin Password</code> : <code>mongodb</code></p>
-</li>
-</ul>
-</div>
-<div class="admonitionblock caution">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-caution" title="Caution"></i>
-</td>
-<td class="content">
-Make sure to have configured the <strong><code>MongoDB Database Name</code></strong> parameter with the appropriate value as by default it will already have a value of <code>sampledb</code>.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Once you have entered in the above information, click on <strong>Create</strong> to go to the next step which will allow us to add a binding.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/nationalparks-databases-catalog-databases-mongodb-create-bining.png" alt="Bind Mongo">
-</div>
-</div>
-<div class="paragraph">
-<p>Click the secret name listed under <strong>Parameters</strong>. The secret can be used in other components, such as the <code>nationalparks</code> backend, to authenticate to the database.</p>
-</div>
-<div class="paragraph">
-<p>Now that the connection and authentication information stored in a secret in our project, we need to add it to the <code>nationalparks</code> backend. Click the <strong>Add Secret to Workload</strong> button.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/nationalparks-databases-binding-view-secret.png" alt="National Parks Binding">
-</div>
-</div>
-<div class="paragraph">
-<p>Select the <code>nationalparks</code> workload and click <strong>Save</strong>.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/nationalparks-databases-binding-add-binding-to-nationalparks.png" alt="Add binding to application">
-</div>
-</div>
-<div class="paragraph">
-<p>This change in configuration will trigger a new deployment of the <code>nationalparks</code> application with the environment variables properly injected.</p>
-</div>
-<div class="paragraph">
-<p>Back in the <strong>Topology</strong> view, click and drag the <code>mongodb-nationalparks</code> component into the light gray area that denotes the <code>workshop</code> application, so that all three components are contained in it.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/nationalparks-databases-add-mongodb-to-workshop-app-js.png" alt="Add mongodb to the workshop app">
-</div>
-</div>
-<div class="paragraph">
-<p>Next, let&#8217;s fix the labels assigned to the <code>mongodb-nationalparks</code> deployment. Currently, we cannot set labels when using the database template from the catalog, so we will fix these labels manually.</p>
-</div>
-<div class="paragraph">
-<p>Like before, we&#8217;ll add 3 labels:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong><em>app</em>=workshop</strong>  (the name we will be giving to the app)</p>
-</li>
-<li>
-<p><strong><em>component</em>=nationalparks</strong>  (the name of this deployment)</p>
-</li>
-<li>
-<p><strong><em>role</em>=database</strong> (the role this component plays in the overall application)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Execute the following command:</p>
-</div>
-<div class="listingblock execute-1">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc label dc/mongodb-nationalparks svc/mongodb-nationalparks app=workshop component=nationalparks role=database --overwrite</code></pre>
+<img src="_images/roadshow-app-architecture-parksmap-1.png" alt="Application architecture" width="800">
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_exercise_exploring_openshift_magic"><a class="anchor" href="#_exercise_exploring_openshift_magic"></a>Exercise: Exploring OpenShift Magic</h2>
+<h2 id="deploy_your_first_image"><a class="anchor" href="#deploy_your_first_image"></a>Exercise: Deploying your First Image</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>As soon as we changed the <strong>DeploymentConfiguration</strong>, some
-magic happened. OpenShift decided that this was a significant enough change to
-warrant updating the internal version number of the <strong>DeploymentConfiguration</strong>. You
-can verify this by looking at the output of <code>oc get dc</code>:</p>
+<p>Let&#8217;s start by doing the simplest thing possible - get a plain old
+Docker-formatted image to run on OpenShift. This is incredibly simple to do.
+With OpenShift it can be done directly from the web console.</p>
 </div>
-<div class="listingblock">
+<div class="paragraph">
+<p>Return to the <a href="http://console-openshift-console.%CLUSTER_SUBDOMAIN%/k8s/cluster/projects">Web Console</a>.</p>
+</div>
+<div class="paragraph">
+<p>If you&#8217;re no longer on the <strong>Topology</strong> view in the Developer perspective, return there now. Click <strong>Container Image</strong> to open a dialog that will allow you to specify the information for the image you want to deploy.</p>
+</div>
+<div class="imageblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                    REVISION   DESIRED   CURRENT   TRIGGERED BY
-mongodb-nationalparks   1          1         1         config,image(mongodb:3.6)
-nationalparks           2          1         1         config,image(nationalparks:master)
-parksmap                2          1         1         config,image(parksmap:%PARKSMAP_VERSION%))</code></pre>
+<img src="_images/parksmap-devconsole-container-image.png" alt="Add from Container Image">
 </div>
 </div>
 <div class="paragraph">
-<p>Something that increments the version of a <strong>DeploymentConfiguration</strong>, by default,
-causes a new deployment. You can verify this by looking at the output of <code>oc get
-rc</code>:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                      DESIRED   CURRENT   READY     AGE
-mongodb-nationalparks-1   1         1         1         24m
-nationalparks-1           0         0         0         3h
-nationalparks-2           1         1         1         8m
-parksmap-1                0         0         0         6h
-parksmap-2                1         1         1         5h</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>We see that the desired and current number of instances for the "-1" deployment
-is 0. The desired and current number of instances for the "-2" deployment is 1.
-This means that OpenShift has gracefully torn down our "old" application and
-stood up a "new" instance.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_exercise_data_data_everywhere"><a class="anchor" href="#_exercise_data_data_everywhere"></a>Exercise: Data, Data, Everywhere</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Now that we have a database deployed, we can again visit the <code>nationalparks</code> web
-service to query for data:</p>
+<p>In the <strong>Image Name</strong> field, copy/paste the following into the box:</p>
 </div>
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">http://nationalparks-%PROJECT_NAMESPACE%.%CLUSTER_SUBDOMAIN%/ws/data/all</code></pre>
+<pre class="highlightjs highlight"><code>quay.io/openshiftroadshow/parksmap:1.3.0</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>And the result?</p>
+<p>Either press <strong>enter</strong> or click on the magnifying glass. OpenShift will then go
+out to the container registry specified and interrogate the image.</p>
 </div>
-<div class="listingblock">
+<div class="paragraph">
+<p>Your screen will end up looking something like this:</p>
+</div>
+<div class="imageblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">[]</code></pre>
+<img src="_images/parksmap-image.png" alt="Explore Project">
 </div>
 </div>
 <div class="paragraph">
-<p>Where&#8217;s the data? Think about the process you went through. You deployed the
-application and then deployed the database. Nothing actually loaded anything
-<strong>INTO</strong> the database, though.</p>
+<p>Make sure to have the correct values in:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Application Name</strong> : workshop</p>
+</li>
+<li>
+<p><strong>Name</strong> : parksmap</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>The application provides an endpoint to do just that:</p>
+<p>Pick <strong>Deployment Config</strong> from <strong>Resource</strong> section.</p>
+</div>
+<div class="paragraph">
+<p>Un-check the checkbox next to "Create a route to the application". For learning purposes, we will create a <strong>Route</strong> for the application later in the workshop.</p>
+</div>
+<div class="paragraph">
+<p>At the bottom of the page, click <strong>Labels</strong> in the Advanced Options section and add some labels to better identify this deployment later. Labels will help us identify and filter components in the web console and in the command line.</p>
+</div>
+<div class="paragraph">
+<p>We will add 3 labels. After you enter the name=value pair for each label, press <strong>enter</strong> before typing the next. First the name to be given to the application.</p>
 </div>
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">http://nationalparks-%PROJECT_NAMESPACE%.%CLUSTER_SUBDOMAIN%/ws/data/load</code></pre>
+<pre class="highlightjs highlight"><code>app=workshop</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>And the result?</p>
+<p>Next the name of this deployment.</p>
 </div>
-<div class="listingblock">
+<div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Items inserted in database: 2740</code></pre>
+<pre class="highlightjs highlight"><code>component=parksmap</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>If you then go back to <code>/ws/data/all</code> you will see tons of JSON data now.
-That&#8217;s great. Our parks map should finally work!</p>
+<p>And finally, the role this component plays in the overall application.</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code>role=frontend</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parksmap-image-options.png" alt="Deploy image">
+</div>
+</div>
+<div class="paragraph">
+<p>Next, click the blue <strong>Create</strong> button. You will be directed to the <strong>Topology</strong> page, where you should see the visualization for the <code>parksmap</code> deployment config in the <code>workshop</code> application.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parksmap-dc-topology.png" alt="Topology View with Parksmap">
+</div>
+</div>
+<div class="paragraph">
+<p>These few steps are the only ones you need to run to get a
+container image deployed on OpenShift. This should work with any
+container image that follows best practices, such as defining an EXPOSE
+port, not needing to run specifically as the <strong>root user</strong> or other user name, and a single non-exiting CMD to execute on start.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -757,21 +587,88 @@ That&#8217;s great. Our parks map should finally work!</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-There&#8217;s some errors reported with browsers like firefox 54 that don&#8217;t properly parse the resulting JSON. It&#8217;s
-a browser problem, and the application is working properly.
+Providing appropriate labels is desired when deploying complex applications for organization purposes. OpenShift uses a label <strong>app</strong> to define and group components together in the Overview page. OpenShift will create this label with some default if the user doesn&#8217;t provide it explicitly.
 </td>
 </tr>
 </table>
 </div>
-<div class="listingblock copypaste">
+</div>
+</div>
+<div class="sect1">
+<h2 id="containers_and_pods"><a class="anchor" href="#containers_and_pods"></a>Background: Containers and Pods</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Before we start digging in, we need to understand how containers and <strong>Pods</strong> are
+related. We will not be covering the background on these technologies in this lab but if you have questions please inform the instructor. Instead, we will dive right in and start using them.</p>
+</div>
+<div class="paragraph">
+<p>In OpenShift, the smallest deployable unit is a <strong>Pod</strong>. A <strong>Pod</strong> is a group of one or more OCI containers deployed together and guaranteed to be on the same host.
+From the official OpenShift documentation:</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<em>
+Each <strong>Pod</strong> has its own IP address, therefore owning its entire port space, and
+containers within pods can share storage. <strong>Pods</strong> can be "tagged" with one or
+more labels, which are then used to select and manage groups of <strong>pods</strong> in a
+single operation.
+</em>
+</blockquote>
+</div>
+<div class="paragraph">
+<p><strong>Pods</strong> can contain multiple OCI containers. The general idea is for a <strong>Pod</strong> to
+contain a "main process" and any auxiliary services you want to run along with that process. Examples of containers you might put in a <strong>Pod</strong> are, an Apache HTTPD
+server, a log analyzer, and a file service to help manage uploaded files.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="examining_the_pod"><a class="anchor" href="#examining_the_pod"></a>Exercise: Examining the Pod</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you click on the <code>parksmap</code> entry in the Topology view, you will see some information about that deployment config. The <strong>Resources</strong> tab may be displayed by default. If so, click on the <strong>Details</strong> tab. On that panel, you will see that there is a single <strong>Pod</strong> that was created by your actions.</p>
+</div>
+<div class="imageblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">http://parksmap-%PROJECT_NAMESPACE%.%CLUSTER_SUBDOMAIN%</code></pre>
+<img src="_images/parksmap-overview.png" alt="Pod overview">
 </div>
 </div>
 <div class="paragraph">
-<p>Hmm&#8230;&#8203; There&#8217;s just one thing. The main map <strong>STILL</strong> isn&#8217;t displaying the parks.
-That&#8217;s because the front end parks map only tries to talk to services that have
-the right <strong>Label</strong>.</p>
+<p>You can also get a list of all the <strong>Pods</strong> created within your <strong>Project</strong>, by navigating to <strong>Workloads &#8594; Pods</strong> in the Administrator perspective of the web console.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parksmap-podlist.png" alt="Pod list">
+</div>
+</div>
+<div class="paragraph">
+<p>This <strong>Pod</strong> contains a single container, which
+happens to be the <code>parksmap</code> application - a simple Spring Boot/Java application.</p>
+</div>
+<div class="paragraph">
+<p>You can also examine <strong>Pods</strong> from the command line:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pods</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see output that looks similar to:</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                READY   STATUS      RESTARTS   AGE
+parksmap-1-deploy   0/1     Completed   0          4m56s
+parksmap-1-gxbgq    1/1     Running     0          4m48s</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The above output lists all of the <strong>Pods</strong> in the current <strong>Project</strong>, including the
+<strong>Pod</strong> name, state, restarts, and uptime. Once you have a <strong>Pod</strong>'s name, you can
+get more information about the <strong>Pod</strong> using the <code>oc get</code> command.  To make the
+output readable, I suggest changing the output type to <strong>YAML</strong> using the
+following syntax:</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -780,129 +677,319 @@ the right <strong>Label</strong>.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<div class="paragraph">
-<p>You are probably wondering how the database connection magically started
-working? When deploying applications to OpenShift, it is always best to use
-environment variables, secrets, or configMaps to define connections to dependent systems.  This allows
-for application portability across different environments.  The source file that
-performs the connection as well as creates the database schema can be viewed
-here:</p>
-</div>
-<div class="listingblock copypaste">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">https://github.com/openshift-roadshow/nationalparks-js/blob/master/bin/config.js#L4-L11</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>In short summary: By referring to bindings to connect to services
-(like databases), it can be trivial to promote applications throughout different
-lifecycle environments on OpenShift without having to modify application code.</p>
-</div>
+Make sure you use the correct <strong>Pod</strong> name from your output.
 </td>
 </tr>
 </table>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_exercise_working_with_labels"><a class="anchor" href="#_exercise_working_with_labels"></a>Exercise: Working With Labels</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>We explored how a <strong>Label</strong> is just a key=value pair earlier when looking at
-<strong>Services</strong> and <strong>Routes</strong> and <strong>Selectors</strong>. In general, a <strong>Label</strong> is simply an
-arbitrary key=value pair. It could be anything.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>pizza=pepperoni</code></p>
-</li>
-<li>
-<p><code>pet=dog</code></p>
-</li>
-<li>
-<p><code>openshift=awesome</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>In the case of the parks map, the application is actually querying the OpenShift
-API and asking about the <strong>Routes</strong> and <strong>Services</strong> in the project. If any of them have a
-<strong>Label</strong> that is <code>type=parksmap-backend</code>, the application knows to interrogate
-the endpoints to look for map data.
-You can see the code that does this
-<a href="https://github.com/openshift-roadshow/parksmap-web/blob/%PARKSMAP_VERSION%/src/main/java/com/openshift/evg/roadshow/rest/RouteWatcher.java#L20">here</a>.</p>
-</div>
-<div class="paragraph">
-<p>Fortunately, the command line provides a convenient way for us to manipulate
-labels. <code>describe</code> the <code>nationalparks</code> service:</p>
-</div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc describe route nationalparks</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pod parksmap-1-gxbgq -o yaml</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>You should see something like the following output (which has been truncated due
+to space considerations of this workshop manual):</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Name:                   nationalparks
-Namespace:              %PROJECT_NAMESPACE%
-Created:                2 hours ago
-Labels:                 app=workshop
-                        app.kubernetes.io/component=nationalparks
-                        app.kubernetes.io/instance=nationalparks
-                        app.kubernetes.io/name=java
-                        app.kubernetes.io/part-of=workshop
-                        app.openshift.io/runtime=java
-                        app.openshift.io/runtime-version=8
-                        component=nationalparks
-                        role=backend
-Annotations:            openshift.io/host.generated=true
-Requested Host:         nationalparks-%PROJECT_NAMESPACE%.%CLUSTER_SUBDOMAIN%
-                        exposed on router router 2 hours ago
-Path:                   &lt;none&gt;
-TLS Termination:        &lt;none&gt;
-Insecure Policy:        &lt;none&gt;
-Endpoint Port:          8080-tcp
-
-Service:                nationalparks
-Weight:                 100 (100%)
-Endpoints:              10.1.9.8:8080</code></pre>
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    k8s.v1.cni.cncf.io/networks-status: |-
+      [{
+          "name": "openshift-sdn",
+          "interface": "eth0",
+          "ips": [
+              "10.130.2.68"
+          ],
+          "default": true,
+          "dns": {}
+      }]
+    openshift.io/deployment-config.latest-version: "1"
+    openshift.io/deployment-config.name: parksmap
+    openshift.io/deployment.name: parksmap-1
+    openshift.io/generated-by: OpenShiftWebConsole
+    openshift.io/scc: restricted
+  creationTimestamp: 2029-09-20T17:45:45Z
+  generateName: parksmap-1-
+  labels:
+    app: parksmap
+    deployment: parksmap-1
+    deploymentconfig: parksmap
+  name: parksmap-1-gxbgq
+...............</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>You see that it already has some labels. Now, use <code>oc label</code>:</p>
+<p>The web interface also shows a lot of the same information on the <strong>Pod</strong> details
+page. If you click on the name of the <strong>Pod</strong>, you will
+find the details page. You can also get there by clicking on the <code>parksmap</code> deployment config on the <strong>Topology</strong> page, selecting <strong>Resources</strong>, and then clicking the <strong>Pod</strong> name.</p>
 </div>
-<div class="listingblock execute-1">
+<div class="imageblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc label route nationalparks type=parksmap-backend</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>You will see something like:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">route.route.openshift.io/nationalparks labeled</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If you check your browser now:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">http://parksmap-%PROJECT_NAMESPACE%.%CLUSTER_SUBDOMAIN%/</code></pre>
+<img src="_images/parksmap-dc-resources.png" alt="Parksmap Resources">
 </div>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/nationalparks-databases-new-parks.png" alt="MongoDB">
+<img src="_images/parksmap-pod.png" alt="Pod list">
 </div>
 </div>
 <div class="paragraph">
-<p>You&#8217;ll notice that the parks suddenly are showing up. That&#8217;s really cool!</p>
+<p>Getting the <code>parksmap</code> image running may take a little while to complete. Each
+OpenShift node that is asked to run the image has to pull (download) it, if the
+node does not already have it cached locally. You can check on the status of the
+image download and deployment in the <strong>Pod</strong> details page, or from the command
+line with the <code>oc get pods</code> command that you used before.</p>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="customizing_image_lifecycle_behavior"><a class="anchor" href="#customizing_image_lifecycle_behavior"></a>Background: Customizing the Image Lifecycle Behavior</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Whenever OpenShift asks the node&#8217;s CRI (Container Runtime Interface) runtime (Docker daemon or CRI-O) to run an image, the runtime will check to make sure it has the right "version" of the image to run.
+If it doesn&#8217;t, it will pull it from the specified registry.</p>
+</div>
+<div class="paragraph">
+<p>There are a number of ways to customize this behavior. They are documented in
+<a href="https://docs.openshift.com/container-platform/4.5/applications/application_life_cycle_management/creating-applications-using-cli.html#applications-create-using-cli-image_creating-applications-using-cli">specifying an image</a>
+as well as
+<a href="https://docs.openshift.com/container-platform/4.5/openshift_images/managing_images/image-pull-policy.html">image pull policy</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="services"><a class="anchor" href="#services"></a>Background: Services</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Services</strong> provide a convenient abstraction layer inside OpenShift to find a
+group of similar <strong>Pods</strong>. They also act as an internal proxy/load balancer between
+those <strong>Pods</strong> and anything else that needs to access them from inside the
+OpenShift environment. For example, if you needed more <code>parksmap</code> instances to
+handle the load, you could spin up more <strong>Pods</strong>. OpenShift automatically maps
+them as endpoints to the <strong>Service</strong>, and the incoming requests would not notice
+anything different except that the <strong>Service</strong> was now doing a better job handling
+the requests.</p>
+</div>
+<div class="paragraph">
+<p>When you asked OpenShift to run the image, it automatically created a <strong>Service</strong>
+for you. Remember that services are an internal construct. They are not
+available to the "outside world", or anything that is outside the OpenShift
+environment. That&#8217;s okay, as you will learn later.</p>
+</div>
+<div class="paragraph">
+<p>The way that a <strong>Service</strong> maps to a set of <strong>Pods</strong> is via a system of <strong>Labels</strong> and
+<strong>Selectors</strong>. <strong>Services</strong> are assigned a fixed IP address and many ports and
+protocols can be mapped.</p>
+</div>
+<div class="paragraph">
+<p>There is a lot more information about
+<a href="https://docs.openshift.com/container-platform/4.5/architecture/understanding-development.html#understanding-kubernetes-pods">Services</a>,
+including the YAML format to make one by hand, in the official documentation.</p>
+</div>
+<div class="paragraph">
+<p>Now that we understand the basics of what a <strong>Service</strong> is, let&#8217;s take a look at
+the <strong>Service</strong> that was created for the image that we just deployed. In order to
+view the <strong>Services</strong> defined in your <strong>Project</strong>, enter in the following command:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get services</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see output similar to the following:</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME       TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+parksmap   ClusterIP   172.30.22.209  &lt;none&gt;        8080/TCP   3h</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the above output, we can see that we have a <strong>Service</strong> named <code>parksmap</code> with an
+IP/Port combination of 172.30.22.209/8080TCP. Your IP address may be different, as
+each <strong>Service</strong> receives a unique IP address upon creation. <strong>Service</strong> IPs are
+fixed and never change for the life of the <strong>Service</strong>.</p>
+</div>
+<div class="paragraph">
+<p>In the Developer perspective from the <strong>Topology</strong> view, service information is available by clicking the <code>parksmap</code> deployment config, then <strong>Resources</strong>, and then you should see the <code>parksmap</code> entry in the <strong>Services</strong> section.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parksmap-serviceslist.png" alt="Services list">
+</div>
+</div>
+<div class="paragraph">
+<p>You can also get more detailed information about a <strong>Service</strong> by using the
+following command to display the data in YAML:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get service parksmap -o yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see output similar to the following:</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftWebConsole
+  creationTimestamp: "2020-09-30T14:10:12Z"
+  labels:
+    app: workshop
+    app.kubernetes.io/component: parksmap
+    app.kubernetes.io/instance: parksmap
+    app.kubernetes.io/part-of: workshop
+    component: parksmap
+    role: frontend
+  name: parksmap
+  namespace: user1
+  resourceVersion: "1062269"
+  selfLink: /api/v1/namespaces/user1/services/parksmap
+  uid: e1ff69c8-cb2f-11e9-82a1-0267eec7e1a0
+spec:
+  clusterIP: 172.30.22.209
+  ports:
+  - name: 8080-tcp
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: parksmap
+    deploymentconfig: parksmap
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Take note of the <code>selector</code> stanza. Remember it.</p>
+</div>
+<div class="paragraph">
+<p>Alternatively, you can use the web console to view information about the <strong>Service</strong> by clicking on it from the previous screen.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parksmap-service.png" alt="Service">
+</div>
+</div>
+<div class="paragraph">
+<p>It is also of interest to view the YAML of the <strong>Pod</strong> to understand how OpenShift
+wires components together. For example, run the following command to get the
+name of your <code>parksmap</code> <strong>Pod</strong>:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pods</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see output similar to the following:</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                READY   STATUS      RESTARTS   AGE
+parksmap-1-deploy   0/1     Completed   0          12m
+parksmap-1-gxbgq    1/1     Running     0          12m</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now you can view the detailed data for your <strong>Pod</strong> with the following command:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pod parksmap-1-gxbgq -o yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Under the <code>metadata</code> section you should see the following:</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">  labels:
+    app: parksmap
+    deployment: parksmap-1
+    deploymentconfig: parksmap</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <strong>Service</strong> has <code>selector</code> stanza that refers to <code>deploymentconfig=parksmap</code>.</p>
+</li>
+<li>
+<p>The <strong>Pod</strong> has multiple <strong>Labels</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>app=parksmap</code></p>
+</li>
+<li>
+<p><code>deployment=parksmap-1</code></p>
+</li>
+<li>
+<p><code>deploymentconfig=parksmap</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Labels</strong> are just key/value pairs. Any <strong>Pod</strong> in this <strong>Project</strong> that has a <strong>Label</strong> that
+matches the <strong>Selector</strong> will be associated with the <strong>Service</strong>. To see this in
+action, issue the following command:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc describe service parksmap</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see something like the following output:</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">Name:              parksmap
+Namespace:         user1
+Labels:            app=workshop
+                   app.kubernetes.io/component=parksmap
+                   app.kubernetes.io/instance=parksmap
+                   app.kubernetes.io/part-of=workshop
+                   component=parksmap
+                   role=frontend
+Annotations:       openshift.io/generated-by: OpenShiftWebConsole
+Selector:          app=parksmap,deploymentconfig=parksmap
+Type:              ClusterIP
+IP:                172.30.22.209
+Port:              8080-tcp  8080/TCP
+TargetPort:        8080/TCP
+Endpoints:         10.128.2.90:8080
+Session Affinity:  None
+Events:            &lt;none&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You may be wondering why only one endpoint is listed. That is because there is
+only one <strong>Pod</strong> currently running.  In the next lab, we will learn how to scale
+an application, at which point you will be able to see multiple endpoints
+associated with the <strong>Service</strong>.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="common-parksmap-architecture.html" class="query-params-link">Parksmap Architecture</a></span>
+  <span class="next"><a href="parksmap-scaling.html" class="query-params-link">Scaling Apps</a></span>
+</nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
