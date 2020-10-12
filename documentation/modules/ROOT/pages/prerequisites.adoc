@@ -32,6 +32,8 @@ image::prerequisites_operatorhub_pipelines_installed.png[Pipelines Installed]
 [#github_account]
 == GitHub Account
 
-We will demonstrate the automation capability with OpenShift Pipelines, and in order to do this, we need you to fork our Java backend app repository https://github.com/openshift-roadshow/nationalparks[NationalParks] from https://github.com[GitHub].
+We will demonstrate the automation capability with OpenShift Pipelines, and in order to do this, we need you to have an account on https://github.com[GitHub].
 
 If you don't have an account on GitHub, please create one https://github.com/join[here].
+
+Also ensure link:https://git-scm.com/[Git] is available in your environment. 
