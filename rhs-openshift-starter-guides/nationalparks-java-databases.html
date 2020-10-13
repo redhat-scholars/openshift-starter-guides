@@ -652,7 +652,7 @@ Make sure to have configured the <strong><code>MongoDB Database Name</code></str
 <p>This change in configuration will trigger a new deployment of the <code>nationalparks</code> application with the environment variables properly injected.</p>
 </div>
 <div class="paragraph">
-<p>Back in the <strong>Topology</strong> view, click and drag the <code>mongodb-nationalparks</code> component into the light gray area that denotes the <code>workshop</code> application, so that all three components are contained in it.</p>
+<p>Back in the <strong>Topology</strong> view, click and drag with Shift key the <code>mongodb-nationalparks</code> component into the light gray area that denotes the <code>workshop</code> application, so that all three components are contained in it.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -665,18 +665,29 @@ Make sure to have configured the <strong><code>MongoDB Database Name</code></str
 <div class="paragraph">
 <p>Like before, we&#8217;ll add 3 labels:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong><em>app</em>=workshop</strong>  (the name we will be giving to the app)</p>
-</li>
-<li>
-<p><strong><em>component</em>=nationalparks</strong>  (the name of this deployment)</p>
-</li>
-<li>
-<p><strong><em>role</em>=database</strong> (the role this component plays in the overall application)</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>The name of the Application group:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code>app=workshop</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Next the name of this deployment.</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code>component=nationalparks</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And finally, the role this component plays in the overall application.</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code>role=database</code></pre>
+</div>
 </div>
 <div class="paragraph">
 <p>Execute the following command:</p>
