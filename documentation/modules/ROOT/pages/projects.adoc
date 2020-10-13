@@ -43,5 +43,13 @@ You can also create and manage project from the CLI as well. Let's use our newly
 oc project %PROJECT_NAMESPACE%
 ----
 
+You should an output similar to the following:
+
+[.console-output]
+[source,bash]
+----
+Now using project "workshop" on server "https://c104-e.us-east.containers.cloud.ibm.com:31455"
+----
+
 We will be using a mix of command line tooling and the web console for the labs.
 Get ready!
