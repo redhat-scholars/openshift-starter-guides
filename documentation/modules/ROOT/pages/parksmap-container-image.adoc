@@ -40,7 +40,9 @@ Make sure to have the correct values in:
 
 Pick *Deployment Config* from *Resource* section.
 
-Un-check the checkbox next to "Create a route to the application". For learning purposes, we will create a *Route* for the application later in the workshop.
+NOTE: We will discuss in details about *DeploymentConfig* and *Deployment* in next chapters.
+
+*Un-check* the checkbox next to *Create a route to the application*. For learning purposes, we will create a *Route* for the application later in the workshop.
 
 At the bottom of the page, click *Labels* in the Advanced Options section and add some labels to better identify this deployment later. Labels will help us identify and filter components in the web console and in the command line.
 
@@ -105,6 +107,8 @@ server, a log analyzer, and a file service to help manage uploaded files.
 If you click on the `parksmap` entry in the Topology view, you will see some information about that deployment config. The *Resources* tab may be displayed by default. If so, click on the *Details* tab. On that panel, you will see that there is a single *Pod* that was created by your actions.
 
 image::parksmap-overview.png[Pod overview]
+
+NOTE: You'll notice in this view an info box suggesting to add Health checks for our app. We will discuss it in details later, so for the moment you can just close this info box by clicking on the top-right X icon.
 
 You can also get a list of all the *Pods* created within your *Project*, by navigating to *Workloads -> Pods* in the Administrator perspective of the web console.
 
