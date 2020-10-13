@@ -95,7 +95,7 @@ image::nationalparks-databases-binding-add-binding-to-nationalparks.png[Add bind
 
 This change in configuration will trigger a new deployment of the `nationalparks` application with the environment variables properly injected.
 
-Back in the *Topology* view, click and drag the `mongodb-nationalparks` component into the light gray area that denotes the `workshop` application, so that all three components are contained in it.
+Back in the *Topology* view, click and drag with Shift key the `mongodb-nationalparks` component into the light gray area that denotes the `workshop` application, so that all three components are contained in it.
 
 image::nationalparks-databases-add-mongodb-to-workshop-app.png[Add mongodb to the workshop app]
 
@@ -103,9 +103,26 @@ Next, let's fix the labels assigned to the `mongodb-nationalparks` deployment. C
 
 Like before, we'll add 3 labels:
 
-- *__app__=workshop*  (the name we will be giving to the app)
-- *__component__=nationalparks*  (the name of this deployment)
-- *__role__=database* (the role this component plays in the overall application)
+The name of the Application group:
+
+[source,role=copypaste]
+----
+app=workshop
+----
+
+Next the name of this deployment.
+
+[source,role=copypaste]
+----
+component=nationalparks
+----
+
+And finally, the role this component plays in the overall application.
+
+[source,role=copypaste]
+----
+role=database
+----
 
 Execute the following command:
 [.console-input]
