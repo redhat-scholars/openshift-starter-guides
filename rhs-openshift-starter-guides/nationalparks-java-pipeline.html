@@ -603,11 +603,46 @@ on the current Deployment to automatically trigger when there is a new image or 
 </div>
 </div>
 <div class="paragraph">
+<p>Verify the Tasks you created:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get tasks -n %PROJECT_NAMESPACE%</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see something similar:</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                 AGE
+redeploy             13s
+s2i-java-11-binary   13s</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Verify the Pipeline you created:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pipelines -n %PROJECT_NAMESPACE%</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see something like this:</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                     AGE
+nationalparks-pipeline   8s</code></pre>
+</div>
+</div>
+<div class="paragraph">
 <p>Now let&#8217;s review our Tekton Pipeline:</p>
 </div>
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">---
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">---
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
