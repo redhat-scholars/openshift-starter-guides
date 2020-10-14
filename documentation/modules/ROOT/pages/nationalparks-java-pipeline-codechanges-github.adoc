@@ -45,11 +45,11 @@ image::devops-pipeline-triggers-eventlistener.png[EventListener created]
 [#fork_repository_from_GitHub]
 == Exercise: Fork NationalParks repository from GitHub
 
-A link:https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo[fork] is a copy of a repository. Forking a repository allows you to freely experiment with changes without affecting the original project.
+A link:https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo[fork,window='_blank'] is a copy of a repository. Forking a repository allows you to freely experiment with changes without affecting the original project.
 
-In this step we will fork the original `nationalparks`repository to apply our changes and automatically trigger the Pipeline through a link:https://docs.github.com/en/free-pro-team@latest/developers/webhooks-and-events/about-webhooks[GitHub Webhook] that we're going to configure.
+In this step we will fork the original `nationalparks` repository to apply our changes and automatically trigger the Pipeline through a link:https://docs.github.com/en/free-pro-team@latest/developers/webhooks-and-events/about-webhooks[GitHub Webhook,window='_blank'] that we're going to configure.
 
-Go to link:https://github.com/openshift-roadshow/nationalparks[Nationalparks] repository. From top-right side, click to *Fork* to start forking it into your account.
+Go to link:https://github.com/openshift-roadshow/nationalparks[Nationalparks,window='_blank'] repository. From top-right side, click to *Fork* to start forking it into your account.
 
 image::nationalparks-codechanges-github-fork-1.png[Fork Repository]
 
@@ -133,13 +133,13 @@ or run the following command to verify:
 [.console-input]
 [source,bash,subs="+attributes,macros+"]
 ----
-oc get PipelineRun
+oc get pipelineruns
 ----
 
 Once the build and deploy has finished, verify your new image was automatically deployed by viewing the application in your browser:
 
 
-link:http://nationalparks-%PROJECT_NAMESPACE%.%CLUSTER_SUBDOMAIN%/ws/info/[National Parks Info Page]
+link:http://nationalparks-%PROJECT_NAMESPACE%.%CLUSTER_SUBDOMAIN%/ws/info/[National Parks Info Page,window='_blank']
 
 
 You should now see the new name you have set in the JSON string returned.

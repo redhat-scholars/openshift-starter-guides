@@ -57,7 +57,17 @@ Pay attention to the output location for the ROOT.war, we will need that directo
 
 [#code_change]
 === Code Change
-Time for a source code change! Go to `src/main/java/com/openshift/evg/roadshow/rest/BackendController.java`.and edit it with `vi` or `nano`.
+
+Time for a source code change! 
+
+Edit `BackendController` Java class from this path:
+
+[.console-output]
+[source,bash]
+----
+src/main/java/com/openshift/evg/roadshow/rest/BackendController.java
+----
+
 This is the REST endpoint that gives basic info on the service and can be reached at:
 
 [source,bash,role="copypaste"]
@@ -77,7 +87,6 @@ Don't forget to save the file and run `mvn package` again from the root of the s
 [.console-input]
 [source,bash,subs="+attributes,macros+"]
 ----
-cd mlbparks
 mvn package
 ----
 

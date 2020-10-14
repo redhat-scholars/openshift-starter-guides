@@ -50,7 +50,7 @@ the source code repository. Execute the following command:
 [.console-input]
 [source,bash]
 ----
-oc create -f https://raw.githubusercontent.com/openshift-roadshow/mlbparks/master/ose3/application-template-eap.json
+oc create -f https://raw.githubusercontent.com/openshift-roadshow/mlbparks/master/ose3/application-template-eap.json -n %PROJECT_NAMESPACE%
 ----
 
 What just happened? What did you just `create`? The item that we passed to the `create`
