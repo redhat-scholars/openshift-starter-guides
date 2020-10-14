@@ -7,7 +7,7 @@
 OpenShift ships with a web-based console that will allow users to
 perform various tasks via a browser. 
 
-To get a feel for how the web console works, click on this http://console-openshift-console.%CLUSTER_SUBDOMAIN%/k8s/cluster/projects[Web Console, role='params-link'] link.
+To get a feel for how the web console works, click on this https://console-openshift-console.%CLUSTER_SUBDOMAIN%[Web Console, role='params-link'] link.
 
 On the login screen, enter the following credentials:
 
