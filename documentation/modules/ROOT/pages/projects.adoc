@@ -48,7 +48,7 @@ You should an output similar to the following:
 [.console-output]
 [source,bash]
 ----
-Now using project "workshop" on server "https://c104-e.us-east.containers.cloud.ibm.com:31455"
+Now using project "%PROJECT_NAMESPACE%" on server "https://api.%CLUSTER_SUBDOMAIN%:6443"
 ----
 
 We will be using a mix of command line tooling and the web console for the labs.

@@ -22,6 +22,7 @@ asciidoc:
     workshop-domain: rhscholars.devx.red
     kubernetes-version: v1.18.0
     release-version: roks
+    page-pagination: true
     openshift-console-url: https://console-openshift-console.apps.example.com
     etherpad-url: http://example.com
   extensions:
@@ -29,7 +30,7 @@ asciidoc:
     - ./lib/tab-block.js
 ui:
   bundle:
-    url: https://github.com/redhat-scholars/course-ui/releases/download/v0.1.7/ui-bundle.zip
+    url: https://github.com/redhat-scholars/course-ui/releases/download/v0.1.8/ui-bundle.zip
     snapshot: true
   supplemental_files: ./supplemental-ui
 output:
