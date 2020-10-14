@@ -18,7 +18,7 @@ You can view current permissions in the web console, go to the Topology view in 
 
 image::parksmap-permissions-namespace.png[Namespace]
 
-Then, click *Role Bindings*.
+Then, select *Role Bindings* tab and filter by *Namespace Role Binding* so see all permissions for selected project.
 
 image::parksmap-permissions-membership.png[Membership]
 
@@ -90,7 +90,7 @@ image::parksmap-permissions-redeployed.png[Application deployed]
 If you look at the logs for the application now, you should see no errors.  That's great.
 
 [#grant_user_view_permissions]
-== Exercise: Grant User View Permissions
+== (Optional) Exercise: Grant User View Permissions
 If you create a project, you are that project's administrator. This means that
 you can grant access to other users, too. If you like, give your neighbor view
 access to your project using the following command:
