@@ -74,9 +74,44 @@ For this example, we're going to deploy our pipeline which is stored in the same
 oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipeline-all.yaml -n %PROJECT_NAMESPACE%
 ----
 
+Verify the Tasks you created:
+
+[.console-input]
+[source,bash]
+----
+oc get tasks -n %PROJECT_NAMESPACE%
+----
+
+You should see something similar:
+
+[.console-output]
+[source,bash]
+----
+NAME                 AGE
+redeploy             13s
+s2i-java-11-binary   13s
+----
+
+Verify the Pipeline you created:
+
+[.console-input]
+[source,bash]
+----
+oc get pipelines -n %PROJECT_NAMESPACE%
+----
+
+You should see something like this:
+
+[.console-output]
+[source,bash]
+----
+NAME                     AGE
+nationalparks-pipeline   8s
+----
+
 Now let's review our Tekton Pipeline:
 
-[source,bash,role="copypaste"]
+[source,yaml,role="copypaste"]
 ----
 ---
 apiVersion: tekton.dev/v1beta1
