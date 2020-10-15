@@ -67,7 +67,14 @@ As pipelines provide the ability to promote applications between different stage
 
 For this example, we're going to deploy our pipeline which is stored in the same GitHub repository where we have our code. In a more real scenario, and in order to honor https://en.wikipedia.org/wiki/Infrastructure_as_Code[infrastructure as code] principles, we would store all the pipeline definitions along with every OpenShift resources definitions we would use.
 
+If you are on *ROKS* create the pipeline with this command:
+[.console-input]
+[source,bash]
+----
+oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipeline-all-vfs.yaml -n %PROJECT_NAMESPACE%
+----
 
+Otherwise create the pipeline with this command:
 [.console-input]
 [source,bash]
 ----
@@ -228,7 +235,16 @@ It is using two *Workspace*:
 [#run_the_pipeline]
 == Run the Pipeline
 
-We can start now the Pipeline from the Web Console. From left-side menu, click on *Pipeline*, then click on *nationalparks-pipeline*. From top-right *Actions* list, click on *Start*.
+You can run the Pipeline either from CLI than Web Console:
+
+To start it with `oc`:
+[.console-input]
+[source,bash]
+----
+oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipelinerun.yaml -n %PROJECT_NAMESPACE%
+----
+
+To start it with Web Console, within *Developer Perspective* go to left-side menu, click on *Pipeline*, then click on *nationalparks-pipeline*. From top-right *Actions* list, click on *Start*.
 
 image::devops-pipeline-start-1.png[Start Pipeline]
 
