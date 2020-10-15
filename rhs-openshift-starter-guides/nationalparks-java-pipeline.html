@@ -597,6 +597,17 @@ on the current Deployment to automatically trigger when there is a new image or 
 <div class="paragraph">
 <p>For this example, we&#8217;re going to deploy our pipeline which is stored in the same GitHub repository where we have our code. In a more real scenario, and in order to honor <a href="https://en.wikipedia.org/wiki/Infrastructure_as_Code">infrastructure as code</a> principles, we would store all the pipeline definitions along with every OpenShift resources definitions we would use.</p>
 </div>
+<div class="paragraph">
+<p>If you are on <strong>ROKS</strong> create the pipeline with this command:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipeline-all-vfs.yaml -n %PROJECT_NAMESPACE%</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Otherwise create the pipeline with this command:</p>
+</div>
 <div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipeline-all.yaml -n %PROJECT_NAMESPACE%</code></pre>
@@ -786,7 +797,18 @@ spec:
 <h2 id="run_the_pipeline"><a class="anchor" href="#run_the_pipeline"></a>Run the Pipeline</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>We can start now the Pipeline from the Web Console. From left-side menu, click on <strong>Pipeline</strong>, then click on <strong>nationalparks-pipeline</strong>. From top-right <strong>Actions</strong> list, click on <strong>Start</strong>.</p>
+<p>You can run the Pipeline either from CLI than Web Console:</p>
+</div>
+<div class="paragraph">
+<p>To start it with <code>oc</code>:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipelinerun.yaml -n %PROJECT_NAMESPACE%</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To start it with Web Console, within <strong>Developer Perspective</strong> go to left-side menu, click on <strong>Pipeline</strong>, then click on <strong>nationalparks-pipeline</strong>. From top-right <strong>Actions</strong> list, click on <strong>Start</strong>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
