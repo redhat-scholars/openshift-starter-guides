@@ -43,7 +43,7 @@ persistent storage!). The image will ensure that:
 - A user exists with the specified name
 - The user can access the specified database with the specified password
 
-In the Developer Perspective in your `%PROJECT_NAMESPACE%` project,
+In the Developer Perspective in your `{project-namespace}` project,
 click *+Add* and then *Database*. In the Databases view, you can click *Mongo* to filter for just MongoDB.
 
 NOTE: Make sure to uncheck *Operator Backed* option from *Type* section
@@ -173,9 +173,9 @@ stood up a "new" instance.
 Now that we have a database deployed, we can again visit the `nationalparks` web
 service to query for data:
 
-[source,role="copypaste"]
+[source,role="copypaste",subs="+attributes"]
 ----
-http://nationalparks-%PROJECT_NAMESPACE%.%CLUSTER_SUBDOMAIN%/ws/data/all
+http://nationalparks-{project-namespace}.%CLUSTER_SUBDOMAIN%/ws/data/all
 ----
 
 And the result?
@@ -192,9 +192,9 @@ application and then deployed the database. Nothing actually loaded anything
 
 The application provides an endpoint to do just that:
 
-[source,role="copypaste"]
+[source,role="copypaste",subs="+attributes"]
 ----
-http://nationalparks-%PROJECT_NAMESPACE%.%CLUSTER_SUBDOMAIN%/ws/data/load
+http://nationalparks-{project-namespace}.%CLUSTER_SUBDOMAIN%/ws/data/load
 ----
 
 And the result?
@@ -211,9 +211,9 @@ That's great. Our parks map should finally work!
 NOTE: There are some errors reported with browsers like Firefox 54 that don't properly parse the resulting JSON. It's
 a browser problem, and the application is working properly.
 
-[source,role="copypaste"]
+[source,role="copypaste",subs="+attributes"]
 ----
-http://parksmap-%PROJECT_NAMESPACE%.%CLUSTER_SUBDOMAIN%
+http://parksmap-{project-namespace}.%CLUSTER_SUBDOMAIN%
 ----
 
 Hmm... There's just one thing. The main map **STILL** isn't displaying the parks.
@@ -270,10 +270,10 @@ oc describe route nationalparks
 ----
 
 [.console-output]
-[source,bash]
+[source,bash,subs="+attributes,macros+"]
 ----
 Name:                   nationalparks
-Namespace:              %PROJECT_NAMESPACE%
+Namespace:              {project-namespace}
 Created:                2 hours ago
 Labels:                 app=workshop
                         app.kubernetes.io/component=nationalparks
@@ -285,7 +285,7 @@ Labels:                 app=workshop
                         component=nationalparks
                         role=backend  
 Annotations:            openshift.io/host.generated=true                          
-Requested Host:         nationalparks-%PROJECT_NAMESPACE%.%CLUSTER_SUBDOMAIN%
+Requested Host:         nationalparks-{project-namespace}.%CLUSTER_SUBDOMAIN%
                         exposed on router router 2 hours ago
 Path:                   <none>
 TLS Termination:        <none>
@@ -315,9 +315,9 @@ route.route.openshift.io/nationalparks labeled
 
 If you check your browser now:
 
-[source,role="copypaste"]
+[source,role="copypaste",subs="+attributes"]
 ----
-http://parksmap-%PROJECT_NAMESPACE%.%CLUSTER_SUBDOMAIN%/
+http://parksmap-{project-namespace}.%CLUSTER_SUBDOMAIN%/
 ----
 
 image::nationalparks-databases-new-parks.png[MongoDB]

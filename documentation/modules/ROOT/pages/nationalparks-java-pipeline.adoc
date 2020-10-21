@@ -55,9 +55,9 @@ on the current Deployment to automatically trigger when there is a new image or 
 DeploymentConfigs have triggers that allow automatic deploying when a new image has been pushed into OpenShift Registry. In this case we want the Pipeline to drive the flow of updating the Application, thus we just need to disable those triggers for the moment:
 
 [.console-input]
-[source,bash]
+[source,bash,subs="+attributes,macros+"]
 ----
-oc set triggers dc nationalparks --manual -n %PROJECT_NAMESPACE%
+oc set triggers dc nationalparks --manual -n {project-namespace}
 ----
 
 You should get an output like this:
@@ -83,18 +83,18 @@ ROKS::
 +
 --
 [.console-input]
-[source,bash]
+[source,bash,subs="+attributes"]
 ----
-oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipeline-all-vfs.yaml -n %PROJECT_NAMESPACE%
+oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipeline-all-vfs.yaml -n {project-namespace}
 ----
 --
 Others::
 +
 --
 [.console-input]
-[source,bash]
+[source,bash,subs="+attributes"]
 ----
-oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipeline-all.yaml -n %PROJECT_NAMESPACE%
+oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipeline-all.yaml -n {project-namespace}
 ----
 --
 ====
@@ -103,9 +103,9 @@ oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/
 Verify the Tasks you created:
 
 [.console-input]
-[source,bash]
+[source,bash,subs="+attributes,macros+"]
 ----
-oc get tasks -n %PROJECT_NAMESPACE%
+oc get tasks -n {project-namespace}
 ----
 
 You should see something similar:
@@ -121,9 +121,9 @@ s2i-java-11-binary   13s
 Verify the Pipeline you created:
 
 [.console-input]
-[source,bash]
+[source,bash,subs="+attributes,macros+"]
 ----
-oc get pipelines -n %PROJECT_NAMESPACE%
+oc get pipelines -n {project-namespace}
 ----
 
 You should see something like this:
@@ -260,9 +260,9 @@ ROKS::
 +
 --
 [.console-input]
-[source,bash]
+[source,bash,subs="+attributes"]
 ----
-oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipelinerun.yaml -n %PROJECT_NAMESPACE%
+oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipelinerun.yaml -n {project-namespace}
 ----
 --
 Others::

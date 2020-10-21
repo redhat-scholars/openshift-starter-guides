@@ -20,7 +20,7 @@ Web: link:index.adoc[Starter Guides]
 [#web_terminal]
 == Web terminal
 
-Web: http://terminal-%PROJECT_NAMESPACE%.%CLUSTER_SUBDOMAIN%
+Web: http://terminal-{project-namespace}.%CLUSTER_SUBDOMAIN%
 
 [#git_server]
 == Git Server

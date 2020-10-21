@@ -20,6 +20,7 @@ asciidoc:
     parksmap-image: quay.io/openshiftroadshow/parksmap
     openshift-docs-url: https://docs.openshift.com/container-platform/4.5
     openshift-version: 4.5
+    project-namespace: workshop
     release-version: roks
     page-pagination: true
   extensions:

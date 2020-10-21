@@ -48,9 +48,9 @@ endpoint to cause the data to be loaded into the database from a JSON file in
 the source code repository. Execute the following command:
 
 [.console-input]
-[source,bash]
+[source,bash,subs="+attributes"]
 ----
-oc create -f https://raw.githubusercontent.com/openshift-roadshow/mlbparks/master/ose3/application-template-eap.json -n %PROJECT_NAMESPACE%
+oc create -f https://raw.githubusercontent.com/openshift-roadshow/mlbparks/master/ose3/application-template-eap.json -n {project-namespace}
 ----
 
 What just happened? What did you just `create`? The item that we passed to the `create`

@@ -30,7 +30,7 @@ The parksmap application wants to talk to the OpenShift API to learn about other
 [.console-input]
 [source,bash,subs="+attributes,macros+"]
 ----
-oc project %PROJECT_NAMESPACE%
+oc project {project-namespace}
 ----
 
 Then:
@@ -51,7 +51,7 @@ we are using a special flag, `-z`. What does this flag do? From the `-h` output:
 
 The `-z` syntax is a special one that saves us from having to type out the
 entire string, which, in this case, is
-`system:serviceaccount:%PROJECT_NAMESPACE%:default`. It's a nifty shortcut.
+`system:serviceaccount:{project-namespace}:default`. It's a nifty shortcut.
 
 [NOTE]
 ====
@@ -66,7 +66,7 @@ Another way you could have done the same is by using the OpenShift console. Once
 
 image::parksmap-permissions-membership-serviceaccount-list.png[Service account list]
 
-Select *view* for the Role Binding Name *%PROJECT_NAMESPACE%* for the Namespace, *view* for the Role Name, *Service Account* for the Subject, *%PROJECT_NAMESPACE%* for the Subject Namespace, and *default* for the Subject Name.
+Select *view* for the Role Binding Name *{project-namespace}* for the Namespace, *view* for the Role Name, *Service Account* for the Subject, *{project-namespace}* for the Subject Namespace, and *default* for the Subject Name.
 
 image::parksmap-permissions-membership-serviceaccount-edit.png[Service account edit]
 
@@ -95,12 +95,12 @@ If you create a project, you are that project's administrator. This means that
 you can grant access to other users, too. If you like, give your neighbor view
 access to your project using the following command:
 
-CAUTION: In the following command(s), replace `%PROJECT_NAMESPACE%` with the user name of the person to whom you want to grant access.
+CAUTION: In the following command(s), replace `{project-namespace}` with the user name of the person to whom you want to grant access.
 
 [.console-input]
 [source,bash,subs="+attributes,macros+"]
 ----
-oc policy add-role-to-user view %PROJECT_NAMESPACE%
+oc policy add-role-to-user view {project-namespace}
 ----
 
 Have them go to the project view by clicking the *Projects* button and verify

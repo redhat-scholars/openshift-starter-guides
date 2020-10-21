@@ -8,7 +8,7 @@ hook at the OpenShift API, automated code/build/deploy pipelines can be
 achieved.
 
 == Exercise: Configuring Gogs Web Hooks
-In this lab you can use a build webhook to trigger a build execution every time there is a change in the nationalparks Gogs repository. In the OpenShift web console, navigate to your `%PROJECT_NAMESPACE%` project, and then mouse-over `Builds` and then `Builds`. Click the `nationalparks` build and then `Configuration` tab.
+In this lab you can use a build webhook to trigger a build execution every time there is a change in the nationalparks Gogs repository. In the OpenShift web console, navigate to your `{project-namespace}` project, and then mouse-over `Builds` and then `Builds`. Click the `nationalparks` build and then `Configuration` tab.
 
 On this screen you will see the option to copy the generic webhook URL as shown in the following image:
 
@@ -110,7 +110,7 @@ Once the build and deploy has finished, verify your new image was
 automatically deployed by viewing the application in your browser:
 
 
-link:http://nationalparks-%PROJECT_NAMESPACE%.%CLUSTER_SUBDOMAIN%/ws/info/[National Parks Info Page]
+link:http://nationalparks-{project-namespace}.%CLUSTER_SUBDOMAIN%/ws/info/[National Parks Info Page]
 
 You should now see the new name you have set in the JSON string returned.
 
@@ -162,7 +162,7 @@ Once the deploy is complete, verify that the page header is reverted to the
 original header by viewing the application in your browser.
 
 
-link:http://nationalparks-%PROJECT_NAMESPACE%.%CLUSTER_SUBDOMAIN%/ws/info/[National Parks Info Page]
+link:http://nationalparks-{project-namespace}.%CLUSTER_SUBDOMAIN%/ws/info/[National Parks Info Page]
 
 
 [NOTE]
