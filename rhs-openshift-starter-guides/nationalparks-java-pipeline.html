@@ -598,19 +598,34 @@ on the current Deployment to automatically trigger when there is a new image or 
 <p>For this example, we&#8217;re going to deploy our pipeline which is stored in the same GitHub repository where we have our code. In a more real scenario, and in order to honor <a href="https://en.wikipedia.org/wiki/Infrastructure_as_Code">infrastructure as code</a> principles, we would store all the pipeline definitions along with every OpenShift resources definitions we would use.</p>
 </div>
 <div class="paragraph">
-<p>If you are on <strong>ROKS</strong> cluster create the pipeline with this command:</p>
+<p>Let&#8217;s create now a Tekton pipeline for Nationalparks backend, select your OpenShift cluster type from below table:</p>
 </div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset1_roks"></a>ROKS</p>
+</li>
+<li>
+<p><a id="tabset1_others"></a>Others</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset1_roks">
 <div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipeline-all-vfs.yaml -n %PROJECT_NAMESPACE%</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Otherwise create the pipeline with this command:</p>
 </div>
+<div class="tab-pane" aria-labelledby="tabset1_others">
 <div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipeline-all.yaml -n %PROJECT_NAMESPACE%</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="paragraph">
@@ -795,16 +810,28 @@ spec:
 <h2 id="run_the_pipeline"><a class="anchor" href="#run_the_pipeline"></a>Run the Pipeline</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You can run the Pipeline either from CLI than Web Console:</p>
+<p>Select your OpenShift cluster type and follow instruction to start the pipeline:</p>
 </div>
-<div class="paragraph">
-<p>To start it with <code>oc</code>:</p>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset2_roks"></a>ROKS</p>
+</li>
+<li>
+<p><a id="tabset2_others"></a>Others</p>
+</li>
+</ul>
 </div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset2_roks">
 <div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipelinerun.yaml -n %PROJECT_NAMESPACE%</code></pre>
 </div>
 </div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset2_others">
 <div class="paragraph">
 <p>To start it with Web Console, within <strong>Developer Perspective</strong> go to left-side menu, click on <strong>Pipeline</strong>, then click on <strong>nationalparks-pipeline</strong>. From top-right <strong>Actions</strong> list, click on <strong>Start</strong>.</p>
 </div>
@@ -835,8 +862,11 @@ spec:
 <img src="_images/devops-pipeline-start-2.png" alt="Add parameters">
 </div>
 </div>
+</div>
+</div>
+</div>
 <div class="paragraph">
-<p>You can follow the Pipeline execution from <strong>Pipeline</strong> section, watching all the steps in progress. Click on <strong>Pipeline Runs</strong> tab to see it running:</p>
+<p>You can follow the Pipeline execution at ease from Web Console. Open <strong>Developer Perspective</strong> and go to left-side menu, click on <strong>Pipeline</strong>, then click on <strong>nationalparks-pipeline</strong>. Switch to <strong>Pipeline Runs</strong> tab to watch all the steps in progress:</p>
 </div>
 <div class="imageblock">
 <div class="content">
