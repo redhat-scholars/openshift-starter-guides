@@ -575,7 +575,7 @@ on the current Deployment to automatically trigger when there is a new image or 
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc set triggers dc nationalparks --manual -n %PROJECT_NAMESPACE%</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc set triggers dc nationalparks --manual -n {project-namespace}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -615,14 +615,14 @@ on the current Deployment to automatically trigger when there is a new image or 
 <div class="tab-pane" aria-labelledby="tabset1_roks">
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipeline-all-vfs.yaml -n %PROJECT_NAMESPACE%</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipeline-all-vfs.yaml -n {project-namespace}</code></pre>
 </div>
 </div>
 </div>
 <div class="tab-pane" aria-labelledby="tabset1_others">
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipeline-all.yaml -n %PROJECT_NAMESPACE%</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipeline-all.yaml -n {project-namespace}</code></pre>
 </div>
 </div>
 </div>
@@ -633,7 +633,7 @@ on the current Deployment to automatically trigger when there is a new image or 
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get tasks -n %PROJECT_NAMESPACE%</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get tasks -n {project-namespace}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -651,7 +651,7 @@ s2i-java-11-binary   13s</code></pre>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pipelines -n %PROJECT_NAMESPACE%</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pipelines -n {project-namespace}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -827,7 +827,7 @@ spec:
 <div class="tab-pane" aria-labelledby="tabset2_roks">
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipelinerun.yaml -n %PROJECT_NAMESPACE%</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipelinerun.yaml -n {project-namespace}</code></pre>
 </div>
 </div>
 </div>
