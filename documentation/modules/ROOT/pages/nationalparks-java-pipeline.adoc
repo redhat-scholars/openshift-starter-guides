@@ -75,19 +75,30 @@ As pipelines provide the ability to promote applications between different stage
 
 For this example, we're going to deploy our pipeline which is stored in the same GitHub repository where we have our code. In a more real scenario, and in order to honor https://en.wikipedia.org/wiki/Infrastructure_as_Code[infrastructure as code] principles, we would store all the pipeline definitions along with every OpenShift resources definitions we would use.
 
-If you are on *ROKS* cluster create the pipeline with this command:
+Let's create now a Tekton pipeline for Nationalparks backend, select your OpenShift cluster type from below table:
+
+[tabs, subs="attributes+,+macros"]
+====
+ROKS::
++
+--
 [.console-input]
 [source,bash]
 ----
 oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipeline-all-vfs.yaml -n %PROJECT_NAMESPACE%
 ----
-
-Otherwise create the pipeline with this command:
+--
+Others::
++
+--
 [.console-input]
 [source,bash]
 ----
 oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipeline-all.yaml -n %PROJECT_NAMESPACE%
 ----
+--
+====
+
 
 Verify the Tasks you created:
 
@@ -241,15 +252,22 @@ It is using two *Workspace*:
 [#run_the_pipeline]
 == Run the Pipeline
 
-You can run the Pipeline either from CLI than Web Console:
+Select your OpenShift cluster type and follow instruction to start the pipeline:
 
-To start it with `oc`:
+[tabs, subs="attributes+,+macros"]
+====
+ROKS::
++
+--
 [.console-input]
 [source,bash]
 ----
 oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipelinerun.yaml -n %PROJECT_NAMESPACE%
 ----
-
+--
+Others::
++
+--
 To start it with Web Console, within *Developer Perspective* go to left-side menu, click on *Pipeline*, then click on *nationalparks-pipeline*. From top-right *Actions* list, click on *Start*.
 
 image::devops-pipeline-start-1.png[Start Pipeline]
@@ -268,8 +286,11 @@ In *Workspaces*-> *app-source* select *PVC* from the list, then select *app-sour
 Click on *Start* to run your Pipeline.
 
 image::devops-pipeline-start-2.png[Add parameters]
+--
+====
 
-You can follow the Pipeline execution from *Pipeline* section, watching all the steps in progress. Click on *Pipeline Runs* tab to see it running:
+
+You can follow the Pipeline execution at ease from Web Console. Open *Developer Perspective* and go to left-side menu, click on *Pipeline*, then click on *nationalparks-pipeline*. Switch to *Pipeline Runs* tab to watch all the steps in progress:
 
 image::devops-pipeline-run-1.png[Pipeline running]
 
