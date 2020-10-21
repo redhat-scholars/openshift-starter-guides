@@ -512,7 +512,7 @@ achieved.</p>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-triggers-all.yaml -n {project-namespace}</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-triggers-all.yaml -n workshop</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -680,7 +680,7 @@ triggered in OpenShift. Click <strong>Pipeline</strong> in the left navigation m
 <p>Once the build and deploy has finished, verify your new image was automatically deployed by viewing the application in your browser:</p>
 </div>
 <div class="paragraph">
-<p><a href="http://nationalparks-{project-namespace}.%CLUSTER_SUBDOMAIN%/ws/info/" target="_blank" rel="noopener">National Parks Info Page</a></p>
+<p><a href="http://nationalparks-workshop.%CLUSTER_SUBDOMAIN%/ws/info/" target="_blank" rel="noopener">National Parks Info Page</a></p>
 </div>
 <div class="paragraph">
 <p>You should now see the new name you have set in the JSON string returned.</p>
@@ -752,7 +752,7 @@ Warning: the following images triggers were disabled: nationalparks:latest
 original header by viewing the application in your browser.</p>
 </div>
 <div class="paragraph">
-<p><a href="http://nationalparks-{project-namespace}.%CLUSTER_SUBDOMAIN%/ws/info/">National Parks Info Page</a></p>
+<p><a href="http://nationalparks-workshop.%CLUSTER_SUBDOMAIN%/ws/info/">National Parks Info Page</a></p>
 </div>
 <div class="admonitionblock note">
 <table>

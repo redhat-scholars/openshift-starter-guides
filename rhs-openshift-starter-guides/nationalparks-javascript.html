@@ -718,8 +718,8 @@ URL in the web console, or via the command line:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME            HOST/PORT                                                   PATH      SERVICES        PORT       TERMINATION
-nationalparks   nationalparks-{project-namespace}.%CLUSTER_SUBDOMAIN%             nationalparks   8080-tcp
-parksmap        parksmap-{project-namespace}.%CLUSTER_SUBDOMAIN%                  parksmap        8080-tcp</code></pre>
+nationalparks   nationalparks-workshop.%CLUSTER_SUBDOMAIN%             nationalparks   8080-tcp
+parksmap        parksmap-workshop.%CLUSTER_SUBDOMAIN%                  parksmap        8080-tcp</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -727,7 +727,7 @@ parksmap        parksmap-{project-namespace}.%CLUSTER_SUBDOMAIN%                
 </div>
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">&lt;a href="http://nationalparks-{project-namespace}.%CLUSTER_SUBDOMAIN%" class="bare"&gt;http://nationalparks-{project-namespace}.%CLUSTER_SUBDOMAIN%&lt;/a&gt;</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">&lt;a href="http://nationalparks-workshop.%CLUSTER_SUBDOMAIN%" class="bare"&gt;http://nationalparks-workshop.%CLUSTER_SUBDOMAIN%&lt;/a&gt;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -736,7 +736,7 @@ However, it can still be used with a browser. All backends that work with the pa
 frontend are required to implement a <code>/ws/info/</code> endpoint. To test, visit this URL in your browser:</p>
 </div>
 <div class="paragraph">
-<p><a href="http://nationalparks-{project-namespace}.%CLUSTER_SUBDOMAIN%/ws/info/">National Parks Info Page</a></p>
+<p><a href="http://nationalparks-workshop.%CLUSTER_SUBDOMAIN%/ws/info/">National Parks Info Page</a></p>
 </div>
 <div class="admonitionblock warning">
 <table>
