@@ -3,6 +3,21 @@
 
 In order to run the lab in your cluster, you need to meet the requirements discussed below.
 
+[cols="2*^,2*.",options="header,+attributes"]
+|===
+|**Component**|**Version**
+
+| https://www.openshift.com/try[OpenShift]
+| `4.5`
+
+| link:#openshift_pipelines[OpenShift Pipelines]
+| `>=1.0.1`
+
+| link:#github_account[Git]
+| `2.x`
+
+|===
+
 [#openshift_pipelines]
 == OpenShift Pipelines
 
