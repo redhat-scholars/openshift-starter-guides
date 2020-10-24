@@ -62,9 +62,72 @@ Your repository is forked now, we can start adding our automation to that.
 [#configuring_github_webhooks]
 == Exercise: Configuring GitHub Web Hooks
 
+[tabs, subs="attributes+,+macros"]
+====
+ROKS/OCP::
++
+--
 From Topology, click to `el-nationalparks` Deployment, go into *Routes* section and and copy the *el-nationparks* Route URL.
 
 image::devops-pipeline-triggers-route.png[EventListener created]
+--
+CRC::
++
+--
+When using link:https://developers.redhat.com/products/codeready-containers/overview[CRC,window='_blank'], your OpenShift cluster is running in your computer and it is not externally accessible. In order to let GitHub trigger our Pipeline via a Web Hook, we can use link:https://ngrok.com[Ngrok,window='_blank'], an online service that exposes local servers to public internet over secure tunnels.
+
+Let's use a template to launch an Ngrok instance inside our project to link to our Tekton Eventlistener `el-nationalparks`:
+
+[.console-input]
+[source,bash,subs="+attributes"]
+----
+oc new-app -f https://raw.githubusercontent.com/csrwng/ngrok/master/openshift/ngrok-template.yaml -p HOST=el-nationalparks -p PORT=8080 -n {project-namespace}
+----
+
+You should see an output like this:
+
+[.console-output]
+[source,bash,subs="+attributes"]
+----
+--> Deploying template "{project-namespace}/ngrok" for "https://raw.githubusercontent.com/csrwng/ngrok/master/openshift/ngrok-template.yaml" to project {project-namespace}
+
+     * With parameters:
+        * Host=el-nationalparks
+        * Port=8080
+
+--> Creating resources ...
+    service "ngrok" created
+    deploymentconfig.apps.openshift.io "ngrok" created
+    route.route.openshift.io "ngrok" created
+    imagestream.image.openshift.io "ngrok" created
+--> Success
+    Access your application via route 'ngrok-{project-namespace}.%CLUSTER_SUBDOMAIN%' 
+    Run 'oc status' to view your app.
+----
+
+Get the Ngrok Route URL:
+[.console-input]
+[source,bash,subs="+attributes"]
+----
+oc get route ngrok -n {project-namespace}
+----
+
+Open it in the browser to get the Ngrok tunnel URL that we can use and copy the HTTP URL you see in the webpage as shown below, this will be the one we will use to configure the Github Webhook.
+
+image::devops-pipeline-triggers-ngrok.png[Ngrok tunnels]
+
+Verify that it is working, when opening in the browser you should get the response from the *EventListener* we are exposing through an Ngrok tunnel:
+
+[.console-output]
+[source,bash,subs="+attributes"]
+----
+{"eventListener":"nationalparks","namespace":"{project-namespace}","eventID":"vzkx5"}
+----
+
+--
+====
+
+
 
 Once you have the URL copied to your clipboard, navigate to the code repository fork that you have on GitHub.
 
