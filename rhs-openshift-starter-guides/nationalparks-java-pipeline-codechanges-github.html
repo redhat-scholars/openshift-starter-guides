@@ -561,12 +561,86 @@ achieved.</p>
 <div class="sect1">
 <h2 id="configuring_github_webhooks"><a class="anchor" href="#configuring_github_webhooks"></a>Exercise: Configuring GitHub Web Hooks</h2>
 <div class="sectionbody">
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset1_roks-ocp"></a>ROKS/OCP</p>
+</li>
+<li>
+<p><a id="tabset1_crc"></a>CRC</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset1_roks-ocp">
 <div class="paragraph">
 <p>From Topology, click to <code>el-nationalparks</code> Deployment, go into <strong>Routes</strong> section and and copy the <strong>el-nationparks</strong> Route URL.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devops-pipeline-triggers-route.png" alt="EventListener created">
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_crc">
+<div class="paragraph">
+<p>When using <a href="https://developers.redhat.com/products/codeready-containers/overview" target="_blank" rel="noopener">CRC</a>, your OpenShift cluster is running in your computer and it is not externally accessible. In order to let GitHub trigger our Pipeline via a Web Hook, we can use <a href="https://ngrok.com" target="_blank" rel="noopener">Ngrok</a>, an online service that exposes local servers to public internet over secure tunnels.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s use a template to launch an Ngrok instance inside our project to link to our Tekton Eventlistener <code>el-nationalparks</code>:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc new-app -f https://raw.githubusercontent.com/csrwng/ngrok/master/openshift/ngrok-template.yaml -p HOST=el-nationalparks -p PORT=8080 -n workshop</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see an output like this:</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">--&gt; Deploying template "workshop/ngrok" for "https://raw.githubusercontent.com/csrwng/ngrok/master/openshift/ngrok-template.yaml" to project workshop
+
+     * With parameters:
+        * Host=el-nationalparks
+        * Port=8080
+
+--&gt; Creating resources ...
+    service "ngrok" created
+    deploymentconfig.apps.openshift.io "ngrok" created
+    route.route.openshift.io "ngrok" created
+    imagestream.image.openshift.io "ngrok" created
+--&gt; Success
+    Access your application via route 'ngrok-workshop.%CLUSTER_SUBDOMAIN%'
+    Run 'oc status' to view your app.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Get the Ngrok Route URL:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get route ngrok -n workshop</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Open it in the browser to get the Ngrok tunnel URL that we can use and copy the HTTP URL you see in the webpage as shown below, this will be the one we will use to configure the Github Webhook.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devops-pipeline-triggers-ngrok.png" alt="Ngrok tunnels">
+</div>
+</div>
+<div class="paragraph">
+<p>Verify that it is working, when opening in the browser you should get the response from the <strong>EventListener</strong> we are exposing through an Ngrok tunnel:</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">{"eventListener":"nationalparks","namespace":"workshop","eventID":"vzkx5"}</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="paragraph">
