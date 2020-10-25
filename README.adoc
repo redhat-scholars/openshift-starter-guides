@@ -52,10 +52,10 @@ To start this workshop, follow the step by step tutorial link for your cluster a
 |link:https://redhat-scholars.github.io/openshift-starter-guides/[Link]
 
 |link:https://developers.redhat.com/products/codeready-containers/overview[CRC 4.5]
-|link:https://redhat-scholars.github.io/openshift-starter-guides/index.html?CLUSTER_SUBDOMAIN=apps-crc.testing[Link]
+|link:https://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/index.html?CLUSTER_SUBDOMAIN=apps-crc.testing[Link]
 
 |link:https://learn.openshift.com/playgrounds/openshift45/[OpenShift 4.5 Playground] 
-|link:https://redhat-scholars.github.io/openshift-starter-guides/index.html?USERNAME=admin&PASSWORD=admin[Link]
+|link:https://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/index.html?USERNAME=admin&PASSWORD=admin[Link]
 |===
 
 ## Contributing
