@@ -1,7 +1,7 @@
 # Contributing Guide
 
 The sources of this tutorial docs is in https://github.com/redhat-scholars/openshift-starter-guides/tree/master/documentation[documentation] folder.
-The site generation is done my https://docs.antora.org/[Antora]
+The site generation is done by https://docs.antora.org/[Antora]
 
 ## Running site in development mode
 
