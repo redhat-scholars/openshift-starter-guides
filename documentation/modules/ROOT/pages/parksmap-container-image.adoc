@@ -25,8 +25,7 @@ In the *Image Name* field, copy/paste the following into the box:
 {parksmap-image}:{parksmap-version}
 ----
 
-Either press *enter* or click on the magnifying glass. OpenShift will then go
-out to the container registry specified and interrogate the image.
+OpenShift will then go out to the container registry specified and interrogate the image.
 
 Your screen will end up looking something like this:
 
