@@ -48,7 +48,7 @@ To start this workshop, follow the step by step tutorial link for your cluster a
 |OpenShift
 |Guide
 
-|Any OCP 4.5 Cluster
+|ROKS/OCP 4.5 Cluster
 |link:https://redhat-scholars.github.io/openshift-starter-guides/[Link]
 
 |link:https://developers.redhat.com/products/codeready-containers/overview[CRC 4.5]
