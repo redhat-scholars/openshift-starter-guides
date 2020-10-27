@@ -5,8 +5,43 @@
 == The Web Console
 
 OpenShift ships with a web-based console that will allow users to
-perform various tasks via a browser. 
+perform various tasks via a browser.
 
+[tabs, subs="attributes+,+macros"]
+====
+ROKS::
++
+--
+Login to IBM Cloud through this link: {roks-login-url} 
+
+Enter following credentials:
+
+[source,role="copypaste"]
+Username: %USERNAME%
+
+[source,role="copypaste"]
+Password: %PASSWORD%
+
+Click *Sign In*.
+
+image::roks-login1.png[ROKS Login]
+
+After you successfully logged in, click *Clusters* from left-side pane:
+
+image::roks-login2.png[ROKS Clusters]
+
+From result page, expand *Clusters* section and click on the one starting with *redhat-*:
+
+image::roks-login3.png[ROKS Cluster]
+
+From right side pane, click *OpenShift web console* to access your OpenShift Cluster Dashboard:
+
+image::roks-login3.png[ROKS Open-shift web console]
+
+--
+Others::
++
+--
 To get a feel for how the web console works, click on this https://console-openshift-console.%CLUSTER_SUBDOMAIN%[Web Console,role='params-link',window='_blank'] link.
 
 On the login screen, enter the following credentials:
@@ -16,6 +51,10 @@ Username: %USERNAME%
 
 [source,role="copypaste"]
 Password: %PASSWORD%
+--
+====
+
+
 
 The first time you access the web console, you will most likely be in the Administrator perspective. If you are also the Cluster Administrator, you will be presented with an overview of the whole Cluster status:
 

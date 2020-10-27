@@ -22,6 +22,7 @@ asciidoc:
     openshift-version: 4.5
     project-namespace: workshop
     release-version: roks
+    roks-login-url: https://cloud.ibm.com/authorize/devcluster
     page-pagination: true
   extensions:
     - ./lib/tab-block.js
