@@ -19,11 +19,13 @@ Login to IBM Cloud, copy this link and open in your browser:
 
 Enter following credentials:
 
+*Username*:
 [source,role="copypaste"]
-Username: %USERNAME%
+%USERNAME%
 
+*Password*:
 [source,role="copypaste"]
-Password: %PASSWORD%
+%PASSWORD%
 
 Click *Sign In*.
 
@@ -41,11 +43,13 @@ To get a feel for how the web console works, click on this https://console-opens
 
 On the login screen, enter the following credentials:
 
+*Username*:
 [source,role="copypaste"]
-Username: %USERNAME%
+%USERNAME%
 
+*Password*:
 [source,role="copypaste"]
-Password: %PASSWORD%
+%PASSWORD%
 --
 ====
 
