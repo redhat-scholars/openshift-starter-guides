@@ -12,7 +12,10 @@ perform various tasks via a browser.
 ROKS::
 +
 --
-Login to IBM Cloud through this link: {roks-login-url} 
+Login to IBM Cloud, copy this link and open in your browser:
+
+[source,role="copypaste"]
+%LOGIN%
 
 Enter following credentials:
 
@@ -26,15 +29,7 @@ Click *Sign In*.
 
 image::roks-login1.png[ROKS Login]
 
-After you successfully logged in, click *Clusters* from left-side pane:
-
-image::roks-login2.png[ROKS Clusters]
-
-From result page, expand *Clusters* section and click on the one starting with *redhat-*:
-
-image::roks-login3.png[ROKS Cluster]
-
-From right side pane, click *OpenShift web console* to access your OpenShift Cluster Dashboard:
+After you successfully logged in, from right side pane, click *OpenShift web console* to access your OpenShift Cluster Dashboard:
 
 image::roks-login4.png[ROKS Open-shift web console]
 
