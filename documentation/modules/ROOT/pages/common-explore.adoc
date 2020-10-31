@@ -222,6 +222,38 @@ need help, raise your hand and the instructor will assist.
 [#download_and_install_openshift_cli_on_windows]
 ==== Download and Install OpenShift CLI on Windows
 
+The CLI for Windows is provided as a zip archive. Download and unzip the archive with a ZIP program and move the oc binary to a directory on your PATH. To check your PATH, open the Command Prompt and run:
+
+[.console-input]
+[source,shell,subs="+attributes,macros+"]
+----
+path
+----
+
+Checkout this blog post if you'd like to set it up with link:https://www.openshift.com/blog/installing-oc-tools-windows[Powershell,window='_blank']
+
+At this point, we should have the oc tool available for use. Let's test this
+out by printing the version of the oc command:
+
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
+----
+oc version
+----
+
+You should see the following (or something similar):
+
+[.console-output]
+[source,bash]
+----
+Client Version: openshift-clients-4.5.0-202006231303.p0-9-ge40bd2dd9
+Server Version: 4.5.11
+Kubernetes Version: v1.18.3+b0068a8
+----
+
+If you get an error message, you have not updated your path correctly. If you
+need help, raise your hand and the instructor will assist.
+
 [#connect_to_the_cluster_with_cli]
 === Connect to the OpenShift Cluster from CLI
 
