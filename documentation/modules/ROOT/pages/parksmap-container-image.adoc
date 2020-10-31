@@ -109,7 +109,7 @@ image::parksmap-overview.png[Pod overview]
 
 NOTE: You'll notice in this view an info box suggesting to add Health checks for our app. We will discuss it in details later, so for the moment you can just close this info box by clicking on the top-right X icon.
 
-You can also get a list of all the *Pods* created within your *Project*, by navigating to *Workloads -> Pods* in the Administrator perspective of the web console.
+You can also get a list of all the *Pods* created within your *Project*, by navigating to *Workloads -> Pods* in the *Administrator perspective* of the web console.
 
 image::parksmap-podlist.png[Pod list]
 
