@@ -139,7 +139,7 @@ several app servers, databases, and more.  You could deploy the entire set of
 resources with one command, and then hack on them to develop new features,
 microservices, fix bugs, and more.
 
-In Topology view, you can drag `mlbparks` and `mongodb-mlbparks` into the `workshop` application grouping.
+TIP: You'll notice apps are already inside `workshop` application group and they have a nice EAP and MongoDB icon. This is thanks to the label `app.kubernetes.io/part-of` and `app.kubernetes.io/name` that the template already setup for both DeploymentConfigs 
 
 image::mlbparks-templates-complete-overview.png[Complete overview]
 
