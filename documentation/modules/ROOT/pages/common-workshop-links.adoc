@@ -15,14 +15,9 @@ Password: %PASSWORD% +
 [#workshop_guides]
 == Workshop Guides
 
-Web: link:index.adoc[Starter Guides]
-
-[#web_terminal]
-== Web terminal
-
-Web: http://terminal-{project-namespace}.%CLUSTER_SUBDOMAIN%
+Web: link:https://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/index.html[Starter Guides,window='_blank']
 
 [#git_server]
 == Git Server
 
-Web: https://github.com
+Web: link:https://github.com[GitHub,window='_blank']
