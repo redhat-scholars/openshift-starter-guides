@@ -648,8 +648,17 @@ several app servers, databases, and more.  You could deploy the entire set of
 resources with one command, and then hack on them to develop new features,
 microservices, fix bugs, and more.</p>
 </div>
-<div class="paragraph">
-<p>In Topology view, you can drag <code>mlbparks</code> and <code>mongodb-mlbparks</code> into the <code>workshop</code> application grouping.</p>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You&#8217;ll notice apps are already inside <code>workshop</code> application group and they have a nice EAP and MongoDB icon. This is thanks to the label <code>app.kubernetes.io/part-of</code> and <code>app.kubernetes.io/name</code> that the template already setup for both DeploymentConfigs
+</td>
+</tr>
+</table>
 </div>
 <div class="imageblock">
 <div class="content">
