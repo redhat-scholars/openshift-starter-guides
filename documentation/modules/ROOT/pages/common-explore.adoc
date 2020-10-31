@@ -108,7 +108,7 @@ image::prerequisites_cli_binaries.png[CLI Binaries]
 
 
 [#download_and_install_openshift_cli_on_linux]
-==== Download and Install OpenShift CLI on Linux
+==== *Download and Install OpenShift CLI on Linux*
 
 
 Once the file has been downloaded, you will need to extract the contents as it
@@ -164,7 +164,7 @@ If you get an error message, you have not updated your path correctly. If you
 need help, raise your hand and the instructor will assist.
 
 [#download_and_install_openshift_cli_on_mac]
-==== Download and Install OpenShift CLI on Mac OS X
+==== *Download and Install OpenShift CLI on Mac OS X*
 
 
 Once the file has been downloaded, you will need to extract the contents as it
@@ -220,7 +220,7 @@ If you get an error message, you have not updated your path correctly. If you
 need help, raise your hand and the instructor will assist.
 
 [#download_and_install_openshift_cli_on_windows]
-==== Download and Install OpenShift CLI on Windows
+==== *Download and Install OpenShift CLI on Windows*
 
 The CLI for Windows is provided as a zip archive. Download and unzip the archive with a ZIP program and move the oc binary to a directory on your PATH. To check your PATH, open the Command Prompt and run:
 
