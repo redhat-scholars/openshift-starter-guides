@@ -97,7 +97,7 @@
     <a class="nav-link" href="common-explore.html#download_and_install_openshift_cli_on_mac">Download and Install OpenShift CLI on Mac OS X</a>
   </li>
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="common-explore.html#download_and_install_openshift_cli_on_win">Download and Install OpenShift CLI on Windows</a>
+    <a class="nav-link" href="common-explore.html#download_and_install_openshift_cli_on_windows">Download and Install OpenShift CLI on Windows</a>
   </li>
 </ul>
   </li>
@@ -668,7 +668,40 @@ need help, raise your hand and the instructor will assist.</p>
 <div class="sect1">
 <h2 id="download_and_install_openshift_cli_on_windows"><a class="anchor" href="#download_and_install_openshift_cli_on_windows"></a>Download and Install OpenShift CLI on Windows</h2>
 <div class="sectionbody">
-
+<div class="paragraph">
+<p>The CLI for Windows is provided as a zip archive. Download and unzip the archive with a ZIP program and move the oc binary to a directory on your PATH. To check your PATH, open the Command Prompt and run:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">path</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Checkout this blog post if you&#8217;d like to set it up with <a href="https://www.openshift.com/blog/installing-oc-tools-windows">Powershell</a></p>
+</div>
+<div class="paragraph">
+<p>At this point, we should have the oc tool available for use. Let&#8217;s test this
+out by printing the version of the oc command:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc version</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see the following (or something similar):</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Client Version: openshift-clients-4.5.0-202006231303.p0-9-ge40bd2dd9
+Server Version: 4.5.11
+Kubernetes Version: v1.18.3+b0068a8</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you get an error message, you have not updated your path correctly. If you
+need help, raise your hand and the instructor will assist.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
