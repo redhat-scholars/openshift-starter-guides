@@ -32,7 +32,11 @@ ui:
   bundle:
     url: https://github.com/redhat-scholars/course-ui/releases/download/v0.1.8/ui-bundle.zip
     snapshot: true
-  supplemental_files: ./supplemental-ui
+  supplemental_files:
+    - path: ./supplemental-ui
+    - path: .nojekyll
+    - path: ui.yml
+      contents: "static_files: [ .nojekyll ]"
 
 output:
   dir: ./gh-pages
