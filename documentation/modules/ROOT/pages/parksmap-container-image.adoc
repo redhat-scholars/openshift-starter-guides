@@ -66,6 +66,14 @@ And finally, the role this component plays in the overall application.
 role=frontend
 ----
 
+TIP: *(Optional)* Since this is a Spring app, you can mark this app as Spring application into Topology view with this additional label, it will be represented with a Spring icon:
+
+[source,role=copypaste]
+----
+app.kubernetes.io/name=spring
+----
+
+
 image::parksmap-image-options.png[Deploy image]
 
 Next, click the blue *Create* button. You will be directed to the *Topology* page, where you should see the visualization for the `parksmap` deployment config in the `workshop` application.
