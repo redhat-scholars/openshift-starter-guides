@@ -2,7 +2,7 @@
 :!sectids:
 
 [.text-center.strong]
-== OpenShift OpenShift Starter Guides for Java Developers
+== OpenShift Starter Guides for Java Developers
 
 Developing Java Applications on OpenShift - Starter Lab
 

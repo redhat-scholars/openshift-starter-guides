@@ -2,7 +2,7 @@ runtime:
   cache_dir: ./.cache/antora
 
 site:
-  #title: OpenShift Starter Guides(Dev Mode)
+  title: OpenShift Starter Guides(Dev Mode)
   url: http://localhost:3000/rhs-openshift-starter-guides/index.html
   start_page: rhs-openshift-starter-guides::index.adoc
 
