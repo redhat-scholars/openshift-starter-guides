@@ -278,10 +278,10 @@ Created:                2 hours ago
 Labels:                 app=workshop
                         app.kubernetes.io/component=nationalparks
                         app.kubernetes.io/instance=nationalparks
-                        app.kubernetes.io/name=nodejs
+                        app.kubernetes.io/name=java
                         app.kubernetes.io/part-of=workshop
-                        app.openshift.io/runtime=nodejs
-                        app.openshift.io/runtime-version=10
+                        app.openshift.io/runtime=java
+                        app.openshift.io/runtime-version=11
                         component=nationalparks
                         role=backend  
 Annotations:            openshift.io/host.generated=true                          
