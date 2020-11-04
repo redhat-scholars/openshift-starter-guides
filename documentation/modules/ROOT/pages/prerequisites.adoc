@@ -11,7 +11,7 @@ In order to run the lab in your cluster, you need to meet the requirements discu
 | `4.5`
 
 | link:#openshift_pipelines[OpenShift Pipelines]
-| `>=1.0.1`
+| `1.1.2`
 
 | link:#github_account[Git]
 | `2.x`
