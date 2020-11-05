@@ -130,7 +130,7 @@ You can also specify the shell commands to run directly with the *oc rsh* comman
 [.console-input]
 [source,bash,subs="+attributes,macros+"]
 ----
-oc rsh parksmap-2-mcjsw -- whoami
+oc rsh parksmap-2-mcjsw whoami
 ----
 
 You would see something like:
