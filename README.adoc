@@ -4,7 +4,7 @@ image::https://github.com/redhat-scholars/openshift-starter-guides/workflows/doc
 
 ## Overview
 
-image::documentation/modules/ROOT/assets/images/mlbparks-templates-complete-overview.png[Workshop]
+image::documentation/modules/ROOT/assets/images/starter-guide-complete.png[Workshop]
 
 |===
 || 
