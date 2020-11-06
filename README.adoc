@@ -4,6 +4,8 @@ image::https://github.com/redhat-scholars/openshift-starter-guides/workflows/doc
 
 ## Overview
 
+image::documentation/modules/ROOT/assets/images/mlbparks-templates-complete-overview.png[Workshop]
+
 |===
 || 
 
@@ -57,6 +59,40 @@ To start this workshop, follow the step by step tutorial link for your cluster a
 |link:https://learn.openshift.com/playgrounds/openshift45/[OpenShift 4.5 Playground] 
 |link:https://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/index.html?USERNAME=admin&PASSWORD=admin[Link]
 |===
+
+### Lab Parameters
+
+This lab supports both link:site.yml#L17[Antora variables] than query parameters. Query params makes the workshop content dynamic, like URLs specific for your cluster to copy and paste.
+
+NOTE: In the table above, CRC and Playground links use them.
+
+Here's the list of all query params used (they are all optional, but generated links won't work unless at least `CLUSTER_SUBDOMAIN` is set):
+
+[%header,cols=2*] 
+|===
+|PARAM
+|Description
+
+|`CLUSTER_SUBDOMAIN`
+|The subdomain for your OpenShift cluster in the form `apps.<cluster_name>.<base_domain>`, e.g. `apps.openshift.mydomain.tld`
+
+|`USERNAME`
+| The username of your OpenShift cluster
+
+|`PASSWORD`
+| The password for your OpenShift cluster
+
+|`LOGIN`
+| Only for ROKS clusters, the IBM Cloud login URL for authentication
+
+|===
+
+Example:
+
+https://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/index.html?CLUSTER_SUBDOMAIN=apps-crc.testing&USERNAME=developer&PASSWORD=developer
+
+
+
 
 ## Contributing
 
