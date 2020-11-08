@@ -36,7 +36,7 @@ From the description view, click *Install* to review all installation settings.
 
 image::prerequisites_operatorhub_install_pipelines.png[Install Pipelines]
 
-Leave all default settings, and click *Install* to start installing the Operator.
+Ensure *Update Channel* is set to *ocp-4.5* , and click *Install* to start installing the Operator.
 
 image::prerequisites_operatorhub_install_operator.png[Install Operator]
 
