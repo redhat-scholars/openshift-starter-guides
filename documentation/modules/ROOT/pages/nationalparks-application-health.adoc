@@ -66,8 +66,6 @@ Repeat the same procedure for Liveness Probe, click to *Add Liveness Probe* and 
 
 Leave all default settings like *Port* 8080 and *Type* HTTP GET. Click the little bottom-right confirmation gray tick to confirm.
 
-WARNING: Note the trailing slash in the URL
-
 Finally confirm all new changes clicking to *Add*:
 
 image::nationalparks-application-health-add.png[Add Probes]

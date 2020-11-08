@@ -220,7 +220,7 @@ frontend are required to implement a `/ws/info/` endpoint. To test, visit this U
 
 link:http://nationalparks-{project-namespace}.%CLUSTER_SUBDOMAIN%/ws/info/[National Parks Info Page, role='params-link',window='_blank']
 
-WARNING: The trailing slash is *required*. If the Pod is Running and the application is not available, please wait a few seconds and refresh the page, since we haven't configured yet Health Checks for that.
+WARNING: If the Pod is Running and the application is not available, please wait a few seconds and refresh the page, since we haven't configured yet Health Checks for that.
 
 You will see a simple JSON string:
 
