@@ -84,7 +84,7 @@ You will see some output similar to this:
 [.console-output]
 [source,bash]
 ----
---> Deploying template "user1/mlbparks" to project user1
+--> Deploying template "workshop/mlbparks" to project workshop
 
      MLBparks
      ---------
@@ -115,7 +115,7 @@ You will see some output similar to this:
     route.route.openshift.io "mlbparks" created
 --> Success
     Build scheduled, use 'oc logs -f bc/mlbparks' to track its progress.
-    Access your application via route 'mlbparks-user5.apps.cluster-1d43.1d43.openshiftworkshop.com'
+    Access your application via route 'mlbparks-workshop.apps.cluster-1d43.1d43.openshiftworkshop.com'
     Run 'oc status' to view your app.
 ----
 
