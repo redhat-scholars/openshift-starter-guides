@@ -223,15 +223,15 @@ need help, raise your hand and the instructor will assist.
 
 If you have HomeBrew installed (www.brew.sh) you can install OpenShift CLI using brew:
 
-[.console-output]
-[source,bash]
+[.console-input]
+[source,bash,role="copypaste"]
 ----
 brew install openshift-cli
 ----
 
 You may also want to enable CLI autocompletion (bash or zsh):
-[.console-output]
-[source,bash]
+[.console-input]
+[source,bash,role="copypaste"]
 ----
 source <(oc completion bash)
 source <(oc completion zsh)
@@ -239,8 +239,8 @@ source <(oc completion zsh)
 
 To make CLI autocompletion persistent (bash or zsh) by adding a relevant line to your .bashrc or .zshrc:
 
-[.console-output]
-[source,bash]
+[.console-input]
+[source,bash,role="copypaste"]
 ----
 oc completion bash > oc_bash_completion.sh
 oc completion bash > oc_zsh_completion.sh
