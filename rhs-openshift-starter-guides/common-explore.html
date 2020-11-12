@@ -748,6 +748,38 @@ need help, raise your hand and the instructor will assist.</p>
 </div>
 </div>
 <div class="sect3">
+<h4 id="_download_and_install_openshift_cli_on_mac_os_x_using_homebrew"><a class="anchor" href="#_download_and_install_openshift_cli_on_mac_os_x_using_homebrew"></a><strong>Download and Install OpenShift CLI on Mac OS X using HomeBrew</strong></h4>
+<div class="paragraph">
+<p>If you have HomeBrew installed (www.brew.sh) you can install OpenShift CLI using brew:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">brew install openshift-cli</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You may also want to enable CLI autocompletion (bash or zsh):</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">source &lt;(oc completion bash)
+source &lt;(oc completion zsh)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To make CLI autocompletion persistent (bash or zsh) by adding a relevant line to your .bashrc or .zshrc:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc completion bash &gt; oc_bash_completion.sh
+oc completion bash &gt; oc_zsh_completion.sh
+
+source oc_bash_completion.sh
+source oc_zsh_completion.sh</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
 <h4 id="download_and_install_openshift_cli_on_windows"><a class="anchor" href="#download_and_install_openshift_cli_on_windows"></a><strong>Download and Install OpenShift CLI on Windows</strong></h4>
 <div class="paragraph">
 <p>The CLI for Windows is provided as a zip archive. Download and unzip the archive with a ZIP program and move the oc binary to a directory on your PATH. To check your PATH, open the Command Prompt and run:</p>
