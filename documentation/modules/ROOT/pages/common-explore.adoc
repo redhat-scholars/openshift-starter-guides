@@ -219,6 +219,36 @@ Kubernetes Version: v1.18.3+b0068a8
 If you get an error message, you have not updated your path correctly. If you
 need help, raise your hand and the instructor will assist.
 
+==== *Download and Install OpenShift CLI on Mac OS X using HomeBrew*
+
+If you have HomeBrew installed (www.brew.sh) you can install OpenShift CLI using brew:
+
+[.console-output]
+[source,bash]
+----
+brew install openshift-cli
+----
+
+You may also want to enable CLI autocompletion (bash or zsh):
+[.console-output]
+[source,bash]
+----
+source <(oc completion bash)
+source <(oc completion zsh)
+----
+
+To make CLI autocompletion persistent (bash or zsh) by adding a relevant line to your .bashrc or .zshrc:
+
+[.console-output]
+[source,bash]
+----
+oc completion bash > oc_bash_completion.sh
+oc completion bash > oc_zsh_completion.sh
+ 
+source oc_bash_completion.sh
+source oc_zsh_completion.sh
+----
+
 [#download_and_install_openshift_cli_on_windows]
 ==== *Download and Install OpenShift CLI on Windows*
 
