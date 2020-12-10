@@ -53,6 +53,6 @@ image::further-resources-openshift-for-developers.png[OpenShift for Developers]
 
 image::further-resources-devops-with-openshift.png[DevOps with OpenShift]
 
-* *link:https://developers.redhat.com/books/devops-openshift-cloud-deployments-made-easy/old[Deploying with OpenShift]*
+* *link:https://developers.redhat.com/books/deploying-openshift/old[Deploying with OpenShift]*
 
 image::further-resources-deploying-to-openshift.png[Deploying to OpenShift]
