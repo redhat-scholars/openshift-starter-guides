@@ -62,7 +62,7 @@ If you're referring to a service account in a different project, use the `-n <pr
 Now that the `default` *Service Account* now has **view** access, so now it can query the API to see what resources are within the *Project*. This also has the added benefit of suppressing the error message! Although, in reality, we fixed the application.
 
 Another way you could have done the same is by using the OpenShift console. Once you're on the 
-*Workloads -> Deployment Configs* page, click on the *Namespace*, then *Role Bindings* and then the *Create Binding* button.
+*Workloads -> Deployments* page, click on the *Namespace*, then *Role Bindings* and then the *Create Binding* button.
 
 image::parksmap-permissions-membership-serviceaccount-list.png[Service account list]
 
@@ -76,14 +76,14 @@ image::parksmap-permissions-membership-serviceaccount-done.png[Service account c
 
 [#redeploy_application]
 == Exercise: Redeploy Application
-One more step is required. We need to re-deploy the `parksmap` application because it's
-given up trying to query the API.
 
-This time we'll use the web console. In the Developer Perspective, in Topology view, click the `parksmap` entry. Then, in the *Actions* dropdown menu, select *Start Rollout*.
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
+----
+oc rollout restart deployment/parksmap
+----
 
-image::parksmap-permissions-start-rollout.png[Start rollout]
-
-A new deployment is immediately started. Return to Topology view and click the `parksmap` entry again to watch it happen. You might not be fast enough! But it will be reflected in the *Latest Version* number.
+A new deployment is immediately started. Return to Topology view and click the `parksmap` entry again to watch it happen. You might not be fast enough! But it will be reflected in the *ReplicaSet* number.
 
 image::parksmap-permissions-redeployed.png[Application deployed]
 

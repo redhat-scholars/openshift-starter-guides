@@ -30,7 +30,7 @@ various log information to various files, fear not.
 == Exercise: Examining Logs
 
 Since we already deployed our application, we can take some time to examine its
-logs. In the Developer Perspective, from Topology view, click the `parksmap` entry and then the *Resources* tab. You should see a *View Logs* link next to the *Pod* entry.
+logs. In the *Developer Perspective*, from Topology view, click the `parksmap` entry and then the *Resources* tab. You should see a *View Logs* link next to the *Pod* entry.
 
 image::parksmap-view-logs-link.png[View Logs for Pod]
 

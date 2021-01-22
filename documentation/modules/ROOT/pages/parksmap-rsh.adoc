@@ -26,10 +26,8 @@ You should an output similar to the following:
 [.console-output]
 [source,bash]
 ----
-NAME                READY   STATUS      RESTARTS   AGE
-parksmap-1-deploy   0/1     Completed   0          3h15m
-parksmap-2-deploy   0/1     Completed   0          172m
-parksmap-2-mcjsw    1/1     Running     0          172m
+NAME                        READY   STATUS    RESTARTS   AGE
+parksmap-65c4f8b676-fxcrq   1/1     Running   0          52m
 ----
 
 Now you can establish a remote shell session into the pod by using the pod name:
@@ -37,7 +35,7 @@ Now you can establish a remote shell session into the pod by using the pod name:
 [.console-input]
 [source,bash,subs="+attributes,macros+"]
 ----
-oc rsh parksmap-2-mcjsw
+oc rsh parksmap-65c4f8b676-fxcrq
 ----
 
 You would see the following output:
@@ -106,7 +104,7 @@ In order to show just the JAR file, run the following:
 [.console-input]
 [source,bash,subs="+attributes,macros+"]
 ----
-oc exec parksmap-2-mcjsw -- ls -l /parksmap.jar
+oc exec parksmap-65c4f8b676-fxcrq -- ls -l /parksmap.jar
 ----
 
 You would see something like the following:
@@ -130,7 +128,7 @@ You can also specify the shell commands to run directly with the *oc rsh* comman
 [.console-input]
 [source,bash,subs="+attributes,macros+"]
 ----
-oc rsh parksmap-2-mcjsw whoami
+oc rsh parksmap-65c4f8b676-fxcrq whoami
 ----
 
 You would see something like:

@@ -10,16 +10,16 @@ content:
   sources:
     - url: git@github.com:redhat-scholars/openshift-starter-guides.git
       tags: []
-      branches: roks
+      branches: ocp-4.6
       start_path: documentation
 
 asciidoc:
   attributes:
     #title: OpenShift Starter Guides
-    parksmap-version: 1.3.0
+    parksmap-version: latest
     parksmap-image: quay.io/openshiftroadshow/parksmap
-    openshift-docs-url: https://docs.openshift.com/container-platform/4.5
-    openshift-version: 4.5
+    openshift-docs-url: https://docs.openshift.com/container-platform/4.6
+    openshift-version: 4.6
     project-namespace: workshop
     release-version: roks
     roks-login-url: https://cloud.ibm.com/authorize/devcluster

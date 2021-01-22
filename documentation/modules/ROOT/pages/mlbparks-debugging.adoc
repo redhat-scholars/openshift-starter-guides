@@ -43,8 +43,6 @@ oc get pods
 [source,bash]
 ----
 NAME                             READY   STATUS      RESTARTS   AGE
-jenkins-1-deploy                 0/1     Completed   0          4d19h
-jenkins-1-l2g2c                  1/1     Running     0          4d19h
 mlbparks-1-build                 0/1     Completed   0          4d
 mlbparks-1-deploy                0/1     Completed   0          4d
 mlbparks-1-hook-post             0/1     Completed   0          4d
