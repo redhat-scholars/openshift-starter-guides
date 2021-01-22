@@ -1,4 +1,4 @@
-FROM ubi8/nodejs-10
+FROM node:latest
 
 # Add application sources
 ADD . .
