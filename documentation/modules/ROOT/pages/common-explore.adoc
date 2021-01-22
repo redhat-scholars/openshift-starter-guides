@@ -7,38 +7,6 @@
 OpenShift ships with a web-based console that will allow users to
 perform various tasks via a browser.
 
-[tabs, subs="attributes+,+macros"]
-====
-ROKS::
-+
---
-Login to IBM Cloud, copy this link and open in your browser:
-
-[source,role="copypaste"]
-%LOGIN%
-
-Enter following credentials:
-
-*Username*:
-[source,role="copypaste"]
-%USERNAME%
-
-*Password*:
-[source,role="copypaste"]
-%PASSWORD%
-
-Click *Sign In*.
-
-image::roks-login1.png[ROKS Login]
-
-After you successfully logged in, from right side pane, click *OpenShift web console* to access your OpenShift Cluster Dashboard:
-
-image::roks-login4.png[ROKS Open-shift web console]
-
---
-Others::
-+
---
 To get a feel for how the web console works, click on this https://console-openshift-console.%CLUSTER_SUBDOMAIN%[Web Console,role='params-link',window='_blank'] link.
 
 On the login screen, enter the following credentials:
@@ -50,8 +18,7 @@ On the login screen, enter the following credentials:
 *Password*:
 [source,role="copypaste"]
 %PASSWORD%
---
-====
+
 
 
 
@@ -85,9 +52,9 @@ You should see the following (or something similar):
 [.console-output]
 [source,bash]
 ----
-Client Version: openshift-clients-4.5.0-202006231303.p0-9-ge40bd2dd9
-Server Version: 4.5.11
-Kubernetes Version: v1.18.3+b0068a8
+Client Version: 4.6.9
+Server Version: 4.6.4
+Kubernetes Version: v1.19.0+9f84db3
 ----
 
 If the `oc` doesn't exist or you have an older version of the OpenShift CLI, follow
@@ -155,9 +122,9 @@ You should see the following (or something similar):
 [.console-output]
 [source,bash]
 ----
-Client Version: openshift-clients-4.5.0-202006231303.p0-9-ge40bd2dd9
-Server Version: 4.5.11
-Kubernetes Version: v1.18.3+b0068a8
+Client Version: 4.6.9
+Server Version: 4.6.4
+Kubernetes Version: v1.19.0+9f84db3
 ----
 
 If you get an error message, you have not updated your path correctly. If you
@@ -211,9 +178,9 @@ You should see the following (or something similar):
 [.console-output]
 [source,bash]
 ----
-Client Version: openshift-clients-4.5.0-202006231303.p0-9-ge40bd2dd9
-Server Version: 4.5.11
-Kubernetes Version: v1.18.3+b0068a8
+Client Version: 4.6.9
+Server Version: 4.6.4
+Kubernetes Version: v1.19.0+9f84db3
 ----
 
 If you get an error message, you have not updated your path correctly. If you
@@ -276,9 +243,9 @@ You should see the following (or something similar):
 [.console-output]
 [source,bash]
 ----
-Client Version: openshift-clients-4.5.0-202006231303.p0-9-ge40bd2dd9
-Server Version: 4.5.11
-Kubernetes Version: v1.18.3+b0068a8
+Client Version: 4.6.9
+Server Version: 4.6.4
+Kubernetes Version: v1.19.0+9f84db3
 ----
 
 If you get an error message, you have not updated your path correctly. If you
