@@ -1,10 +1,14 @@
 FROM node:latest
 
-# Add application sources
-ADD . .
+RUN mkdir -p /opt/src
 
-# Install the dependencies
+WORKDIR /opt/src
+
+ADD . /opt/src
+
+RUN chgrp -R 0 /opt/src && \
+    chmod -R g=u /opt/src
+
 RUN npm install
 
-# Run script uses standard ways to run the application
 CMD npm run dev -d
