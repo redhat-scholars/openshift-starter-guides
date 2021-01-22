@@ -59,28 +59,11 @@ For this example, we're going to deploy our pipeline which is stored in the same
 
 Let's create now a Tekton pipeline for Nationalparks backend, select your OpenShift cluster type from below table:
 
-[tabs, subs="attributes+,+macros"]
-====
-ROKS::
-+
---
-[.console-input]
-[source,bash,subs="+attributes"]
-----
-oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipeline-all-vfs.yaml -n {project-namespace}
-----
---
-Others::
-+
---
 [.console-input]
 [source,bash,subs="+attributes"]
 ----
 oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipeline-all-new.yaml -n {project-namespace}
 ----
---
-====
-
 
 Verify the Tasks you created:
 
