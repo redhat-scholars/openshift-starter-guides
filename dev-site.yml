@@ -9,7 +9,8 @@ site:
 content:
   sources:
     - url: .
-      branches: HEAD
+      #branches: HEAD
+      branches: [roks, ocp-4.6] 
       start_path: documentation
 asciidoc:
   attributes:
