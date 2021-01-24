@@ -22,11 +22,13 @@ asciidoc:
     project-namespace: workshop
     workshop-domain: rhscholars.devx.red
     kubernetes-version: v1.19.0
-    release-version: roks
+    release-version: ocp
     roks-login-url: https://cloud.ibm.com/authorize/devcluster
     page-pagination: true
     openshift-console-url: https://console-openshift-console.apps.example.com
     etherpad-url: http://example.com
+    lab: java
+    lab-name: Java
   extensions:
     - ./lib/remote-include-processor.js
     - ./lib/tab-block.js
