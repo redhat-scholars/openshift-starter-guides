@@ -92,7 +92,9 @@ You can also verify the *Route* in the Developer Perspective under the *Resource
 
 image::parksmap-route-created.png[Route created]
 
-This application is now available at the URL shown in the Developer Perspective. Click the link and you will see:
+This application is now available at the URL shown in the Developer Perspective. Click the link and you will see it.
+
+NOTE: At first time, the Browser will ask permission to get your position. This is needed by the Frontend app to center the world map to your location, if you don't allow it, it will just use a default location.
 
 image::parksmap-route-empty-map.png[Empty map]
 
