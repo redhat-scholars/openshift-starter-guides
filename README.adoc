@@ -54,10 +54,10 @@ To start this workshop, follow the step by step tutorial link for your cluster a
 |link:https://redhat-scholars.github.io/openshift-starter-guides/[Link]
 
 |link:https://developers.redhat.com/products/codeready-containers/overview[CRC 4.6]
-|link:https://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/index.html?CLUSTER_SUBDOMAIN=apps-crc.testing[Link]
+|link:https://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.6/index.html?CLUSTER_SUBDOMAIN=apps-crc.testing[Link]
 
 |link:https://learn.openshift.com/playgrounds/openshift46/[OpenShift 4.6 Playground] 
-|link:https://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/index.html?USERNAME=admin&PASSWORD=admin[Link]
+|link:https://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.6/index.html?USERNAME=admin&PASSWORD=admin[Link]
 |===
 
 ### Lab Parameters
@@ -89,7 +89,7 @@ Here's the list of all query params used (they are all optional, but generated l
 
 Example:
 
-https://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/index.html?CLUSTER_SUBDOMAIN=apps-crc.testing&USERNAME=developer&PASSWORD=developer
+https://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.6/index.html?CLUSTER_SUBDOMAIN=apps-crc.testing&USERNAME=developer&PASSWORD=developer
 
 
 
