@@ -4,8 +4,6 @@ image::https://github.com/redhat-scholars/openshift-starter-guides/workflows/doc
 
 ## Overview
 
-image::documentation/modules/ROOT/assets/images/starter-guide-complete.png[Workshop]
-
 |===
 || 
 
@@ -22,6 +20,8 @@ This workshop is intended to give you a hands on introduction to using https://o
 https://www.redhat.com/en/topics/containers/whats-a-linux-container-vb[Containers] are a standardized way to package apps with all of their dependencies to simplify deployment and speed delivery. Unlike virtual machines, containers do not bundle to the operating system. Only the application code, run time, libraries, and settings are packaged inside of containers. Thus, containers are more lightweight, portable, and efficient as compared to virtual machines.
 
 For developers looking to kickstart their projets, OpenShift enables efficient application development through streamlined workflows and validated integrations.
+
+image::documentation/modules/ROOT/assets/images/starter-guide-complete.png[Workshop]
 
 ### Objectives
 
