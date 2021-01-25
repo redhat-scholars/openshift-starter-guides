@@ -50,7 +50,7 @@ To start this workshop, follow the step by step tutorial link for your cluster a
 |OpenShift
 |Guide
 
-|OpenShift 4.6 Cluster
+|link:https://www.openshift.com/try[OpenShift 4.6 Cluster]
 |link:https://redhat-scholars.github.io/openshift-starter-guides/[Link]
 
 |link:https://developers.redhat.com/products/codeready-containers/overview[CRC 4.6]
@@ -58,6 +58,10 @@ To start this workshop, follow the step by step tutorial link for your cluster a
 
 |link:https://learn.openshift.com/playgrounds/openshift46/[OpenShift 4.6 Playground] 
 |link:https://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.6/index.html?USERNAME=admin&PASSWORD=admin[Link]
+
+|link:https://cloud.ibm.com/docs/openshift?topic=openshift-roks-overview[ROKS/ OpenShift 4.5]
+|link:https://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.5/index.html[Link]
+
 |===
 
 ### Lab Parameters
