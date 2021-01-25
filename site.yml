@@ -10,7 +10,7 @@ content:
   sources:
     - url: git@github.com:redhat-scholars/openshift-starter-guides.git
       tags: []
-      branches: ocp-4.6
+      branches: [roks, ocp-4.6]
       start_path: documentation
 
 asciidoc:
@@ -24,6 +24,8 @@ asciidoc:
     release-version: roks
     roks-login-url: https://cloud.ibm.com/authorize/devcluster
     page-pagination: true
+    lab: java
+    lab-name: Java
   extensions:
     - ./lib/tab-block.js
     - ./lib/remote-include-processor.js
