@@ -24,11 +24,23 @@ create a *Route*.
 == Exercise: Creating a Route
 
 You may remember that when we deployed the `parksmap` application, we un-checked the checkbox to 
-create a *Route*. Normally it would have been created for us automatically. Fortunately, creating a *Route* is a pretty straight-forward process. You simply `expose` the *Service* via the command line. Or, via the Administrator Perspective, just click *Networking -> Routes* and then the *Create Route* button. Choose the *Service* you want to expose and enter values as shown in the following image:
+create a *Route*. Normally it would have been created for us automatically. Fortunately, creating a *Route* is a pretty straight-forward process. You could simply `expose` the *Service* via the command line. Or, via the *Administrator Perspective*, just click *Networking -> Routes* and then the *Create Route* button.
 
-image::parksmap-route-create.png[Create Route,align="center"]
+Insert *parksmap* in *Name* field.
 
-When creating a *Route*, some other options can be provided, like the hostname for the *Route* or the TLS configuration for the *Route*.
+From *Service* field, select *parksmap*. For *Target Port*, select *8080*.
+
+In *Security* section, check *Secure route*. Select *Edge* from *TLS Termination* list.
+
+Leave all other fields blank and click *Create*:
+
+image::parksmap-route-create-1.png[Create Route Part 1,align="center"]
+
+image::parksmap-route-create-2.png[Create Route Part 2,align="center"]
+
+TIP: The TLS certificate for cluster Apps domains is used by default, so you don't need to add any certificate. In case you would like a custom domain resolving to OpenShift Nodes hosting Routers, you can add certificates on a per-route basis.
+
+When creating a *Route*, some other options can be provided, like the hostname and path for the *Route* or the other TLS configurations.
 
 When using the command line, we can first verify that we don't already have any existing *Routes*:
 
@@ -64,7 +76,7 @@ Once we know the *Service* name, creating a *Route* is a simple one-command task
 [.console-input]
 [source,bash,subs="+attributes,macros+"]
 ----
-oc expose service parksmap
+oc create route edge parksmap --service=parksmap
 ----
 
 [.console-output]
@@ -84,11 +96,11 @@ oc get route
 [.console-output]
 [source,bash,subs="+attributes,macros+"]
 ----
-NAME       HOST/PORT                            PATH      SERVICES   PORT       TERMINATION
-parksmap   parksmap-{project-namespace}.%CLUSTER_SUBDOMAIN%             parksmap   8080-tcp
+NAME       HOST/PORT                            PATH      SERVICES   PORT       TERMINATION   WILDCARD
+parksmap   parksmap-{project-namespace}.%CLUSTER_SUBDOMAIN%             parksmap   8080-tcp   edge          None
 ----
 
-You can also verify the *Route* in the Developer Perspective under the *Resources* tab for your `parksmap` deployment configuration. Also note that there is a decorator icon on the `parksmap` visualization now. If you click that, it will open the URL for your *Route* in a browser.
+You can also verify the *Route* in the *Developer Perspective* under the *Resources* tab for your `parksmap` deployment configuration. Also note that there is a decorator icon on the `parksmap` visualization now. If you click that, it will open the URL for your *Route* in a browser.
 
 image::parksmap-route-created.png[Route created]
 

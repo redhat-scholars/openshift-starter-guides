@@ -213,7 +213,7 @@ a browser problem, and the application is working properly.
 
 [source,role="copypaste",subs="+attributes"]
 ----
-http://parksmap-{project-namespace}.%CLUSTER_SUBDOMAIN%
+https://parksmap-{project-namespace}.%CLUSTER_SUBDOMAIN%
 ----
 
 Hmm... There's just one thing. The main map **STILL** isn't displaying the parks.
@@ -317,7 +317,7 @@ If you check your browser now:
 
 [source,role="copypaste",subs="+attributes"]
 ----
-http://parksmap-{project-namespace}.%CLUSTER_SUBDOMAIN%/
+https://parksmap-{project-namespace}.%CLUSTER_SUBDOMAIN%/
 ----
 
 image::nationalparks-databases-new-parks.png[MongoDB]
