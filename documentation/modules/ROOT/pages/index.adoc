@@ -1,12 +1,10 @@
 = Welcome to OpenShift Starter Guides
 :!sectids:
 
-[.text-center.strong]
-== OpenShift Starter Guides for Java Developers
+== Developing Java Applications on OpenShift - Starter Lab
 
-Developing Java Applications on OpenShift - Starter Lab
+link:https://www.redhat.com/en/topics/containers/whats-a-linux-container-vb[Containers,window='_blank'] are a standardized way to package apps with all of their dependencies to simplify deployment and speed delivery. Unlike virtual machines, containers do not bundle to the operating system. Only the application code, run time, libraries, and settings are packaged inside of containers. Thus, containers are more lightweight, portable, and efficient as compared to virtual machines.
 
+For developers looking to kickstart their projects, link:https://openshift.com/[OpenShift,window='_blank'] enables efficient application development through streamlined workflows and validated integrations.
 
-Containers are a standardized way to package apps with all of their dependencies to simplify deployment and speed delivery. Unlike virtual machines, containers do not bundle to the operating system. Only the application code, run time, libraries, and settings are packaged inside of containers. Thus, containers are more lightweight, portable, and efficient as compared to virtual machines.
-
-For developers looking to kickstart their projects, OpenShift enables efficient application development through streamlined workflows and validated integrations.
+This Lab is accompanied by the slide deck available at link:https://dn.dev/openshift-workshop[dn.dev/openshift-workshop,window='_blank']
