@@ -38,6 +38,8 @@ image::parksmap-route-create-1.png[Create Route Part 1,align="center"]
 
 image::parksmap-route-create-2.png[Create Route Part 2,align="center"]
 
+TIP: The TLS certificate for cluster Apps domains is used by default, so you don't need to add any certificate. In case you would like a custom domain resolving to OpenShift Nodes hosting Routers, you can add certificates also on a per-route basis.
+
 When creating a *Route*, some other options can be provided, like the hostname and path for the *Route* or the other TLS configurations.
 
 When using the command line, we can first verify that we don't already have any existing *Routes*:
