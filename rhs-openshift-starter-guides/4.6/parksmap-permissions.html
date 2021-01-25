@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Permissions :: OpenShift Starter Guides</title>
+    <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.6/parksmap-permissions.html">
+    <link rel="prev" href="parksmap-logging.html">
+    <link rel="next" href="parksmap-rsh.html">
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../../_/css/site.css">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="http://redhat-scholars.github.io/openshift-starter-guides">OpenShift Starter Guides</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+        <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://developers.redhat.com/ebooks/" target="_blank">Books</a>
+        <a class="navbar-item" href="https://developers.redhat.com/cheatsheets/" target="_blank">Cheat Sheets</a>
+        <a class="navbar-item" href="https://developers.redhat.com/events/" target="_blank">Upcoming Events</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://redhat-scholars.github.io/kubernetes-tutorial/" target="_blank">Kubernetes</a>
+            <a class="navbar-item" href="https://redhat-scholars.github.io/istio-tutorial/" target="_blank">Istio</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/quarkus-tutorial/" target="_blank">Quarkus</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/knative-tutorial/" target="_blank">Knative</a>
+            <a class="navbar-item" href="https://redhat-scholars.github.io/tekton-tutorial/" target="_blank">Tekton</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="rhs-openshift-starter-guides" data-version="4.6">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html" class=" query-params-link">OpenShift Starter Guides</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-workshop-summary.html">Workshop Summary</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-environment.html">OCP architecture</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="common-explore.html">Explore OpenShift</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="common-explore.html#the_web_console">The Web Console</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="common-explore.html#command_line_interface">Command Line Interface</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="common-explore.html#download_openshift_cli">Download OpenShift CLI</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="common-explore.html#download_and_install_openshift_cli_on_linux">Download and Install OpenShift CLI on Linux</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="common-explore.html#download_and_install_openshift_cli_on_mac">Download and Install OpenShift CLI on Mac OS X</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="common-explore.html#download_and_install_openshift_cli_on_windows">Download and Install OpenShift CLI on Windows</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="common-explore.html#connect_to_the_cluster_with_cli">Connect to the OpenShift Cluster from CLI</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="common-explore.html#working_with_proxies">Working with proxies</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="prerequisites.html">Prerequisites</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="prerequisites.html#openshift_pipelines">OpenShift Pipelines</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="prerequisites.html#install_openshift_pipelines_from_operatorhub">Install OpenShift Pipelines from OperatorHub</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="prerequisites.html#github_account">GitHub Account</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="projects.html">Projects</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="projects.html#create_your_first_project">Create your First Project</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-parksmap-architecture.html">Parksmap Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="parksmap-container-image.html">Parksmap App</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-container-image.html#deploy_your_first_image">Exercise: Deploying your First Image</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-container-image.html#containers_and_pods">Background: Containers and Pods</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-container-image.html#examining_the_pod">Exercise: Examining the Pod</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-container-image.html#customizing_image_lifecycle_behavior">Background: Customizing the Image Lifecycle Behavior</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-container-image.html#services">Background: Services</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="parksmap-scaling.html">Scaling Apps</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-scaling.html#deployments_and_replicasets">Background: Deployments and ReplicaSets</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-scaling.html#exploring_deployment_related_objects">Exercise: Exploring Deployment-related Objects</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-scaling.html#scaling_the_application">Exercise: Scaling the Application</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-scaling.html#application_self_healing">Application "Self Healing"</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-scaling.html#scale_down">Scale down</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="parksmap-routes.html">Routes</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-routes.html#routes">Background: Routes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-routes.html#creating_a_route">Exercise: Creating a Route</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="parksmap-logging.html">Logging</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-logging.html#container_logs">Background: Container Logs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-logging.html#examining_logs">Examining Logs</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="parksmap-permissions.html">Permissions</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#grant_serviceaccount_view_permissions">Grant Service Account View Permissions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#redeploy_application">Exercise: Redeploy Application</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#grant_user_view_permissions">Exercise: Grant User View Permissions</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="parksmap-rsh.html">Connecting to a Container</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-rsh.html#remote_shell_session_to_container_using_cli">Exercise: Remote Shell Session to a Container Using the CLI</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-rsh.html#execute_command_in_container">Exercise: Remote Shell Session to a Container Using the Web Console</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-rsh.html#remote_shell_session_to_container_using_webconsole">Exercise: Execute a Command in a Container</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="nationalparks-java.html">Nationalparks Java App</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java.html#source_to_image">Background: Source-to-Image (S2I)</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="nationalparks-java.html#creating_java_application">Exercise: Creating a Java application</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="nationalparks-java.html#add_to_project">Add to Project</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="nationalparks-java.html#using_application_code_on_git_server">Using Application Code on a Git Server</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="nationalparks-java.html#build_code_on_openshift">Build the Code on OpenShift</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="nationalparks-java-databases.html">Connecting to a Database</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-databases.html#storage">Background: Storage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-databases.html#templates">Background: Templates</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-databases.html#create_mongodb_template">Exercise: Create MongoDB Template</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-databases.html#deploy_mongodb">Exercise: Deploy MongoDB</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-databases.html#exploring_openshift_magic">Exercise: Exploring OpenShift Magic</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-databases.html#data_data_everywhere">Exercise: Data, Data, Everywhere</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-databases.html#working_with_labels">Exercise: Working With Labels</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="nationalparks-application-health.html">Application Healthchecks</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-application-health.html#add_health_checks">Exercise: Add Health Checks</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="nationalparks-java-pipeline.html">Continuous Integration and Pipelines</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-pipeline.html#understanding_tekton">Understanding Tekton</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-pipeline.html#setup_your_pipeline">Set Up Your Pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-pipeline.html#create_your_pipeline">Create Your Pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-pipeline.html#run_the_pipeline">Run the Pipeline</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html">Automation with Pipelines</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#webhooks">Web Hooks</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#adding_triggers_to_your_pipeline">Adding Triggers to your Pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#configuring_github_webhooks">Exercise: Configuring GitHub Web Hooks</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#using_github_webhooks">Exercise: Using GitHub Web Hooks</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="mlbparks-templates.html">MLBParks App</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mlbparks-templates.html#instantiate_template">Exercise: Instantiate a Template</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="mlbparks-binary-build.html">Binary Builds</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mlbparks-binary-build.html#moving_on_from_s2i">Moving on From S2I</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mlbparks-binary-build.html#fast_iterative_code_change_using_binary_deploy">Fast Iterative Code Change Using Binary Deploy</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="mlbparks-binary-build.html#using_binary_deployment">Exercise: Using Binary Deployment</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="mlbparks-binary-build.html#clone_source">Clone source</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="mlbparks-binary-build.html#setup_the_build_of_the_war_file">Setup the Build of the WAR file</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="mlbparks-binary-build.html#clone_change">Clone change</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="mlbparks-binary-build.html#doing_the_binary_build">Doing the Binary Build</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="mlbparks-debugging.html">Debugging Apps</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mlbparks-debugging.html#port_forwading_and_debugging">Background: Port Forwarding and Debugging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mlbparks-debugging.html#enabling_debugging_in_eap_on_openshift">Exercise: Enabling Debugging in EAP on OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="mlbparks-debugging.html#port-forwarding_from_pod_to_our_local_machine">Exercise: Port-Forwarding from the pod to our local machine</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="mlbparks-debugging.html#setting_up_remote_debug_in_intellij">Setting up Remote Debug in IntelliJ</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-further-resources.html">Further Resources</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="common-workshop-links.html">Workshop Links</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="common-workshop-links.html#openshift_cluster_url">OpenShift Cluster URL</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="common-workshop-links.html#workshop_guides">Workshop Guides</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="common-workshop-links.html#web_terminal">Web terminal</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="common-workshop-links.html#git_server">Git Server</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">OpenShift Starter Guides</span>
+    <span class="version">4.6</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">OpenShift Starter Guides</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">4.6</a>
+        </li>
+        <li class="version">
+          <a href="../4.5/index.html">4.5</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Starter Guides</a></li>
+    <li><a href="parksmap-permissions.html">Permissions</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">4.6</button>
+  <div class="version-menu">
+    <a class="version is-current" href="parksmap-permissions.html">4.6</a>
+    <a class="version" href="../4.5/parksmap-permissions.html">4.5</a>
+  </div>
+</div>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-starter-guides/edit/ocp-4.6/documentation/modules/ROOT/pages/parksmap-permissions.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Permissions</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Almost every interaction with an OpenShift environment that you can think of
+requires going through the OpenShift&#8217;s control plane API. All API interactions are both authenticated (AuthN - who are you?) and authorized (AuthZ - are you allowed to do what you are asking?).</p>
+</div>
+<div class="paragraph">
+<p>In the log aggregation lab we saw that there was an
+error in reference to a <strong>Service Account</strong>.</p>
+</div>
+<div class="paragraph">
+<p>As OpenShift is a declarative platform, some actions will be performed by the platform and not by the end user (when he or she issues a command). These actions are performed using a <strong>Service Account</strong> which is a special type of <code>user</code> that the platform will use internally.</p>
+</div>
+<div class="paragraph">
+<p>OpenShift automatically creates a few special service accounts in every project.
+The <strong>default</strong> service account is the one taking the responsibility of running the pods, and OpenShift uses and injects this service account into
+every pod that is launched. By changing the permissions for that service
+account, we can do interesting things.</p>
+</div>
+<div class="paragraph">
+<p>You can view current permissions in the web console, go to the Topology view in the Developer Perspective, click the <code>parksmap</code> entry, go to the <strong>Details</strong> tab, and then click the <strong>Namespace</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parksmap-permissions-namespace.png" alt="Namespace">
+</div>
+</div>
+<div class="paragraph">
+<p>Then, select <strong>Role Bindings</strong> tab and filter by <strong>Namespace Role Binding</strong> so see all permissions for selected project.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parksmap-permissions-membership.png" alt="Membership">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="grant_serviceaccount_view_permissions"><a class="anchor" href="#grant_serviceaccount_view_permissions"></a>Exercise: Grant Service Account View Permissions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The parksmap application wants to talk to the OpenShift API to learn about other
+<strong>Pods</strong>, <strong>Services</strong>, and resources within the <strong>Project</strong>. You&#8217;ll soon learn why!</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc project workshop</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc policy add-role-to-user view -z default</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>oc policy</code> command above is giving a defined <em>role</em> (<code>view</code>) to a user. But
+we are using a special flag, <code>-z</code>. What does this flag do? From the <code>-h</code> output:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">-z, --serviceaccount=[]: service account in the current namespace to use as a user</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>-z</code> syntax is a special one that saves us from having to type out the
+entire string, which, in this case, is
+<code>system:serviceaccount:workshop:default</code>. It&#8217;s a nifty shortcut.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The <code>-z</code> flag will only work for service accounts in the <strong>current</strong> project.
+If you&#8217;re referring to a service account in a different project, use the `-n &lt;project&gt;`switch.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Now that the <code>default</code> <strong>Service Account</strong> now has <strong>view</strong> access, so now it can query the API to see what resources are within the <strong>Project</strong>. This also has the added benefit of suppressing the error message! Although, in reality, we fixed the application.</p>
+</div>
+<div class="paragraph">
+<p>Another way you could have done the same is by using the OpenShift console. Once you&#8217;re on the
+<strong>Workloads &#8594; Deployments</strong> page, click on the <strong>Namespace</strong>, then <strong>Role Bindings</strong> and then the <strong>Create Binding</strong> button.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parksmap-permissions-membership-serviceaccount-list.png" alt="Service account list">
+</div>
+</div>
+<div class="paragraph">
+<p>Select <strong>view</strong> for the Role Binding Name <strong>workshop</strong> for the Namespace, <strong>view</strong> for the Role Name, <strong>Service Account</strong> for the Subject, <strong>workshop</strong> for the Subject Namespace, and <strong>default</strong> for the Subject Name.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parksmap-permissions-membership-serviceaccount-edit.png" alt="Service account edit">
+</div>
+</div>
+<div class="paragraph">
+<p>Once you&#8217;re finished editing permissions, click on the <strong>Create</strong> button.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parksmap-permissions-membership-serviceaccount-done.png" alt="Service account changed">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="redeploy_application"><a class="anchor" href="#redeploy_application"></a>Exercise: Redeploy Application</h2>
+<div class="sectionbody">
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc rollout restart deployment/parksmap</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A new deployment is immediately started. Return to Topology view and click the <code>parksmap</code> entry again to watch it happen. You might not be fast enough! But it will be reflected in the <strong>ReplicaSet</strong> number.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parksmap-permissions-redeployed.png" alt="Application deployed">
+</div>
+</div>
+<div class="paragraph">
+<p>If you look at the logs for the application now, you should see no errors.  That&#8217;s great.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="grant_user_view_permissions"><a class="anchor" href="#grant_user_view_permissions"></a>(Optional) Exercise: Grant User View Permissions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you create a project, you are that project&#8217;s administrator. This means that
+you can grant access to other users, too. If you like, give your neighbor view
+access to your project using the following command:</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+In the following command(s), replace <code>workshop</code> with the user name of the person to whom you want to grant access.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc policy add-role-to-user view workshop</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Have them go to the project view by clicking the <strong>Projects</strong> button and verify
+that they can see your project and its resources. This type of arrangement (view
+but not edit) might be ideal for a developer getting visibility into a
+production application&#8217;s project.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="parksmap-logging.html" class="query-params-link">Logging</a></span>
+  <span class="next"><a href="parksmap-rsh.html" class="query-params-link">Connecting to a Container</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../../_/js/vendor/clipboard.js"></script>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

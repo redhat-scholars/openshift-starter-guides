@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: OpenShift Starter Guides</title>
+    <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.6/nationalparks-php-databases.html">
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../../_/css/site.css">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="http://redhat-scholars.github.io/openshift-starter-guides">OpenShift Starter Guides</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+        <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://developers.redhat.com/ebooks/" target="_blank">Books</a>
+        <a class="navbar-item" href="https://developers.redhat.com/cheatsheets/" target="_blank">Cheat Sheets</a>
+        <a class="navbar-item" href="https://developers.redhat.com/events/" target="_blank">Upcoming Events</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://redhat-scholars.github.io/kubernetes-tutorial/" target="_blank">Kubernetes</a>
+            <a class="navbar-item" href="https://redhat-scholars.github.io/istio-tutorial/" target="_blank">Istio</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/quarkus-tutorial/" target="_blank">Quarkus</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/knative-tutorial/" target="_blank">Knative</a>
+            <a class="navbar-item" href="https://redhat-scholars.github.io/tekton-tutorial/" target="_blank">Tekton</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="rhs-openshift-starter-guides" data-version="4.6">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html" class=" query-params-link">OpenShift Starter Guides</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-workshop-summary.html">Workshop Summary</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-environment.html">OCP architecture</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="common-explore.html">Explore OpenShift</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="common-explore.html#the_web_console">The Web Console</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="common-explore.html#command_line_interface">Command Line Interface</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="common-explore.html#download_openshift_cli">Download OpenShift CLI</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="common-explore.html#download_and_install_openshift_cli_on_linux">Download and Install OpenShift CLI on Linux</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="common-explore.html#download_and_install_openshift_cli_on_mac">Download and Install OpenShift CLI on Mac OS X</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="common-explore.html#download_and_install_openshift_cli_on_windows">Download and Install OpenShift CLI on Windows</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="common-explore.html#connect_to_the_cluster_with_cli">Connect to the OpenShift Cluster from CLI</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="common-explore.html#working_with_proxies">Working with proxies</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="prerequisites.html">Prerequisites</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="prerequisites.html#openshift_pipelines">OpenShift Pipelines</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="prerequisites.html#install_openshift_pipelines_from_operatorhub">Install OpenShift Pipelines from OperatorHub</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="prerequisites.html#github_account">GitHub Account</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="projects.html">Projects</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="projects.html#create_your_first_project">Create your First Project</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-parksmap-architecture.html">Parksmap Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="parksmap-container-image.html">Parksmap App</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-container-image.html#deploy_your_first_image">Exercise: Deploying your First Image</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-container-image.html#containers_and_pods">Background: Containers and Pods</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-container-image.html#examining_the_pod">Exercise: Examining the Pod</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-container-image.html#customizing_image_lifecycle_behavior">Background: Customizing the Image Lifecycle Behavior</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-container-image.html#services">Background: Services</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="parksmap-scaling.html">Scaling Apps</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-scaling.html#deployments_and_replicasets">Background: Deployments and ReplicaSets</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-scaling.html#exploring_deployment_related_objects">Exercise: Exploring Deployment-related Objects</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-scaling.html#scaling_the_application">Exercise: Scaling the Application</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-scaling.html#application_self_healing">Application "Self Healing"</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-scaling.html#scale_down">Scale down</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="parksmap-routes.html">Routes</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-routes.html#routes">Background: Routes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-routes.html#creating_a_route">Exercise: Creating a Route</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="parksmap-logging.html">Logging</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-logging.html#container_logs">Background: Container Logs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-logging.html#examining_logs">Examining Logs</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="parksmap-permissions.html">Permissions</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-permissions.html#grant_serviceaccount_view_permissions">Grant Service Account View Permissions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-permissions.html#redeploy_application">Exercise: Redeploy Application</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-permissions.html#grant_user_view_permissions">Exercise: Grant User View Permissions</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="parksmap-rsh.html">Connecting to a Container</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-rsh.html#remote_shell_session_to_container_using_cli">Exercise: Remote Shell Session to a Container Using the CLI</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-rsh.html#execute_command_in_container">Exercise: Remote Shell Session to a Container Using the Web Console</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-rsh.html#remote_shell_session_to_container_using_webconsole">Exercise: Execute a Command in a Container</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="nationalparks-java.html">Nationalparks Java App</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java.html#source_to_image">Background: Source-to-Image (S2I)</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="nationalparks-java.html#creating_java_application">Exercise: Creating a Java application</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="nationalparks-java.html#add_to_project">Add to Project</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="nationalparks-java.html#using_application_code_on_git_server">Using Application Code on a Git Server</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="nationalparks-java.html#build_code_on_openshift">Build the Code on OpenShift</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="nationalparks-java-databases.html">Connecting to a Database</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-databases.html#storage">Background: Storage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-databases.html#templates">Background: Templates</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-databases.html#create_mongodb_template">Exercise: Create MongoDB Template</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-databases.html#deploy_mongodb">Exercise: Deploy MongoDB</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-databases.html#exploring_openshift_magic">Exercise: Exploring OpenShift Magic</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-databases.html#data_data_everywhere">Exercise: Data, Data, Everywhere</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-databases.html#working_with_labels">Exercise: Working With Labels</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="nationalparks-application-health.html">Application Healthchecks</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-application-health.html#add_health_checks">Exercise: Add Health Checks</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="nationalparks-java-pipeline.html">Continuous Integration and Pipelines</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-pipeline.html#understanding_tekton">Understanding Tekton</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-pipeline.html#setup_your_pipeline">Set Up Your Pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-pipeline.html#create_your_pipeline">Create Your Pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-pipeline.html#run_the_pipeline">Run the Pipeline</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html">Automation with Pipelines</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#webhooks">Web Hooks</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#adding_triggers_to_your_pipeline">Adding Triggers to your Pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#configuring_github_webhooks">Exercise: Configuring GitHub Web Hooks</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#using_github_webhooks">Exercise: Using GitHub Web Hooks</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="mlbparks-templates.html">MLBParks App</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mlbparks-templates.html#instantiate_template">Exercise: Instantiate a Template</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="mlbparks-binary-build.html">Binary Builds</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mlbparks-binary-build.html#moving_on_from_s2i">Moving on From S2I</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mlbparks-binary-build.html#fast_iterative_code_change_using_binary_deploy">Fast Iterative Code Change Using Binary Deploy</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="mlbparks-binary-build.html#using_binary_deployment">Exercise: Using Binary Deployment</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="mlbparks-binary-build.html#clone_source">Clone source</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="mlbparks-binary-build.html#setup_the_build_of_the_war_file">Setup the Build of the WAR file</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="mlbparks-binary-build.html#clone_change">Clone change</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="mlbparks-binary-build.html#doing_the_binary_build">Doing the Binary Build</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="mlbparks-debugging.html">Debugging Apps</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mlbparks-debugging.html#port_forwading_and_debugging">Background: Port Forwarding and Debugging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mlbparks-debugging.html#enabling_debugging_in_eap_on_openshift">Exercise: Enabling Debugging in EAP on OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="mlbparks-debugging.html#port-forwarding_from_pod_to_our_local_machine">Exercise: Port-Forwarding from the pod to our local machine</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="mlbparks-debugging.html#setting_up_remote_debug_in_intellij">Setting up Remote Debug in IntelliJ</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-further-resources.html">Further Resources</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="common-workshop-links.html">Workshop Links</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="common-workshop-links.html#openshift_cluster_url">OpenShift Cluster URL</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="common-workshop-links.html#workshop_guides">Workshop Guides</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="common-workshop-links.html#web_terminal">Web terminal</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="common-workshop-links.html#git_server">Git Server</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">OpenShift Starter Guides</span>
+    <span class="version">4.6</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">OpenShift Starter Guides</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">4.6</a>
+        </li>
+        <li class="version">
+          <a href="../4.5/index.html">4.5</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">4.6</button>
+  <div class="version-menu">
+    <a class="version is-current" href="nationalparks-php-databases.html">4.6</a>
+    <a class="version" href="../4.5/nationalparks-php-databases.html">4.5</a>
+  </div>
+</div>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-starter-guides/edit/ocp-4.6/documentation/modules/ROOT/pages/nationalparks-php-databases.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<div class="paragraph">
+<p>In this section, we&#8217;re going to deploy a MongoDB database that will be used to store
+the data for the <code>nationalparks</code> application. We will also connect the
+<code>nationalparks</code> service with the newly deployed MongoDB database, so that the
+<code>nationalparks</code> service can load and query the database for the corresponding
+information.</p>
+</div>
+<div class="paragraph">
+<p>Finally, we will mark the <code>nationalparks</code> application as a backend for the map
+visualization tool, so that it can be dynamically discovered by the <code>parksmap</code>
+component using the OpenShift discovery mechanism and the map will be displayed
+automatically.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="_images/roadshow-app-architecture-nationalparks-2.png" alt="Application architecture" width="800">
+</div>
+</div>
+<div class="sect1">
+<h2 id="_background_storage"><a class="anchor" href="#_background_storage"></a>Background: Storage</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Most useful applications are "stateful" or "dynamic" in some way, and this is
+usually achieved with a database or other data storage. In this lab we are
+going to add MongoDB to our <code>nationalparks</code> application and then rewire it to
+talk to the database using environment variables via a secret.</p>
+</div>
+<div class="paragraph">
+<p>We are going to use the MongoDB image that is included with OpenShift.</p>
+</div>
+<div class="paragraph">
+<p>By default, this will use <strong>EmptyDir</strong> for data storage, which means if the <strong>Pod</strong>
+disappears the data does as well. In a real application you would use
+OpenShift&#8217;s persistent storage mechanism to attach real-world storage (NFS,
+Gluster, EBS, etc) to the <strong>Pods</strong> to give them a persistent place to store their
+data.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercise_deploy_mongodb"><a class="anchor" href="#_exercise_deploy_mongodb"></a>Exercise: Deploy MongoDB</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As you&#8217;ve seen so far, the web console makes it very easy to deploy things onto
+OpenShift. When we deploy the database, we pass in some values for configuration.
+These values are used to set the username, password, and name of
+the database.</p>
+</div>
+<div class="paragraph">
+<p>The database image is built in a way that it will automatically configure itself
+using the supplied information (assuming there is no data already present in the
+persistent storage!). The image will ensure that:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A database exists with the specified name</p>
+</li>
+<li>
+<p>A user exists with the specified name</p>
+</li>
+<li>
+<p>The user can access the specified database with the specified password</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In the Developer Perspective in your <code>workshop</code> project,
+click <strong>+Add</strong> and then <strong>Database</strong>. In the Databases view, you can click <strong>Mongo</strong> to filter for just MongoDB.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-databases-catalog-databases.png" alt="Data Stores">
+</div>
+</div>
+<div class="paragraph">
+<p>Alternatively, you could type <code>mongodb</code> in the search box. Once you have drilled down to see MongoDB, find the <strong>MongoDB (Ephemeral)</strong> template and select it.  You will notice that there are multiple
+MongoDB templates available.  We do not need a database with persistent storage, so the ephemeral Mongo
+template is what you should choose.  Go ahead and select the ephemeral template and click the <strong>Instantiate Template</strong> button.</p>
+</div>
+<div class="paragraph">
+<p>When we performed the application build, there was no template. Rather, we selected the
+builder image directly and OpenShift presented only the standard build workflow.
+Now we are using a template - a preconfigured set of resources that includes
+parameters that can be customized. In our case, the parameters we are concerned
+with are&#8201;&#8212;&#8201;user, password, database, and
+admin password.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-databases-catalog-databases-mongodb-config.png" alt="MongoDB Deploy">
+</div>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Make sure you name your database service name <strong>mongodb-nationalparks</strong>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You can see that some of the fields say <strong>"generated if empty"</strong>. This is a
+feature of <strong>Templates</strong> in OpenShift. For
+now, be sure to use the following values in their respective fields:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Database Service Name</code> : <code>mongodb-nationalparks</code></p>
+</li>
+<li>
+<p><code>MongoDB Connection Username</code> : <code>mongodb</code></p>
+</li>
+<li>
+<p><code>MongoDB Connection Password</code> : <code>mongodb</code></p>
+</li>
+<li>
+<p><code>MongoDB Database Name</code>: <code>mongodb</code></p>
+</li>
+<li>
+<p><code>MongoDB Admin Password</code> : <code>mongodb</code></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Make sure to have configured the <strong><code>MongoDB Database Name</code></strong> parameter with the appropriate value as by default it will already have a value of <code>sampledb</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Once you have entered in the above information, click on <strong>Create</strong> to go to the next step which will allow us to add a binding.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-databases-catalog-databases-mongodb-create-bining.png" alt="Bind Mongo">
+</div>
+</div>
+<div class="paragraph">
+<p>Click the secret name listed under <strong>Parameters</strong>. The secret can be used in other components, such as the <code>nationalparks</code> backend, to authenticate to the database.</p>
+</div>
+<div class="paragraph">
+<p>Now that the connection and authentication information stored in a secret in our project, we need to add it to the <code>nationalparks</code> backend. Click the <strong>Add Secret to Workload</strong> button.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-databases-binding-view-secret.png" alt="National Parks Binding">
+</div>
+</div>
+<div class="paragraph">
+<p>Select the <code>nationalparks</code> workload and click <strong>Save</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-databases-binding-add-binding-to-nationalparks.png" alt="Add binding to application">
+</div>
+</div>
+<div class="paragraph">
+<p>This change in configuration will trigger a new deployment of the <code>nationalparks</code> application with the environment variables properly injected.</p>
+</div>
+<div class="paragraph">
+<p>Back in the <strong>Topology</strong> view, click and drag the <code>mongodb-nationalparks</code> component into the light gray area that denotes the <code>workshop</code> application, so that all three components are contained in it.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-databases-add-mongodb-to-workshop-app-php.png" alt="Add mongodb to the workshop app">
+</div>
+</div>
+<div class="paragraph">
+<p>Next, let&#8217;s fix the labels assigned to the <code>mongodb-nationalparks</code> deployment. Currently, we cannot set labels when using the database template from the catalog, so we will fix these labels manually.</p>
+</div>
+<div class="paragraph">
+<p>Like before, we&#8217;ll add 3 labels:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><em>app</em>=workshop</strong>  (the name we will be giving to the app)</p>
+</li>
+<li>
+<p><strong><em>component</em>=nationalparks</strong>  (the name of this deployment)</p>
+</li>
+<li>
+<p><strong><em>role</em>=database</strong> (the role this component plays in the overall application)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Execute the following command:</p>
+</div>
+<div class="listingblock execute-1">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc label dc/mongodb-nationalparks svc/mongodb-nationalparks app=workshop component=nationalparks role=database --overwrite</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercise_exploring_openshift_magic"><a class="anchor" href="#_exercise_exploring_openshift_magic"></a>Exercise: Exploring OpenShift Magic</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As soon as we changed the <strong>DeploymentConfiguration</strong>, some
+magic happened. OpenShift decided that this was a significant enough change to
+warrant updating the internal version number of the <strong>DeploymentConfiguration</strong>. You
+can verify this by looking at the output of <code>oc get dc</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                    REVISION   DESIRED   CURRENT   TRIGGERED BY
+mongodb-nationalparks   1          1         1         config,image(mongodb:3.6)
+nationalparks           2          1         1         config,image(nationalparks:master)
+parksmap                2          1         1         config,image(parksmap:%PARKSMAP_VERSION%))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Something that increments the version of a <strong>DeploymentConfiguration</strong>, by default,
+causes a new deployment. You can verify this by looking at the output of <code>oc get
+rc</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                      DESIRED   CURRENT   READY     AGE
+mongodb-nationalparks-1   1         1         1         24m
+nationalparks-1           0         0         0         3h
+nationalparks-2           1         1         1         8m
+parksmap-1                0         0         0         6h
+parksmap-2                1         1         1         5h</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We see that the desired and current number of instances for the "-1" deployment
+is 0. The desired and current number of instances for the "-2" deployment is 1.
+This means that OpenShift has gracefully torn down our "old" application and
+stood up a "new" instance.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercise_data_data_everywhere"><a class="anchor" href="#_exercise_data_data_everywhere"></a>Exercise: Data, Data, Everywhere</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now that we have a database deployed, we can again visit the <code>nationalparks</code> web
+service to query for data:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">&lt;a href="http://nationalparks-workshop.%CLUSTER_SUBDOMAIN%/ws/data/all" class="bare"&gt;http://nationalparks-workshop.%CLUSTER_SUBDOMAIN%/ws/data/all&lt;/a&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And the result?</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">[]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Where&#8217;s the data? Think about the process you went through. You deployed the
+application and then deployed the database. Nothing actually loaded anything
+<strong>INTO</strong> the database, though.</p>
+</div>
+<div class="paragraph">
+<p>The application provides an endpoint to do just that:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">&lt;a href="http://nationalparks-workshop.%CLUSTER_SUBDOMAIN%/ws/data/load" class="bare"&gt;http://nationalparks-workshop.%CLUSTER_SUBDOMAIN%/ws/data/load&lt;/a&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And the result?</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Items inserted in database: 2762</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you then go back to <code>/ws/data/all</code> you will see tons of JSON data now.
+That&#8217;s great. Our parks map should finally work!</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+There&#8217;s some errors reported with browsers like firefox 54 that don&#8217;t properly parse the resulting JSON. It&#8217;s
+a browser problem, and the application is working properly.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">&lt;a href="http://parksmap-workshop.%CLUSTER_SUBDOMAIN%" class="bare"&gt;http://parksmap-workshop.%CLUSTER_SUBDOMAIN%&lt;/a&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Hmm&#8230;&#8203; There&#8217;s just one thing. The main map <strong>STILL</strong> isn&#8217;t displaying the parks.
+That&#8217;s because the front end parks map only tries to talk to services that have
+the right <strong>Label</strong>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You are probably wondering how the database connection magically started
+working? When deploying applications to OpenShift, it is always best to use
+environment variables, secrets, or configMaps to define connections to dependent systems.  This allows
+for application portability across different environments.  The source file that
+performs the connection as well as creates the database schema can be viewed
+here:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">https://github.com/openshift-roadshow/nationalparks-php/blob/master/index.php#L8-L14</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In short summary: By referring to bindings to connect to services
+(like databases), it can be trivial to promote applications throughout different
+lifecycle environments on OpenShift without having to modify application code.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercise_working_with_labels"><a class="anchor" href="#_exercise_working_with_labels"></a>Exercise: Working With Labels</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We explored how a <strong>Label</strong> is just a key=value pair earlier when looking at
+<strong>Services</strong> and <strong>Routes</strong> and <strong>Selectors</strong>. In general, a <strong>Label</strong> is simply an
+arbitrary key=value pair. It could be anything.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>pizza=pepperoni</code></p>
+</li>
+<li>
+<p><code>pet=dog</code></p>
+</li>
+<li>
+<p><code>openshift=awesome</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In the case of the parks map, the application is actually querying the OpenShift
+API and asking about the <strong>Routes</strong> and <strong>Services</strong> in the project. If any of them have a
+<strong>Label</strong> that is <code>type=parksmap-backend</code>, the application knows to interrogate
+the endpoints to look for map data.
+You can see the code that does this
+<a href="https://github.com/openshift-roadshow/parksmap-web/blob/%PARKSMAP_VERSION%/src/main/java/com/openshift/evg/roadshow/rest/RouteWatcher.java#L20">here</a>.</p>
+</div>
+<div class="paragraph">
+<p>Fortunately, the command line provides a convenient way for us to manipulate
+labels. <code>describe</code> the <code>nationalparks</code> service:</p>
+</div>
+<div class="listingblock execute-1">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc describe route nationalparks</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Name:                   nationalparks
+Namespace:              workshop
+Created:                2 hours ago
+Labels:                 app=workshop
+                        app.kubernetes.io/component=nationalparks
+                        app.kubernetes.io/instance=nationalparks
+                        app.kubernetes.io/name=php
+                        app.kubernetes.io/part-of=workshop
+                        app.openshift.io/runtime=php
+                        app.openshift.io/runtime-version=7.2
+                        component=nationalparks
+                        role=backend
+Annotations:            openshift.io/host.generated=true
+Requested Host:         nationalparks-workshop.%CLUSTER_SUBDOMAIN%
+                        exposed on router router 2 hours ago
+Path:                   &lt;none&gt;
+TLS Termination:        &lt;none&gt;
+Insecure Policy:        &lt;none&gt;
+Endpoint Port:          8080-tcp
+
+Service:                nationalparks
+Weight:                 100 (100%)
+Endpoints:              10.1.9.8:8080</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You see that it already has some labels. Now, use <code>oc label</code>:</p>
+</div>
+<div class="listingblock execute-1">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc label route nationalparks type=parksmap-backend</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You will see something like:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">route.route.openshift.io/nationalparks labeled</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you check your browser now:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">&lt;a href="http://parksmap-workshop.%CLUSTER_SUBDOMAIN%/" class="bare"&gt;http://parksmap-workshop.%CLUSTER_SUBDOMAIN%/&lt;/a&gt;</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-databases-new-parks.png" alt="MongoDB">
+</div>
+</div>
+<div class="paragraph">
+<p>You&#8217;ll notice that the parks suddenly are showing up. That&#8217;s really cool!</p>
+</div>
+</div>
+</div>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../../_/js/vendor/clipboard.js"></script>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

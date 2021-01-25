@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Binary Builds :: OpenShift Starter Guides</title>
+    <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.6/mlbparks-binary-build.html">
+    <link rel="prev" href="mlbparks-templates.html">
+    <link rel="next" href="mlbparks-debugging.html">
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../../_/css/site.css">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="http://redhat-scholars.github.io/openshift-starter-guides">OpenShift Starter Guides</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+        <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://developers.redhat.com/ebooks/" target="_blank">Books</a>
+        <a class="navbar-item" href="https://developers.redhat.com/cheatsheets/" target="_blank">Cheat Sheets</a>
+        <a class="navbar-item" href="https://developers.redhat.com/events/" target="_blank">Upcoming Events</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://redhat-scholars.github.io/kubernetes-tutorial/" target="_blank">Kubernetes</a>
+            <a class="navbar-item" href="https://redhat-scholars.github.io/istio-tutorial/" target="_blank">Istio</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/quarkus-tutorial/" target="_blank">Quarkus</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/knative-tutorial/" target="_blank">Knative</a>
+            <a class="navbar-item" href="https://redhat-scholars.github.io/tekton-tutorial/" target="_blank">Tekton</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="rhs-openshift-starter-guides" data-version="4.6">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html" class=" query-params-link">OpenShift Starter Guides</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-workshop-summary.html">Workshop Summary</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-environment.html">OCP architecture</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="common-explore.html">Explore OpenShift</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="common-explore.html#the_web_console">The Web Console</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="common-explore.html#command_line_interface">Command Line Interface</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="common-explore.html#download_openshift_cli">Download OpenShift CLI</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="common-explore.html#download_and_install_openshift_cli_on_linux">Download and Install OpenShift CLI on Linux</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="common-explore.html#download_and_install_openshift_cli_on_mac">Download and Install OpenShift CLI on Mac OS X</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="common-explore.html#download_and_install_openshift_cli_on_windows">Download and Install OpenShift CLI on Windows</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="common-explore.html#connect_to_the_cluster_with_cli">Connect to the OpenShift Cluster from CLI</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="common-explore.html#working_with_proxies">Working with proxies</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="prerequisites.html">Prerequisites</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="prerequisites.html#openshift_pipelines">OpenShift Pipelines</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="prerequisites.html#install_openshift_pipelines_from_operatorhub">Install OpenShift Pipelines from OperatorHub</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="prerequisites.html#github_account">GitHub Account</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="projects.html">Projects</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="projects.html#create_your_first_project">Create your First Project</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-parksmap-architecture.html">Parksmap Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="parksmap-container-image.html">Parksmap App</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-container-image.html#deploy_your_first_image">Exercise: Deploying your First Image</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-container-image.html#containers_and_pods">Background: Containers and Pods</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-container-image.html#examining_the_pod">Exercise: Examining the Pod</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-container-image.html#customizing_image_lifecycle_behavior">Background: Customizing the Image Lifecycle Behavior</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-container-image.html#services">Background: Services</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="parksmap-scaling.html">Scaling Apps</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-scaling.html#deployments_and_replicasets">Background: Deployments and ReplicaSets</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-scaling.html#exploring_deployment_related_objects">Exercise: Exploring Deployment-related Objects</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-scaling.html#scaling_the_application">Exercise: Scaling the Application</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-scaling.html#application_self_healing">Application "Self Healing"</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-scaling.html#scale_down">Scale down</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="parksmap-routes.html">Routes</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-routes.html#routes">Background: Routes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-routes.html#creating_a_route">Exercise: Creating a Route</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="parksmap-logging.html">Logging</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-logging.html#container_logs">Background: Container Logs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-logging.html#examining_logs">Examining Logs</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="parksmap-permissions.html">Permissions</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-permissions.html#grant_serviceaccount_view_permissions">Grant Service Account View Permissions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-permissions.html#redeploy_application">Exercise: Redeploy Application</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-permissions.html#grant_user_view_permissions">Exercise: Grant User View Permissions</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="parksmap-rsh.html">Connecting to a Container</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-rsh.html#remote_shell_session_to_container_using_cli">Exercise: Remote Shell Session to a Container Using the CLI</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-rsh.html#execute_command_in_container">Exercise: Remote Shell Session to a Container Using the Web Console</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-rsh.html#remote_shell_session_to_container_using_webconsole">Exercise: Execute a Command in a Container</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="nationalparks-java.html">Nationalparks Java App</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java.html#source_to_image">Background: Source-to-Image (S2I)</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="nationalparks-java.html#creating_java_application">Exercise: Creating a Java application</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="nationalparks-java.html#add_to_project">Add to Project</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="nationalparks-java.html#using_application_code_on_git_server">Using Application Code on a Git Server</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="nationalparks-java.html#build_code_on_openshift">Build the Code on OpenShift</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="nationalparks-java-databases.html">Connecting to a Database</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-databases.html#storage">Background: Storage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-databases.html#templates">Background: Templates</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-databases.html#create_mongodb_template">Exercise: Create MongoDB Template</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-databases.html#deploy_mongodb">Exercise: Deploy MongoDB</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-databases.html#exploring_openshift_magic">Exercise: Exploring OpenShift Magic</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-databases.html#data_data_everywhere">Exercise: Data, Data, Everywhere</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-databases.html#working_with_labels">Exercise: Working With Labels</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="nationalparks-application-health.html">Application Healthchecks</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-application-health.html#add_health_checks">Exercise: Add Health Checks</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="nationalparks-java-pipeline.html">Continuous Integration and Pipelines</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-pipeline.html#understanding_tekton">Understanding Tekton</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-pipeline.html#setup_your_pipeline">Set Up Your Pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-pipeline.html#create_your_pipeline">Create Your Pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-pipeline.html#run_the_pipeline">Run the Pipeline</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html">Automation with Pipelines</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#webhooks">Web Hooks</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#adding_triggers_to_your_pipeline">Adding Triggers to your Pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#configuring_github_webhooks">Exercise: Configuring GitHub Web Hooks</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#using_github_webhooks">Exercise: Using GitHub Web Hooks</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="mlbparks-templates.html">MLBParks App</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mlbparks-templates.html#instantiate_template">Exercise: Instantiate a Template</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="mlbparks-binary-build.html">Binary Builds</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#moving_on_from_s2i">Moving on From S2I</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#fast_iterative_code_change_using_binary_deploy">Fast Iterative Code Change Using Binary Deploy</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#using_binary_deployment">Exercise: Using Binary Deployment</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#clone_source">Clone source</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#setup_the_build_of_the_war_file">Setup the Build of the WAR file</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#clone_change">Clone change</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#doing_the_binary_build">Doing the Binary Build</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="mlbparks-debugging.html">Debugging Apps</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mlbparks-debugging.html#port_forwading_and_debugging">Background: Port Forwarding and Debugging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mlbparks-debugging.html#enabling_debugging_in_eap_on_openshift">Exercise: Enabling Debugging in EAP on OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="mlbparks-debugging.html#port-forwarding_from_pod_to_our_local_machine">Exercise: Port-Forwarding from the pod to our local machine</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="mlbparks-debugging.html#setting_up_remote_debug_in_intellij">Setting up Remote Debug in IntelliJ</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-further-resources.html">Further Resources</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="common-workshop-links.html">Workshop Links</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="common-workshop-links.html#openshift_cluster_url">OpenShift Cluster URL</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="common-workshop-links.html#workshop_guides">Workshop Guides</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="common-workshop-links.html#web_terminal">Web terminal</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="common-workshop-links.html#git_server">Git Server</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">OpenShift Starter Guides</span>
+    <span class="version">4.6</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">OpenShift Starter Guides</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">4.6</a>
+        </li>
+        <li class="version">
+          <a href="../4.5/index.html">4.5</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Starter Guides</a></li>
+    <li><a href="mlbparks-binary-build.html">Binary Builds</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">4.6</button>
+  <div class="version-menu">
+    <a class="version is-current" href="mlbparks-binary-build.html">4.6</a>
+    <a class="version" href="../4.5/mlbparks-binary-build.html">4.5</a>
+  </div>
+</div>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-starter-guides/edit/ocp-4.6/documentation/modules/ROOT/pages/mlbparks-binary-build.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Binary Builds</h1>
+<div class="sect1">
+<h2 id="moving_on_from_s2i"><a class="anchor" href="#moving_on_from_s2i"></a>Moving on From S2I</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As you saw before S2I is a great way to get from source code to a container, but the process is a bit too slow for daily fast iterative
+development. For example, if you want to change some CSS or change one method in a class you don&#8217;t want to go through
+a full git commit and build cycle. In this lab we are going to show you a more efficient method for quick iteration. While
+we are at it we will also show you how to debug your code.</p>
+</div>
+<div class="paragraph">
+<p>Now that we built the MLB parks service let&#8217;s go ahead and make some quick changes.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fast_iterative_code_change_using_binary_deploy"><a class="anchor" href="#fast_iterative_code_change_using_binary_deploy"></a>Fast Iterative Code Change Using Binary Deploy</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The OpenShift command line has the ability to do a deployment from your local machine. In this case we are going to use S2I,
+but we are going to tell OpenShift to just take the war file from our local machine and bake it in the image.</p>
+</div>
+<div class="paragraph">
+<p>Doing this pattern of development lets us do quick builds on our local machine (benefitting from our local cache and
+all the horsepower on our machine) and then just quickly send up the war file.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You could also use this pattern to actually send up your working directory to the S2I builder to have it do the Maven build
+on OpenShift. Using the local directory would relieve you from having Maven or any of the Java toolchain on your local
+machine AND would also not require git commit with a push. Read more in the
+<a href="https://docs.openshift.com/container-platform/4.6/builds/basic-build-operations.html#builds-basic-start-source_basic-build-operations">official documentation</a>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="using_binary_deployment"><a class="anchor" href="#using_binary_deployment"></a>Exercise: Using Binary Deployment</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="clone_source"><a class="anchor" href="#clone_source"></a>Clone source</h3>
+<div class="paragraph">
+<p>The first step is to clone the MLB source code from GitHub to your workshop environment:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git clone https://github.com/openshift-roadshow/mlbparks.git</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+We are using Intellij here in the guide for screenshots but this should work regardless of your tool chain. JBoss
+Developer Studio and JBoss Developer Tools have built in functionality that makes this close to seamless right from the IDE.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="setup_the_build_of_the_war_file"><a class="anchor" href="#setup_the_build_of_the_war_file"></a>Setup the Build of the WAR file</h3>
+<div class="paragraph">
+<p>If you have Maven all set up on your machine, then you can <code>cd</code> into the <code>mlbparks</code> directory and run <code>mvn package</code></p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd mlbparks
+mvn package</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Pay attention to the output location for the ROOT.war, we will need that directory later.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="code_change"><a class="anchor" href="#code_change"></a>Code Change</h3>
+<div class="paragraph">
+<p>Time for a source code change!</p>
+</div>
+<div class="paragraph">
+<p>Edit <code>BackendController</code> Java class from this path:</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">src/main/java/com/openshift/evg/roadshow/rest/BackendController.java</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This is the REST endpoint that gives basic info on the service and can be reached at:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">http://mlbparks-workshop.%CLUSTER_SUBDOMAIN%/ws/info/</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Please change line 23 to add a <em>AMAZING</em> in front of "MLB Parks" look like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">return new Backend("mlbparks", "AMAZING MLB Parks", new Coordinates("39.82", "-98.57"), 5);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Don&#8217;t forget to save the file and run <code>mvn package</code> again from the root of the source folder:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mvn package</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="doing_the_binary_build"><a class="anchor" href="#doing_the_binary_build"></a>Doing the Binary Build</h3>
+<div class="paragraph">
+<p>Alright we have our war file built, time to kick off a build using it.</p>
+</div>
+<div class="paragraph">
+<p>If you built your war with Maven:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc start-build bc/mlbparks --from-file=target/ROOT.war --follow</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The --follow is optional if you want to follow the build output in your terminal.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Using labels and a recreate deployment strategy, as soon as the new deployment finishes the map name will be updated. Under a recreate deployment strategy we first tear down the pod before doing our new deployment.
+When the pod is torn down, the parksmap service removes the MLBParks map from the layers. When it comes back up, the layer
+automatically gets added back with our new title.  This would not have happened with a rolling deployment because
+rolling spins up the new version of the pod before it takes down the old one. Rolling strategy enables a zero-downtime deployment.</p>
+</div>
+<div class="paragraph">
+<p>You can follow the deployment in progress from Topology view, and when it is completed, you will see the new content at:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">http://mlbparks-workshop.%CLUSTER_SUBDOMAIN%/ws/info/</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>So now you have seen how we can speed up the build and deploy process.</p>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="mlbparks-templates.html" class="query-params-link">MLBParks App</a></span>
+  <span class="next"><a href="mlbparks-debugging.html" class="query-params-link">Debugging Apps</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../../_/js/vendor/clipboard.js"></script>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

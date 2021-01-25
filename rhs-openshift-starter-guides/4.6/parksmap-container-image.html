@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Parksmap App :: OpenShift Starter Guides</title>
+    <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.6/parksmap-container-image.html">
+    <link rel="prev" href="common-parksmap-architecture.html">
+    <link rel="next" href="parksmap-scaling.html">
+    <meta name="generator" content="Antora 2.3.4">
+    <link rel="stylesheet" href="../../_/css/site.css">
+<link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img
+          src="../../_/img/header_logo.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="http://redhat-scholars.github.io/openshift-starter-guides">OpenShift Starter Guides</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+        <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://developers.redhat.com/ebooks/" target="_blank">Books</a>
+        <a class="navbar-item" href="https://developers.redhat.com/cheatsheets/" target="_blank">Cheat Sheets</a>
+        <a class="navbar-item" href="https://developers.redhat.com/events/" target="_blank">Upcoming Events</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://redhat-scholars.github.io/kubernetes-tutorial/" target="_blank">Kubernetes</a>
+            <a class="navbar-item" href="https://redhat-scholars.github.io/istio-tutorial/" target="_blank">Istio</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/quarkus-tutorial/" target="_blank">Quarkus</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/knative-tutorial/" target="_blank">Knative</a>
+            <a class="navbar-item" href="https://redhat-scholars.github.io/tekton-tutorial/" target="_blank">Tekton</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="rhs-openshift-starter-guides" data-version="4.6">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html" class=" query-params-link">OpenShift Starter Guides</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-workshop-summary.html">Workshop Summary</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-environment.html">OCP architecture</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="common-explore.html">Explore OpenShift</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="common-explore.html#the_web_console">The Web Console</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="common-explore.html#command_line_interface">Command Line Interface</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="common-explore.html#download_openshift_cli">Download OpenShift CLI</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="common-explore.html#download_and_install_openshift_cli_on_linux">Download and Install OpenShift CLI on Linux</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="common-explore.html#download_and_install_openshift_cli_on_mac">Download and Install OpenShift CLI on Mac OS X</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="common-explore.html#download_and_install_openshift_cli_on_windows">Download and Install OpenShift CLI on Windows</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="common-explore.html#connect_to_the_cluster_with_cli">Connect to the OpenShift Cluster from CLI</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="common-explore.html#working_with_proxies">Working with proxies</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="prerequisites.html">Prerequisites</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="prerequisites.html#openshift_pipelines">OpenShift Pipelines</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="prerequisites.html#install_openshift_pipelines_from_operatorhub">Install OpenShift Pipelines from OperatorHub</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="prerequisites.html#github_account">GitHub Account</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="projects.html">Projects</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="projects.html#create_your_first_project">Create your First Project</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-parksmap-architecture.html">Parksmap Architecture</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="parksmap-container-image.html">Parksmap App</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#deploy_your_first_image">Exercise: Deploying your First Image</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#containers_and_pods">Background: Containers and Pods</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#examining_the_pod">Exercise: Examining the Pod</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#customizing_image_lifecycle_behavior">Background: Customizing the Image Lifecycle Behavior</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#services">Background: Services</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="parksmap-scaling.html">Scaling Apps</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-scaling.html#deployments_and_replicasets">Background: Deployments and ReplicaSets</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-scaling.html#exploring_deployment_related_objects">Exercise: Exploring Deployment-related Objects</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-scaling.html#scaling_the_application">Exercise: Scaling the Application</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-scaling.html#application_self_healing">Application "Self Healing"</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-scaling.html#scale_down">Scale down</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="parksmap-routes.html">Routes</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-routes.html#routes">Background: Routes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-routes.html#creating_a_route">Exercise: Creating a Route</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="parksmap-logging.html">Logging</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-logging.html#container_logs">Background: Container Logs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-logging.html#examining_logs">Examining Logs</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="parksmap-permissions.html">Permissions</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-permissions.html#grant_serviceaccount_view_permissions">Grant Service Account View Permissions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-permissions.html#redeploy_application">Exercise: Redeploy Application</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-permissions.html#grant_user_view_permissions">Exercise: Grant User View Permissions</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="parksmap-rsh.html">Connecting to a Container</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-rsh.html#remote_shell_session_to_container_using_cli">Exercise: Remote Shell Session to a Container Using the CLI</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-rsh.html#execute_command_in_container">Exercise: Remote Shell Session to a Container Using the Web Console</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="parksmap-rsh.html#remote_shell_session_to_container_using_webconsole">Exercise: Execute a Command in a Container</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="nationalparks-java.html">Nationalparks Java App</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java.html#source_to_image">Background: Source-to-Image (S2I)</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="nationalparks-java.html#creating_java_application">Exercise: Creating a Java application</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="nationalparks-java.html#add_to_project">Add to Project</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="nationalparks-java.html#using_application_code_on_git_server">Using Application Code on a Git Server</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="nationalparks-java.html#build_code_on_openshift">Build the Code on OpenShift</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="nationalparks-java-databases.html">Connecting to a Database</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-databases.html#storage">Background: Storage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-databases.html#templates">Background: Templates</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-databases.html#create_mongodb_template">Exercise: Create MongoDB Template</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-databases.html#deploy_mongodb">Exercise: Deploy MongoDB</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-databases.html#exploring_openshift_magic">Exercise: Exploring OpenShift Magic</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-databases.html#data_data_everywhere">Exercise: Data, Data, Everywhere</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-databases.html#working_with_labels">Exercise: Working With Labels</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="nationalparks-application-health.html">Application Healthchecks</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-application-health.html#add_health_checks">Exercise: Add Health Checks</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="nationalparks-java-pipeline.html">Continuous Integration and Pipelines</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-pipeline.html#understanding_tekton">Understanding Tekton</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-pipeline.html#setup_your_pipeline">Set Up Your Pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-pipeline.html#create_your_pipeline">Create Your Pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-pipeline.html#run_the_pipeline">Run the Pipeline</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html">Automation with Pipelines</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#webhooks">Web Hooks</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#adding_triggers_to_your_pipeline">Adding Triggers to your Pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#configuring_github_webhooks">Exercise: Configuring GitHub Web Hooks</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#using_github_webhooks">Exercise: Using GitHub Web Hooks</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="mlbparks-templates.html">MLBParks App</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mlbparks-templates.html#instantiate_template">Exercise: Instantiate a Template</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="mlbparks-binary-build.html">Binary Builds</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mlbparks-binary-build.html#moving_on_from_s2i">Moving on From S2I</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mlbparks-binary-build.html#fast_iterative_code_change_using_binary_deploy">Fast Iterative Code Change Using Binary Deploy</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="mlbparks-binary-build.html#using_binary_deployment">Exercise: Using Binary Deployment</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="mlbparks-binary-build.html#clone_source">Clone source</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="mlbparks-binary-build.html#setup_the_build_of_the_war_file">Setup the Build of the WAR file</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="mlbparks-binary-build.html#clone_change">Clone change</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="mlbparks-binary-build.html#doing_the_binary_build">Doing the Binary Build</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="mlbparks-debugging.html">Debugging Apps</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mlbparks-debugging.html#port_forwading_and_debugging">Background: Port Forwarding and Debugging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mlbparks-debugging.html#enabling_debugging_in_eap_on_openshift">Exercise: Enabling Debugging in EAP on OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="mlbparks-debugging.html#port-forwarding_from_pod_to_our_local_machine">Exercise: Port-Forwarding from the pod to our local machine</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="mlbparks-debugging.html#setting_up_remote_debug_in_intellij">Setting up Remote Debug in IntelliJ</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="common-further-resources.html">Further Resources</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="common-workshop-links.html">Workshop Links</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="common-workshop-links.html#openshift_cluster_url">OpenShift Cluster URL</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="common-workshop-links.html#workshop_guides">Workshop Guides</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="common-workshop-links.html#web_terminal">Web terminal</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="common-workshop-links.html#git_server">Git Server</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">OpenShift Starter Guides</span>
+    <span class="version">4.6</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <span class="title">OpenShift Starter Guides</span>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">4.6</a>
+        </li>
+        <li class="version">
+          <a href="../4.5/index.html">4.5</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Starter Guides</a></li>
+    <li><a href="parksmap-container-image.html">Parksmap App</a></li>
+  </ul>
+</nav>
+<div class="page-versions">
+  <button class="version-menu-toggle" title="Show other versions of page">4.6</button>
+  <div class="version-menu">
+    <a class="version is-current" href="parksmap-container-image.html">4.6</a>
+    <a class="version" href="../4.5/parksmap-container-image.html">4.5</a>
+  </div>
+</div>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-starter-guides/edit/ocp-4.6/documentation/modules/ROOT/pages/parksmap-container-image.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Parksmap App</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this lab, we&#8217;re going to deploy the web component of the ParksMap application which is also called <code>parksmap</code> and uses OpenShift&#8217;s service discovery mechanism to discover the backend services deployed and shows their data on the map.</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="_images/roadshow-app-architecture-parksmap-1.png" alt="Application architecture" width="800">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="deploy_your_first_image"><a class="anchor" href="#deploy_your_first_image"></a>Exercise: Deploying your First Image</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Let&#8217;s start by doing the simplest thing possible - get a plain old
+Docker-formatted image to run on OpenShift. This is incredibly simple to do.
+With OpenShift it can be done directly from the web console.</p>
+</div>
+<div class="paragraph">
+<p>Return to the <a href="https://console-openshift-console.%CLUSTER_SUBDOMAIN%/k8s/cluster/projects" class="params-link" target="_blank" rel="noopener">Web Console</a>.</p>
+</div>
+<div class="paragraph">
+<p>If you&#8217;re no longer on the <strong>Topology</strong> view in the Developer perspective, return there now. Click <strong>Container Image</strong> to open a dialog that will allow you to specify the information for the image you want to deploy.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parksmap-devconsole-container-image.png" alt="Add from Container Image">
+</div>
+</div>
+<div class="paragraph">
+<p>In the <strong>Image Name</strong> field, copy/paste the following into the box:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code>quay.io/openshiftroadshow/parksmap:latest</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>OpenShift will then go out to the container registry specified and interrogate the image.</p>
+</div>
+<div class="paragraph">
+<p>Your screen will end up looking something like this:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parksmap-image.png" alt="Explore Project">
+</div>
+</div>
+<div class="paragraph">
+<p>In <strong>Runtime Icon</strong> you can select the icon to use in OpenShift Topology View for the app. You can leave the default OpenShift icon, or since this Frontend is made with Spring boot, you can pick Spring boot icon if you want.</p>
+</div>
+<div class="paragraph">
+<p>Make sure to have the correct values in:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Application Name</strong> : workshop</p>
+</li>
+<li>
+<p><strong>Name</strong> : parksmap</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Ensure <strong>Deployment</strong> is selected from <strong>Resource</strong> section.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+We will discuss in details about <strong>Deployment</strong> and <strong>DeploymentConfig</strong> in next chapters.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>Un-check</strong> the checkbox next to <strong>Create a route to the application</strong>. For learning purposes, we will create a <strong>Route</strong> for the application later in the workshop.</p>
+</div>
+<div class="paragraph">
+<p>At the bottom of the page, click <strong>Labels</strong> in the Advanced Options section and add some labels to better identify this deployment later. Labels will help us identify and filter components in the web console and in the command line.</p>
+</div>
+<div class="paragraph">
+<p>We will add 3 labels. After you enter the name=value pair for each label, press <strong>enter</strong> before typing the next. First the name to be given to the application.</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code>app=workshop</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Next the name of this deployment.</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code>component=parksmap</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And finally, the role this component plays in the overall application.</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code>role=frontend</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parksmap-image-options.png" alt="Deploy image">
+</div>
+</div>
+<div class="paragraph">
+<p>Next, click the blue <strong>Create</strong> button. You will be directed to the <strong>Topology</strong> page, where you should see the visualization for the <code>parksmap</code> deployment config in the <code>workshop</code> application.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parksmap-dc-topology.png" alt="Topology View with Parksmap">
+</div>
+</div>
+<div class="paragraph">
+<p>These few steps are the only ones you need to run to get a
+container image deployed on OpenShift. This should work with any
+container image that follows best practices, such as defining an EXPOSE
+port, not needing to run specifically as the <strong>root user</strong> or other user name, and a single non-exiting CMD to execute on start.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Providing appropriate labels is desired when deploying complex applications for organization purposes. OpenShift uses a label <strong>app</strong> to define and group components together in the Overview page. OpenShift will create this label with some default if the user doesn&#8217;t provide it explicitly.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="containers_and_pods"><a class="anchor" href="#containers_and_pods"></a>Background: Containers and Pods</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Before we start digging in, we need to understand how containers and <strong>Pods</strong> are
+related. We will not be covering the background on these technologies in this lab but if you have questions please inform the instructor. Instead, we will dive right in and start using them.</p>
+</div>
+<div class="paragraph">
+<p>In OpenShift, the smallest deployable unit is a <strong>Pod</strong>. A <strong>Pod</strong> is a group of one or more OCI containers deployed together and guaranteed to be on the same host.
+From the official OpenShift documentation:</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<em>
+Each <strong>Pod</strong> has its own IP address, therefore owning its entire port space, and
+containers within pods can share storage. <strong>Pods</strong> can be "tagged" with one or
+more labels, which are then used to select and manage groups of <strong>pods</strong> in a
+single operation.
+</em>
+</blockquote>
+</div>
+<div class="paragraph">
+<p><strong>Pods</strong> can contain multiple OCI containers. The general idea is for a <strong>Pod</strong> to
+contain a "main process" and any auxiliary services you want to run along with that process. Examples of containers you might put in a <strong>Pod</strong> are, an Apache HTTPD
+server, a log analyzer, and a file service to help manage uploaded files.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="examining_the_pod"><a class="anchor" href="#examining_the_pod"></a>Exercise: Examining the Pod</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you click on the <code>parksmap</code> entry in the Topology view, you will see some information about that deployment config. The <strong>Resources</strong> tab may be displayed by default. If so, click on the <strong>Details</strong> tab. On that panel, you will see that there is a single <strong>Pod</strong> that was created by your actions.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parksmap-overview.png" alt="Pod overview">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You&#8217;ll notice in this view an info box suggesting to add Health checks for our app. We will discuss it in details later, so for the moment you can just close this info box by clicking on the top-right X icon.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You can also get a list of all the <strong>Pods</strong> created within your <strong>Project</strong>, by navigating to <strong>Workloads &#8594; Pods</strong> in the <strong>Administrator perspective</strong> of the web console.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parksmap-podlist.png" alt="Pod list">
+</div>
+</div>
+<div class="paragraph">
+<p>This <strong>Pod</strong> contains a single container, which
+happens to be the <code>parksmap</code> application - a simple Spring Boot/Java application.</p>
+</div>
+<div class="paragraph">
+<p>You can also examine <strong>Pods</strong> from the command line:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pods</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see output that looks similar to:</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                READY   STATUS      RESTARTS   AGE
+parksmap-65c4f8b676-k5gkk    1/1     Running     0          20s</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The above output lists all of the <strong>Pods</strong> in the current <strong>Project</strong>, including the
+<strong>Pod</strong> name, state, restarts, and uptime.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You&#8217;ll notice two <strong>Pods</strong> here, one whose name ends with <strong>-deploy</strong>, and the other one with a random string as the final part of its name. The former it&#8217;s a temporary Pod used by OpenShift just to deploy the latter, which is the Pod containing your application.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Once you have a <strong>Pod</strong>'s name, you can
+get more information about the <strong>Pod</strong> using the <code>oc get</code> command.  To make the
+output readable, I suggest changing the output type to <strong>YAML</strong> using the
+following syntax:</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Make sure you use the correct <strong>Pod</strong> name from your output.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pod parksmap-1-gxbgq -o yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see something like the following output (which has been truncated due
+to space considerations of this workshop manual):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    k8s.v1.cni.cncf.io/network-status: |-
+      [{
+          "name": "",
+          "interface": "eth0",
+          "ips": [
+              "10.131.0.93"
+          ],
+          "default": true,
+          "dns": {}
+      }]
+    k8s.v1.cni.cncf.io/networks-status: |-
+      [{
+          "name": "",
+          "interface": "eth0",
+          "ips": [
+              "10.131.0.93"
+          ],
+          "default": true,
+          "dns": {}
+      }]
+    openshift.io/generated-by: OpenShiftWebConsole
+    openshift.io/scc: restricted
+  creationTimestamp: "2021-01-05T17:00:32Z"
+  generateName: parksmap-65c4f8b676-
+  labels:
+    app: parksmap
+    component: parksmap
+    deploymentconfig: parksmap
+    pod-template-hash: 65c4f8b676
+    role: frontend
+...............</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The web interface also shows a lot of the same information on the <strong>Pod</strong> details
+page. If you click on the name of the <strong>Pod</strong>, you will
+find the details page. You can also get there by clicking on the <code>parksmap</code> deployment config on the <strong>Topology</strong> page, selecting <strong>Resources</strong>, and then clicking the <strong>Pod</strong> name.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parksmap-dc-resources.png" alt="Parksmap Resources">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parksmap-pod.png" alt="Pod list">
+</div>
+</div>
+<div class="paragraph">
+<p>Getting the <code>parksmap</code> image running may take a little while to complete. Each
+OpenShift node that is asked to run the image has to pull (download) it, if the
+node does not already have it cached locally. You can check on the status of the
+image download and deployment in the <strong>Pod</strong> details page, or from the command
+line with the <code>oc get pods</code> command that you used before.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="customizing_image_lifecycle_behavior"><a class="anchor" href="#customizing_image_lifecycle_behavior"></a>Background: Customizing the Image Lifecycle Behavior</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Whenever OpenShift asks the node&#8217;s CRI (Container Runtime Interface) runtime (Docker daemon or CRI-O) to run an image, the runtime will check to make sure it has the right "version" of the image to run.
+If it doesn&#8217;t, it will pull it from the specified registry.</p>
+</div>
+<div class="paragraph">
+<p>There are a number of ways to customize this behavior. They are documented in
+<a href="https://docs.openshift.com/container-platform/4.6/applications/application_life_cycle_management/creating-applications-using-cli.html#applications-create-using-cli-image_creating-applications-using-cli">specifying an image</a>
+as well as
+<a href="https://docs.openshift.com/container-platform/4.6/openshift_images/managing_images/image-pull-policy.html">image pull policy</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="services"><a class="anchor" href="#services"></a>Background: Services</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Services</strong> provide a convenient abstraction layer inside OpenShift to find a
+group of similar <strong>Pods</strong>. They also act as an internal proxy/load balancer between
+those <strong>Pods</strong> and anything else that needs to access them from inside the
+OpenShift environment. For example, if you needed more <code>parksmap</code> instances to
+handle the load, you could spin up more <strong>Pods</strong>. OpenShift automatically maps
+them as endpoints to the <strong>Service</strong>, and the incoming requests would not notice
+anything different except that the <strong>Service</strong> was now doing a better job handling
+the requests.</p>
+</div>
+<div class="paragraph">
+<p>When you asked OpenShift to run the image, it automatically created a <strong>Service</strong>
+for you. Remember that services are an internal construct. They are not
+available to the "outside world", or anything that is outside the OpenShift
+environment. That&#8217;s okay, as you will learn later.</p>
+</div>
+<div class="paragraph">
+<p>The way that a <strong>Service</strong> maps to a set of <strong>Pods</strong> is via a system of <strong>Labels</strong> and
+<strong>Selectors</strong>. <strong>Services</strong> are assigned a fixed IP address and many ports and
+protocols can be mapped.</p>
+</div>
+<div class="paragraph">
+<p>There is a lot more information about
+<a href="https://docs.openshift.com/container-platform/4.6/architecture/understanding-development.html#understanding-kubernetes-pods">Services</a>,
+including the YAML format to make one by hand, in the official documentation.</p>
+</div>
+<div class="paragraph">
+<p>Now that we understand the basics of what a <strong>Service</strong> is, let&#8217;s take a look at
+the <strong>Service</strong> that was created for the image that we just deployed. In order to
+view the <strong>Services</strong> defined in your <strong>Project</strong>, enter in the following command:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get services</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see output similar to the following:</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME       TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+parksmap   ClusterIP   172.30.22.209  &lt;none&gt;        8080/TCP   3h</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the above output, we can see that we have a <strong>Service</strong> named <code>parksmap</code> with an
+IP/Port combination of 172.30.22.209/8080TCP. Your IP address may be different, as
+each <strong>Service</strong> receives a unique IP address upon creation. <strong>Service</strong> IPs are
+fixed and never change for the life of the <strong>Service</strong>.</p>
+</div>
+<div class="paragraph">
+<p>In the Developer perspective from the <strong>Topology</strong> view, service information is available by clicking the <code>parksmap</code> deployment config, then <strong>Resources</strong>, and then you should see the <code>parksmap</code> entry in the <strong>Services</strong> section.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parksmap-serviceslist.png" alt="Services list">
+</div>
+</div>
+<div class="paragraph">
+<p>You can also get more detailed information about a <strong>Service</strong> by using the
+following command to display the data in YAML:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get service parksmap -o yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see output similar to the following:</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftWebConsole
+  creationTimestamp: "2020-09-30T14:10:12Z"
+  labels:
+    app: workshop
+    app.kubernetes.io/component: parksmap
+    app.kubernetes.io/instance: parksmap
+    app.kubernetes.io/part-of: workshop
+    component: parksmap
+    role: frontend
+  name: parksmap
+  namespace: user1
+  resourceVersion: "1062269"
+  selfLink: /api/v1/namespaces/user1/services/parksmap
+  uid: e1ff69c8-cb2f-11e9-82a1-0267eec7e1a0
+spec:
+  clusterIP: 172.30.22.209
+  ports:
+  - name: 8080-tcp
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: parksmap
+    deploymentconfig: parksmap
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Take note of the <code>selector</code> stanza. Remember it.</p>
+</div>
+<div class="paragraph">
+<p>Alternatively, you can use the web console to view information about the <strong>Service</strong> by clicking on it from the previous screen.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parksmap-service.png" alt="Service">
+</div>
+</div>
+<div class="paragraph">
+<p>It is also of interest to view the YAML of the <strong>Pod</strong> to understand how OpenShift
+wires components together. For example, run the following command to get the
+name of your <code>parksmap</code> <strong>Pod</strong>:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pods</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see output similar to the following:</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                        READY   STATUS    RESTARTS   AGE
+parksmap-65c4f8b676-k5gkk   1/1     Running   0          5m12s</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now you can view the detailed data for your <strong>Pod</strong> with the following command:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pod parksmap-1-gxbgq -o yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Under the <code>metadata</code> section you should see the following:</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">  labels:
+    app: parksmap
+    deploymentconfig: parksmap</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <strong>Service</strong> has <code>selector</code> stanza that refers to <code>deploymentconfig=parksmap</code>.</p>
+</li>
+<li>
+<p>The <strong>Pod</strong> has multiple <strong>Labels</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>app=parksmap</code></p>
+</li>
+<li>
+<p><code>deploymentconfig=parksmap</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Labels</strong> are just key/value pairs. Any <strong>Pod</strong> in this <strong>Project</strong> that has a <strong>Label</strong> that
+matches the <strong>Selector</strong> will be associated with the <strong>Service</strong>. To see this in
+action, issue the following command:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc describe service parksmap</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see something like the following output:</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">Name:              parksmap
+Namespace:         user1
+Labels:            app=workshop
+                   app.kubernetes.io/component=parksmap
+                   app.kubernetes.io/instance=parksmap
+                   app.kubernetes.io/part-of=workshop
+                   component=parksmap
+                   role=frontend
+Annotations:       openshift.io/generated-by: OpenShiftWebConsole
+Selector:          app=parksmap,deploymentconfig=parksmap
+Type:              ClusterIP
+IP:                172.30.22.209
+Port:              8080-tcp  8080/TCP
+TargetPort:        8080/TCP
+Endpoints:         10.128.2.90:8080
+Session Affinity:  None
+Events:            &lt;none&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You may be wondering why only one endpoint is listed. That is because there is
+only one <strong>Pod</strong> currently running.  In the next lab, we will learn how to scale
+an application, at which point you will be able to see multiple endpoints
+associated with the <strong>Service</strong>.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="common-parksmap-architecture.html" class="query-params-link">Parksmap Architecture</a></span>
+  <span class="next"><a href="parksmap-scaling.html" class="query-params-link">Scaling Apps</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../../_/js/vendor/clipboard.js"></script>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
