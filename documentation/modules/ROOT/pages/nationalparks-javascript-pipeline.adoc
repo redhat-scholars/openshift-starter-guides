@@ -38,95 +38,86 @@ In short, in order to create a pipeline, one does the following:
 
 For further details on pipeline concepts, refer to the https://github.com/tektoncd/pipeline/tree/master/docs#learn-more[Tekton documentation] that provides an excellent guide for understanding various parameters and attributes available for defining pipelines.
 
-
-[#create_your_pipeline]
-== Create Your Pipeline
-
-NOTE: Ensure you met all link:prerequisites.doc[Prerequisites] before proceeding. link:prerequisites.adoc#openshift_pipelines[OpenShift Pipelines] installed in your cluster and a link:prerequisited.adoc#github_account[GitHub account] are required.
+[#explore_pipeline]
+== Explore your Pipeline
 
 As pipelines provide the ability to promote applications between different stages of the delivery cycle, Tekton, which is our Continuous Integration server that will execute our pipelines, will be deployed on a project with a Continuous Integration role. Pipelines executed in this project will have permissions to interact with all the projects modeling the different stages of our delivery cycle. 
 
-For this example, we're going to deploy our pipeline which is stored in the same GitHub repository where we have our code. In a more real scenario, and in order to honor https://en.wikipedia.org/wiki/Infrastructure_as_Code[infrastructure as code] principles, we would store all the pipeline definitions along with every OpenShift resources definitions we would use.
+For this example, we're going to deploy our pipeline that we created automatically from Developer Console together with `nationalparks` backend. 
 
-Let's create now a Tekton pipeline for Nationalparks backend, select your OpenShift cluster type from below table:
 
-[.console-input]
-[source,bash,subs="+attributes"]
+Verify Tasks already available in the OpenShift cluster (ClusterTasks):
+
+[source,shell,role=execute-1]
 ----
-oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipeline-all-new.yaml -n {project-namespace}
-----
-
-Verify the Tasks you created:
-
-[.console-input]
-[source,bash,subs="+attributes,macros+"]
-----
-oc get tasks -n {project-namespace}
+oc get clustertasks -n {{project_namespace}}
 ----
 
 You should see something similar:
 
-[.console-output]
 [source,bash]
 ----
 NAME                 AGE
-redeploy             13s
-s2i-java-11-binary   13s
+....
+s2i-nodejs-12               4h58m
+s2i-nodejs-12-pr            4h58m
+....
 ----
 
-Verify the Pipeline you created:
+Verify the Pipeline we created:
 
-[.console-input]
-[source,bash,subs="+attributes,macros+"]
+[source,shell,role=execute-1]
 ----
-oc get pipelines -n {project-namespace}
+oc get pipelines -n {{project_namespace}}
 ----
 
 You should see something like this:
 
-[.console-output]
 [source,bash]
 ----
 NAME                     AGE
-nationalparks-pipeline   8s
+nationalparks   5m
 ----
 
 Now let's review our Tekton Pipeline:
 
-[source,yaml,role="copypaste"]
+[source,yaml,role=copypaste]
 ----
 ---
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: nationalparks-pipeline
+  name: nationalparks
 spec:
   params:
     - default: nationalparks
-      description: The application name
       name: APP_NAME
       type: string
-    - default: 'https://github.com/openshift-roadshow/nationalparks.git'
-      description: The application git repository url
-      name: APP_GIT_URL
+    - default: >-
+        https://github.com/openshift-roadshow/nationalparks-js.git
+      name: GIT_REPO
       type: string
     - default: master
-      description: The application git repository revision
-      name: APP_GIT_REVISION
+      name: GIT_REVISION
+      type: string
+    - default: 'image-registry.openshift-image-registry.svc:5000/user1/nationalparks'
+      name: IMAGE_NAME
+      type: string
+    - default: .
+      name: PATH_CONTEXT
+      type: string
+    - default: '1'
+      name: MINOR_VERSION
       type: string
   tasks:
-    - name: git-clone
+    - name: fetch-repository
       params:
         - name: url
-          value: $(params.APP_GIT_URL)
+          value: $(params.GIT_REPO)
         - name: revision
-          value: $(params.APP_GIT_REVISION)
-        - name: submodules
-          value: 'true'
-        - name: depth
-          value: '1'
-        - name: sslVerify
-          value: 'true'
+          value: $(params.GIT_REVISION)
+        - name: subdirectory
+          value: ''
         - name: deleteExisting
           value: 'true'
       taskRef:
@@ -134,52 +125,41 @@ spec:
         name: git-clone
       workspaces:
         - name: output
-          workspace: app-source
-    - name: build-and-test
+          workspace: workspace
+    - name: build
       params:
-        - name: GOALS
-          value:
-            - package
-        - name: PROXY_PROTOCOL
-          value: http
-      runAfter:
-        - git-clone
-      taskRef:
-        kind: ClusterTask
-        name: maven
-      workspaces:
-        - name: source
-          workspace: app-source
-        - name: maven-settings
-          workspace: maven-settings
-    - name: build-image
-      params:
-        - name: PATH_CONTEXT
-          value: .
+        - name: IMAGE
+          value: $(params.IMAGE_NAME)
         - name: TLSVERIFY
           value: 'false'
-        - name: OUTPUT_IMAGE_STREAM
-          value: '$(params.APP_NAME):latest'
+        - name: PATH_CONTEXT
+          value: $(params.PATH_CONTEXT)
+        - name: MINOR_VERSION
+          value: $(params.MINOR_VERSION)
       runAfter:
-        - build-and-test
+        - fetch-repository
       taskRef:
-        kind: Task
-        name: s2i-java-11-binary
+        kind: ClusterTask
+        name: s2i-nodejs-12
       workspaces:
         - name: source
-          workspace: app-source
-    - name: redeploy
+          workspace: workspace
+    - name: deploy
       params:
-        - name: DEPLOYMENT
-          value: $(params.APP_NAME)
+        - name: SCRIPT
+          value: kubectl $@
+        - name: ARGS
+          value:
+            - rollout
+            - status
+            - deploy/$(params.APP_NAME)
       runAfter:
-        - build-image
+        - build
       taskRef:
-        kind: Task
-        name: redeploy
+        kind: ClusterTask
+        name: openshift-client
   workspaces:
-    - name: app-source
-    - name: maven-settings
+    - name: workspace
 
 ----
 
@@ -187,39 +167,60 @@ A `Pipeline` is a user-defined model of a CD pipeline. A Pipeline’s code defin
 
 A `Task` and a `ClusterTask` contain some step to be executed. *ClusterTasks* are available to all user within a cluster where OpenShift Pipelines has been installed, while *Tasks* can be custom.
 
-This pipeline has 4 Tasks defined:
+This pipeline has 3 Tasks defined:
 
-- *git clone*: this is a `ClusterTask` that will clone our source repository for nationalparks and store it to a `Workspace` `app-source` which will use the PVC created for it `app-source-workspace`
-- *build-and-test*: will build and test our Java application using `maven` `ClusterTask`
-- *build-image*: will build an image using a binary file as input in OpenShift. The build will use the .jar file that was created and a custom Task for it `s2i-java11-binary`
-- *redeploy*: it will deploy the created image on OpenShift using the Deployment named `nationalparks` we created in the previous lab, using the custom Task `redeploy` 
+- *fetch-repository*: this is a `ClusterTask` that will clone our source repository for nationalparks and store it to a `Workspace` `app-source` which will use the PVC created for it `app-source-workspace`
+- *build*: will build and test our NodeJS application, generate and push a container image automatically with compiled binaries inside OpenShift Container Registry.
+- *deploy*: it will deploy the created image on OpenShift using the Deployment named `nationalparks` we created in the previous lab.
 
-From left-side menu, click on *Pipeline*, then click on *nationalparks-pipeline* to see the pipeline you just created.
+From left-side menu, click on *Pipeline*, then click on *nationalparks* to see the pipeline you just created.
 
-image::devops-pipeline-created.png[Pipeline created]
+image::devops-pipeline-created-new.png[Pipeline created]
 
 The Pipeline is parametric, with default value on the one we need to use.
 
-It is using two *Workspace*:
+It is using one *Workspace*:
 
-- *app-source*: linked to a *PersistentVolumeClaim* `app-source-pvc` created from the YAML template we used in previous command. This will be used to store the artifact to be used in different *Task*
-- *maven-settings*: an *EmptyDir* volume for the maven cache, this can be extended also with a PVC to make subsequent Maven builds faster
+- *app-source*: this need to be linked to a *PersistentVolumeClaim* since will be used to store the code and the compiled binary to be used in different *Tasks*
+
+[#add_storage_for_pipeline]
+== Exercise: Add Storage for your Pipeline
+
+OpenShift manages Storage with link:https://kubernetes.io/docs/concepts/storage/persistent-volumes/[Persistent Volumes] to be attached to Pods running our applications through *Persistent Volume Claim* requests, and it also provides the capability to manage it at ease from Web Console. 
+From *Administrator Perspective*, go to *Storage*-> *Persistent Volume Claims*.
+
+Go to top-right side and click *Create Persistent Volume Claim* button.
+
+Inside *Persistent Volume Claim name* insert *app-source-pvc*.
+
+In *Size* section, insert *1* as we are going to create 1 GiB Persistent Volume for our Pipeline, using RWO Single User access mode.
+
+Leave all other default settings, and click *Create*.
+
+image::nationalparks-codechanges-pipeline-pvc.png[Create PVC]
+
+TIP: The *Storage Class* is the type of storage available in the cluster.
 
 [#run_the_pipeline]
 == Run the Pipeline
 
-We can start now the Pipeline from the Web Console. Within *Developer Perspective* go to left-side menu, click on *Pipeline*, then click on *nationalparks-pipeline*. From top-right *Actions* list, click on *Start*.
+We can start now the Pipeline from the Web Console. Switch to *Developer Perspective*, and from left-side menu, click on *Pipeline*, then click on *nationalparks*. From top-right *Actions* list, click on *Start*.
 
-image::devops-pipeline-start-1.png[Start Pipeline]
+image::images/devops-pipeline-start-1-new.png[Start Pipeline]
 
 You will be prompted with parameters to add the Pipeline, showing default ones. 
 
-In *APP_GIT_URL*, verify the `nationalparks` repository from GitHub:
 
-[source,bash,role=copypaste]
-----
-https://github.com/openshift-roadshow/nationalparks.git
-----
+In *Workspaces*-> *app-source* select *PVC* from the list, then select *app-source-pvc*. This is the shared volume used by Pipeline Tasks in your Pipeline containing the source code and compiled artifacts.
+
+Click on *Start* to run your Pipeline.
+
+image::devops-pipeline-start-2-new.png[Add parameters]
+
+
+You can follow the Pipeline execution from *Pipeline* section, watching all the steps in rogress. Click on *Pipeline Runs* tab to see it running:
+
+image::devops-pipeline-run-1.png[Pipeline runnin
 
 In *Workspaces*-> *app-source* select *PVC* from the list, then select *app-source-pvc*. This is the share volume used by Pipeline Tasks in your Pipeline containing the source code and compiled artifacts.
 
@@ -228,18 +229,16 @@ Click on *Start* to run your Pipeline.
 image::devops-pipeline-start-2.png[Add parameters]
 
 
-You can follow the Pipeline execution at ease from Web Console. Open *Developer Perspective* and go to left-side menu, click on *Pipeline*, then click on *nationalparks-pipeline*. Switch to *Pipeline Runs* tab to watch all the steps in progress:
-
-image::devops-pipeline-run-1.png[Pipeline running]
+You can follow the Pipeline execution from *Pipeline* section, watching all the steps in g]
 
 The click on the `PipelineRun` *national-parks-deploy-run-*:
 
-image::devops-pipeline-run-java-2.png[Pipeline running animation]
+image::devops-pipeline-run-2.png[Pipeline running animation]
 
 Then click on the *Task* running to check logs:
 
-image::devops-pipeline-run-java-3.png[Pipeline Task log]
+image::devops-pipeline-run-3.png[Pipeline Task log]
 
 Verify PipelineRun has been completed with success:
 
-image::devops-pipeline-run-java-4.png[PipelineRun completed]
+image::devops-pipeline-run-4.png[PipelineRun completed]

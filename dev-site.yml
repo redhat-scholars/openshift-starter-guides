@@ -12,6 +12,10 @@ content:
       #branches: HEAD
       branches: [roks, ocp-4.6] 
       start_path: documentation
+      #- url: git@github.com:redhat-scholars/openshift-starter-guides-dotnet.git
+      #branches: ocp-4.6
+      #start_path: documentation
+
 asciidoc:
   attributes:
     #title: OpenShift Starter Guides(Dev Mode)

@@ -1,4 +1,7 @@
-In this lab, we're going to deploy a backend service, developed in JavaScript
+= Nationalparks NodeJS App
+:navtitle: Nationalparks NodeJS App
+
+In this lab, we're going to deploy a backend service, developed in NodeJS
  that will expose 2 main REST endpoints to the visualizer
 application (`parksmap` web component that was deployed in the previous labs).
 The application will query for national parks information (including it's
@@ -8,6 +11,7 @@ by the end user.
 
 image::roadshow-app-architecture-nationalparks-1.png[Application architecture,800,align="center"]
 
+[#source_to_image]
 == Background: Source-to-Image (S2I)
 
 In a previous lab, we learned how to deploy a pre-existing container
@@ -40,21 +44,25 @@ more information about it either in the
 or on https://github.com/openshift/source-to-image[GitHub]. The only key concept you need to
 remember about S2I is that it's magic.
 
-== Exercise: Creating a JavaScript application
+[#creating_nodejs_application]
+== Exercise: Creating a NodeJS application
 
 The backend service that we will be deploying as part of this exercise is
-called `nationalparks`.  This is a JavaScript application that performs 2D
+called `nationalparks`.  This is a NodeJS application that performs 2D
 geo-spatial queries against a MongoDB database to locate and return map
 coordinates of all National Parks in the world. That was just a fancy way of
 saying that we are going to deploy a webservice that returns a JSON list of
 places.
 
+[#add_to_project]
 === Add to Project
+
 Because the `nationalparks` component is a backend to serve data that our
 existing frontend (parksmap) will consume, we are going to build it inside the existing
 project that we have been working with. To illustrate how you can interact with OpenShift via the CLI or the Web Console, we will deploy the nationalparks component using the web console.
 
-=== Using application code on embedded Git server
+[#using_application_code_on_git_server]
+=== Using Application Code on Git Server
 
 OpenShift can work with any accessible Git repository. This could be GitHub,
 GitLab, or any other server that speaks Git. You can even register webhooks in
@@ -64,26 +72,19 @@ application code!
 The repository that we are going to use is already cloned in the internal Gogs repository
 and located at the following URL:
 
-link:http://gogs-%INFRA_PROJECT%.%CLUSTER_SUBDOMAIN%/%USERNAME%/nationalparks-js.git[Gogs Repository]
-
-Your Gogs credentials are:
-
-[source,bash]
-----
-username: %USERNAME%
-password: %GOGS_PASSWORD%
-----
+link:https://github.com/openshift-roadshow/nationalparks-js.git[Gogs Repository]
 
 Later in the lab, we want you to make a code change and then rebuild your
-application. This is a fairly simple JavaScript application.
+application. This is a fairly simple NodeJS application.
 
+[#build_code_on_openshift]
 === Build the Code on OpenShift
 
 Similar to how we used *+Add* before with an existing image, we
 can do the same for specifying a source code repository. Since for this lab you
-have your own git repository, let's use it with a simple JavaScript S2I image.
+have your own git repository, let's use it with a simple NodeJS S2I image.
 
-In the Developer Perspective, click *+Add* in the left navigation and then choose "From Git"
+In the *Developer Perspective*, click *+Add* in the left navigation and then choose *From Git*.
 
 image::nationalparks-show-add-options.png[Add to Project]
 
@@ -93,17 +94,23 @@ Enter the following for Git Repo URL:
 
 [source,role=copypaste]
 ----
-http://gogs-%INFRA_PROJECT%.%CLUSTER_SUBDOMAIN%/%USERNAME%/nationalparks.git
+https://github.com/openshift-roadshow/nationalparks-js.git
 ----
 
-Select Node.js as your Builder Image.
+Select *NodeJS* as your Builder Image.
 
-image::nationalparks-import-from-git-url-builder.png[Import from Git]
+image::nationalparks-import-from-git-url-builder-js.png[Import from Git]
 
-NOTE: All of these builder images shown are made available via *Templates* and
-*ImageStreams*, which will be discussed in a later lab.
+Scroll down to the *General* section. Select:
 
-Scroll down to the *General* section. Select `workshop` as your application, and `nationalparks` as the name.
+* *Application Name* : workshop
+* *Name* : nationalparks
+
+In *Resources* section, select *Deployment*.
+
+Inside *Pipeline* section, check *Add pipeline* box. This will create a Tekton Pipeline for us that we will use after in the Pipeline modules.
+
+TIP: Click "Show pipeline visualization" to preview the Pipeline inside Pipeline UI that we are going to use later on.
 
 Expand the Labels section and add 3 labels:
 
@@ -113,7 +120,7 @@ Expand the Labels section and add 3 labels:
 
 Now click the *Create* button.
 
-image::nationalparks-configure-service.png[Runtimes]
+image::nationalparks-configure-service-pipelines.png[Runtimes]
 
 To see the build logs, in Topology view, click the `nationalparks` entry, then click on *View Logs* in the *Builds* section of the *Resources* tab.
 
@@ -124,13 +131,15 @@ the application. You can see all of this happening in real time!
 
 From the command line, you can also see the *Builds*:
 
-[source,bash,role=execute-1]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc get builds
 ----
 
 You'll see output like:
 
+[.console-output]
 [source,bash]
 ----
 NAME              TYPE      FROM          STATUS     STARTED              DURATION
@@ -139,7 +148,8 @@ nationalparks-1   Source    Git@b052ae6   Running    About a minute ago   1m2s
 
 You can also view the build logs with the following command:
 
-[source,bash,role=execute-1]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc logs -f builds/nationalparks-1
 ----
@@ -147,43 +157,46 @@ oc logs -f builds/nationalparks-1
 After the build has completed and successfully:
 
 * The S2I process will push the resulting container image to the internal OpenShift registry
-* The *DeploymentConfiguration* (DC) will detect that the image has changed, and this
+* The *Deployment* (D) will detect that the image has changed, and this
   will cause a new deployment to happen.
-* A *ReplicationController* (RC) will be spawned for this new deployment.
-* The RC will detect no *Pods* are running and will cause one to be deployed, as our default replica count is just 1.
+* A *ReplicaSet* (RS) will be spawned for this new deployment.
+* The RS will detect no *Pods* are running and will cause one to be deployed, as our default replica count is just 1.
 
 In the end, when issuing the `oc get pods` command, you will see that the build Pod
 has finished (exited) and that an application *Pod* is in a ready and running state:
 
+[.console-output]
 [source,bash]
 ----
 NAME                    READY     STATUS      RESTARTS   AGE
 nationalparks-1-tkid3   1/1       Running     3          2m
 nationalparks-1-build   0/1       Completed   0          3m
-parksmap-1-4hbtk        1/1       Running     0          2h
+parksmap-57df75c46d-xltcs        1/1       Running     0          2h
 ----
 
 If you look again at the web console, you will notice that, when you create the
 application this way, OpenShift also creates a *Route* for you. You can see the
 URL in the web console, or via the command line:
 
-[source,bash,role=execute-1]
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
 ----
 oc get routes
 ----
 
 Where you should see something like the following:
 
+[.console-output]
 [source,bash,subs="+attributes,macros+"]
 ----
-NAME            HOST/PORT                                                   PATH      SERVICES        PORT       TERMINATION
+NAME            HOST/PORT                                                   PATH      SERVICES        PORT       TERMINATION       WILDCARD
 nationalparks   nationalparks-{project-namespace}.%CLUSTER_SUBDOMAIN%             nationalparks   8080-tcp
-parksmap        parksmap-{project-namespace}.%CLUSTER_SUBDOMAIN%                  parksmap        8080-tcp
+parksmap        parksmap-{project-namespace}.%CLUSTER_SUBDOMAIN%                  parksmap        8080-tcp        edge        none
 ----
 
 In the above example, the URL is:
 
-[source,bash,role=copypaste,subs="+attributes,macros+"]
+[source,text,role="copypaste",subs="+attributes"]
 ----
 http://nationalparks-{project-namespace}.%CLUSTER_SUBDOMAIN%
 ----
@@ -193,22 +206,19 @@ However, it can still be used with a browser. All backends that work with the pa
 frontend are required to implement a `/ws/info/` endpoint. To test, visit this URL in your browser:
 
 
-link:http://nationalparks-{project-namespace}.%CLUSTER_SUBDOMAIN%/ws/info/[National Parks Info Page]
-
-WARNING: The trailing slash is *required*.
-
+link:http://nationalparks-{project-namespace}.%CLUSTER_SUBDOMAIN%/ws/info/[National Parks Info Page, role='params-link',window='_blank']
 You will see a simple JSON string:
 
 [source,json]
 ----
-{"id":"nationalparks-js","displayName":"National Parks (JS)","center":{"latitude":"47.039304","longitude":"14.505178"},"zoom":4}
+{"id":"nationalparks","displayName":"National Parks (JS)","center":{"latitude":47.039304,"longitude":14.505178},"zoom":4}
 ----
 
 Earlier we said:
 
-[source,bash]
+[source,text]
 ----
-This is a JavaScript application that performs 2D geo-spatial queries
+This is a NodeJS application that performs 2D geo-spatial queries
 against a MongoDB database
 ----
 

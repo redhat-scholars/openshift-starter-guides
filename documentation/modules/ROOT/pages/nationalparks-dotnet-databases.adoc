@@ -129,7 +129,7 @@ This change in configuration will trigger a new deployment of the `nationalparks
 
 Back in the *Topology* view, click and drag with Shift key the `mongodb-nationalparks` component into the light gray area that denotes the `workshop` application, so that all three components are contained in it.
 
-image::nationalparks-databases-add-mongodb-to-workshop-app-js.png[Add mongodb to the workshop app]
+image::nationalparks-databases-add-mongodb-to-workshop-app-dotnet.png[Add mongodb to the workshop app]
 
 Next, let's fix the labels assigned to the `mongodb-nationalparks` deployment. Currently, we cannot set labels when using the database template from the catalog, so we will fix these labels manually. 
 
@@ -299,10 +299,10 @@ Created:                2 hours ago
 Labels:                 app=workshop
                         app.kubernetes.io/component=nationalparks
                         app.kubernetes.io/instance=nationalparks
-                        app.kubernetes.io/name=nodejs
+                        app.kubernetes.io/name=dotnet
                         app.kubernetes.io/part-of=workshop
-                        app.openshift.io/runtime=nodejs
-                        app.openshift.io/runtime-version=12
+                        app.openshift.io/runtime=dotnet
+                        app.openshift.io/runtime-version=3.1
                         component=nationalparks
                         role=backend  
 Annotations:            openshift.io/host.generated=true                          

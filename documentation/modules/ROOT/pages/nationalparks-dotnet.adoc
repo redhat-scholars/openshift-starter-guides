@@ -1,7 +1,7 @@
-= Nationalparks Python App
-:navtitle: Nationalparks Python App
+= Nationalparks .NET App
+:navtitle: Nationalparks .NET App
 
-In this lab, we're going to deploy a backend service, developed in Python
+In this lab, we're going to deploy a backend service, developed in .NET
  that will expose 2 main REST endpoints to the visualizer
 application (`parksmap` web component that was deployed in the previous labs).
 The application will query for national parks information (including it's
@@ -44,11 +44,11 @@ more information about it either in the
 or on https://github.com/openshift/source-to-image[GitHub]. The only key concept you need to
 remember about S2I is that it's magic.
 
-[#creating_python_application]
-== Exercise: Creating a Python application
+[#creating_dotnet_application]
+== Exercise: Creating a .NET application
 
 The backend service that we will be deploying as part of this exercise is
-called `nationalparks`.  This is a Python application that performs 2D
+called `nationalparks`.  This is a .NET application that performs 2D
 geo-spatial queries against a MongoDB database to locate and return map
 coordinates of all National Parks in the world. That was just a fancy way of
 saying that we are going to deploy a webservice that returns a JSON list of
@@ -72,17 +72,17 @@ application code!
 The repository that we are going to use is already cloned in the internal Gogs repository
 and located at the following URL:
 
-link:https://github.com/openshift-roadshow/nationalparks-py.git[Gogs Repository]
+link:https://github.com/openshift-roadshow/nationalparks-dotnet.git[Gogs Repository]
 
 Later in the lab, we want you to make a code change and then rebuild your
-application. This is a fairly simple Python application.
+application. This is a fairly simple .NET application.
 
 [#build_code_on_openshift]
 === Build the Code on OpenShift
 
 Similar to how we used *+Add* before with an existing image, we
 can do the same for specifying a source code repository. Since for this lab you
-have your own git repository, let's use it with a simple Python S2I image.
+have your own git repository, let's use it with a simple .NET S2I image.
 
 In the *Developer Perspective*, click *+Add* in the left navigation and then choose *From Git*.
 
@@ -94,12 +94,12 @@ Enter the following for Git Repo URL:
 
 [source,role=copypaste]
 ----
-https://github.com/openshift-roadshow/nationalparks-py.git
+https://github.com/openshift-roadshow/nationalparks-dotnet.git
 ----
 
-Select *Python Core* as your Builder Image.
+Select *.NET Core* as your Builder Image.
 
-image::nationalparks-import-from-git-url-builder-py.png[Import from Git]
+image::nationalparks-import-from-git-url-builder-dotnet.png[Import from Git]
 
 Scroll down to the *General* section. Select:
 
@@ -124,7 +124,7 @@ image::nationalparks-configure-service-pipelines.png[Runtimes]
 
 To see the build logs, in Topology view, click the `nationalparks` entry, then click on *View Logs* in the *Builds* section of the *Resources* tab.
 
-image::nationalparks-python-new-python-build.png[Nationalparks build]
+image::nationalparks-dotnet-new-dotnet-build.png[Nationalparks build]
 
 The initial build will take a few minutes to download all of the dependencies needed for
 the application. You can see all of this happening in real time!
@@ -211,14 +211,14 @@ You will see a simple JSON string:
 
 [source,json]
 ----
-{"id":"nationalparks","displayName":"National Parks (PY)","center":{"latitude":47.039304,"longitude":14.505178},"zoom":4}
+{"id":"nationalparks","displayName":"National Parks (C#)","center":{"latitude":47.039304,"longitude":14.505178},"zoom":4}
 ----
 
 Earlier we said:
 
 [source,text]
 ----
-This is a Python application that performs 2D geo-spatial queries
+This is a .NET application that performs 2D geo-spatial queries
 against a MongoDB database
 ----
 
