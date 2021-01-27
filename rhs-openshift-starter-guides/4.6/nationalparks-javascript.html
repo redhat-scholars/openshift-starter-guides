@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: OpenShift Starter Guides</title>
+    <title>Nationalparks NodeJS App :: OpenShift Starter Guides</title>
     <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.6/nationalparks-javascript.html">
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../../_/css/site.css">
@@ -291,9 +291,6 @@
     <a class="nav-link" href="nationalparks-java-pipeline.html#understanding_tekton">Understanding Tekton</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nationalparks-java-pipeline.html#setup_your_pipeline">Set Up Your Pipeline</a>
-  </li>
-  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="nationalparks-java-pipeline.html#create_your_pipeline">Create Your Pipeline</a>
   </li>
   <li class="nav-item" data-depth="2">
@@ -432,6 +429,10 @@
 <button class="nav-toggle"></button>
   <a href="index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Starter Guides</a></li>
+    <li><a href="nationalparks-javascript.html">Nationalparks NodeJS App</a></li>
+  </ul>
 </nav>
 <div class="page-versions">
   <button class="version-menu-toggle" title="Show other versions of page">4.6</button>
@@ -444,8 +445,11 @@
   </div>
   <div class="content">
 <article class="doc">
+<h1 class="page">Nationalparks NodeJS App</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p>In this lab, we&#8217;re going to deploy a backend service, developed in JavaScript
+<p>In this lab, we&#8217;re going to deploy a backend service, developed in NodeJS
  that will expose 2 main REST endpoints to the visualizer
 application (<code>parksmap</code> web component that was deployed in the previous labs).
 The application will query for national parks information (including it&#8217;s
@@ -458,8 +462,10 @@ by the end user.</p>
 <img src="_images/roadshow-app-architecture-nationalparks-1.png" alt="Application architecture" width="800">
 </div>
 </div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="_background_source_to_image_s2i"><a class="anchor" href="#_background_source_to_image_s2i"></a>Background: Source-to-Image (S2I)</h2>
+<h2 id="source_to_image"><a class="anchor" href="#source_to_image"></a>Background: Source-to-Image (S2I)</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>In a previous lab, we learned how to deploy a pre-existing container
@@ -499,18 +505,18 @@ remember about S2I is that it&#8217;s magic.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_exercise_creating_a_javascript_application"><a class="anchor" href="#_exercise_creating_a_javascript_application"></a>Exercise: Creating a JavaScript application</h2>
+<h2 id="creating_nodejs_application"><a class="anchor" href="#creating_nodejs_application"></a>Exercise: Creating a NodeJS application</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The backend service that we will be deploying as part of this exercise is
-called <code>nationalparks</code>.  This is a JavaScript application that performs 2D
+called <code>nationalparks</code>.  This is a NodeJS application that performs 2D
 geo-spatial queries against a MongoDB database to locate and return map
 coordinates of all National Parks in the world. That was just a fancy way of
 saying that we are going to deploy a webservice that returns a JSON list of
 places.</p>
 </div>
 <div class="sect2">
-<h3 id="_add_to_project"><a class="anchor" href="#_add_to_project"></a>Add to Project</h3>
+<h3 id="add_to_project"><a class="anchor" href="#add_to_project"></a>Add to Project</h3>
 <div class="paragraph">
 <p>Because the <code>nationalparks</code> component is a backend to serve data that our
 existing frontend (parksmap) will consume, we are going to build it inside the existing
@@ -518,7 +524,7 @@ project that we have been working with. To illustrate how you can interact with 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_using_application_code_on_embedded_git_server"><a class="anchor" href="#_using_application_code_on_embedded_git_server"></a>Using application code on embedded Git server</h3>
+<h3 id="using_application_code_on_git_server"><a class="anchor" href="#using_application_code_on_git_server"></a>Using Application Code on Git Server</h3>
 <div class="paragraph">
 <p>OpenShift can work with any accessible Git repository. This could be GitHub,
 GitLab, or any other server that speaks Git. You can even register webhooks in
@@ -530,31 +536,22 @@ application code!</p>
 and located at the following URL:</p>
 </div>
 <div class="paragraph">
-<p><a href="http://gogs-%INFRA_PROJECT%.%CLUSTER_SUBDOMAIN%/%USERNAME%/nationalparks-js.git">Gogs Repository</a></p>
-</div>
-<div class="paragraph">
-<p>Your Gogs credentials are:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">username: %USERNAME%
-password: %GOGS_PASSWORD%</code></pre>
-</div>
+<p><a href="https://github.com/openshift-roadshow/nationalparks-js.git">Gogs Repository</a></p>
 </div>
 <div class="paragraph">
 <p>Later in the lab, we want you to make a code change and then rebuild your
-application. This is a fairly simple JavaScript application.</p>
+application. This is a fairly simple NodeJS application.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_build_the_code_on_openshift"><a class="anchor" href="#_build_the_code_on_openshift"></a>Build the Code on OpenShift</h3>
+<h3 id="build_code_on_openshift"><a class="anchor" href="#build_code_on_openshift"></a>Build the Code on OpenShift</h3>
 <div class="paragraph">
 <p>Similar to how we used <strong>+Add</strong> before with an existing image, we
 can do the same for specifying a source code repository. Since for this lab you
-have your own git repository, let&#8217;s use it with a simple JavaScript S2I image.</p>
+have your own git repository, let&#8217;s use it with a simple NodeJS S2I image.</p>
 </div>
 <div class="paragraph">
-<p>In the Developer Perspective, click <strong>+Add</strong> in the left navigation and then choose "From Git"</p>
+<p>In the <strong>Developer Perspective</strong>, click <strong>+Add</strong> in the left navigation and then choose <strong>From Git</strong>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -569,32 +566,47 @@ have your own git repository, let&#8217;s use it with a simple JavaScript S2I im
 </div>
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code>http://gogs-%INFRA_PROJECT%.%CLUSTER_SUBDOMAIN%/%USERNAME%/nationalparks.git</code></pre>
+<pre class="highlightjs highlight"><code>https://github.com/openshift-roadshow/nationalparks-js.git</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Select Node.js as your Builder Image.</p>
+<p>Select <strong>NodeJS</strong> as your Builder Image.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/nationalparks-import-from-git-url-builder.png" alt="Import from Git">
+<img src="_images/nationalparks-import-from-git-url-builder-js.png" alt="Import from Git">
 </div>
 </div>
-<div class="admonitionblock note">
+<div class="paragraph">
+<p>Scroll down to the <strong>General</strong> section. Select:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Application Name</strong> : workshop</p>
+</li>
+<li>
+<p><strong>Name</strong> : nationalparks</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In <strong>Resources</strong> section, select <strong>Deployment</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Inside <strong>Pipeline</strong> section, check <strong>Add pipeline</strong> box. This will create a Tekton Pipeline for us that we will use after in the Pipeline modules.</p>
+</div>
+<div class="admonitionblock tip">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-All of these builder images shown are made available via <strong>Templates</strong> and
-<strong>ImageStreams</strong>, which will be discussed in a later lab.
+Click "Show pipeline visualization" to preview the Pipeline inside Pipeline UI that we are going to use later on.
 </td>
 </tr>
 </table>
-</div>
-<div class="paragraph">
-<p>Scroll down to the <strong>General</strong> section. Select <code>workshop</code> as your application, and <code>nationalparks</code> as the name.</p>
 </div>
 <div class="paragraph">
 <p>Expand the Labels section and add 3 labels:</p>
@@ -617,7 +629,7 @@ All of these builder images shown are made available via <strong>Templates</stro
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/nationalparks-configure-service.png" alt="Runtimes">
+<img src="_images/nationalparks-configure-service-pipelines.png" alt="Runtimes">
 </div>
 </div>
 <div class="paragraph">
@@ -635,7 +647,7 @@ the application. You can see all of this happening in real time!</p>
 <div class="paragraph">
 <p>From the command line, you can also see the <strong>Builds</strong>:</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get builds</code></pre>
 </div>
@@ -643,7 +655,7 @@ the application. You can see all of this happening in real time!</p>
 <div class="paragraph">
 <p>You&#8217;ll see output like:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME              TYPE      FROM          STATUS     STARTED              DURATION
 nationalparks-1   Source    Git@b052ae6   Running    About a minute ago   1m2s</code></pre>
@@ -652,7 +664,7 @@ nationalparks-1   Source    Git@b052ae6   Running    About a minute ago   1m2s</
 <div class="paragraph">
 <p>You can also view the build logs with the following command:</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc logs -f builds/nationalparks-1</code></pre>
 </div>
@@ -666,14 +678,14 @@ nationalparks-1   Source    Git@b052ae6   Running    About a minute ago   1m2s</
 <p>The S2I process will push the resulting container image to the internal OpenShift registry</p>
 </li>
 <li>
-<p>The <strong>DeploymentConfiguration</strong> (DC) will detect that the image has changed, and this
+<p>The <strong>Deployment</strong> (D) will detect that the image has changed, and this
 will cause a new deployment to happen.</p>
 </li>
 <li>
-<p>A <strong>ReplicationController</strong> (RC) will be spawned for this new deployment.</p>
+<p>A <strong>ReplicaSet</strong> (RS) will be spawned for this new deployment.</p>
 </li>
 <li>
-<p>The RC will detect no <strong>Pods</strong> are running and will cause one to be deployed, as our default replica count is just 1.</p>
+<p>The RS will detect no <strong>Pods</strong> are running and will cause one to be deployed, as our default replica count is just 1.</p>
 </li>
 </ul>
 </div>
@@ -681,12 +693,12 @@ will cause a new deployment to happen.</p>
 <p>In the end, when issuing the <code>oc get pods</code> command, you will see that the build Pod
 has finished (exited) and that an application <strong>Pod</strong> is in a ready and running state:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                    READY     STATUS      RESTARTS   AGE
 nationalparks-1-tkid3   1/1       Running     3          2m
 nationalparks-1-build   0/1       Completed   0          3m
-parksmap-1-4hbtk        1/1       Running     0          2h</code></pre>
+parksmap-57df75c46d-xltcs        1/1       Running     0          2h</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -694,7 +706,7 @@ parksmap-1-4hbtk        1/1       Running     0          2h</code></pre>
 application this way, OpenShift also creates a <strong>Route</strong> for you. You can see the
 URL in the web console, or via the command line:</p>
 </div>
-<div class="listingblock execute-1">
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get routes</code></pre>
 </div>
@@ -702,11 +714,11 @@ URL in the web console, or via the command line:</p>
 <div class="paragraph">
 <p>Where you should see something like the following:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME            HOST/PORT                                                   PATH      SERVICES        PORT       TERMINATION
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME            HOST/PORT                                                   PATH      SERVICES        PORT       TERMINATION       WILDCARD
 nationalparks   nationalparks-workshop.%CLUSTER_SUBDOMAIN%             nationalparks   8080-tcp
-parksmap        parksmap-workshop.%CLUSTER_SUBDOMAIN%                  parksmap        8080-tcp</code></pre>
+parksmap        parksmap-workshop.%CLUSTER_SUBDOMAIN%                  parksmap        8080-tcp        edge        none</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -714,7 +726,7 @@ parksmap        parksmap-workshop.%CLUSTER_SUBDOMAIN%                  parksmap 
 </div>
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">&lt;a href="http://nationalparks-workshop.%CLUSTER_SUBDOMAIN%" class="bare"&gt;http://nationalparks-workshop.%CLUSTER_SUBDOMAIN%&lt;/a&gt;</code></pre>
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">http://nationalparks-workshop.%CLUSTER_SUBDOMAIN%</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -723,26 +735,12 @@ However, it can still be used with a browser. All backends that work with the pa
 frontend are required to implement a <code>/ws/info/</code> endpoint. To test, visit this URL in your browser:</p>
 </div>
 <div class="paragraph">
-<p><a href="http://nationalparks-workshop.%CLUSTER_SUBDOMAIN%/ws/info/">National Parks Info Page</a></p>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-The trailing slash is <strong>required</strong>.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>You will see a simple JSON string:</p>
+<p><a href="http://nationalparks-workshop.%CLUSTER_SUBDOMAIN%/ws/info/" class="params-link" target="_blank" rel="noopener">National Parks Info Page</a>
+You will see a simple JSON string:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{"id":"nationalparks-js","displayName":"National Parks (JS)","center":{"latitude":"47.039304","longitude":"14.505178"},"zoom":4}</code></pre>
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{"id":"nationalparks","displayName":"National Parks (JS)","center":{"latitude":47.039304,"longitude":14.505178},"zoom":4}</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -750,7 +748,7 @@ The trailing slash is <strong>required</strong>.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">This is a JavaScript application that performs 2D geo-spatial queries
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">This is a NodeJS application that performs 2D geo-spatial queries
 against a MongoDB database</code></pre>
 </div>
 </div>

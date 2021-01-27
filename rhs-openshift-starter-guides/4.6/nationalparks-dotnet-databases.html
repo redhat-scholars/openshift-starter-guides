@@ -3,10 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Permissions :: OpenShift Starter Guides</title>
-    <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.6/parksmap-permissions.html">
-    <link rel="prev" href="parksmap-logging.html">
-    <link rel="next" href="parksmap-rsh.html">
+    <title>Connecting to a Database :: OpenShift Starter Guides</title>
+    <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.6/nationalparks-dotnet-databases.html">
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../../_/css/site.css">
 <link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
@@ -195,18 +193,18 @@
   </li>
 </ul>
   </li>
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="parksmap-permissions.html">Permissions</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#grant_serviceaccount_view_permissions">Grant Service Account View Permissions</a>
+    <a class="nav-link" href="parksmap-permissions.html#grant_serviceaccount_view_permissions">Grant Service Account View Permissions</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#redeploy_application">Exercise: Redeploy Application</a>
+    <a class="nav-link" href="parksmap-permissions.html#redeploy_application">Exercise: Redeploy Application</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#grant_user_view_permissions">Exercise: Grant User View Permissions</a>
+    <a class="nav-link" href="parksmap-permissions.html#grant_user_view_permissions">Exercise: Grant User View Permissions</a>
   </li>
 </ul>
   </li>
@@ -433,91 +431,389 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">OpenShift Starter Guides</a></li>
-    <li><a href="parksmap-permissions.html">Permissions</a></li>
+    <li><a href="nationalparks-dotnet-databases.html">Connecting to a Database</a></li>
   </ul>
 </nav>
 <div class="page-versions">
   <button class="version-menu-toggle" title="Show other versions of page">4.6</button>
   <div class="version-menu">
-    <a class="version is-current" href="parksmap-permissions.html">4.6</a>
-    <a class="version" href="../4.5/parksmap-permissions.html">4.5</a>
+    <a class="version is-current" href="nationalparks-dotnet-databases.html">4.6</a>
+    <a class="version is-missing" href="../4.5/index.html">4.5</a>
   </div>
 </div>
-  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-starter-guides/edit/ocp-4.6/documentation/modules/ROOT/pages/parksmap-permissions.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-starter-guides/edit/ocp-4.6/documentation/modules/ROOT/pages/nationalparks-dotnet-databases.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Permissions</h1>
+<h1 class="page">Connecting to a Database</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Almost every interaction with an OpenShift environment that you can think of
-requires going through the OpenShift&#8217;s control plane API. All API interactions are both authenticated (AuthN - who are you?) and authorized (AuthZ - are you allowed to do what you are asking?).</p>
+<p>In this section we will deploy and connect a MongoDB database where the
+<code>nationalparks</code> application will store location information.</p>
 </div>
 <div class="paragraph">
-<p>In the log aggregation lab we saw that there was an
-error in reference to a <strong>Service Account</strong>.</p>
+<p>Finally, we will mark the <code>nationalparks</code> application as a backend for the map
+visualization tool, so that it can be dynamically discovered by the <code>parksmap</code>
+component using the OpenShift discovery mechanism and the map will be displayed
+automatically.</p>
 </div>
-<div class="paragraph">
-<p>As OpenShift is a declarative platform, some actions will be performed by the platform and not by the end user (when he or she issues a command). These actions are performed using a <strong>Service Account</strong> which is a special type of <code>user</code> that the platform will use internally.</p>
-</div>
-<div class="paragraph">
-<p>OpenShift automatically creates a few special service accounts in every project.
-The <strong>default</strong> service account is the one taking the responsibility of running the pods, and OpenShift uses and injects this service account into
-every pod that is launched. By changing the permissions for that service
-account, we can do interesting things.</p>
-</div>
-<div class="paragraph">
-<p>You can view current permissions in the web console, go to the Topology view in the Developer Perspective, click the <code>parksmap</code> entry, go to the <strong>Details</strong> tab, and then click the <strong>Namespace</strong>.</p>
-</div>
-<div class="imageblock">
+<div class="imageblock text-center">
 <div class="content">
-<img src="_images/parksmap-permissions-namespace.png" alt="Namespace">
-</div>
-</div>
-<div class="paragraph">
-<p>Then, select <strong>Role Bindings</strong> tab and filter by <strong>Namespace Role Binding</strong> so see all permissions for selected project.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/parksmap-permissions-membership.png" alt="Membership">
+<img src="_images/roadshow-app-architecture-nationalparks-2.png" alt="Application architecture" width="800">
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="grant_serviceaccount_view_permissions"><a class="anchor" href="#grant_serviceaccount_view_permissions"></a>Exercise: Grant Service Account View Permissions</h2>
+<h2 id="storage"><a class="anchor" href="#storage"></a>Background: Storage</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The parksmap application wants to talk to the OpenShift API to learn about other
-<strong>Pods</strong>, <strong>Services</strong>, and resources within the <strong>Project</strong>. You&#8217;ll soon learn why!</p>
+<p>Most useful applications are "stateful" or "dynamic" in some way, and this is
+usually achieved with a database or other data storage. In this lab we are
+going to add MongoDB to our <code>nationalparks</code> application and then rewire it to
+talk to the database using environment variables via a secret.</p>
+</div>
+<div class="paragraph">
+<p>We are going to use the MongoDB image that is included with OpenShift.</p>
+</div>
+<div class="paragraph">
+<p>By default, this will use <strong>EmptyDir</strong> for data storage, which means if the <strong>Pod</strong>
+disappears the data does as well. In a real application you would use
+OpenShift&#8217;s persistent storage mechanism to attach real-world storage (NFS,
+Ceph, EBS, iSCSI, etc) to the <strong>Pods</strong> to give them a persistent place to store their
+data.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="templates"><a class="anchor" href="#templates"></a>Background: Templates</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this module we will create MongoDB from a <strong>Template</strong>, which is useful mechanism in OpenShift to define parameters for certain values, such as
+DB username or password, that can be automatically generated by OpenShift at
+processing time.</p>
+</div>
+<div class="paragraph">
+<p>Administrators can load <strong>Templates</strong> into OpenShift and make them available to
+all users. Users can create <strong>Templates</strong> and load them
+into their own <strong>Projects</strong> for other users (with access) to share and use.</p>
+</div>
+<div class="paragraph">
+<p>The great thing about <strong>Templates</strong> is that they can speed up the deployment
+workflow for application development by providing a "recipe" of sorts that can
+be deployed with a single command.  Not only that, they can be loaded into
+OpenShift from an external URL, which will allow you to keep your templates in a
+version control system.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="create_mongodb_template"><a class="anchor" href="#create_mongodb_template"></a>Exercise: Create a MongoDB Template</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this step we will create a MongoDB template inside our project, so that is only visible to our user and we can access it from Developer Perspective to create a MongoDB instance.</p>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc project workshop</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f https://raw.githubusercontent.com/openshift-labs/starter-guides/ocp-4.6/mongodb-template.yaml -n workshop</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Then:</p>
+<p>What just happened? What did you just <code>create</code>? The item that we passed to the <code>create</code>
+command is a <strong>Template</strong>. <code>create</code> simply makes the template available in
+your <strong>Project</strong>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="deploy_mongodb"><a class="anchor" href="#deploy_mongodb"></a>Exercise: Deploy MongoDB</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As you&#8217;ve seen so far, the web console makes it very easy to deploy things onto
+OpenShift. When we deploy the database, we pass in some values for configuration.
+These values are used to set the username, password, and name of
+the database.</p>
+</div>
+<div class="paragraph">
+<p>The database image is built in a way that it will automatically configure itself
+using the supplied information (assuming there is no data already present in the
+persistent storage!). The image will ensure that:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A database exists with the specified name</p>
+</li>
+<li>
+<p>A user exists with the specified name</p>
+</li>
+<li>
+<p>The user can access the specified database with the specified password</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In the Developer Perspective in your <code>workshop</code> project,
+click <strong>+Add</strong> and then <strong>Database</strong>. In the Databases view, you can click <strong>Mongo</strong> to filter for just MongoDB.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Make sure to uncheck <strong>Operator Backed</strong> option from <strong>Type</strong> section
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-databases-catalog-databases.png" alt="Data Stores">
+</div>
+</div>
+<div class="paragraph">
+<p>Alternatively, you could type <code>mongodb</code> in the search box. Once you have drilled down to see MongoDB, find the <strong>MongoDB (Ephemeral)</strong> template and select it.  You will notice that there are multiple
+MongoDB templates available.  We do not need a database with persistent storage, so the ephemeral Mongo
+template is what you should choose.  Go ahead and select the ephemeral template and click the <strong>Instantiate Template</strong> button.</p>
+</div>
+<div class="paragraph">
+<p>When we performed the application build, there was no template. Rather, we selected the
+builder image directly and OpenShift presented only the standard build workflow.
+Now we are using a template - a preconfigured set of resources that includes
+parameters that can be customized. In our case, the parameters we are concerned
+with are&#8201;&#8212;&#8201;user, password, database, and
+admin password.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-databases-catalog-databases-mongodb-config.png" alt="MongoDB Deploy">
+</div>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Make sure you name your database service name <strong>mongodb-nationalparks</strong>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You can see that some of the fields say <strong>"generated if empty"</strong>. This is a
+feature of <strong>Templates</strong> in OpenShift. For
+now, be sure to use the following values in their respective fields:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Database Service Name</code> : <code>mongodb-nationalparks</code></p>
+</li>
+<li>
+<p><code>MongoDB Connection Username</code> : <code>mongodb</code></p>
+</li>
+<li>
+<p><code>MongoDB Connection Password</code> : <code>mongodb</code></p>
+</li>
+<li>
+<p><code>MongoDB Database Name</code>: <code>mongodb</code></p>
+</li>
+<li>
+<p><code>MongoDB Admin Password</code> : <code>mongodb</code></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Make sure to have configured the <strong><code>MongoDB Database Name</code></strong> parameter with the appropriate value as by default it will already have a value of <code>sampledb</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Once you have entered in the above information, click on <strong>Create</strong> to go to the next step which will allow us to add a binding.</p>
+</div>
+<div class="paragraph">
+<p>From left-side menu, click to <strong>Secrets</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-databases-list-secrets.png" alt="List Secrets">
+</div>
+</div>
+<div class="paragraph">
+<p>Click the secret name listed that we will use for <strong>Parameters</strong>. The secret can be used in other components, such as the <code>nationalparks</code> backend, to authenticate to the database.</p>
+</div>
+<div class="paragraph">
+<p>Now that the connection and authentication information stored in a secret in our project, we need to add it to the <code>nationalparks</code> backend. Click the <strong>Add Secret to Workload</strong> button.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-databases-binding-view-secret.png" alt="National Parks Binding">
+</div>
+</div>
+<div class="paragraph">
+<p>Select the <code>nationalparks</code> workload and click <strong>Save</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-databases-binding-add-binding-to-nationalparks.png" alt="Add binding to application">
+</div>
+</div>
+<div class="paragraph">
+<p>This change in configuration will trigger a new deployment of the <code>nationalparks</code> application with the environment variables properly injected.</p>
+</div>
+<div class="paragraph">
+<p>Back in the <strong>Topology</strong> view, click and drag with Shift key the <code>mongodb-nationalparks</code> component into the light gray area that denotes the <code>workshop</code> application, so that all three components are contained in it.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-databases-add-mongodb-to-workshop-app-dotnet.png" alt="Add mongodb to the workshop app">
+</div>
+</div>
+<div class="paragraph">
+<p>Next, let&#8217;s fix the labels assigned to the <code>mongodb-nationalparks</code> deployment. Currently, we cannot set labels when using the database template from the catalog, so we will fix these labels manually.</p>
+</div>
+<div class="paragraph">
+<p>Like before, we&#8217;ll add 3 labels:</p>
+</div>
+<div class="paragraph">
+<p>The name of the Application group:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code>app=workshop</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Next the name of this deployment.</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code>component=nationalparks</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And finally, the role this component plays in the overall application.</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code>role=database</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Execute the following command:</p>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc policy add-role-to-user view -z default</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc label dc/mongodb-nationalparks svc/mongodb-nationalparks app=workshop component=nationalparks role=database --overwrite</code></pre>
 </div>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="exploring_openshift_magic"><a class="anchor" href="#exploring_openshift_magic"></a>Exercise: Exploring OpenShift Magic</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>The <code>oc policy</code> command above is giving a defined <em>role</em> (<code>view</code>) to a user. But
-we are using a special flag, <code>-z</code>. What does this flag do? From the <code>-h</code> output:</p>
+<p>As soon as we attached the Secret to the <strong>Deployment</strong>, some
+magic happened. OpenShift decided that this was a significant enough change to
+warrant updating the internal version number of the <strong>ReplicaSet</strong>. You
+can verify this by looking at the output of <code>oc get rs</code>:</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">-z, --serviceaccount=[]: service account in the current namespace to use as a user</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                       DESIRED   CURRENT   READY   AGE
+nationalparks-58bd4758fc   0         0         0       4m58s
+nationalparks-7445576cd9   0         0         0       6m42s
+nationalparks-789c6bc4f4   1         1         1       41s
+parksmap-57df75c46d        1         1         1       8m24s
+parksmap-65c4f8b676        0         0         0       18m</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>-z</code> syntax is a special one that saves us from having to type out the
-entire string, which, in this case, is
-<code>system:serviceaccount:workshop:default</code>. It&#8217;s a nifty shortcut.</p>
+<p>We see that the DESIRED and CURRENT number of instances for the current deployment. The desired and current number of the other instances are 0.
+This means that OpenShift has gracefully torn down our "old" application and
+stood up a "new" instance.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="data_data_everywhere"><a class="anchor" href="#data_data_everywhere"></a>Exercise: Data, Data, Everywhere</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now that we have a database deployed, we can again visit the <code>nationalparks</code> web
+service to query for data:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code>http://nationalparks-workshop.%CLUSTER_SUBDOMAIN%/ws/data/all</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And the result?</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">[]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Where&#8217;s the data? Think about the process you went through. You deployed the
+application and then deployed the database. Nothing actually loaded anything
+<strong>INTO</strong> the database, though.</p>
+</div>
+<div class="paragraph">
+<p>The application provides an endpoint to do just that:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code>http://nationalparks-workshop.%CLUSTER_SUBDOMAIN%/ws/data/load</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And the result?</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Items inserted in database: 2893</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you then go back to <code>/ws/data/all</code> you will see tons of JSON data now.
+That&#8217;s great. Our parks map should finally work!</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+There are some errors reported with browsers like Firefox 54 that don&#8217;t properly parse the resulting JSON. It&#8217;s
+a browser problem, and the application is working properly.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code>https://parksmap-workshop.%CLUSTER_SUBDOMAIN%</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Hmm&#8230;&#8203; There&#8217;s just one thing. The main map <strong>STILL</strong> isn&#8217;t displaying the parks.
+That&#8217;s because the front end parks map only tries to talk to services that have
+the right <strong>Label</strong>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -527,101 +823,128 @@ entire string, which, in this case, is
 </td>
 <td class="content">
 <div class="paragraph">
-<p>The <code>-z</code> flag will only work for service accounts in the <strong>current</strong> project.
-If you&#8217;re referring to a service account in a different project, use the `-n &lt;project&gt;`switch.</p>
+<p>You are probably wondering how the database connection magically started
+working? When deploying applications to OpenShift, it is always best to use
+environment variables, secrets, or configMaps to define connections to dependent systems.  This allows
+for application portability across different environments.  The source file that
+performs the connection as well as creates the database schema can be viewed
+here:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code>http://www.github.com/openshift-roadshow/nationalparks/blob/master/src/main/java/com/openshift/evg/roadshow/parks/db/MongoDBConnection.java#L44-l48</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In short summary: By referring to bindings to connect to services
+(like databases), it can be trivial to promote applications throughout different
+lifecycle environments on OpenShift without having to modify application code.</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>Now that the <code>default</code> <strong>Service Account</strong> now has <strong>view</strong> access, so now it can query the API to see what resources are within the <strong>Project</strong>. This also has the added benefit of suppressing the error message! Although, in reality, we fixed the application.</p>
-</div>
-<div class="paragraph">
-<p>Another way you could have done the same is by using the OpenShift console. Once you&#8217;re on the
-<strong>Workloads &#8594; Deployments</strong> page, click on the <strong>Namespace</strong>, then <strong>Role Bindings</strong> and then the <strong>Create Binding</strong> button.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/parksmap-permissions-membership-serviceaccount-list.png" alt="Service account list">
-</div>
-</div>
-<div class="paragraph">
-<p>Select <strong>view</strong> for the Role Binding Name <strong>workshop</strong> for the Namespace, <strong>view</strong> for the Role Name, <strong>Service Account</strong> for the Subject, <strong>workshop</strong> for the Subject Namespace, and <strong>default</strong> for the Subject Name.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/parksmap-permissions-membership-serviceaccount-edit.png" alt="Service account edit">
-</div>
-</div>
-<div class="paragraph">
-<p>Once you&#8217;re finished editing permissions, click on the <strong>Create</strong> button.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/parksmap-permissions-membership-serviceaccount-done.png" alt="Service account changed">
-</div>
-</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="redeploy_application"><a class="anchor" href="#redeploy_application"></a>Exercise: Redeploy Application</h2>
+<h2 id="working_with_labels"><a class="anchor" href="#working_with_labels"></a>Exercise: Working With Labels</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>We explored how a <strong>Label</strong> is just a key=value pair earlier when looking at
+<strong>Services</strong> and <strong>Routes</strong> and <strong>Selectors</strong>. In general, a <strong>Label</strong> is simply an
+arbitrary key=value pair. It could be anything.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>pizza=pepperoni</code></p>
+</li>
+<li>
+<p><code>pet=dog</code></p>
+</li>
+<li>
+<p><code>openshift=awesome</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In the case of the parks map, the application is actually querying the OpenShift
+API and asking about the <strong>Routes</strong> and <strong>Services</strong> in the project. If any of them have a
+<strong>Label</strong> that is <code>type=parksmap-backend</code>, the application knows to interrogate
+the endpoints to look for map data.
+You can see the code that does this
+<a href="https://github.com/openshift-roadshow/parksmap-web/blob/latest/src/main/java/com/openshift/evg/roadshow/rest/RouteWatcher.java#L20">here</a>.</p>
+</div>
+<div class="paragraph">
+<p>Fortunately, the command line provides a convenient way for us to manipulate
+labels. <code>describe</code> the <code>nationalparks</code> service:</p>
+</div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc rollout restart deployment/parksmap</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc describe route nationalparks</code></pre>
+</div>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Name:                   nationalparks
+Namespace:              workshop
+Created:                2 hours ago
+Labels:                 app=workshop
+                        app.kubernetes.io/component=nationalparks
+                        app.kubernetes.io/instance=nationalparks
+                        app.kubernetes.io/name=dotnet
+                        app.kubernetes.io/part-of=workshop
+                        app.openshift.io/runtime=dotnet
+                        app.openshift.io/runtime-version=3.1
+                        component=nationalparks
+                        role=backend
+Annotations:            openshift.io/host.generated=true
+Requested Host:         nationalparks-workshop.%CLUSTER_SUBDOMAIN%
+                        exposed on router router 2 hours ago
+Path:                   &lt;none&gt;
+TLS Termination:        &lt;none&gt;
+Insecure Policy:        &lt;none&gt;
+Endpoint Port:          8080-tcp
+
+Service:                nationalparks
+Weight:                 100 (100%)
+Endpoints:              10.1.9.8:8080</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>A new deployment is immediately started. Return to Topology view and click the <code>parksmap</code> entry again to watch it happen. You might not be fast enough! But it will be reflected in the <strong>ReplicaSet</strong> number.</p>
+<p>You see that it already has some labels. Now, use <code>oc label</code>:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc label route nationalparks type=parksmap-backend</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You will see something like:</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">route.route.openshift.io/nationalparks labeled</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you check your browser now:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code>https://parksmap-workshop.%CLUSTER_SUBDOMAIN%/</code></pre>
+</div>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/parksmap-permissions-redeployed.png" alt="Application deployed">
+<img src="_images/nationalparks-databases-new-parks.png" alt="MongoDB">
 </div>
 </div>
 <div class="paragraph">
-<p>If you look at the logs for the application now, you should see no errors.  That&#8217;s great.</p>
+<p>You&#8217;ll notice that the parks suddenly are showing up. That&#8217;s really cool!</p>
 </div>
 </div>
 </div>
-<div class="sect1">
-<h2 id="grant_user_view_permissions"><a class="anchor" href="#grant_user_view_permissions"></a>(Optional) Exercise: Grant User View Permissions</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>If you create a project, you are that project&#8217;s administrator. This means that
-you can grant access to other users, too. If you like, give your neighbor view
-access to your project using the following command:</p>
-</div>
-<div class="admonitionblock caution">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-caution" title="Caution"></i>
-</td>
-<td class="content">
-In the following command(s), replace <code>workshop</code> with the user name of the person to whom you want to grant access.
-</td>
-</tr>
-</table>
-</div>
-<div class="listingblock console-input">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc policy add-role-to-user view workshop</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Have them go to the project view by clicking the <strong>Projects</strong> button and verify
-that they can see your project and its resources. This type of arrangement (view
-but not edit) might be ideal for a developer getting visibility into a
-production application&#8217;s project.</p>
-</div>
-</div>
-</div>
-<nav class="pagination">
-  <span class="prev"><a href="parksmap-logging.html" class="query-params-link">Logging</a></span>
-  <span class="next"><a href="parksmap-rsh.html" class="query-params-link">Connecting to a Container</a></span>
-</nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>

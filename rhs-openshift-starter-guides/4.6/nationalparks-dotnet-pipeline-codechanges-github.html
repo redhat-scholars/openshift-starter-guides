@@ -3,10 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Parksmap Architecture :: OpenShift Starter Guides</title>
-    <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.6/common-parksmap-architecture.html">
-    <link rel="prev" href="projects.html">
-    <link rel="next" href="parksmap-container-image.html">
+    <title>Automation with Pipelines :: OpenShift Starter Guides</title>
+    <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.6/nationalparks-dotnet-pipeline-codechanges-github.html">
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../../_/css/site.css">
 <link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
@@ -126,7 +124,7 @@
   </li>
 </ul>
   </li>
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="common-parksmap-architecture.html">Parksmap Architecture</a>
   </li>
   <li class="nav-item" data-depth="1">
@@ -433,55 +431,330 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">OpenShift Starter Guides</a></li>
-    <li><a href="common-parksmap-architecture.html">Parksmap Architecture</a></li>
+    <li><a href="nationalparks-dotnet-pipeline-codechanges-github.html">Automation with Pipelines</a></li>
   </ul>
 </nav>
 <div class="page-versions">
   <button class="version-menu-toggle" title="Show other versions of page">4.6</button>
   <div class="version-menu">
-    <a class="version is-current" href="common-parksmap-architecture.html">4.6</a>
-    <a class="version" href="../4.5/common-parksmap-architecture.html">4.5</a>
+    <a class="version is-current" href="nationalparks-dotnet-pipeline-codechanges-github.html">4.6</a>
+    <a class="version is-missing" href="../4.5/index.html">4.5</a>
   </div>
 </div>
-  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-starter-guides/edit/ocp-4.6/documentation/modules/ROOT/pages/common-parksmap-architecture.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-starter-guides/edit/ocp-4.6/documentation/modules/ROOT/pages/nationalparks-dotnet-pipeline-codechanges-github.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Parksmap Architecture</h1>
+<h1 class="page">Automation with Pipelines</h1>
+<div class="sect1">
+<h2 id="webhooks"><a class="anchor" href="#webhooks"></a>Background: Web Hooks</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>This lab introduces you to the architecture of the ParksMap application used throughout this workshop, to get a better understanding of the things you&#8217;ll be doing from a developer perspective. ParksMap is a polyglot geo-spatial data visualization application built using the microservices architecture and is composed of a set of services which are developed using different programming languages and frameworks.</p>
+<p>Most Git repository servers support the concept of web hooks&#8201;&#8212;&#8201;calling to an
+external source via HTTP(S) when a change in the code repository happens.
+OpenShift provides an API endpoint that supports receiving hooks from
+remote systems in order to trigger builds. By pointing the code repository&#8217;s
+hook at the OpenShift Pipelines resources, automated code/build/deploy pipelines can be
+achieved.</p>
 </div>
-<div class="imageblock text-center">
+</div>
+</div>
+<div class="sect1">
+<h2 id="adding_triggers_to_your_pipeline"><a class="anchor" href="#adding_triggers_to_your_pipeline"></a>Adding Triggers to your Pipeline</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Tekton <strong>Triggers</strong> enable us to configure Pipelines to respond to external events (Git push events, pull requests etc) such as Web Hooks.</p>
+</div>
+<div class="paragraph">
+<p>Adding triggering support requires the creation of a <code>TriggerTemplate</code>, <code>TriggerBinding</code>, and an <code>EventListener</code> in our project.</p>
+</div>
+<div class="imageblock">
 <div class="content">
-<img src="_images/roadshow-app-architecture.png" alt="Application architecture" width="800">
+<img src="_images/devops-pipeline-triggers.png" alt="Triggers">
 </div>
 </div>
 <div class="paragraph">
-<p>The main service is a web application which has a server-side component in charge of aggregating the geo-spatial APIs provided by multiple independent backend services and a client-side component in JavaScript that is responsible for visualizing the geo-spatial data on the map. The client-side component which runs in your browser communicates with the server-side via WebSockets protocol in order to update the map in real-time.</p>
-</div>
-<div class="paragraph">
-<p>There will be a set of independent backend services deployed that will provide different mapping and geo-spatial information. The set of available backend services that provide geo-spatial information are:</p>
+<p>Let&#8217;s see each component in detail:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>WorldWide National Parks</p>
+<p><strong>TriggerTemplate</strong>: a trigger template is a template for newly created resources. It supports parameters to create specific <code>PipelineResources</code> and <code>PipelineRuns</code>.</p>
 </li>
 <li>
-<p>Major League Baseball Stadiums in North America</p>
+<p><strong>TriggerBinding</strong>: validates events and extracts payload fields</p>
+</li>
+<li>
+<p><strong>EventListener</strong>: connects <code>TriggerBindings</code> and <code>TriggerTemplates</code> into an addressable endpoint (the event sink). It uses the extracted event parameters from each TriggerBinding (and any supplied static parameters) to create the resources specified in the corresponding TriggerTemplate. It also optionally allows an external service to pre-process the event payload via the interceptor field.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The original source code for this application is located <a href="https://github.com/openshift-roadshow/">here</a>.</p>
+<p>Now let&#8217;s create them all together for our Pipeline:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-triggers-all.yaml -n workshop</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>The server-side component of the ParksMap web application acts as a communication gateway to all the available backends. These backends will be dynamically discovered by using service discovery mechanisms provided by OpenShift which will be discussed in more details in the following labs.</p>
+<p>This will create a new Pod with a Route that we can use to setup our Webhook on GitHub to trigger the automatic start of the Pipeline.</p>
 </div>
-<nav class="pagination">
-  <span class="prev"><a href="projects.html" class="query-params-link">Projects</a></span>
-  <span class="next"><a href="parksmap-container-image.html" class="query-params-link">Parksmap App</a></span>
-</nav>
+<div class="paragraph">
+<p>From left side menu, click on <strong>Topology</strong> to verify if a new Deployment <strong>el-nationalparks</strong> for the <code>EventListener</code> has ben created:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devops-pipeline-triggers-eventlistener.png" alt="EventListener created">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="fork_repository_from_GitHub"><a class="anchor" href="#fork_repository_from_GitHub"></a>Exercise: Fork NationalParks repository from GitHub</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A <a href="https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo" target="_blank" rel="noopener">fork</a> is a copy of a repository. Forking a repository allows you to freely experiment with changes without affecting the original project.</p>
+</div>
+<div class="paragraph">
+<p>In this step we will fork the original <code>nationalparks</code> repository to apply our changes and automatically trigger the Pipeline through a <a href="https://docs.github.com/en/free-pro-team@latest/developers/webhooks-and-events/about-webhooks" target="_blank" rel="noopener">GitHub Webhook</a> that we&#8217;re going to configure.</p>
+</div>
+<div class="paragraph">
+<p>Go to <a href="https://github.com/openshift-roadshow/nationalparks" target="_blank" rel="noopener">Nationalparks</a> repository. From top-right side, click to <strong>Fork</strong> to start forking it into your account.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-codechanges-github-fork-1.png" alt="Fork Repository">
+</div>
+</div>
+<div class="paragraph">
+<p>Select your account, and click <strong>Fork</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-codechanges-github-fork-2.png" alt="Fork in progress">
+</div>
+</div>
+<div class="paragraph">
+<p>Your repository is forked now, we can start adding our automation to that.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configuring_github_webhooks"><a class="anchor" href="#configuring_github_webhooks"></a>Exercise: Configuring GitHub Web Hooks</h2>
+<div class="sectionbody">
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset1_ocp"></a>OCP</p>
+</li>
+<li>
+<p><a id="tabset1_crc"></a>CRC</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset1_ocp">
+<div class="paragraph">
+<p>From Topology, click to <code>el-nationalparks</code> Deployment, go into <strong>Routes</strong> section and and copy the <strong>el-nationparks</strong> Route URL.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devops-pipeline-triggers-route.png" alt="EventListener created">
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_crc">
+<div class="paragraph">
+<p>When using <a href="https://developers.redhat.com/products/codeready-containers/overview" target="_blank" rel="noopener">CRC</a>, your OpenShift cluster is running in your computer and it is not externally accessible. In order to let GitHub trigger our Pipeline via a Web Hook, we can use <a href="https://ngrok.com" target="_blank" rel="noopener">Ngrok</a>, an online service that exposes local servers to public internet over secure tunnels.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s use a template to launch an Ngrok instance inside our project to link to our Tekton Eventlistener <code>el-nationalparks</code>:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc new-app -f https://raw.githubusercontent.com/csrwng/ngrok/master/openshift/ngrok-template.yaml -p HOST=el-nationalparks -p PORT=8080 -n workshop</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see an output like this:</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">--&gt; Deploying template "workshop/ngrok" for "https://raw.githubusercontent.com/csrwng/ngrok/master/openshift/ngrok-template.yaml" to project workshop
+
+     * With parameters:
+        * Host=el-nationalparks
+        * Port=8080
+
+--&gt; Creating resources ...
+    service "ngrok" created
+    deploymentconfig.apps.openshift.io "ngrok" created
+    route.route.openshift.io "ngrok" created
+    imagestream.image.openshift.io "ngrok" created
+--&gt; Success
+    Access your application via route 'ngrok-workshop.%CLUSTER_SUBDOMAIN%'
+    Run 'oc status' to view your app.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Get the Ngrok Route URL:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get route ngrok -n workshop</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Open it in the browser to get the Ngrok tunnel URL that we can use and copy the HTTP URL you see in the webpage as shown below, this will be the one we will use to configure the Github Webhook.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devops-pipeline-triggers-ngrok.png" alt="Ngrok tunnels">
+</div>
+</div>
+<div class="paragraph">
+<p>Verify that it is working, when opening in the browser you should get the response from the <strong>EventListener</strong> we are exposing through an Ngrok tunnel:</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">{"eventListener":"nationalparks","namespace":"workshop","eventID":"vzkx5"}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Once you have the URL copied to your clipboard, navigate to the code repository fork that you have on GitHub.</p>
+</div>
+<div class="paragraph">
+<p>From your fork page top-right menu, click <strong>Settings</strong>. Then from result left-side menu, click <strong>Webhook</strong>, then from right side click <strong>Add webhooks</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-codechanges-github-webhook-settings.png" alt="Add Webhook">
+</div>
+</div>
+<div class="paragraph">
+<p>In the next screen, paste your link into the "Payload URL" field. You can leave the
+secret token field blank&#8201;&#8212;&#8201;the secret is already in the URL and does not need
+to be in the payload.</p>
+</div>
+<div class="paragraph">
+<p>Change the <code>Content Type</code> to <code>application/json</code>.</p>
+</div>
+<div class="paragraph">
+<p>Finally, click on <strong>Add Webhook</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-codechanges-github-add-webhook.png" alt="Webhook">
+</div>
+</div>
+<div class="paragraph">
+<p>Boom! From now on, every time you commit new source code to your GitHub
+repository, a new build and deploy will occur inside of OpenShift.  Let&#8217;s try
+this out.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="using_github_webhooks"><a class="anchor" href="#using_github_webhooks"></a>Exercise: Using GitHub Web Hooks</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Click the <strong>Code</strong> tab in GitHub. This is GitHub&#8217;s repository view.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Make sure that the drop-down menu at the upper right is set for
+the <strong><code>master</code></strong> branch. Navigate to the
+following path:
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Controllers/</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then click on the <code>ParksController.cs</code> file.</p>
+</div>
+<div class="paragraph">
+<p>Once you have the file on the screen, click the edit button in the top right
+hand corner as shown here:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-codechanges-github-change-code.png" alt="Webhook">
+</div>
+</div>
+<div class="paragraph">
+<p>Change line number 45:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">displayName = "National Parks (C#)",</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">displayName = "Amazing National Parks (C#)",</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Click on <strong>Commit changes</strong> at the bottom of the screen. Feel free to enter a commit message.</p>
+</div>
+<div class="paragraph">
+<p>Once you have committed your changes, a new <strong>PipelineRun</strong> should almost instantaneously be
+triggered in OpenShift. Click <strong>Pipeline</strong> in the left navigation menu then <code>nationalparks-pipeline</code>. You should see a new one running:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-codechanges-pipeline-running.png" alt="Webhook">
+</div>
+</div>
+<div class="paragraph">
+<p>or run the following command to verify:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pipelineruns</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once the build and deploy has finished, verify your new image was automatically deployed by viewing the application in your browser:</p>
+</div>
+<div class="paragraph">
+<p><a href="http://nationalparks-workshop.%CLUSTER_SUBDOMAIN%/ws/info/" class="params-link" target="_blank" rel="noopener">National Parks Info Page</a></p>
+</div>
+<div class="paragraph">
+<p>You should now see the new name you have set in the JSON string returned.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+To see this in the map&#8217;s legend itself, you will need to scale down your parksmap to 0, then back up to 1 to force the app to refresh its cache.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>

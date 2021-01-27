@@ -3,10 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Parksmap Architecture :: OpenShift Starter Guides</title>
-    <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.6/common-parksmap-architecture.html">
-    <link rel="prev" href="projects.html">
-    <link rel="next" href="parksmap-container-image.html">
+    <title>Continuous Integration and Pipelines :: OpenShift Starter Guides</title>
+    <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.6/nationalparks-python-pipeline.html">
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../../_/css/site.css">
 <link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
@@ -126,7 +124,7 @@
   </li>
 </ul>
   </li>
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="common-parksmap-architecture.html">Parksmap Architecture</a>
   </li>
   <li class="nav-item" data-depth="1">
@@ -433,55 +431,383 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">OpenShift Starter Guides</a></li>
-    <li><a href="common-parksmap-architecture.html">Parksmap Architecture</a></li>
+    <li><a href="nationalparks-python-pipeline.html">Continuous Integration and Pipelines</a></li>
   </ul>
 </nav>
 <div class="page-versions">
   <button class="version-menu-toggle" title="Show other versions of page">4.6</button>
   <div class="version-menu">
-    <a class="version is-current" href="common-parksmap-architecture.html">4.6</a>
-    <a class="version" href="../4.5/common-parksmap-architecture.html">4.5</a>
+    <a class="version is-current" href="nationalparks-python-pipeline.html">4.6</a>
+    <a class="version is-missing" href="../4.5/index.html">4.5</a>
   </div>
 </div>
-  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-starter-guides/edit/ocp-4.6/documentation/modules/ROOT/pages/common-parksmap-architecture.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-starter-guides/edit/ocp-4.6/documentation/modules/ROOT/pages/nationalparks-python-pipeline.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Parksmap Architecture</h1>
+<h1 class="page">Continuous Integration and Pipelines</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p>This lab introduces you to the architecture of the ParksMap application used throughout this workshop, to get a better understanding of the things you&#8217;ll be doing from a developer perspective. ParksMap is a polyglot geo-spatial data visualization application built using the microservices architecture and is composed of a set of services which are developed using different programming languages and frameworks.</p>
+<p>In this lab you will learn about pipelines and how to configure a pipeline in OpenShift so
+that it will take care of the application lifecycle.</p>
 </div>
-<div class="imageblock text-center">
+<div class="paragraph">
+<p>A continuous delivery (CD) pipeline is an automated expression of your process for getting software
+from version control right through to your users and customers.
+Every change to your software (committed in source control) goes through a complex process on
+its way to being released. This process involves building the software in a reliable and repeatable
+manner, as well as progressing the built software (called a "build") through multiple stages of
+testing and deployment.</p>
+</div>
+<div class="paragraph">
+<p>OpenShift Pipelines is a cloud-native, continuous integration and delivery (CI/CD) solution for building pipelines using <a href="https://tekton.dev/">Tekton</a>. Tekton is a flexible, Kubernetes-native, open-source CI/CD framework that enables automating deployments across multiple platforms (Kubernetes, serverless, VMs, etc) by abstracting away the underlying details.</p>
+</div>
+<div class="imageblock">
 <div class="content">
-<img src="_images/roadshow-app-architecture.png" alt="Application architecture" width="800">
+<img src="_images/devops-pipeline-flow.png" alt="Pipelines">
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="understanding_tekton"><a class="anchor" href="#understanding_tekton"></a>Understanding Tekton</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Tekton defines a number of <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">Kubernetes custom resources</a> as building blocks in order to standardize pipeline concepts and provide a terminology that is consistent across CI/CD solutions.</p>
 </div>
 <div class="paragraph">
-<p>The main service is a web application which has a server-side component in charge of aggregating the geo-spatial APIs provided by multiple independent backend services and a client-side component in JavaScript that is responsible for visualizing the geo-spatial data on the map. The client-side component which runs in your browser communicates with the server-side via WebSockets protocol in order to update the map in real-time.</p>
-</div>
-<div class="paragraph">
-<p>There will be a set of independent backend services deployed that will provide different mapping and geo-spatial information. The set of available backend services that provide geo-spatial information are:</p>
+<p>The custom resources needed to define a pipeline are listed below:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>WorldWide National Parks</p>
+<p><code>Task</code>: a reusable, loosely coupled number of steps that perform a specific task (e.g. building a container image)</p>
 </li>
 <li>
-<p>Major League Baseball Stadiums in North America</p>
+<p><code>Pipeline</code>: the definition of the pipeline and the <code>Tasks</code> that it should perform</p>
+</li>
+<li>
+<p><code>TaskRun</code>: the execution and result of running an instance of task</p>
+</li>
+<li>
+<p><code>PipelineRun</code>: the execution and result of running an instance of pipeline, which includes a number of <code>TaskRuns</code></p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/tekton-architecture.png" alt="Tekton Architecture">
+</div>
+</div>
+<div class="paragraph">
+<p>In short, in order to create a pipeline, one does the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Create custom or install <a href="https://github.com/tektoncd/catalog">existing</a> reusable <code>Tasks</code></p>
+</li>
+<li>
+<p>Create a <code>Pipeline</code> and <code>PipelineResources</code> to define your application&#8217;s delivery pipeline</p>
+</li>
+<li>
+<p>Create a <code>PersistentVolumeClaim</code> to provide the volume/filesystem for pipeline execution or provide a <code>VolumeClaimTemplate</code> which creates a <code>PersistentVolumeClaim</code></p>
+</li>
+<li>
+<p>Create a <code>PipelineRun</code> to instantiate and invoke the pipeline</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The original source code for this application is located <a href="https://github.com/openshift-roadshow/">here</a>.</p>
+<p>For further details on pipeline concepts, refer to the <a href="https://github.com/tektoncd/pipeline/tree/master/docs#learn-more">Tekton documentation</a> that provides an excellent guide for understanding various parameters and attributes available for defining pipelines.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="explore_pipeline"><a class="anchor" href="#explore_pipeline"></a>Explore your Pipeline</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As pipelines provide the ability to promote applications between different stages of the delivery cycle, Tekton, which is our Continuous Integration server that will execute our pipelines, will be deployed on a project with a Continuous Integration role. Pipelines executed in this project will have permissions to interact with all the projects modeling the different stages of our delivery cycle.</p>
 </div>
 <div class="paragraph">
-<p>The server-side component of the ParksMap web application acts as a communication gateway to all the available backends. These backends will be dynamically discovered by using service discovery mechanisms provided by OpenShift which will be discussed in more details in the following labs.</p>
+<p>For this example, we&#8217;re going to deploy our pipeline that we created automatically from Developer Console together with <code>nationalparks</code> backend.</p>
 </div>
-<nav class="pagination">
-  <span class="prev"><a href="projects.html" class="query-params-link">Projects</a></span>
-  <span class="next"><a href="parksmap-container-image.html" class="query-params-link">Parksmap App</a></span>
-</nav>
+<div class="paragraph">
+<p>Verify Tasks already available in the OpenShift cluster (ClusterTasks):</p>
+</div>
+<div class="listingblock execute-1">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">oc get clustertasks -n {{project_namespace}}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see something similar:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                 AGE
+....
+s2i-python-3               4h58m
+s2i-python-3-pr            4h58m
+....</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Verify the Pipeline we created:</p>
+</div>
+<div class="listingblock execute-1">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">oc get pipelines -n {{project_namespace}}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see something like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                     AGE
+nationalparks   5m</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now let&#8217;s review our Tekton Pipeline:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">---
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: nationalparks
+spec:
+  params:
+    - default: nationalparks
+      name: APP_NAME
+      type: string
+    - default: &gt;-
+        https://github.com/openshift-roadshow/nationalparks-py.git
+      name: GIT_REPO
+      type: string
+    - default: master
+      name: GIT_REVISION
+      type: string
+    - default: 'image-registry.openshift-image-registry.svc:5000/user1/nationalparks'
+      name: IMAGE_NAME
+      type: string
+    - default: .
+      name: PATH_CONTEXT
+      type: string
+    - default: '1'
+      name: MINOR_VERSION
+      type: string
+  tasks:
+    - name: fetch-repository
+      params:
+        - name: url
+          value: $(params.GIT_REPO)
+        - name: revision
+          value: $(params.GIT_REVISION)
+        - name: subdirectory
+          value: ''
+        - name: deleteExisting
+          value: 'true'
+      taskRef:
+        kind: ClusterTask
+        name: git-clone
+      workspaces:
+        - name: output
+          workspace: workspace
+    - name: build
+      params:
+        - name: IMAGE
+          value: $(params.IMAGE_NAME)
+        - name: TLSVERIFY
+          value: 'false'
+        - name: PATH_CONTEXT
+          value: $(params.PATH_CONTEXT)
+        - name: MINOR_VERSION
+          value: $(params.MINOR_VERSION)
+      runAfter:
+        - fetch-repository
+      taskRef:
+        kind: ClusterTask
+        name: s2i-python-3
+      workspaces:
+        - name: source
+          workspace: workspace
+    - name: deploy
+      params:
+        - name: SCRIPT
+          value: kubectl $@
+        - name: ARGS
+          value:
+            - rollout
+            - status
+            - deploy/$(params.APP_NAME)
+      runAfter:
+        - build
+      taskRef:
+        kind: ClusterTask
+        name: openshift-client
+  workspaces:
+    - name: workspace</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A <code>Pipeline</code> is a user-defined model of a CD pipeline. A Pipeline’s code defines your entire build process, which typically includes stages for building an application, testing it and then delivering it.</p>
+</div>
+<div class="paragraph">
+<p>A <code>Task</code> and a <code>ClusterTask</code> contain some step to be executed. <strong>ClusterTasks</strong> are available to all user within a cluster where OpenShift Pipelines has been installed, while <strong>Tasks</strong> can be custom.</p>
+</div>
+<div class="paragraph">
+<p>This pipeline has 3 Tasks defined:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>fetch-repository</strong>: this is a <code>ClusterTask</code> that will clone our source repository for nationalparks and store it to a <code>Workspace</code> <code>app-source</code> which will use the PVC created for it <code>app-source-workspace</code></p>
+</li>
+<li>
+<p><strong>build</strong>: will build and test our Python application, generate and push a container image automatically with compiled binaries inside OpenShift Container Registry.</p>
+</li>
+<li>
+<p><strong>deploy</strong>: it will deploy the created image on OpenShift using the Deployment named <code>nationalparks</code> we created in the previous lab.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>From left-side menu, click on <strong>Pipeline</strong>, then click on <strong>nationalparks</strong> to see the pipeline you just created.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devops-pipeline-created-new.png" alt="Pipeline created">
+</div>
+</div>
+<div class="paragraph">
+<p>The Pipeline is parametric, with default value on the one we need to use.</p>
+</div>
+<div class="paragraph">
+<p>It is using one <strong>Workspace</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>app-source</strong>: this need to be linked to a <strong>PersistentVolumeClaim</strong> since will be used to store the code and the compiled binary to be used in different <strong>Tasks</strong></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="add_storage_for_pipeline"><a class="anchor" href="#add_storage_for_pipeline"></a>Exercise: Add Storage for your Pipeline</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>OpenShift manages Storage with <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/">Persistent Volumes</a> to be attached to Pods running our applications through <strong>Persistent Volume Claim</strong> requests, and it also provides the capability to manage it at ease from Web Console.
+From <strong>Administrator Perspective</strong>, go to <strong>Storage</strong>&#8594; <strong>Persistent Volume Claims</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Go to top-right side and click <strong>Create Persistent Volume Claim</strong> button.</p>
+</div>
+<div class="paragraph">
+<p>Inside <strong>Persistent Volume Claim name</strong> insert <strong>app-source-pvc</strong>.</p>
+</div>
+<div class="paragraph">
+<p>In <strong>Size</strong> section, insert <strong>1</strong> as we are going to create 1 GiB Persistent Volume for our Pipeline, using RWO Single User access mode.</p>
+</div>
+<div class="paragraph">
+<p>Leave all other default settings, and click <strong>Create</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-codechanges-pipeline-pvc.png" alt="Create PVC">
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The <strong>Storage Class</strong> is the type of storage available in the cluster.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="run_the_pipeline"><a class="anchor" href="#run_the_pipeline"></a>Run the Pipeline</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We can start now the Pipeline from the Web Console. Switch to <strong>Developer Perspective</strong>, and from left-side menu, click on <strong>Pipeline</strong>, then click on <strong>nationalparks</strong>. From top-right <strong>Actions</strong> list, click on <strong>Start</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/images/devops-pipeline-start-1-new.png" alt="Start Pipeline">
+</div>
+</div>
+<div class="paragraph">
+<p>You will be prompted with parameters to add the Pipeline, showing default ones.</p>
+</div>
+<div class="paragraph">
+<p>In <strong>Workspaces</strong>&#8594; <strong>app-source</strong> select <strong>PVC</strong> from the list, then select <strong>app-source-pvc</strong>. This is the shared volume used by Pipeline Tasks in your Pipeline containing the source code and compiled artifacts.</p>
+</div>
+<div class="paragraph">
+<p>Click on <strong>Start</strong> to run your Pipeline.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devops-pipeline-start-2-new.png" alt="Add parameters">
+</div>
+</div>
+<div class="paragraph">
+<p>You can follow the Pipeline execution from <strong>Pipeline</strong> section, watching all the steps in rogress. Click on <strong>Pipeline Runs</strong> tab to see it running:</p>
+</div>
+<div class="paragraph">
+<p>image::devops-pipeline-run-1.png[Pipeline runnin</p>
+</div>
+<div class="paragraph">
+<p>In <strong>Workspaces</strong>&#8594; <strong>app-source</strong> select <strong>PVC</strong> from the list, then select <strong>app-source-pvc</strong>. This is the share volume used by Pipeline Tasks in your Pipeline containing the source code and compiled artifacts.</p>
+</div>
+<div class="paragraph">
+<p>Click on <strong>Start</strong> to run your Pipeline.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devops-pipeline-start-2.png" alt="Add parameters">
+</div>
+</div>
+<div class="paragraph">
+<p>You can follow the Pipeline execution from <strong>Pipeline</strong> section, watching all the steps in g]</p>
+</div>
+<div class="paragraph">
+<p>The click on the <code>PipelineRun</code> <strong>national-parks-deploy-run-</strong>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devops-pipeline-run-2.png" alt="Pipeline running animation">
+</div>
+</div>
+<div class="paragraph">
+<p>Then click on the <strong>Task</strong> running to check logs:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devops-pipeline-run-3.png" alt="Pipeline Task log">
+</div>
+</div>
+<div class="paragraph">
+<p>Verify PipelineRun has been completed with success:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devops-pipeline-run-4.png" alt="PipelineRun completed">
+</div>
+</div>
+</div>
+</div>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>

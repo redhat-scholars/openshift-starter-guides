@@ -3,10 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Parksmap Architecture :: OpenShift Starter Guides</title>
-    <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.6/common-parksmap-architecture.html">
-    <link rel="prev" href="projects.html">
-    <link rel="next" href="parksmap-container-image.html">
+    <title>Application Healthchecks :: OpenShift Starter Guides</title>
+    <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.6/nationalparks-python-application-health.html">
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../../_/css/site.css">
 <link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
@@ -126,7 +124,7 @@
   </li>
 </ul>
   </li>
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="common-parksmap-architecture.html">Parksmap Architecture</a>
   </li>
   <li class="nav-item" data-depth="1">
@@ -433,55 +431,134 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">OpenShift Starter Guides</a></li>
-    <li><a href="common-parksmap-architecture.html">Parksmap Architecture</a></li>
+    <li><a href="nationalparks-python-application-health.html">Application Healthchecks</a></li>
   </ul>
 </nav>
 <div class="page-versions">
   <button class="version-menu-toggle" title="Show other versions of page">4.6</button>
   <div class="version-menu">
-    <a class="version is-current" href="common-parksmap-architecture.html">4.6</a>
-    <a class="version" href="../4.5/common-parksmap-architecture.html">4.5</a>
+    <a class="version is-current" href="nationalparks-python-application-health.html">4.6</a>
+    <a class="version is-missing" href="../4.5/index.html">4.5</a>
   </div>
 </div>
-  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-starter-guides/edit/ocp-4.6/documentation/modules/ROOT/pages/common-parksmap-architecture.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-starter-guides/edit/ocp-4.6/documentation/modules/ROOT/pages/nationalparks-python-application-health.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Parksmap Architecture</h1>
+<h1 class="page">Application Healthchecks</h1>
+<div class="sect1">
+<h2 id="_background_readiness_and_liveness_probes"><a class="anchor" href="#_background_readiness_and_liveness_probes"></a>Background: Readiness and Liveness Probes</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>This lab introduces you to the architecture of the ParksMap application used throughout this workshop, to get a better understanding of the things you&#8217;ll be doing from a developer perspective. ParksMap is a polyglot geo-spatial data visualization application built using the microservices architecture and is composed of a set of services which are developed using different programming languages and frameworks.</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="_images/roadshow-app-architecture.png" alt="Application architecture" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>The main service is a web application which has a server-side component in charge of aggregating the geo-spatial APIs provided by multiple independent backend services and a client-side component in JavaScript that is responsible for visualizing the geo-spatial data on the map. The client-side component which runs in your browser communicates with the server-side via WebSockets protocol in order to update the map in real-time.</p>
-</div>
-<div class="paragraph">
-<p>There will be a set of independent backend services deployed that will provide different mapping and geo-spatial information. The set of available backend services that provide geo-spatial information are:</p>
+<p>As we have seen before in the UI via warnings, there is a concept of application
+health checks in OpenShift. These come in two flavors:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>WorldWide National Parks</p>
+<p>Readiness probe</p>
 </li>
 <li>
-<p>Major League Baseball Stadiums in North America</p>
+<p>Liveness probe</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The original source code for this application is located <a href="https://github.com/openshift-roadshow/">here</a>.</p>
+<p>From the
+<a href="https://docs.openshift.com/container-platform/4.6/applications/application-health.html">Application
+Health</a> section of the documentation, we see the definitions:</p>
+</div>
+<div class="dlist glossary">
+<dl>
+<dt>Liveness Probe</dt>
+<dd>
+<p>A liveness probe checks if the container in which it is configured is still
+running. If the liveness probe fails, the kubelet kills the container, which
+will be subjected to its restart policy. Set a liveness check by configuring
+the <code>template.spec.containers.livenessprobe</code> stanza of a pod configuration.</p>
+</dd>
+<dt>Readiness Probe</dt>
+<dd>
+<p>A readiness probe determines if a container is ready to service requests. If
+the readiness probe fails a container, the endpoints controller ensures the
+container has its IP address removed from the endpoints of all services. A
+readiness probe can be used to signal to the endpoints controller that even
+though a container is running, it should not receive any traffic from a proxy.
+Set a readiness check by configuring the
+<code>template.spec.containers.readinessprobe</code> stanza of a pod configuration.</p>
+</dd>
+</dl>
 </div>
 <div class="paragraph">
-<p>The server-side component of the ParksMap web application acts as a communication gateway to all the available backends. These backends will be dynamically discovered by using service discovery mechanisms provided by OpenShift which will be discussed in more details in the following labs.</p>
+<p>It sounds complicated, but it really isn&#8217;t. We will use the web console to add
+these probes to our <code>nationalparks</code> application.</p>
 </div>
-<nav class="pagination">
-  <span class="prev"><a href="projects.html" class="query-params-link">Projects</a></span>
-  <span class="next"><a href="parksmap-container-image.html" class="query-params-link">Parksmap App</a></span>
-</nav>
+</div>
+</div>
+<div class="sect1">
+<h2 id="add_health_checks"><a class="anchor" href="#add_health_checks"></a>Exercise: Add Health Checks</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As we are going to be implementing a realistic CI/CD pipeline, we will be doing
+some testing of the "development" version of the application. However, in order
+to test the app, it must be ready. This is where OpenShift&#8217;s application health
+features come in very handy.</p>
+</div>
+<div class="paragraph">
+<p>We are going to add both a readiness and liveness probe to the existing
+<code>nationalparks</code> deployment. This will ensure that OpenShift does not add any
+instances to the service until they pass the readiness checks, and will ensure
+that unhealthy instances are restarted (if they fail the liveness checks).</p>
+</div>
+<div class="paragraph">
+<p>From the <strong>Topology</strong> view, click <code>nationalparks</code>. On the side panel, click the <strong>Actions</strong> dropdown menu and the select <strong>Add Health Checks</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-application-health-menu-python.png" alt="Add Health Checks">
+</div>
+</div>
+<div class="paragraph">
+<p>Click to <strong>Add Readiness Probe</strong> and add in <strong>Path</strong> field:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code>/ws/healthz/</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Leave all default settings like <strong>Port</strong> 8080 and <strong>Type</strong> HTTP GET. Click the little bottom-right confirmation gray tick to confirm:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-application-health-settings.png" alt="Add Readiness and Liveness Probe">
+</div>
+</div>
+<div class="paragraph">
+<p>Repeat the same procedure for Liveness Probe, click to <strong>Add Liveness Probe</strong> and add in <strong>Path</strong> field:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code>/ws/healthz/</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Leave all default settings like <strong>Port</strong> 8080 and <strong>Type</strong> HTTP GET. Click the little bottom-right confirmation gray tick to confirm.</p>
+</div>
+<div class="paragraph">
+<p>Finally confirm all new changes clicking to <strong>Add</strong>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-application-health-add.png" alt="Add Probes">
+</div>
+</div>
+<div class="paragraph">
+<p>You will notice that these changes caused a new deployment&#8201;&#8212;&#8201;they counted as a
+configuration change.</p>
+</div>
+</div>
+</div>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
