@@ -69,10 +69,7 @@ GitLab, or any other server that speaks Git. You can even register webhooks in
 your Git server to initiate OpenShift builds triggered by any update to the
 application code!
 
-The repository that we are going to use is already cloned in the internal Gogs repository
-and located at the following URL:
-
-link:https://github.com/openshift-roadshow/nationalparks-js.git[Gogs Repository]
+link:https://github.com/openshift-roadshow/nationalparks-js.git[NationalParks GitHub Repository]
 
 Later in the lab, we want you to make a code change and then rebuild your
 application. This is a fairly simple NodeJS application.
