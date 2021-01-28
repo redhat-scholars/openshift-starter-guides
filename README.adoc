@@ -45,22 +45,37 @@ This workshop is based on link:https://antora.org/[Antora] and link:https://gith
 
 To start this workshop, follow the step by step tutorial link for your cluster available below: 
 
-[%header,cols=2*] 
+[%header,cols=5*] 
 |===
 |OpenShift
-|Guide
+|Java Path
+|.NET Path
+|Javascript Path
+|Python Path  
 
 |link:https://www.openshift.com/try[OpenShift 4.6 Cluster]
-|link:https://redhat-scholars.github.io/openshift-starter-guides/[Link]
+|link:https://redhat-scholars.github.io/openshift-starter-guides/[Guide]
+|link:https://redhat-scholars.github.io/openshift-starter-guides-dotnet/[Guide]
+|link:https://redhat-scholars.github.io/openshift-starter-guides-javascript/[Guide]
+|link:https://redhat-scholars.github.io/openshift-starter-guides-python/[Guide]
 
 |link:https://developers.redhat.com/products/codeready-containers/overview[CRC 4.6]
-|link:https://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.6/index.html?CLUSTER_SUBDOMAIN=apps-crc.testing[Link]
+|link:https://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.6/index.html?CLUSTER_SUBDOMAIN=apps-crc.testing[Guide]
+|link:https://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides-dotnet/4.6/index.html?CLUSTER_SUBDOMAIN=apps-crc.testing[Guide]
+|link:https://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides-javascript/4.6/index.html?CLUSTER_SUBDOMAIN=apps-crc.testing[Guide]
+|link:https://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides-python/4.6/index.html?CLUSTER_SUBDOMAIN=apps-crc.testing[Guide]
 
 |link:https://learn.openshift.com/playgrounds/openshift46/[OpenShift 4.6 Playground] 
-|link:https://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.6/index.html?USERNAME=admin&PASSWORD=admin[Link]
+|link:https://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.6/index.html?USERNAME=admin&PASSWORD=admin[Guide]
+|link:https://redhat-scholars.github.io/openshift-starter-guides-dotnet/rhs-openshift-starter-guides/4.6/index.html?USERNAME=admin&PASSWORD=admin[Guide]
+|link:https://redhat-scholars.github.io/openshift-starter-guides-javascript/rhs-openshift-starter-guides/4.6/index.html?USERNAME=admin&PASSWORD=admin[Guide]
+|link:https://redhat-scholars.github.io/openshift-starter-guides-python/rhs-openshift-starter-guides/4.6/index.html?USERNAME=admin&PASSWORD=admin[Guide]
 
 |link:https://cloud.ibm.com/docs/openshift?topic=openshift-roks-overview[ROKS/ OpenShift 4.5]
-|link:https://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.5/index.html[Link]
+|link:https://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.5/index.html[Guide]
+|n/a
+|n/a
+|n/a
 
 |===
 
