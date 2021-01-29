@@ -115,6 +115,6 @@ https://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter
 
 ## Contributing
 
-Please refer to the link:CONTRIBUTING.adoc#contributing-guide[how to contribute] on how you can contribute to the tutorial
+Please refer to the link:CONTRIBUTING.adoc#contributing-guide[how to contribute] on how you can contribute to the tutorial.
 
  
