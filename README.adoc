@@ -1,4 +1,4 @@
-# OpenShift Starter Guides
+# OpenShift Starter Guides for Developers
 
 image::https://github.com/redhat-scholars/openshift-starter-guides/workflows/docs/badge.svg[docs]
 
