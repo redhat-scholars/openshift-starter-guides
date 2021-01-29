@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Automation with Pipelines :: OpenShift Starter Guides</title>
-    <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.6/nationalparks-java-pipeline-codechanges-github.html">
+    <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.5/nationalparks-java-pipeline-codechanges-github.html">
     <link rel="prev" href="nationalparks-java-pipeline.html">
     <link rel="next" href="mlbparks-templates.html">
     <meta name="generator" content="Antora 2.3.4">
@@ -422,10 +422,7 @@
     <li class="component is-current">
       <span class="title">OpenShift Starter Guides</span>
       <ul class="versions">
-        <li class="version is-latest">
-          <a href="../4.6/index.html">4.6</a>
-        </li>
-        <li class="version is-current">
+        <li class="version is-current is-latest">
           <a href="index.html">4.5</a>
         </li>
       </ul>
@@ -438,20 +435,13 @@
 <main class="article">
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="../4.6/index.html" class="home-link"></a>
+  <a href="index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">OpenShift Starter Guides</a></li>
     <li><a href="nationalparks-java-pipeline-codechanges-github.html">Automation with Pipelines</a></li>
   </ul>
 </nav>
-<div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">4.5</button>
-  <div class="version-menu">
-    <a class="version" href="../4.6/nationalparks-java-pipeline-codechanges-github.html">4.6</a>
-    <a class="version is-current" href="nationalparks-java-pipeline-codechanges-github.html">4.5</a>
-  </div>
-</div>
   <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-starter-guides/edit/roks/documentation/modules/ROOT/pages/nationalparks-java-pipeline-codechanges-github.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
@@ -792,7 +782,7 @@ which has deployed the application:</p>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                 REVISION   DESIRED   CURRENT   TRIGGERED BY
 mongodb              1          1         1         config,image(mongodb:3.6)
-parksmap             2          1         1         config,image(parksmap:latest)
+parksmap             2          1         1         config,image(parksmap:1.3.0)
 nationalparks        9          1         1         config,image(nationalparks:master)</code></pre>
 </div>
 </div>
