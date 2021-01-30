@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Connecting to a Database :: OpenShift Starter Guides</title>
-    <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.6/nationalparks-java-databases.html">
+    <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.5/nationalparks-java-databases.html">
     <link rel="prev" href="nationalparks-java.html">
     <link rel="next" href="nationalparks-application-health.html">
     <meta name="generator" content="Antora 2.3.4">
@@ -422,10 +422,7 @@
     <li class="component is-current">
       <span class="title">OpenShift Starter Guides</span>
       <ul class="versions">
-        <li class="version is-latest">
-          <a href="../4.6/index.html">4.6</a>
-        </li>
-        <li class="version is-current">
+        <li class="version is-current is-latest">
           <a href="index.html">4.5</a>
         </li>
       </ul>
@@ -438,20 +435,13 @@
 <main class="article">
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="../4.6/index.html" class="home-link"></a>
+  <a href="index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">OpenShift Starter Guides</a></li>
     <li><a href="nationalparks-java-databases.html">Connecting to a Database</a></li>
   </ul>
 </nav>
-<div class="page-versions">
-  <button class="version-menu-toggle" title="Show other versions of page">4.5</button>
-  <div class="version-menu">
-    <a class="version" href="../4.6/nationalparks-java-databases.html">4.6</a>
-    <a class="version is-current" href="nationalparks-java-databases.html">4.5</a>
-  </div>
-</div>
   <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-starter-guides/edit/roks/documentation/modules/ROOT/pages/nationalparks-java-databases.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
@@ -706,7 +696,7 @@ can verify this by looking at the output of <code>oc get dc</code>:</p>
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                    REVISION   DESIRED   CURRENT   TRIGGERED BY
 mongodb-nationalparks   1          1         1         config,image(mongodb:3.6)
 nationalparks           2          1         1         config,image(nationalparks:master)
-parksmap                2          1         1         config,image(parksmap:latest))</code></pre>
+parksmap                2          1         1         config,image(parksmap:1.3.0))</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -858,7 +848,7 @@ API and asking about the <strong>Routes</strong> and <strong>Services</strong> i
 <strong>Label</strong> that is <code>type=parksmap-backend</code>, the application knows to interrogate
 the endpoints to look for map data.
 You can see the code that does this
-<a href="https://github.com/openshift-roadshow/parksmap-web/blob/latest/src/main/java/com/openshift/evg/roadshow/rest/RouteWatcher.java#L20">here</a>.</p>
+<a href="https://github.com/openshift-roadshow/parksmap-web/blob/1.3.0/src/main/java/com/openshift/evg/roadshow/rest/RouteWatcher.java#L20">here</a>.</p>
 </div>
 <div class="paragraph">
 <p>Fortunately, the command line provides a convenient way for us to manipulate
