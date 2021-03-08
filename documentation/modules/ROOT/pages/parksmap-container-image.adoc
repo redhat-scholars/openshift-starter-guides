@@ -20,10 +20,25 @@ image::parksmap-devconsole-container-image.png[Add from Container Image]
 
 In the *Image Name* field, copy/paste the following into the box:
 
+[tabs, subs="attributes+,+macros"]
+====
+ROKS::
++
+--
+[source,role=copypaste,subs="+macros,+attributes"]
+----
+{parksmap-image}:1.3.0
+----
+--
+Others::
++
+--
 [source,role=copypaste,subs="+macros,+attributes"]
 ----
 {parksmap-image}:{parksmap-version}
 ----
+--
+====
 
 OpenShift will then go out to the container registry specified and interrogate the image.
 
