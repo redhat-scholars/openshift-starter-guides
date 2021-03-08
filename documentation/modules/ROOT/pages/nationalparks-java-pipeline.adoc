@@ -252,23 +252,7 @@ It is using two *Workspace*:
 [#run_the_pipeline]
 == Run the Pipeline
 
-Select your OpenShift cluster type and follow instruction to start the pipeline:
-
-[tabs, subs="attributes+,+macros"]
-====
-ROKS::
-+
---
-[.console-input]
-[source,bash,subs="+attributes"]
-----
-oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipelinerun.yaml -n {project-namespace}
-----
---
-Others::
-+
---
-To start it with Web Console, within *Developer Perspective* go to left-side menu, click on *Pipeline*, then click on *nationalparks-pipeline*. From top-right *Actions* list, click on *Start*.
+We can start now the Pipeline from the Web Console. Within *Developer Perspective* go to left-side menu, click on *Pipeline*, then click on *nationalparks-pipeline*. From top-right *Actions* list, click on *Start*.
 
 image::devops-pipeline-start-1.png[Start Pipeline]
 
@@ -284,11 +268,6 @@ https://github.com/openshift-roadshow/nationalparks.git
 In *Workspaces*-> *app-source* select *PVC* from the list, then select *app-source-pvc*. This is the share volume used by Pipeline Tasks in your Pipeline containing the source code and compiled artifacts.
 
 Click on *Start* to run your Pipeline.
-
-image::devops-pipeline-start-2.png[Add parameters]
---
-====
-
 
 You can follow the Pipeline execution at ease from Web Console. Open *Developer Perspective* and go to left-side menu, click on *Pipeline*, then click on *nationalparks-pipeline*. Switch to *Pipeline Runs* tab to watch all the steps in progress:
 
