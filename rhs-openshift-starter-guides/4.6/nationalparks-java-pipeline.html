@@ -550,9 +550,32 @@ Ensure you met all <a href="prerequisites.doc">Prerequisites</a> before proceedi
 <div class="paragraph">
 <p>Let&#8217;s create now a Tekton pipeline for Nationalparks backend, select your OpenShift cluster type from below table:</p>
 </div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset1_roks"></a>ROKS</p>
+</li>
+<li>
+<p><a id="tabset1_others"></a>Others</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset1_roks">
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipeline-all-vfs-new.yaml -n workshop</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_others">
 <div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipeline-all-new.yaml -n workshop</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="paragraph">
