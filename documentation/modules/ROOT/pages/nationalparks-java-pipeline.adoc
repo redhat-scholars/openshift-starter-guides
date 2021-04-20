@@ -42,7 +42,7 @@ For further details on pipeline concepts, refer to the https://github.com/tekton
 [#create_your_pipeline]
 == Create Your Pipeline
 
-NOTE: Ensure you met all link:prerequisites.doc[Prerequisites] before proceeding. link:prerequisites.adoc#openshift_pipelines[OpenShift Pipelines] installed in your cluster and a link:prerequisited.adoc#github_account[GitHub account] are required.
+NOTE: Ensure you met all xref:prerequisites.adoc[Prerequisites] before proceeding. xref:prerequisites.adoc#openshift_pipelines[OpenShift Pipelines] installed in your cluster and a xref:prerequisites.adoc#github_account[GitHub account] are required.
 
 As pipelines provide the ability to promote applications between different stages of the delivery cycle, Tekton, which is our Continuous Integration server that will execute our pipelines, will be deployed on a project with a Continuous Integration role. Pipelines executed in this project will have permissions to interact with all the projects modeling the different stages of our delivery cycle. 
 
