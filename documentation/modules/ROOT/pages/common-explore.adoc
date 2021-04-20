@@ -210,7 +210,7 @@ To make CLI autocompletion persistent (bash or zsh) by adding a relevant line to
 [source,bash,role="copypaste"]
 ----
 oc completion bash > oc_bash_completion.sh
-oc completion bash > oc_zsh_completion.sh
+oc completion zsh > oc_zsh_completion.sh
  
 source oc_bash_completion.sh
 source oc_zsh_completion.sh
