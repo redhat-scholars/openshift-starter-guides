@@ -316,9 +316,9 @@ metadata:
     component: parksmap
     role: frontend
   name: parksmap
-  namespace: user1
+  namespace: workshop
   resourceVersion: "1062269"
-  selfLink: /api/v1/namespaces/user1/services/parksmap
+  selfLink: /api/v1/namespaces/workshop/services/parksmap
   uid: e1ff69c8-cb2f-11e9-82a1-0267eec7e1a0
 spec:
   clusterIP: 172.30.22.209
@@ -400,7 +400,7 @@ You should see something like the following output:
 [source,text]
 ----
 Name:              parksmap
-Namespace:         user1
+Namespace:         workshop
 Labels:            app=workshop
                    app.kubernetes.io/component=parksmap
                    app.kubernetes.io/instance=parksmap
