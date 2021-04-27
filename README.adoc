@@ -53,7 +53,7 @@ To start this workshop, follow the step by step tutorial link for your cluster a
 |Javascript Path
 |Python Path  
 
-|link:https://www.openshift.com/try[OpenShift 4.6 Cluster]
+|link:https://www.openshift.com/try[ROKS/OpenShift 4.6 Cluster]
 |link:https://redhat-scholars.github.io/openshift-starter-guides/[Guide]
 |link:https://redhat-scholars.github.io/openshift-starter-guides-dotnet/[Guide]
 |link:https://redhat-scholars.github.io/openshift-starter-guides-javascript/[Guide]
@@ -71,7 +71,7 @@ To start this workshop, follow the step by step tutorial link for your cluster a
 |link:https://redhat-scholars.github.io/openshift-starter-guides-javascript/rhs-openshift-starter-guides-javascript/4.6/index.html?USERNAME=admin&PASSWORD=admin[Guide]
 |link:https://redhat-scholars.github.io/openshift-starter-guides-python/rhs-openshift-starter-guides-python/4.6/index.html?USERNAME=admin&PASSWORD=admin[Guide]
 
-|link:https://cloud.ibm.com/docs/openshift?topic=openshift-roks-overview[ROKS/ OpenShift 4.5]
+|link:https://cloud.ibm.com/docs/openshift?topic=openshift-roks-overview[ROKS/OpenShift 4.5]
 |link:https://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.5/index.html[Guide]
 |n/a
 |n/a
