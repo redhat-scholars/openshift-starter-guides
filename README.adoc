@@ -53,7 +53,7 @@ To start this workshop, follow the step by step tutorial link for your cluster a
 |Javascript Path
 |Python Path  
 
-|link:https://www.openshift.com/try[ROKS/OpenShift 4.6 Cluster]
+|link:https://www.openshift.com/try[ROKS/OpenShift 4.6]
 |link:https://redhat-scholars.github.io/openshift-starter-guides/[Guide]
 |link:https://redhat-scholars.github.io/openshift-starter-guides-dotnet/[Guide]
 |link:https://redhat-scholars.github.io/openshift-starter-guides-javascript/[Guide]
