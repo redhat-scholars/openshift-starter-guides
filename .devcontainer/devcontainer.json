@@ -4,7 +4,7 @@
 	"name": "OpenShift Starter Guide",
 	"build": {
 		"dockerfile": "Dockerfile",
-		"target": "${env:DEVCONTAINER_TARGET_PREFIX}DEVCONTAINER",
+		"target": "${env:DEVCONTAINER_TARGET_PREFIX}devcontainer",
 	},
 	
 	"runArgs": [
@@ -28,5 +28,5 @@
 	"forwardPorts": [3000],
 
 	// Specifies a command that should be run after the container has been created.
-	"postCreateCommand": "yarn install && rsync -a .devcontainer/workspace-setup/ ${containerWorkspaceFolder}/.vscode/ --ignore-existing",
+	"postCreateCommand": "rsync -a .devcontainer/workspace-setup/ ${containerWorkspaceFolder}/.vscode/ --ignore-existing",
 }

@@ -6,7 +6,6 @@
 			"type": "npm",
 			"script": "dev",
 			"problemMatcher": [],
-			"detail": "gulp",
 			"dependsOn":[ "npm install" ]
 		},
 		{
