@@ -27,13 +27,37 @@ image::parksmap-permissions-membership.png[Membership]
 The parksmap application wants to talk to the OpenShift API to learn about other
 *Pods*, *Services*, and resources within the *Project*. You'll soon learn why!
 
+The parksmap application runs as a *Service Account* in our project on the cluster: namely the `default` *Service Account*.  It is to this *Service Account* that we can grant the necessary `view``access that will allow it to query the API to see what resources are within the *Project*. This also has the added benefit of addressing the cause of the error message we witnessed previously in the logs.
+
+Choose an approach represented by the following tabs to update the `default` *Service Account* in the `{project-namespace}` project
+
+[tabs]
+====
+OpenShift Console::
++
+--
+. From the *Workloads -> Deployments* page, click on the *Namespace*, then *Role Bindings* and then the *Create Binding* button.
++
+image::parksmap-permissions-membership-serviceaccount-list.png[Service account list]
++
+. Select *view* for the Role Binding Name *{project-namespace}* for the Namespace, *view* for the Role Name, *Service Account* for the Subject, *{project-namespace}* for the Subject Namespace, and *default* for the Subject Name.
++
+image::parksmap-permissions-membership-serviceaccount-edit.png[Service account edit]
++
+. Once you're finished editing permissions, click on the *Create* button.  You should then be able to see it on the `Role Bindings` list for the `{project-namespace}` project`
++
+image::parksmap-permissions-membership-serviceaccount-done.png[Service account changed]
+--
+`oc` Command Line::
++
+--
 [.console-input]
 [source,bash,subs="+attributes,macros+"]
 ----
 oc project {project-namespace}
 ----
 
-Then:
+Then use the `oc policy add-role-to-user` command to give the predefined `view` _role_ to the user:
 
 [.console-input]
 [source,bash,subs="+attributes,macros+"]
@@ -41,8 +65,9 @@ Then:
 oc policy add-role-to-user view -z default
 ----
 
-The `oc policy` command above is giving a defined _role_ (`view`) to a user. But
-we are using a special flag, `-z`. What does this flag do? From the `-h` output:
+.What does the `-z` flag do?
+****
+From the `-h` output on `oc policy`:
 
 [source,bash]
 ----
@@ -52,27 +77,11 @@ we are using a special flag, `-z`. What does this flag do? From the `-h` output:
 The `-z` syntax is a special one that saves us from having to type out the
 entire string, which, in this case, is
 `system:serviceaccount:{project-namespace}:default`. It's a nifty shortcut.
+****
 
-[NOTE]
+NOTE: The `-z` flag will only work for service accounts in the *current* project.  If you're referring to a service account in a different project, use the `-n <project>`switch.
+--
 ====
-The `-z` flag will only work for service accounts in the *current* project.
-If you're referring to a service account in a different project, use the `-n <project>`switch.
-====
-
-Now that the `default` *Service Account* now has **view** access, so now it can query the API to see what resources are within the *Project*. This also has the added benefit of suppressing the error message! Although, in reality, we fixed the application.
-
-Another way you could have done the same is by using the OpenShift console. Once you're on the 
-*Workloads -> Deployments* page, click on the *Namespace*, then *Role Bindings* and then the *Create Binding* button.
-
-image::parksmap-permissions-membership-serviceaccount-list.png[Service account list]
-
-Select *view* for the Role Binding Name *{project-namespace}* for the Namespace, *view* for the Role Name, *Service Account* for the Subject, *{project-namespace}* for the Subject Namespace, and *default* for the Subject Name.
-
-image::parksmap-permissions-membership-serviceaccount-edit.png[Service account edit]
-
-Once you're finished editing permissions, click on the *Create* button.
-
-image::parksmap-permissions-membership-serviceaccount-done.png[Service account changed]
 
 [#redeploy_application]
 == Exercise: Redeploy Application
@@ -88,22 +97,3 @@ A new deployment is immediately started. Return to Topology view and click the `
 image::parksmap-permissions-redeployed.png[Application deployed]
 
 If you look at the logs for the application now, you should see no errors.  That's great.
-
-[#grant_user_view_permissions]
-== (Optional) Exercise: Grant User View Permissions
-If you create a project, you are that project's administrator. This means that
-you can grant access to other users, too. If you like, give your neighbor view
-access to your project using the following command:
-
-CAUTION: In the following command(s), replace `{project-namespace}` with the user name of the person to whom you want to grant access.
-
-[.console-input]
-[source,bash,subs="+attributes,macros+"]
-----
-oc policy add-role-to-user view {project-namespace}
-----
-
-Have them go to the project view by clicking the *Projects* button and verify
-that they can see your project and its resources. This type of arrangement (view
-but not edit) might be ideal for a developer getting visibility into a
-production application's project.

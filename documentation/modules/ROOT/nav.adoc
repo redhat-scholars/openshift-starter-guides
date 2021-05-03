@@ -34,7 +34,6 @@
 * xref:parksmap-permissions.adoc[Permissions]
 ** xref:parksmap-permissions.adoc#grant_serviceaccount_view_permissions[Grant Service Account View Permissions]
 ** xref:parksmap-permissions.adoc#redeploy_application[Exercise: Redeploy Application]
-** xref:parksmap-permissions.adoc#grant_user_view_permissions[Exercise: Grant User View Permissions]
 * xref:parksmap-rsh.adoc[Connecting to a Container]
 ** xref:parksmap-rsh.adoc#remote_shell_session_to_container_using_cli[Exercise: Remote Shell Session to a Container Using the CLI]
 ** xref:parksmap-rsh.adoc#execute_command_in_container[Exercise: Remote Shell Session to a Container Using the Web Console]
