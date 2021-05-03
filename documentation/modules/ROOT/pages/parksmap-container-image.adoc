@@ -61,7 +61,7 @@ NOTE: We will discuss in details about *Deployment* and *DeploymentConfig* in ne
 
 At the bottom of the page, click *Labels* in the Advanced Options section and add some labels to better identify this deployment later. Labels will help us identify and filter components in the web console and in the command line.
 
-We will add 3 labels. After you enter the name=value pair for each label, press *enter* before typing the next. First the name to be given to the application.
+We will add 3 labels. After you enter the name=value pair for each label, press kbd:[Return] (or kbd:[Enter] depending on your keyboard) before typing the next. The first label that we'll enter  is the name to be given to the application.
 
 [source,role=copypaste]
 ----
@@ -152,8 +152,6 @@ parksmap-65c4f8b676-k5gkk    1/1     Running     0          20s
 
 The above output lists all of the *Pods* in the current *Project*, including the
 *Pod* name, state, restarts, and uptime.
-
-NOTE: You'll notice two *Pods* here, one whose name ends with *-deploy*, and the other one with a random string as the final part of its name. The former it's a temporary Pod used by OpenShift just to deploy the latter, which is the Pod containing your application. 
 
 Once you have a *Pod*'s name, you can
 get more information about the *Pod* using the `oc get` command.  To make the
