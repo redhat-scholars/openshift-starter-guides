@@ -53,8 +53,6 @@ On the login screen, enter the following credentials:
 --
 ====
 
-
-
 The first time you access the web console, you will most likely be in the Administrator perspective. If you are also the Cluster Administrator, you will be presented with an overview of the whole Cluster status:
 
 image::prerequisites_overview.png[Web Console Overview]
@@ -90,138 +88,23 @@ Server Version: 4.6.4
 Kubernetes Version: v1.19.0+9f84db3
 ----
 
-If the `oc` doesn't exist or you have an older version of the OpenShift CLI, follow
-the next sections to install or update the OpenShift CLI. Otherwise, skip to the
-next lab.
+If you see output like the above you can skip to <<Connect to the OpenShift Cluster from CLI,Connect to the OpenShift Cluster from CLI>>.  
 
-[#download_openshift_cli]
-=== Download CLI
+However, if the `oc` command doesn't exist or you have an older version of the OpenShift CLI (e.g. < `4.4.x`), select the tab appropriate to your OS and follow the instructions to install or update the OpenShift CLI. 
 
-From top right menu bar, click to the little white question mark icon, then click to *Command Line Tools*:
+[tabs]
+====
+Mac OSX::
++
+--
+include::partial$cli_instructions_common.adoc[]
 
-image::prerequisites_cli_links.png[Download CLI]
+:os-lower: macosx
+include::partial$cli_instructions.adoc[]
 
-
-Scroll down to *oc - OpenShift Command Line Interface (CLI)*
-
-image::prerequisites_cli_binaries.png[CLI Binaries]
-
-
-[#download_and_install_openshift_cli_on_linux]
-==== *Download and Install OpenShift CLI on Linux*
-
-
-Once the file has been downloaded, you will need to extract the contents as it
-is a compressed archive. I would suggest saving this file to the following
-directories:
-
-[source,bash]
-----
-~/OpenShift
-----
-
-Open up a terminal window and change to the directory where you downloaded the
-file.  Once you are in the directory, enter in the following command:
-
-CAUTION: The name of the oc packaged archive may vary. Adjust accordingly.
-
-[.console-input]
-[source,bash,subs="+attributes,macros+"]
-----
-tar zxvf oc-linux.tar.gz
-----
-
-The tar.gz file name needs to be replaced by the entire name that was downloaded in the previous step.
-
-Now you can add the OpenShift CLI tools to your PATH.
-
-[.console-input]
-[source,bash,subs="+attributes,macros+"]
-----
-export PATH=$PATH:~/openShift
-----
-
-At this point, we should have the oc tool available for use. Let's test this
-out by printing the version of the oc command:
-
-[.console-input]
-[source,bash,subs="+attributes,macros+"]
-----
-oc version
-----
-
-You should see the following (or something similar):
-
-[.console-output]
-[source,bash]
-----
-Client Version: 4.6.9
-Server Version: 4.6.4
-Kubernetes Version: v1.19.0+9f84db3
-----
-
-If you get an error message, you have not updated your path correctly. If you
-need help, raise your hand and the instructor will assist.
-
-[#download_and_install_openshift_cli_on_mac]
-==== *Download and Install OpenShift CLI on Mac OS X*
-
-
-Once the file has been downloaded, you will need to extract the contents as it
-is a compressed archive. I would suggest saving this file to the following
-directories:
-
-[source,bash]
-----
-~/OpenShift
-----
-
-Open up a terminal window and change to the directory where you downloaded the
-file. Once you are in the directory, enter in the following command:
-
-CAUTION: The name of the oc packaged archive may vary. Adjust accordingly.
-
-[.console-input]
-[source,bash,subs="+attributes,macros+"]
-----
-tar zxvf oc-macosx.tar.gz
-----
-
-The tar.gz file name needs to be replaced by the entire name that was downloaded in the previous step.
-
-Now you can add the OpenShift CLI tools to your PATH.
-
-[.console-input]
-[source,bash,subs="+attributes,macros+"]
-----
-export PATH=$PATH:~/OpenShift
-----
-
-At this point, we should have the oc tool available for use. Let's test this
-out by printing the version of the oc command:
-
-[.console-input]
-[source,bash,subs="+attributes,macros+"]
-----
-oc version
-----
-
-You should see the following (or something similar):
-
-[.console-output]
-[source,bash]
-----
-Client Version: 4.6.9
-Server Version: 4.6.4
-Kubernetes Version: v1.19.0+9f84db3
-----
-
-If you get an error message, you have not updated your path correctly. If you
-need help, raise your hand and the instructor will assist.
-
-==== *Download and Install OpenShift CLI on Mac OS X using HomeBrew*
-
-If you have HomeBrew installed (www.brew.sh) you can install OpenShift CLI using brew:
+NOTE: If you have link:www.brew.sh[HomeBrew] installed you can instead install the OpenShift CLI using brew
+.Download and Install OpenShift CLI on Mac OS X using HomeBrew
+****
 
 [.console-input]
 [source,bash,role="copypaste"]
@@ -248,9 +131,24 @@ oc completion zsh > oc_zsh_completion.sh
 source oc_bash_completion.sh
 source oc_zsh_completion.sh
 ----
+****
 
-[#download_and_install_openshift_cli_on_windows]
-==== *Download and Install OpenShift CLI on Windows*
+include::partial$cli_test_oc.adoc[]
+--
+Linux::
++
+--
+include::partial$cli_instructions_common.adoc[]
+
+:os-lower: linux
+include::partial$cli_instructions.adoc[]
+
+include::partial$cli_test_oc.adoc[]
+--
+Windows::
++
+--
+include::partial$cli_instructions_common.adoc[]
 
 The CLI for Windows is provided as a zip archive. Download and unzip the archive with a ZIP program and move the oc binary to a directory on your PATH. To check your PATH, open the Command Prompt and run:
 
@@ -262,27 +160,9 @@ path
 
 Checkout this blog post if you'd like to set it up with link:https://www.openshift.com/blog/installing-oc-tools-windows[Powershell,window='_blank']
 
-At this point, we should have the oc tool available for use. Let's test this
-out by printing the version of the oc command:
-
-[.console-input]
-[source,bash,subs="+attributes,macros+"]
-----
-oc version
-----
-
-You should see the following (or something similar):
-
-[.console-output]
-[source,bash]
-----
-Client Version: 4.6.9
-Server Version: 4.6.4
-Kubernetes Version: v1.19.0+9f84db3
-----
-
-If you get an error message, you have not updated your path correctly. If you
-need help, raise your hand and the instructor will assist.
+include::partial$cli_test_oc.adoc[]
+--
+====
 
 [#connect_to_the_cluster_with_cli]
 === Connect to the OpenShift Cluster from CLI
@@ -315,9 +195,23 @@ Using project "default".
 [#working_with_proxies]
 ==== Working with proxies
 It might happen that you're behind a corporate proxy to access the internet. In this case, you'll need to set
-some additional environment variables for the oc command line to work.
+some additional environment variables for the oc command line to work.  Select the tab appropriate to your OS below.
 
-**Windows:**
+[tabs]
+====
+Mac OS X::
++
+--
+include::partial$common_proxy_instructions.adoc[]
+--
+Linux::
++
+--
+include::partial$common_proxy_instructions.adoc[]
+--
+Windows::
++
+--
 Follow previous section's instructions on how to set an Environment Variable on Windows. The variables you'll need
 to set are:
 
@@ -329,28 +223,8 @@ CAUTION: Replace the proxy server with the one for your environment/machine.
 https_proxy=http://proxy-server.mycorp.com:3128/
 HTTPS_PROXY=http://proxy-server.mycorp.com:3128/
 ----
-
-**Mac OS X:**
-
-CAUTION: Replace the proxy server with the one for your environment/machine.
-
-[.console-input]
-[source,bash,subs="+attributes,macros+"]
-----
-export https_proxy=http://proxy-server.mycorp.com:3128/
-export HTTPS_PROXY=http://proxy-server.mycorp.com:3128/
-----
-
-**Linux:**
-
-CAUTION: Replace the proxy server with the one for your environment/machine.
-
-[.console-input]
-[source,bash,subs="+attributes,macros+"]
-----
-export https_proxy=http://proxy-server.mycorp.com:3128/
-export HTTPS_PROXY=http://proxy-server.mycorp.com:3128/
-----
+--
+====
 
 [NOTE]
 ====

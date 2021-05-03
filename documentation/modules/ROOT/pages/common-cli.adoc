@@ -94,12 +94,10 @@ You should see the following (or something similar):
 [source,bash]
 ----
 Client Version: openshift-clients-4.5.0-202006231303.p0-9-ge40bd2dd9
-Server Version: 4.5.11
-Kubernetes Version: v1.18.3+b0068a8
 ----
 
 If you get an error message, you have not updated your path correctly. If you
-need help, raise your hand and the instructor will assist.
+need help, contact your lab instructor for assistence.
 
 [#download_and_install_openshift_cli_on_mac]
 == Download and Install OpenShift CLI on Mac
@@ -150,12 +148,10 @@ You should see the following (or something similar):
 [source,bash]
 ----
 Client Version: openshift-clients-4.5.0-202006231303.p0-9-ge40bd2dd9
-Server Version: 4.5.11
-Kubernetes Version: v1.18.3+b0068a8
 ----
 
 If you get an error message, you have not updated your path correctly. If you
-need help, raise your hand and the instructor will assist.
+need help, contact your lab instructor for assistence.
 
 [#download_and_install_openshift_cli_on_windows]
 == Download and Install OpenShift CLI on Windows
@@ -185,12 +181,10 @@ You should see the following (or something similar):
 [source,bash]
 ----
 Client Version: openshift-clients-4.5.0-202006231303.p0-9-ge40bd2dd9
-Server Version: 4.5.11
-Kubernetes Version: v1.18.3+b0068a8
 ----
 
 If you get an error message, you have not updated your path correctly. If you
-need help, raise your hand and the instructor will assist.
+need help, contact your lab instructor for assistence.
 
 [#tab_completion]
 == Tab Completion 

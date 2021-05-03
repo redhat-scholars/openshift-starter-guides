@@ -1,0 +1,8 @@
+CAUTION: Replace the proxy server with the one for your environment/machine.
+
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
+----
+export https_proxy=http://proxy-server.mycorp.com:3128/
+export HTTPS_PROXY=http://proxy-server.mycorp.com:3128/
+----

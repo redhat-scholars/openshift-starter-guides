@@ -9,8 +9,8 @@ site:
 content:
   sources:
     - url: .
-      #branches: HEAD
-      branches: [roks, ocp-4.6] 
+      branches: HEAD
+      #branches: [roks, ocp-4.6] 
       start_path: documentation
       #- url: git@github.com:redhat-scholars/openshift-starter-guides-dotnet.git
       #branches: ocp-4.6

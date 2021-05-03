@@ -1,0 +1,19 @@
+At this point, we should have the oc tool available for use. Let's test this
+out by printing the version of the `oc` command:
+
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
+----
+oc version
+----
+
+You should see the following (or something similar):
+
+[.console-output]
+[source,bash]
+----
+Client Version: 4.6.9
+----
+
+If you get an error message, you may not have not updated your path correctly. If after checking your `PATH` you
+still cannot get the `oc` command to work, contact your lab instructor for assistence.
