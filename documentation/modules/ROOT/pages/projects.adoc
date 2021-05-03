@@ -31,7 +31,12 @@ At the top of the left navigation menu, you can toggle between the *Administrato
 
 image::explore-perspective-toggle.png[Toggle Between Perspectives]
 
-Select *Developer* to switch to the Developer perspective. Once the Developer perspective loads, you should be in the *Topology* view. Right now, there are no applications or components to view, but once you begin working on the lab, you'll be able to visualize and interact with the components in your application here.
+Select *Developer* to switch to the Developer perspective. Once the Developer perspective loads, you should be in the *Topology* view. Upon your first visit to the Topology view for the cluster you made be greeted with a "Welcome to the Dev Perspective" dialog.  Dismiss this by pressing the `x` in the corner
+
+.Dismiss welcome dialog
+image::explore-perspective-welcome-dialog.png[Welcome Dialog]
+
+Right now, there are no applications or components to view, but once you begin working on the lab, you'll be able to visualize and interact with the components in your application here.
 
 image::explore-topology-view.png[Topology View]
 
