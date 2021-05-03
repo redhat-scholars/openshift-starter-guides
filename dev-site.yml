@@ -19,6 +19,7 @@ content:
 asciidoc:
   attributes:
     #title: OpenShift Starter Guides(Dev Mode)
+    experimental: true
     parksmap-version: latest
     parksmap-image: quay.io/openshiftroadshow/parksmap
     openshift-docs-url: https://docs.openshift.com/container-platform/4.6
