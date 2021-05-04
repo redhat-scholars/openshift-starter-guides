@@ -1,5 +1,6 @@
 = Nationalparks Java App
 :navtitle: Nationalparks Java App
+:cluster-subdomain: %CLUSTER_SUBDOMAIN%
 
 In this section, we're going to deploy a backend service, developed in Java that will expose 2 main REST endpoints to the visualizer
 application (`parksmap` web component that was deployed in the previous labs).
@@ -93,7 +94,7 @@ Enter the following for Git Repo URL:
 https://github.com/openshift-roadshow/nationalparks.git
 ----
 
-OpenShift will automatically guess the Git server type and the programming language used by the source code. Verify that *Java* has been selected as your Builder Image, and be sure to select version *11* to have OpenJDK 11.
+OpenShift will automatically guess the Git server type and the programming language used by the source code. Verify that *Java* has been selected as your Builder Image, and be sure to select version `openjdk-11-ubi8` to have OpenJDK 11.
 
 image::nationalparks-import-from-git-url-builder.png[Import from Git]
 
@@ -200,22 +201,22 @@ Where you should see something like the following:
 [source,bash,subs="+attributes,macros+"]
 ----
 NAME            HOST/PORT                                                   PATH      SERVICES        PORT       TERMINATION       WILDCARD
-nationalparks   nationalparks-{project-namespace}.%CLUSTER_SUBDOMAIN%             nationalparks   8080-tcp
-parksmap        parksmap-{project-namespace}.%CLUSTER_SUBDOMAIN%                  parksmap        8080-tcp        edge        none
+nationalparks   nationalparks-{project-namespace}.{cluster-subdomain}             nationalparks   8080-tcp
+parksmap        parksmap-{project-namespace}.{cluster-subdomain}                  parksmap        8080-tcp        edge        none
 ----
 
 In the above example, the URL is:
 
 [source,text,role="copypaste",subs="+attributes"]
 ----
-http://nationalparks-{project-namespace}.%CLUSTER_SUBDOMAIN%
+http://nationalparks-{project-namespace}.{cluster-subdomain}
 ----
 
 Since this is a backend application, it doesn't actually have a web interface.
 However, it can still be used with a browser. All backends that work with the parksmap
 frontend are required to implement a `/ws/info/` endpoint. To test, visit this URL in your browser:
 
-link:http://nationalparks-{project-namespace}.%CLUSTER_SUBDOMAIN%/ws/info/[National Parks Info Page, role='params-link',window='_blank']
+link:http://nationalparks-{project-namespace}.{cluster-subdomain}/ws/info/[National Parks Info Page, role='params-link',window='_blank']
 
 WARNING: If the Pod is Running and the application is not available, please wait a few seconds and refresh the page, since we haven't configured yet Health Checks for that.
 
