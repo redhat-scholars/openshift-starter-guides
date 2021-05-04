@@ -1,0 +1,17 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build and watch dev-site",
+			"type": "npm",
+			"script": "dev",
+			"problemMatcher": [],
+			"dependsOn":[ "npm install" ]
+		},
+		{
+			"label": "npm install",
+			"type": "npm",
+			"script": "install"
+		}
+	]
+}

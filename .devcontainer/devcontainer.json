@@ -1,0 +1,34 @@
+// For format details, see https://aka.ms/vscode-remote/devcontainer.json or this file's README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.134.0/containers/javascript-node
+{
+	"name": "OpenShift Starter Guide",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"target": "${env:DEVCONTAINER_TARGET_PREFIX}devcontainer",
+	},
+	
+	"runArgs": [
+		"-v", "${env:HOME}/.kube:/opt/app-root/src/.kube:Z",
+		"-v", "${env:HOME}/.gitconfig:/opt/app-root/src/.gitconfig:Z",
+		"-e", "WORKSPACE_ROOT=${containerWorkspaceFolder}"
+	],
+
+	// Set *default* container specific settings.json values on container create.
+	"settings": { 
+		"terminal.integrated.shell.linux": "/bin/bash",
+		"editor.tabCompletion": "on",
+	},
+
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"dbaeumer.vscode-eslint",
+		"ms-azuretools.vscode-docker",
+		"joaompinto.asciidoctor-vscode",
+	],
+	
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	"forwardPorts": [3000],
+
+	// Specifies a command that should be run after the container has been created.
+	"postCreateCommand": "rsync -a .devcontainer/workspace-setup/ ${containerWorkspaceFolder}/.vscode/ --ignore-existing",
+}
