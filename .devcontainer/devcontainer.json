@@ -9,7 +9,8 @@
 	
 	"runArgs": [
 		"-v", "${env:HOME}/.kube:/opt/app-root/src/.kube:Z",
-		"-v", "${env:HOME}/.gitconfig:/opt/app-root/src/.gitconfig",
+		"-v", "${env:HOME}/.gitconfig:/opt/app-root/src/.gitconfig:Z",
+		"-e", "WORKSPACE_ROOT=${containerWorkspaceFolder}"
 	],
 
 	// Set *default* container specific settings.json values on container create.
