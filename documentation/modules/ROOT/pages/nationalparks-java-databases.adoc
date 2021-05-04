@@ -127,7 +127,7 @@ image::nationalparks-databases-binding-add-binding-to-nationalparks.png[Add bind
 
 This change in configuration will trigger a new deployment of the `nationalparks` application with the environment variables properly injected.
 
-Back in the *Topology* view, click and drag with Shift key the `mongodb-nationalparks` component into the light gray area that denotes the `workshop` application, so that all three components are contained in it.
+Back in the *Topology* view, if your `mongodb-nationalparks` component is not already in the light gray area that denotes the `workshop` application, click and drag the component whilst holding down kbd:[Shift] to add it to the group with the other two components (as shown below)
 
 image::nationalparks-databases-add-mongodb-to-workshop-app.png[Add mongodb to the workshop app]
 
@@ -234,7 +234,7 @@ a browser problem, and the application is working properly.
 
 [source,role="copypaste",subs="+attributes"]
 ----
-https://parksmap-{project-namespace}.%CLUSTER_SUBDOMAIN%
+http://parksmap-{project-namespace}.%CLUSTER_SUBDOMAIN%
 ----
 
 Hmm... There's just one thing. The main map **STILL** isn't displaying the parks.
@@ -338,7 +338,7 @@ If you check your browser now:
 
 [source,role="copypaste",subs="+attributes"]
 ----
-https://parksmap-{project-namespace}.%CLUSTER_SUBDOMAIN%/
+http://parksmap-{project-namespace}.%CLUSTER_SUBDOMAIN%/
 ----
 
 image::nationalparks-databases-new-parks.png[MongoDB]
