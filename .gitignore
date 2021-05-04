@@ -41,3 +41,8 @@ package*
 node_modules
 .firebaserc
 .firebase
+
+### Antora ###
+
+# for local testing/publishing of content
+stage-*-site.yml
