@@ -45,6 +45,7 @@ Developer Studio and JBoss Developer Tools have built in functionality that make
 === Setup the Build of the WAR file
 If you have Maven all set up on your machine, then you can `cd` into the `mlbparks` directory and run `mvn package`
 
+[#docker_for_maven]
 [TIP]
 ====
 If you don't have Maven on your machine but you are able to run docker, you can instead mount the repo directory and run the build commands from within the container.

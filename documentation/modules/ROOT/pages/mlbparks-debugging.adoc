@@ -8,8 +8,7 @@ and our pod. The is useful for operations like connecting to a database running 
 interface we don't want to expose to the public, or, in our case, attaching a debugger to the JVM running our application
 server.
 
-You can read more about port-forwarding from the
-{openshift-docs-url}/dev_guide/port_forwarding.html[developer documentation].
+You can read more about port-forwarding from the link:{openshift-docs-url}/dev_guide/port_forwarding.html[developer documentation].
 
 By port forwarding the debugging port for the application server, we can attach the debugger from our IDE and actually
 step through the code in the pod as it is running in real time. By default EAP is not in debug mode, therefore we first
@@ -27,6 +26,151 @@ oc set env dc/mlbparks DEBUG=true
 ----
 
 This will force a redeploy of our MLBparks pod, this time with the JDWT transport enabled and serving on port 8787.
+
+Whilst we can connect to a pod directly to debug it, when there is only one instance of a Service running it can be convenient to setup port-forwarding through a Service (since pod names change but the name of the Service is static).  See <<Exercise: Port-Forwarding from the pod to our local machine,Exercise: Port-Forwarding from the pod to our local machine>>
+
+[#port-forwarding_from_svc_to_our_local_machine]
+== Port-Forwarding through a Service to our local machine
+
+Let's take a closer look at the service in question:
+
+[.console-input]
+[source,bash,subs="+macros,+attributes"]
+----
+oc describe svc/mlbparks
+----
+
+[.console-output]
+[source,bash,subs="+macros,+attributes"]
+----
+Name:              mlbparks
+Namespace:         workshop
+Labels:            app=workshop
+                   component=mlbparks
+                   createdBy=mlbparks-template
+                   role=backend
+                   type=parksmap-backend
+Annotations:       openshift.io/generated-by: OpenShiftNewApp
+                   service.alpha.openshift.io/dependencies: [{"name":"mongodb-mlbparks","namespace":"","kind":"Service"}]
+Selector:          deploymentConfig=mlbparks
+Type:              ClusterIP
+IP Families:       <none>
+IP:                172.21.206.162
+IPs:               <none>
+Port:              8080-tcp  8080/TCP
+TargetPort:        8080/TCP
+Endpoints:         172.30.18.203:8080
+Port:              8787-tcp  8787/TCP
+TargetPort:        8787/TCP
+Endpoints:         172.30.18.203:8787
+Session Affinity:  None
+Events:            <none>
+----
+
+Now that our deployment is setup for debugging, it will be listening on port 8787.  We'll setup port-forwarding to that port on the service (which will in turn forward on to the pod)
+
+[.console-input]
+[source,bash,subs="+macros,+attributes"]
+----
+oc port-forward svc/mlbparks 8787:8787
+----
+
+So now when we connect on `localhost:8787` it will get forwarded to the mlbparks instance running in the pod.  
+
+NOTE: port-forwarding is only active as long as the `oc port-forward` command is allowed to run.  Since we run it in the foreground, we are able to stop port-forwarding by hitting kbd:[CTRL+c]
+
+Now all we need to do is find a debugger to connect on that port
+
+[#setting_up_remote_debugging]
+== Attaching a Remote Debugger
+
+In order to debug the source code you can either use your IDE of choice (instructions for IntelliJ below) or you can debug from the Console.  Pick the appropriate tab for your situation.
+
+[tabs]
+====
+Console::
++
+--
+
+.NOTE
+****
+This assumes you have `jdb` the Java command line debugger installed.  If you don't, you can see xref::mlbparks-binary-build.adoc#docker_for_maven[these instructions] for running a docker container that has Maven AND the `jdb` installed.  Once you have completed those instructions, from within the container setup port-forwarding as discussed <<Port-Forwarding through a Service to our local machine,above>>.  Then follow the instructions below from within the container.
+****
+
+. From the root of the mlbparks git repo that you cloned locally, run the following command:
++
+[.console-input]
+[source,bash,subs="+macros,+attributes"]
+----
+jdb -sourcepath $(pwd)/src/main/java -attach localhost:8787
+----
++
+[.console-output]
+[source,bash,subs="+macros,+attributes"]
+----
+Set uncaught java.lang.Throwable
+Set deferred uncaught java.lang.Throwable
+Initializing jdb ...
+> 
+----
++
+. Next, set a breakpoint in the `BackendController` class by issuing this command in the debugger:
++
+[.console-input]
+[source,bash,subs="+macros,+attributes"]
+----
+stop in com.openshift.evg.roadshow.rest.BackendController.get
+----
++
+[.console-output]
+[source,bash,subs="+macros,+attributes"]
+----
+Set breakpoint com.openshift.evg.roadshow.rest.BackendController.get
+----
++
+. Navigate to the mlbparks url (you can use curl from a shell or just paste the url in your browser)
++
+[.console-input]
+[source,bash,subs="+macros,+attributes"]
+----
+curl http://mlbparks-workshop.%CLUSTER_SUBDOMAIN%/ws/info
+----
++
+. Your debugger should now be "breaked" at the first line of the `BackendController.get` method
++
+[.console-output]
+[source,java,subs="+macros,+attributes"]
+----
+Breakpoint hit: "thread=default task-4", com.openshift.evg.roadshow.rest.BackendController.get(), line=23 bci=0
+23            return new Backend("mlbparks", "AMAZING MLB Parks", new Coordinates("39.82", "-98.57"), 5);
+----
++
+. Feel free to play around a bit with the jdb commands.  Some examples include: 
+** `list`: To see fuller view of source around the breakpoint
+** `where`: To dump the thread's current stack
+** `print`: Print value of variables, such as `print this` to see the BackendController as string
+** `cont`: Continue execution of the program
+--
+IntelliJ::
++
+--
+Setting up remote debugging is quite easy in IntelliJ. First edit the run/debug configurations.
+Under the Run menu (kbd:[ALT + u]), choose edit configurations. This will bring up the new configuration dialog.
+
+Click the plus in the top left corner, scroll down, and choose remote.
+
+image::mlbparks-debugging-intellij-debug-new.png[IntelliJ New Configuration]
+
+On the resulting dialog page, change the name at the top to "on OpenShift" or whatever is informative to you. Then
+towards the bottom right, change the port number to 8787. When you have done that click "OK".
+
+image::mlbparks-debugging-intellij-debug-info.png[IntelliJ New Configuration]
+
+Now when you click the Debug icon in IntelliJ, it will open the debugger and attach to JVM in the pod on OpenShift. Go
+ahead and set a break point in any class you want and it will do normal debugging - just like you know and love!
+
+--
+====
 
 [#port-forwarding_from_pod_to_our_local_machine]
 == Exercise: Port-Forwarding from the pod to our local machine
@@ -62,24 +206,4 @@ Now we can set to set up the port-forward:
 oc port-forward mlbparks-3-hcd8g 8787:8787
 ----
 
-We said to port-forward from port 8787 on the pod to 8787 on the local machine. Now we can attach a remote debugger.
-
-NOTE: To stop port-forwarding just hit ctrl-c in the terminal window where you did the port forward command
-
-[#setting_up_remote_debug_in_intellij]
-=== Setting up Remote Debug in IntelliJ
-
-Setting up remote debugging is quite easy in IntelliJ. First edit the run/debug configurations.
-Under the Run menu (alt-u), choose edit configurations. This will bring up the new configuration dialog.
-
-Click the plus in the top left corner, scroll down, and choose remote.
-
-image::mlbparks-debugging-intellij-debug-new.png[IntelliJ New Configuration]
-
-On the resulting dialog page, change the name at the top to "on OpenShift" or whatever is informative to you. Then
-towards the bottom right, change the port number to 8787. When you have done that click "OK".
-
-image::mlbparks-debugging-intellij-debug-info.png[IntelliJ New Configuration]
-
-Now when you click the Debug icon in IntelliJ, it will open the debugger and attach to JVM in the pod on OpenShift. Go
-ahead and set a break point in any class you want and it will do normal debugging - just like you know and love!
+We said to port-forward from port 8787 on the pod to 8787 on the local machine. Now we can attach a remote debugger as outlined <<Attaching a Remote Debugger,here>>.
