@@ -84,9 +84,10 @@ You should see the following (or something similar):
 [source,bash]
 ----
 Client Version: 4.6.9
-Server Version: 4.6.4
+Server Version: 4.6.4 <.>
 Kubernetes Version: v1.19.0+9f84db3
 ----
+<.> NOTE: you will only see the `Server Version` and `Kubernetes Version` if you are currently connected to a Kubenetes or OpenShift cluster
 
 If you see output like the above you can skip to <<Connect to the OpenShift Cluster from CLI,Connect to the OpenShift Cluster from CLI>>.  
 
@@ -97,12 +98,8 @@ However, if the `oc` command doesn't exist or you have an older version of the O
 Mac OSX::
 +
 --
-include::partial$cli_instructions_common.adoc[]
+NOTE: If you have link:www.brew.sh[HomeBrew] installed you can instead install the OpenShift CLI using the `brew` command.  If you don't have homebrew, then follow the manual download and install instructions that follow the inset.
 
-:os-lower: macosx
-include::partial$cli_instructions.adoc[]
-
-NOTE: If you have link:www.brew.sh[HomeBrew] installed you can instead install the OpenShift CLI using brew
 .Download and Install OpenShift CLI on Mac OS X using HomeBrew
 ****
 
@@ -132,6 +129,11 @@ source oc_bash_completion.sh
 source oc_zsh_completion.sh
 ----
 ****
+
+include::partial$cli_instructions_common.adoc[]
+
+:os-lower: macosx
+include::partial$cli_instructions.adoc[]
 
 include::partial$cli_test_oc.adoc[]
 --
