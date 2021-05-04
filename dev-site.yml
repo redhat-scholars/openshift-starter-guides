@@ -25,13 +25,10 @@ asciidoc:
     openshift-docs-url: https://docs.openshift.com/container-platform/4.6
     openshift-version: 4.6
     project-namespace: workshop
-    workshop-domain: rhscholars.devx.red
     kubernetes-version: v1.19.0
     release-version: ocp
     roks-login-url: https://cloud.ibm.com/authorize/devcluster
     page-pagination: true
-    openshift-console-url: https://console-openshift-console.apps.example.com
-    etherpad-url: http://example.com
     lab: java
     lab-name: Java
   extensions:
