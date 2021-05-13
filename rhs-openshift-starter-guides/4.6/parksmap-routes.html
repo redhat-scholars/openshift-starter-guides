@@ -72,19 +72,7 @@
     <a class="nav-link" href="common-explore.html#command_line_interface">Command Line Interface</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="common-explore.html#download_openshift_cli">Download OpenShift CLI</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="common-explore.html#download_and_install_openshift_cli_on_linux">Download and Install OpenShift CLI on Linux</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="common-explore.html#download_and_install_openshift_cli_on_mac">Download and Install OpenShift CLI on Mac OS X</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="common-explore.html#download_and_install_openshift_cli_on_windows">Download and Install OpenShift CLI on Windows</a>
-  </li>
-</ul>
   </li>
   <li class="nav-item" data-depth="3">
     <button class="nav-item-toggle"></button>
@@ -204,9 +192,6 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="parksmap-permissions.html#redeploy_application">Exercise: Redeploy Application</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="parksmap-permissions.html#grant_user_view_permissions">Exercise: Grant User View Permissions</a>
   </li>
 </ul>
   </li>
@@ -368,13 +353,13 @@
     <a class="nav-link" href="mlbparks-debugging.html#enabling_debugging_in_eap_on_openshift">Exercise: Enabling Debugging in EAP on OpenShift</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="mlbparks-debugging.html#port-forwarding_from_pod_to_our_local_machine">Exercise: Port-Forwarding from the pod to our local machine</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="mlbparks-debugging.html#setting_up_remote_debug_in_intellij">Setting up Remote Debug in IntelliJ</a>
+    <a class="nav-link" href="mlbparks-debugging.html#port-forwarding_from_svc_to_our_local_machine">Exercise: Port-Forwarding from a Service to our local machine</a>
   </li>
-</ul>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mlbparks-debugging.html#setting_up_remote_debugging">Attaching a Remote Debugger</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mlbparks-debugging.html#port-forwarding_from_pod_to_our_local_machine">Exercise: Port-Forwarding from the pod to our local machine</a>
   </li>
 </ul>
   </li>
@@ -484,20 +469,40 @@ create a <strong>Route</strong>.</p>
 <div class="sectionbody">
 <div class="paragraph">
 <p>You may remember that when we deployed the <code>parksmap</code> application, we un-checked the checkbox to
-create a <strong>Route</strong>. Normally it would have been created for us automatically. Fortunately, creating a <strong>Route</strong> is a pretty straight-forward process. You simply <code>expose</code> the <strong>Service</strong> via the command line. Or, via the <strong>Administrator Perspective</strong>, just click <strong>Networking &#8594; Routes</strong> and then the <strong>Create Route</strong> button.</p>
+create a <strong>Route</strong>. Normally it would have been created for us automatically. Fortunately, creating a <strong>Route</strong> is a pretty straight-forward process.</p>
 </div>
 <div class="paragraph">
+<p>You can create a Route either from the OpenShift Console or using the <code>oc</code> CLI.  Use the tabs to choose your desired approach for adding the route.</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset1_openshift-console"></a>OpenShift Console</p>
+</li>
+<li>
+<p><a id="tabset1_code-oc-code-command-line"></a><code>oc</code> Command Line</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset1_openshift-console">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Via the <strong>Administrator Perspective</strong>, just click <strong>Networking &#8594; Routes</strong> and then the <strong>Create Route</strong> button.</p>
+</li>
+<li>
 <p>Insert <strong>parksmap</strong> in <strong>Name</strong> field.</p>
-</div>
-<div class="paragraph">
+</li>
+<li>
 <p>From <strong>Service</strong> field, select <strong>parksmap</strong>. For <strong>Target Port</strong>, select <strong>8080</strong>.</p>
-</div>
-<div class="paragraph">
+</li>
+<li>
 <p>In <strong>Security</strong> section, check <strong>Secure route</strong>. Select <strong>Edge</strong> from <strong>TLS Termination</strong> list.</p>
-</div>
-<div class="paragraph">
+</li>
+<li>
 <p>Leave all other fields blank and click <strong>Create</strong>:</p>
-</div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="_images/parksmap-route-create-1.png" alt="Create Route Part 1">
@@ -507,6 +512,9 @@ create a <strong>Route</strong>. Normally it would have been created for us auto
 <div class="content">
 <img src="_images/parksmap-route-create-2.png" alt="Create Route Part 2">
 </div>
+</div>
+</li>
+</ol>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -523,8 +531,10 @@ The TLS certificate for cluster Apps domains is used by default, so you don&#821
 <div class="paragraph">
 <p>When creating a <strong>Route</strong>, some other options can be provided, like the hostname and path for the <strong>Route</strong> or the other TLS configurations.</p>
 </div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_code-oc-code-command-line">
 <div class="paragraph">
-<p>When using the command line, we can first verify that we don&#8217;t already have any existing <strong>Routes</strong>:</p>
+<p>We are looking to simply <code>expose</code> the <strong>Service</strong>, but first we need to verify that we don&#8217;t already have any existing <strong>Routes</strong>:</p>
 </div>
 <div class="listingblock console-input">
 <div class="content">
@@ -563,6 +573,9 @@ parksmap   172.30.169.213   &lt;none&gt;        8080/TCP   5h</code></pre>
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">route.route.openshift.io/parksmap exposed</code></pre>
 </div>
 </div>
+</div>
+</div>
+</div>
 <div class="paragraph">
 <p>Verify the <strong>Route</strong> was created with the following command:</p>
 </div>
@@ -595,7 +608,7 @@ parksmap   parksmap-workshop.%CLUSTER_SUBDOMAIN%             parksmap   8080-tcp
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-At first time, the Browser will ask permission to get your position. This is needed by the Frontend app to center the world map to your location, if you don&#8217;t allow it, it will just use a default location.
+If this is the first time opening this page, the browser will ask permission to get your position. This is needed by the Frontend app to center the world map to your location, if you don&#8217;t allow it, it will just use a default location.
 </td>
 </tr>
 </table>

@@ -72,19 +72,7 @@
     <a class="nav-link" href="common-explore.html#command_line_interface">Command Line Interface</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="common-explore.html#download_openshift_cli">Download OpenShift CLI</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="common-explore.html#download_and_install_openshift_cli_on_linux">Download and Install OpenShift CLI on Linux</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="common-explore.html#download_and_install_openshift_cli_on_mac">Download and Install OpenShift CLI on Mac OS X</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="common-explore.html#download_and_install_openshift_cli_on_windows">Download and Install OpenShift CLI on Windows</a>
-  </li>
-</ul>
   </li>
   <li class="nav-item" data-depth="3">
     <button class="nav-item-toggle"></button>
@@ -204,9 +192,6 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="#redeploy_application">Exercise: Redeploy Application</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#grant_user_view_permissions">Exercise: Grant User View Permissions</a>
   </li>
 </ul>
   </li>
@@ -368,13 +353,13 @@
     <a class="nav-link" href="mlbparks-debugging.html#enabling_debugging_in_eap_on_openshift">Exercise: Enabling Debugging in EAP on OpenShift</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="mlbparks-debugging.html#port-forwarding_from_pod_to_our_local_machine">Exercise: Port-Forwarding from the pod to our local machine</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="mlbparks-debugging.html#setting_up_remote_debug_in_intellij">Setting up Remote Debug in IntelliJ</a>
+    <a class="nav-link" href="mlbparks-debugging.html#port-forwarding_from_svc_to_our_local_machine">Exercise: Port-Forwarding from a Service to our local machine</a>
   </li>
-</ul>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mlbparks-debugging.html#setting_up_remote_debugging">Attaching a Remote Debugger</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mlbparks-debugging.html#port-forwarding_from_pod_to_our_local_machine">Exercise: Port-Forwarding from the pod to our local machine</a>
   </li>
 </ul>
   </li>
@@ -492,22 +477,73 @@ account, we can do interesting things.</p>
 <p>The parksmap application wants to talk to the OpenShift API to learn about other
 <strong>Pods</strong>, <strong>Services</strong>, and resources within the <strong>Project</strong>. You&#8217;ll soon learn why!</p>
 </div>
+<div class="paragraph">
+<p>The parksmap application runs as a <strong>Service Account</strong> in our project on the cluster: namely the <code>default</code> <strong>Service Account</strong>.  It is to this <strong>Service Account</strong> that we can grant the necessary `view``access that will allow it to query the API to see what resources are within the <strong>Project</strong>. This also has the added benefit of addressing the cause of the error message we witnessed previously in the logs.</p>
+</div>
+<div class="paragraph">
+<p>Choose an approach represented by the following tabs to update the <code>default</code> <strong>Service Account</strong> in the <code>workshop</code> project</p>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset1_openshift-console"></a>OpenShift Console</p>
+</li>
+<li>
+<p><a id="tabset1_code-oc-code-command-line"></a><code>oc</code> Command Line</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset1_openshift-console">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>From the <strong>Workloads &#8594; Deployments</strong> page, click on the <strong>Namespace</strong>, then <strong>Role Bindings</strong> and then the <strong>Create Binding</strong> button.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parksmap-permissions-membership-serviceaccount-list.png" alt="Service account list">
+</div>
+</div>
+</li>
+<li>
+<p>Select <strong>view</strong> for the Role Binding Name <strong>workshop</strong> for the Namespace, <strong>view</strong> for the Role Name, <strong>Service Account</strong> for the Subject, <strong>workshop</strong> for the Subject Namespace, and <strong>default</strong> for the Subject Name.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parksmap-permissions-membership-serviceaccount-edit.png" alt="Service account edit">
+</div>
+</div>
+</li>
+<li>
+<p>Once you&#8217;re finished editing permissions, click on the <strong>Create</strong> button.  You should then be able to see it on the <code>Role Bindings</code> list for the <code>workshop</code> project`</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parksmap-permissions-membership-serviceaccount-done.png" alt="Service account changed">
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_code-oc-code-command-line">
 <div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc project workshop</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Then:</p>
+<p>Then use the <code>oc policy add-role-to-user</code> command to give the predefined <code>view</code> <em>role</em> to the user:</p>
 </div>
 <div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc policy add-role-to-user view -z default</code></pre>
 </div>
 </div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">What does the <code>-z</code> flag do?</div>
 <div class="paragraph">
-<p>The <code>oc policy</code> command above is giving a defined <em>role</em> (<code>view</code>) to a user. But
-we are using a special flag, <code>-z</code>. What does this flag do? From the <code>-h</code> output:</p>
+<p>From the <code>-h</code> output on <code>oc policy</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -519,6 +555,8 @@ we are using a special flag, <code>-z</code>. What does this flag do? From the <
 entire string, which, in this case, is
 <code>system:serviceaccount:workshop:default</code>. It&#8217;s a nifty shortcut.</p>
 </div>
+</div>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -526,40 +564,12 @@ entire string, which, in this case, is
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<div class="paragraph">
-<p>The <code>-z</code> flag will only work for service accounts in the <strong>current</strong> project.
-If you&#8217;re referring to a service account in a different project, use the `-n &lt;project&gt;`switch.</p>
-</div>
+The <code>-z</code> flag will only work for service accounts in the <strong>current</strong> project.  If you&#8217;re referring to a service account in a different project, use the `-n &lt;project&gt;`switch.
 </td>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>Now that the <code>default</code> <strong>Service Account</strong> now has <strong>view</strong> access, so now it can query the API to see what resources are within the <strong>Project</strong>. This also has the added benefit of suppressing the error message! Although, in reality, we fixed the application.</p>
 </div>
-<div class="paragraph">
-<p>Another way you could have done the same is by using the OpenShift console. Once you&#8217;re on the
-<strong>Workloads &#8594; Deployments</strong> page, click on the <strong>Namespace</strong>, then <strong>Role Bindings</strong> and then the <strong>Create Binding</strong> button.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/parksmap-permissions-membership-serviceaccount-list.png" alt="Service account list">
-</div>
-</div>
-<div class="paragraph">
-<p>Select <strong>view</strong> for the Role Binding Name <strong>workshop</strong> for the Namespace, <strong>view</strong> for the Role Name, <strong>Service Account</strong> for the Subject, <strong>workshop</strong> for the Subject Namespace, and <strong>default</strong> for the Subject Name.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/parksmap-permissions-membership-serviceaccount-edit.png" alt="Service account edit">
-</div>
-</div>
-<div class="paragraph">
-<p>Once you&#8217;re finished editing permissions, click on the <strong>Create</strong> button.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/parksmap-permissions-membership-serviceaccount-done.png" alt="Service account changed">
 </div>
 </div>
 </div>
@@ -582,39 +592,6 @@ If you&#8217;re referring to a service account in a different project, use the `
 </div>
 <div class="paragraph">
 <p>If you look at the logs for the application now, you should see no errors.  That&#8217;s great.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="grant_user_view_permissions"><a class="anchor" href="#grant_user_view_permissions"></a>(Optional) Exercise: Grant User View Permissions</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>If you create a project, you are that project&#8217;s administrator. This means that
-you can grant access to other users, too. If you like, give your neighbor view
-access to your project using the following command:</p>
-</div>
-<div class="admonitionblock caution">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-caution" title="Caution"></i>
-</td>
-<td class="content">
-In the following command(s), replace <code>workshop</code> with the user name of the person to whom you want to grant access.
-</td>
-</tr>
-</table>
-</div>
-<div class="listingblock console-input">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc policy add-role-to-user view workshop</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Have them go to the project view by clicking the <strong>Projects</strong> button and verify
-that they can see your project and its resources. This type of arrangement (view
-but not edit) might be ideal for a developer getting visibility into a
-production application&#8217;s project.</p>
 </div>
 </div>
 </div>

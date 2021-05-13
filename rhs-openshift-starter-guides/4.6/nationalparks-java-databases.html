@@ -72,19 +72,7 @@
     <a class="nav-link" href="common-explore.html#command_line_interface">Command Line Interface</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="common-explore.html#download_openshift_cli">Download OpenShift CLI</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="common-explore.html#download_and_install_openshift_cli_on_linux">Download and Install OpenShift CLI on Linux</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="common-explore.html#download_and_install_openshift_cli_on_mac">Download and Install OpenShift CLI on Mac OS X</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="common-explore.html#download_and_install_openshift_cli_on_windows">Download and Install OpenShift CLI on Windows</a>
-  </li>
-</ul>
   </li>
   <li class="nav-item" data-depth="3">
     <button class="nav-item-toggle"></button>
@@ -204,9 +192,6 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="parksmap-permissions.html#redeploy_application">Exercise: Redeploy Application</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="parksmap-permissions.html#grant_user_view_permissions">Exercise: Grant User View Permissions</a>
   </li>
 </ul>
   </li>
@@ -368,13 +353,13 @@
     <a class="nav-link" href="mlbparks-debugging.html#enabling_debugging_in_eap_on_openshift">Exercise: Enabling Debugging in EAP on OpenShift</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="mlbparks-debugging.html#port-forwarding_from_pod_to_our_local_machine">Exercise: Port-Forwarding from the pod to our local machine</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="mlbparks-debugging.html#setting_up_remote_debug_in_intellij">Setting up Remote Debug in IntelliJ</a>
+    <a class="nav-link" href="mlbparks-debugging.html#port-forwarding_from_svc_to_our_local_machine">Exercise: Port-Forwarding from a Service to our local machine</a>
   </li>
-</ul>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mlbparks-debugging.html#setting_up_remote_debugging">Attaching a Remote Debugger</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mlbparks-debugging.html#port-forwarding_from_pod_to_our_local_machine">Exercise: Port-Forwarding from the pod to our local machine</a>
   </li>
 </ul>
   </li>
@@ -675,13 +660,24 @@ Make sure to have configured the <strong><code>MongoDB Database Name</code></str
 <div class="paragraph">
 <p>This change in configuration will trigger a new deployment of the <code>nationalparks</code> application with the environment variables properly injected.</p>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
 <div class="paragraph">
-<p>Back in the <strong>Topology</strong> view, click and drag with Shift key the <code>mongodb-nationalparks</code> component into the light gray area that denotes the <code>workshop</code> application, so that all three components are contained in it.</p>
+<p>Back in the <strong>Topology</strong> view, if your <code>mongodb-nationalparks</code> component is not already in the light gray area that denotes the <code>workshop</code> application, click and drag the component whilst holding down <kbd>Shift</kbd> to add it to the group with the other two components (as shown below)</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/nationalparks-databases-add-mongodb-to-workshop-app.png" alt="Add mongodb to the workshop app">
 </div>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Next, let&#8217;s fix the labels assigned to the <code>mongodb-nationalparks</code> deployment. Currently, we cannot set labels when using the database template from the catalog, so we will fix these labels manually.</p>

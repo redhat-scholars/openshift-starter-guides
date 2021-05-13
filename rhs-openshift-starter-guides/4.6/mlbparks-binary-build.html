@@ -72,19 +72,7 @@
     <a class="nav-link" href="common-explore.html#command_line_interface">Command Line Interface</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="common-explore.html#download_openshift_cli">Download OpenShift CLI</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="common-explore.html#download_and_install_openshift_cli_on_linux">Download and Install OpenShift CLI on Linux</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="common-explore.html#download_and_install_openshift_cli_on_mac">Download and Install OpenShift CLI on Mac OS X</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="common-explore.html#download_and_install_openshift_cli_on_windows">Download and Install OpenShift CLI on Windows</a>
-  </li>
-</ul>
   </li>
   <li class="nav-item" data-depth="3">
     <button class="nav-item-toggle"></button>
@@ -204,9 +192,6 @@
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="parksmap-permissions.html#redeploy_application">Exercise: Redeploy Application</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="parksmap-permissions.html#grant_user_view_permissions">Exercise: Grant User View Permissions</a>
   </li>
 </ul>
   </li>
@@ -368,13 +353,13 @@
     <a class="nav-link" href="mlbparks-debugging.html#enabling_debugging_in_eap_on_openshift">Exercise: Enabling Debugging in EAP on OpenShift</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="mlbparks-debugging.html#port-forwarding_from_pod_to_our_local_machine">Exercise: Port-Forwarding from the pod to our local machine</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="mlbparks-debugging.html#setting_up_remote_debug_in_intellij">Setting up Remote Debug in IntelliJ</a>
+    <a class="nav-link" href="mlbparks-debugging.html#port-forwarding_from_svc_to_our_local_machine">Exercise: Port-Forwarding from a Service to our local machine</a>
   </li>
-</ul>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mlbparks-debugging.html#setting_up_remote_debugging">Attaching a Remote Debugger</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="mlbparks-debugging.html#port-forwarding_from_pod_to_our_local_machine">Exercise: Port-Forwarding from the pod to our local machine</a>
   </li>
 </ul>
   </li>
@@ -521,6 +506,57 @@ Developer Studio and JBoss Developer Tools have built in functionality that make
 <h3 id="setup_the_build_of_the_war_file"><a class="anchor" href="#setup_the_build_of_the_war_file"></a>Setup the Build of the WAR file</h3>
 <div class="paragraph">
 <p>If you have Maven all set up on your machine, then you can <code>cd</code> into the <code>mlbparks</code> directory and run <code>mvn package</code></p>
+</div>
+<div id="docker_for_maven" class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If you don&#8217;t have Maven on your machine but you are able to run docker, you can instead mount the repo directory and run the build commands from within the container.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>From within the directory that you ran <code>git clone</code> above, run the following command:</p>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run -it --rm --name maven_builder -v ~/.kube:/home/jboss/.kube -v $(pwd):/workspaces -w /workspaces registry.access.redhat.com/ubi8/openjdk-11 /bin/bash</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Next, run this command (in the container) to locally install the latest version of <code>oc</code> on the container</p>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">mkdir -p $HOME/bin &amp;&amp; curl -L <a href="https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-client-linux.tar.gz" class="bare">https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-client-linux.tar.gz</a> | \
+    tar -xvzf - -C $HOME/bin/ oc &amp;&amp; chmod 755 $HOME/bin/oc &amp;&amp; ln -s $HOME/bin/oc $HOME/bin/kubectl</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Finally, ensure that you are still connected to your OpenShift cluster from within the builder container by running the following and comparing the output:</p>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc whoami --show-server</code></pre>
+</div>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"><a href="https://%CLUSTER_SUBDOMAIN%:30713" class="bare">https://%CLUSTER_SUBDOMAIN%:30713</a></code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Once completed, you should be able to follow the commands as they are outlined below.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="listingblock console-input">
 <div class="content">
