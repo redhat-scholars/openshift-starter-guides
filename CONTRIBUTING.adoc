@@ -5,7 +5,7 @@ The site generation is done by https://docs.antora.org/[Antora]
 
 ### Visual Studio Code Remote Development
 
-If you are using [Visual Studio Code](https://code.visualstudio.com/) with the [Remote Containers Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers), you don't need to install anything locally.
+If you are using link:https://code.visualstudio.com/[Visual Studio Code] with the link:https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers[Remote Containers Extension], you don't need to install anything locally.
 
 Simply follow these instructions:
 

@@ -45,6 +45,44 @@ Developer Studio and JBoss Developer Tools have built in functionality that make
 === Setup the Build of the WAR file
 If you have Maven all set up on your machine, then you can `cd` into the `mlbparks` directory and run `mvn package`
 
+[#docker_for_maven]
+[TIP]
+====
+If you don't have Maven on your machine but you are able to run docker, you can instead mount the repo directory and run the build commands from within the container.
+
+. From within the directory that you ran `git clone` above, run the following command:
++
+[.console-input]
+[source,bash,subs="+macros,+attributes"]
+----
+docker run -it --rm --name maven_builder -v ~/.kube:/home/jboss/.kube -v $(pwd):/workspaces -w /workspaces registry.access.redhat.com/ubi8/openjdk-11 /bin/bash
+----
++
+. Next, run this command (in the container) to locally install the latest version of `oc` on the container
++
+[.console-input]
+[source,bash,subs="+macros,+attributes"]
+----
+mkdir -p $HOME/bin && curl -L https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-client-linux.tar.gz | \
+    tar -xvzf - -C $HOME/bin/ oc && chmod 755 $HOME/bin/oc && ln -s $HOME/bin/oc $HOME/bin/kubectl
+----
++
+. Finally, ensure that you are still connected to your OpenShift cluster from within the builder container by running the following and comparing the output:
++
+[.console-input]
+[source,bash,subs="+macros,+attributes"]
+----
+oc whoami --show-server
+----
++
+[.console-output]
+[source,bash,subs="+macros,+attributes"]
+----
+https://%CLUSTER_SUBDOMAIN%:30713
+----
+
+Once completed, you should be able to follow the commands as they are outlined below.
+====
 
 [.console-input]
 [source,bash,subs="+attributes,macros+"]

@@ -9,8 +9,8 @@ site:
 content:
   sources:
     - url: .
-      #branches: HEAD
-      branches: [roks, ocp-4.6] 
+      branches: HEAD
+      #branches: [roks, ocp-4.6] 
       start_path: documentation
       #- url: git@github.com:redhat-scholars/openshift-starter-guides-dotnet.git
       #branches: ocp-4.6
@@ -19,18 +19,16 @@ content:
 asciidoc:
   attributes:
     #title: OpenShift Starter Guides(Dev Mode)
+    experimental: true
     parksmap-version: latest
     parksmap-image: quay.io/openshiftroadshow/parksmap
     openshift-docs-url: https://docs.openshift.com/container-platform/4.6
     openshift-version: 4.6
     project-namespace: workshop
-    workshop-domain: rhscholars.devx.red
     kubernetes-version: v1.19.0
     release-version: ocp
     roks-login-url: https://cloud.ibm.com/authorize/devcluster
     page-pagination: true
-    openshift-console-url: https://console-openshift-console.apps.example.com
-    etherpad-url: http://example.com
     lab: java
     lab-name: Java
   extensions:

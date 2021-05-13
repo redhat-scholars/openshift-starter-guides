@@ -127,9 +127,12 @@ image::nationalparks-databases-binding-add-binding-to-nationalparks.png[Add bind
 
 This change in configuration will trigger a new deployment of the `nationalparks` application with the environment variables properly injected.
 
-Back in the *Topology* view, click and drag with Shift key the `mongodb-nationalparks` component into the light gray area that denotes the `workshop` application, so that all three components are contained in it.
+[TIP]
+====
+Back in the *Topology* view, if your `mongodb-nationalparks` component is not already in the light gray area that denotes the `workshop` application, click and drag the component whilst holding down kbd:[Shift] to add it to the group with the other two components (as shown below)
 
 image::nationalparks-databases-add-mongodb-to-workshop-app.png[Add mongodb to the workshop app]
+====
 
 Next, let's fix the labels assigned to the `mongodb-nationalparks` deployment. Currently, we cannot set labels when using the database template from the catalog, so we will fix these labels manually. 
 

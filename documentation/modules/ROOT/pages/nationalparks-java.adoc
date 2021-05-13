@@ -93,7 +93,7 @@ Enter the following for Git Repo URL:
 https://github.com/openshift-roadshow/nationalparks.git
 ----
 
-OpenShift will automatically guess the Git server type and the programming language used by the source code. Verify that *Java* has been selected as your Builder Image, and be sure to select version *11* to have OpenJDK 11.
+OpenShift will automatically guess the Git server type and the programming language used by the source code. Verify that *Java* has been selected as your Builder Image, and be sure to select version `openjdk-11-ubi8` to have OpenJDK 11.
 
 image::nationalparks-import-from-git-url-builder.png[Import from Git]
 

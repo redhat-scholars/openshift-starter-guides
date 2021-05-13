@@ -24,25 +24,34 @@ create a *Route*.
 == Exercise: Creating a Route
 
 You may remember that when we deployed the `parksmap` application, we un-checked the checkbox to 
-create a *Route*. Normally it would have been created for us automatically. Fortunately, creating a *Route* is a pretty straight-forward process. You simply `expose` the *Service* via the command line. Or, via the *Administrator Perspective*, just click *Networking -> Routes* and then the *Create Route* button.
+create a *Route*. Normally it would have been created for us automatically. Fortunately, creating a *Route* is a pretty straight-forward process. 
 
-Insert *parksmap* in *Name* field.
+You can create a Route either from the OpenShift Console or using the `oc` CLI.  Use the tabs to choose your desired approach for adding the route.
 
-From *Service* field, select *parksmap*. For *Target Port*, select *8080*.
-
-In *Security* section, check *Secure route*. Select *Edge* from *TLS Termination* list.
-
-Leave all other fields blank and click *Create*:
-
+[tabs]
+====
+OpenShift Console::
++
+--
+. Via the *Administrator Perspective*, just click *Networking -> Routes* and then the *Create Route* button.
+. Insert *parksmap* in *Name* field.
+. From *Service* field, select *parksmap*. For *Target Port*, select *8080*.
+. In *Security* section, check *Secure route*. Select *Edge* from *TLS Termination* list.
+. Leave all other fields blank and click *Create*:
++
 image::parksmap-route-create-1.png[Create Route Part 1,align="center"]
-
++
 image::parksmap-route-create-2.png[Create Route Part 2,align="center"]
 
 TIP: The TLS certificate for cluster Apps domains is used by default, so you don't need to add any certificate. In case you would like a custom domain resolving to OpenShift Nodes hosting Routers, you can add certificates also on a per-route basis.
 
 When creating a *Route*, some other options can be provided, like the hostname and path for the *Route* or the other TLS configurations.
 
-When using the command line, we can first verify that we don't already have any existing *Routes*:
+--
+`oc` Command Line::
++
+--
+We are looking to simply `expose` the *Service*, but first we need to verify that we don't already have any existing *Routes*:
 
 [.console-input]
 [source,bash,subs="+attributes,macros+"]
@@ -85,6 +94,9 @@ oc create route edge parksmap --service=parksmap
 route.route.openshift.io/parksmap exposed
 ----
 
+--
+====
+
 Verify the *Route* was created with the following command:
 
 [.console-input]
@@ -106,7 +118,7 @@ image::parksmap-route-created.png[Route created]
 
 This application is now available at the URL shown in the Developer Perspective. Click the link and you will see it.
 
-NOTE: At first time, the Browser will ask permission to get your position. This is needed by the Frontend app to center the world map to your location, if you don't allow it, it will just use a default location.
+NOTE: If this is the first time opening this page, the browser will ask permission to get your position. This is needed by the Frontend app to center the world map to your location, if you don't allow it, it will just use a default location.
 
 image::parksmap-route-empty-map.png[Empty map]
 

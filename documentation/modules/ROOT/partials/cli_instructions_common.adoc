@@ -1,0 +1,9 @@
+
+From top right menu bar, click to the little white question mark icon, then click to *Command Line Tools*:
+
+image::prerequisites_cli_links.png[Download CLI]
+
+
+Scroll down to `oc - OpenShift Command Line Interface (CLI)` and click on the link appropriate to your OS
+
+image::prerequisites_cli_binaries.png[CLI Binaries]

@@ -1,0 +1,30 @@
+Once the file has been downloaded, you will need to extract the contents as it
+is a compressed archive. It is recommended that this file is saved to the following
+directory:
+
+[source,bash]
+----
+~/OpenShift
+----
+
+Open up a terminal window and change to the directory where you downloaded the
+file.  Once you are in the directory, enter in the following command:
+
+CAUTION: The name of the oc packaged archive may vary. Adjust accordingly.
+
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
+----
+tar zxvf oc-{os-lower}.tar.gz
+----
+
+The tar.gz file name needs to be replaced by the entire name that was downloaded in the previous step.
+
+Now you can add the OpenShift CLI tools to your PATH.
+
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
+----
+export PATH=$PATH:~/OpenShift
+----
+
