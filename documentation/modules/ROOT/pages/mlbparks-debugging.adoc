@@ -27,7 +27,7 @@ oc set env dc/mlbparks DEBUG=true
 
 This will force a redeploy of our MLBparks pod, this time with the JDWT transport enabled and serving on port 8787.
 
-Whilst we can connect to a pod directly to debug it, when there is only one instance of a Service running it can be convenient to setup port-forwarding through a Service (since pod names change but the name of the Service is static).  See <<Exercise: Port-Forwarding from the pod to our local machine,Exercise: Port-Forwarding from the pod to our local machine>>
+Whilst we can connect to a Pod directly to debug it, when there is only one instance of a Pod running it can be convenient to setup port-forwarding through a Service (since Pod names change but the name of the Service is static).  See <<Exercise: Port-Forwarding from the pod to our local machine,Exercise: Port-Forwarding from the pod to our local machine>>
 
 [#port-forwarding_from_svc_to_our_local_machine]
 == Port-Forwarding through a Service to our local machine
@@ -77,7 +77,7 @@ oc port-forward svc/mlbparks 8787:8787
 
 So now when we connect on `localhost:8787` it will get forwarded to the mlbparks instance running in the pod.  
 
-NOTE: port-forwarding is only active as long as the `oc port-forward` command is allowed to run.  Since we run it in the foreground, we are able to stop port-forwarding by hitting kbd:[CTRL+c]
+NOTE: port-forwarding is only active as long as the `oc port-forward` command is allowed to run.  Since we run it in the foreground, we are able to stop port-forwarding by hitting kbd:[CTRL+c] (or kbd:[CMD+c] on a Mac)
 
 Now all we need to do is find a debugger to connect on that port
 
