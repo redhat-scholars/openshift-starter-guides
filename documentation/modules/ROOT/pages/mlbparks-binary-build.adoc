@@ -55,7 +55,7 @@ If you don't have Maven on your machine but you are able to run docker, you can 
 [.console-input]
 [source,bash,subs="+macros,+attributes"]
 ----
-docker run -it --rm --name maven_builder -v ~/.kube:/home/jboss/.kube -v $(pwd):/workspaces -w /workspaces registry.access.redhat.com/ubi8/openjdk-11 /bin/bash
+docker run -it --rm --user 0 --name maven_builder -v ~/.kube:/home/jboss/.kube -v $(pwd):/workspaces -w /workspaces registry.access.redhat.com/ubi8/openjdk-11 /bin/bash
 ----
 +
 . Next, run this command (in the container) to locally install the latest version of `oc` on the container
