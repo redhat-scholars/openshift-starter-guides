@@ -109,9 +109,18 @@ nationalparks-pipeline   8s
 
 Now let's review our Tekton Pipeline:
 
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
+
+----
+oc describe pipeline nationalparks-pipeline
+----
+
+You should see something similar to this:
+
+[.console-output]
 [source,yaml,role="copypaste"]
 ----
----
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
