@@ -105,7 +105,11 @@ Scroll down to the *General* section. Select:
 
 In *Resources* section, select *Deployment*.
 
-Expand the Labels section and add 3 labels.
+Under *Advanced Options*, ensure *Create a route to the application* is *checked* here.
+
+NOTE: Leave Pipeline section empty here as we will implement it in the next modules
+
+Expand the *Labels* section and add 3 labels.
 
 The name of the Application group:
 

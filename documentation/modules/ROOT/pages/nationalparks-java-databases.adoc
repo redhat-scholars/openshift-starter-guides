@@ -101,11 +101,35 @@ You can see that some of the fields say *"generated if empty"*. This is a
 feature of *Templates* in OpenShift. For
 now, be sure to use the following values in their respective fields:
 
-* `Database Service Name` : `mongodb-nationalparks`
-* `MongoDB Connection Username` : `mongodb`
-* `MongoDB Connection Password` : `mongodb`
-* `MongoDB Database Name`: `mongodb`
-* `MongoDB Admin Password` : `mongodb`
+*Database Service Name*:
+[source,role=copypaste]
+----
+mongodb-nationalparks
+----
+
+*MongoDB Connection Username*:
+[source,role=copypaste]
+----
+mongodb
+----
+
+*MongoDB Connection Password*:
+[source,role=copypaste]
+----
+mongodb
+----
+
+*MongoDB Database Name*:
+[source,role=copypaste]
+----
+mongodb
+----
+
+*MongoDB Admin Password*:
+[source,role=copypaste]
+----
+mongodb
+----
 
 CAUTION: Make sure to have configured the *`MongoDB Database Name`* parameter with the appropriate value as by default it will already have a value of `sampledb`.
 

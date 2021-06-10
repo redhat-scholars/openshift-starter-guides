@@ -83,9 +83,9 @@ You should see the following (or something similar):
 [.console-output]
 [source,bash]
 ----
-Client Version: 4.6.9
-Server Version: 4.6.4 <.>
-Kubernetes Version: v1.19.0+9f84db3
+Client Version: 4.7.13
+Server Version: 4.7.0 <.>
+Kubernetes Version: v1.20.0+bd9e442
 ----
 <.> NOTE: you will only see the `Server Version` and `Kubernetes Version` if you are currently connected to a Kubenetes or OpenShift cluster
 
@@ -114,6 +114,11 @@ You may also want to enable CLI autocompletion (bash or zsh):
 [source,bash,role="copypaste"]
 ----
 source <(oc completion bash)
+----
+
+[.console-input]
+[source,bash,role="copypaste"]
+----
 source <(oc completion zsh)
 ----
 
@@ -123,9 +128,15 @@ To make CLI autocompletion persistent (bash or zsh) by adding a relevant line to
 [source,bash,role="copypaste"]
 ----
 oc completion bash > oc_bash_completion.sh
-oc completion zsh > oc_zsh_completion.sh
  
 source oc_bash_completion.sh
+----
+
+[.console-input]
+[source,bash,role="copypaste"]
+----
+oc completion zsh > oc_zsh_completion.sh
+ 
 source oc_zsh_completion.sh
 ----
 ****

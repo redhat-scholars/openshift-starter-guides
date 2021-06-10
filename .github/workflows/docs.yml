@@ -3,8 +3,8 @@ name: docs
 on:
   push:
     branches:
+      - ocp-4.7
       - ocp-4.6
-      - roks
 env:
   SITE_DIR: "gh-pages"
 jobs:

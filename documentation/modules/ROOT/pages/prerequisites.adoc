@@ -8,10 +8,10 @@ In order to run the lab in your cluster, you need to meet the requirements discu
 |**Component**|**Version**
 
 | https://www.openshift.com/try[OpenShift]
-| `4.6`
+| `4.7`
 
 | link:#openshift_pipelines[OpenShift Pipelines]
-| `1.2.x`
+| `1.4.x`
 
 | link:#github_account[Git]
 | `2.x`
@@ -36,7 +36,7 @@ From the description view, click *Install* to review all installation settings.
 
 image::prerequisites_operatorhub_install_pipelines.png[Install Pipelines]
 
-Ensure *Update Channel* is set to *ocp-4.6* , and click *Install* to start installing the Operator.
+Ensure *Update Channel* is set to *stable* , and click *Install* to start installing the Operator.
 
 image::prerequisites_operatorhub_install_operator.png[Install Operator]
 
