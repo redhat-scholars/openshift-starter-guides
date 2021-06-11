@@ -541,7 +541,7 @@ Ensure you met all <a href="prerequisites.html" class="page">Prerequisites</a> b
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipeline.yaml -n workshop</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipeline.yaml -n %PROJECT%</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -549,7 +549,7 @@ Ensure you met all <a href="prerequisites.html" class="page">Prerequisites</a> b
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pipelines -n workshop</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pipelines -n %PROJECT%</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -566,7 +566,7 @@ nationalparks-pipeline   8s</code></pre>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pipeline nationalparks-pipeline -o yaml -n workshop</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get pipeline nationalparks-pipeline -o yaml -n %PROJECT%</code></pre>
 </div>
 </div>
 <div class="listingblock copypaste">

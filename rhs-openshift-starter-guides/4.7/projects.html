@@ -458,11 +458,11 @@ understand all of the terminology as we will cover it in detail in later labs.</
 <h2 id="create_your_first_project"><a class="anchor" href="#create_your_first_project"></a>Create your first Project</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Create a project named <strong>workshop</strong>. From left-side menu, click to <strong>Projects</strong>, then from top-right click
+<p>Create a project named <strong>%PROJECT%</strong>. From left-side menu, click to <strong>Projects</strong>, then from top-right click
 to <strong>Create Project</strong>.</p>
 </div>
 <div class="paragraph">
-<p>From the form, insert the name of your project <strong>workshop</strong> and click to <strong>Create</strong>.</p>
+<p>From the form, insert the name of your project <strong>%PROJECT%</strong> and click to <strong>Create</strong>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -471,7 +471,7 @@ to <strong>Create Project</strong>.</p>
 </div>
 <div class="paragraph">
 <p>If you had multiple projects, the first thing you would want to do is to switch
-to the <strong>workshop</strong> project to make sure you&#8217;re on the correct project from now on.</p>
+to the <strong>%PROJECT%</strong> project to make sure you&#8217;re on the correct project from now on.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -504,11 +504,11 @@ to the <strong>workshop</strong> project to make sure you&#8217;re on the correc
 </div>
 </div>
 <div class="paragraph">
-<p>You can also create and manage project from the CLI as well. Let&#8217;s use our newly created project workshop as our default one:</p>
+<p>You can also create and manage project from the CLI as well. Let&#8217;s use our newly created project %PROJECT% as our default one:</p>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc project workshop</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc project %PROJECT%</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -516,7 +516,7 @@ to the <strong>workshop</strong> project to make sure you&#8217;re on the correc
 </div>
 <div class="listingblock console-output">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Now using project "workshop" on server "https://api.%CLUSTER_SUBDOMAIN%:6443"</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Now using project "%PROJECT%" on server "https://api.%CLUSTER_SUBDOMAIN%:6443"</code></pre>
 </div>
 </div>
 <div class="paragraph">

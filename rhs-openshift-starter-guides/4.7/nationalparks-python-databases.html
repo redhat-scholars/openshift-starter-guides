@@ -505,7 +505,7 @@ version control system.</p>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f https://raw.githubusercontent.com/openshift-labs/starter-guides/ocp-4.6/mongodb-template.yaml -n workshop</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f https://raw.githubusercontent.com/openshift-labs/starter-guides/ocp-4.6/mongodb-template.yaml -n %PROJECT%</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -543,7 +543,7 @@ persistent storage!). The image will ensure that:</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>In the Developer Perspective in your <code>workshop</code> project,
+<p>In the Developer Perspective in your <code>%PROJECT%</code> project,
 click <strong>+Add</strong> and then <strong>Database</strong>. In the Databases view, you can click <strong>Mongo</strong> to filter for just MongoDB.</p>
 </div>
 <div class="admonitionblock note">
@@ -745,7 +745,7 @@ service to query for data:</p>
 </div>
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code>http://nationalparks-workshop.%CLUSTER_SUBDOMAIN%/ws/data/all</code></pre>
+<pre class="highlightjs highlight"><code>http://nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%/ws/data/all</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -766,7 +766,7 @@ application and then deployed the database. Nothing actually loaded anything
 </div>
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code>http://nationalparks-workshop.%CLUSTER_SUBDOMAIN%/ws/data/load</code></pre>
+<pre class="highlightjs highlight"><code>http://nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%/ws/data/load</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -796,7 +796,7 @@ a browser problem, and the application is working properly.
 </div>
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code>https://parksmap-workshop.%CLUSTER_SUBDOMAIN%</code></pre>
+<pre class="highlightjs highlight"><code>https://parksmap-%PROJECT%.%CLUSTER_SUBDOMAIN%</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -876,7 +876,7 @@ labels. <code>describe</code> the <code>nationalparks</code> service:</p>
 <div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Name:                   nationalparks
-Namespace:              workshop
+Namespace:              %PROJECT%
 Created:                2 hours ago
 Labels:                 app=workshop
                         app.kubernetes.io/component=nationalparks
@@ -888,7 +888,7 @@ Labels:                 app=workshop
                         component=nationalparks
                         role=backend
 Annotations:            openshift.io/host.generated=true
-Requested Host:         nationalparks-workshop.%CLUSTER_SUBDOMAIN%
+Requested Host:         nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%
                         exposed on router router 2 hours ago
 Path:                   &lt;none&gt;
 TLS Termination:        &lt;none&gt;
@@ -921,7 +921,7 @@ Endpoints:              10.1.9.8:8080</code></pre>
 </div>
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code>https://parksmap-workshop.%CLUSTER_SUBDOMAIN%/</code></pre>
+<pre class="highlightjs highlight"><code>https://parksmap-%PROJECT%.%CLUSTER_SUBDOMAIN%/</code></pre>
 </div>
 </div>
 <div class="imageblock">

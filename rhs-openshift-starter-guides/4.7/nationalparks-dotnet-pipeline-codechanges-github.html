@@ -483,7 +483,7 @@ achieved.</p>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-triggers-all.yaml -n workshop</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-triggers-all.yaml -n %PROJECT%</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -563,7 +563,7 @@ achieved.</p>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc new-app -f https://raw.githubusercontent.com/csrwng/ngrok/master/openshift/ngrok-template.yaml -p HOST=el-nationalparks -p PORT=8080 -n workshop</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc new-app -f https://raw.githubusercontent.com/csrwng/ngrok/master/openshift/ngrok-template.yaml -p HOST=el-nationalparks -p PORT=8080 -n %PROJECT%</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -571,7 +571,7 @@ achieved.</p>
 </div>
 <div class="listingblock console-output">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">--&gt; Deploying template "workshop/ngrok" for "https://raw.githubusercontent.com/csrwng/ngrok/master/openshift/ngrok-template.yaml" to project workshop
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">--&gt; Deploying template "%PROJECT%/ngrok" for "https://raw.githubusercontent.com/csrwng/ngrok/master/openshift/ngrok-template.yaml" to project %PROJECT%
 
      * With parameters:
         * Host=el-nationalparks
@@ -583,7 +583,7 @@ achieved.</p>
     route.route.openshift.io "ngrok" created
     imagestream.image.openshift.io "ngrok" created
 --&gt; Success
-    Access your application via route 'ngrok-workshop.%CLUSTER_SUBDOMAIN%'
+    Access your application via route 'ngrok-%PROJECT%.%CLUSTER_SUBDOMAIN%'
     Run 'oc status' to view your app.</code></pre>
 </div>
 </div>
@@ -592,7 +592,7 @@ achieved.</p>
 </div>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get route ngrok -n workshop</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get route ngrok -n %PROJECT%</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -608,7 +608,7 @@ achieved.</p>
 </div>
 <div class="listingblock console-output">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">{"eventListener":"nationalparks","namespace":"workshop","eventID":"vzkx5"}</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">{"eventListener":"nationalparks","namespace":"%PROJECT%","eventID":"vzkx5"}</code></pre>
 </div>
 </div>
 </div>
@@ -725,7 +725,7 @@ triggered in OpenShift. Click <strong>Pipeline</strong> in the left navigation m
 <p>Once the build and deploy has finished, verify your new image was automatically deployed by viewing the application in your browser:</p>
 </div>
 <div class="paragraph">
-<p><a href="http://nationalparks-workshop.%CLUSTER_SUBDOMAIN%/ws/info/" class="params-link" target="_blank" rel="noopener">National Parks Info Page</a></p>
+<p><a href="http://nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%/ws/info/" class="params-link" target="_blank" rel="noopener">National Parks Info Page</a></p>
 </div>
 <div class="paragraph">
 <p>You should now see the new name you have set in the JSON string returned.</p>

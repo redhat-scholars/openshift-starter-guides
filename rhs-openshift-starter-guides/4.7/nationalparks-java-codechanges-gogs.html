@@ -447,7 +447,7 @@ achieved.</p>
 <h2 id="_exercise_configuring_gogs_web_hooks"><a class="anchor" href="#_exercise_configuring_gogs_web_hooks"></a>Exercise: Configuring Gogs Web Hooks</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this lab you can use a build webhook to trigger a build execution every time there is a change in the nationalparks Gogs repository. In the OpenShift web console, navigate to your <code>workshop</code> project, and then mouse-over <code>Builds</code> and then <code>Builds</code>. Click the <code>nationalparks</code> build and then <code>Configuration</code> tab.</p>
+<p>In this lab you can use a build webhook to trigger a build execution every time there is a change in the nationalparks Gogs repository. In the OpenShift web console, navigate to your <code>%PROJECT%</code> project, and then mouse-over <code>Builds</code> and then <code>Builds</code>. Click the <code>nationalparks</code> build and then <code>Configuration</code> tab.</p>
 </div>
 <div class="paragraph">
 <p>On this screen you will see the option to copy the generic webhook URL as shown in the following image:</p>
@@ -595,7 +595,7 @@ nationalparks-2   Source    Git@3b26e1a   Running    43 seconds ago</code></pre>
 automatically deployed by viewing the application in your browser:</p>
 </div>
 <div class="paragraph">
-<p><a href="http://nationalparks-workshop.%CLUSTER_SUBDOMAIN%/ws/info/">National Parks Info Page</a></p>
+<p><a href="http://nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%/ws/info/">National Parks Info Page</a></p>
 </div>
 <div class="paragraph">
 <p>You should now see the new name you have set in the JSON string returned.</p>
@@ -667,7 +667,7 @@ Warning: the following images triggers were disabled: nationalparks:live
 original header by viewing the application in your browser.</p>
 </div>
 <div class="paragraph">
-<p><a href="http://nationalparks-workshop.%CLUSTER_SUBDOMAIN%/ws/info/">National Parks Info Page</a></p>
+<p><a href="http://nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%/ws/info/">National Parks Info Page</a></p>
 </div>
 <div class="admonitionblock note">
 <table>

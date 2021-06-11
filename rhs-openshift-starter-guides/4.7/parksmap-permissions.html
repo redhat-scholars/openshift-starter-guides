@@ -485,7 +485,7 @@ account, we can do interesting things.</p>
 <p>The parksmap application runs as a <strong>Service Account</strong> in our project on the cluster: namely the <code>default</code> <strong>Service Account</strong>.  It is to this <strong>Service Account</strong> that we can grant the necessary `view``access that will allow it to query the API to see what resources are within the <strong>Project</strong>. This also has the added benefit of addressing the cause of the error message we witnessed previously in the logs.</p>
 </div>
 <div class="paragraph">
-<p>Choose an approach represented by the following tabs to update the <code>default</code> <strong>Service Account</strong> in the <code>workshop</code> project</p>
+<p>Choose an approach represented by the following tabs to update the <code>default</code> <strong>Service Account</strong> in the <code>%PROJECT%</code> project</p>
 </div>
 <div class="tabset is-loading">
 <div class="ulist tabs">
@@ -511,7 +511,7 @@ account, we can do interesting things.</p>
 </div>
 </li>
 <li>
-<p>Select <strong>view</strong> for the Role Binding Name <strong>workshop</strong> for the Namespace, <strong>view</strong> for the Role Name, <strong>Service Account</strong> for the Subject, <strong>workshop</strong> for the Subject Namespace, and <strong>default</strong> for the Subject Name.</p>
+<p>Select <strong>view</strong> for the Role Binding Name <strong>%PROJECT%</strong> for the Namespace, <strong>view</strong> for the Role Name, <strong>Service Account</strong> for the Subject, <strong>%PROJECT%</strong> for the Subject Namespace, and <strong>default</strong> for the Subject Name.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/parksmap-permissions-membership-serviceaccount-edit.png" alt="Service account edit">
@@ -519,7 +519,7 @@ account, we can do interesting things.</p>
 </div>
 </li>
 <li>
-<p>Once you&#8217;re finished editing permissions, click on the <strong>Create</strong> button.  You should then be able to see it on the <code>Role Bindings</code> list for the <code>workshop</code> project`</p>
+<p>Once you&#8217;re finished editing permissions, click on the <strong>Create</strong> button.  You should then be able to see it on the <code>Role Bindings</code> list for the <code>%PROJECT%</code> project`</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/parksmap-permissions-membership-serviceaccount-done.png" alt="Service account changed">
@@ -532,7 +532,7 @@ account, we can do interesting things.</p>
 <div class="tab-pane" aria-labelledby="tabset1_code-oc-code-command-line">
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc project workshop</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc project %PROJECT%</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -557,7 +557,7 @@ account, we can do interesting things.</p>
 <div class="paragraph">
 <p>The <code>-z</code> syntax is a special one that saves us from having to type out the
 entire string, which, in this case, is
-<code>system:serviceaccount:workshop:default</code>. It&#8217;s a nifty shortcut.</p>
+<code>system:serviceaccount:%PROJECT%:default</code>. It&#8217;s a nifty shortcut.</p>
 </div>
 </div>
 </div>

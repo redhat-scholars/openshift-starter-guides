@@ -702,8 +702,8 @@ URL in the web console, or via the command line:</p>
 <div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME            HOST/PORT                                                   PATH      SERVICES        PORT       TERMINATION       WILDCARD
-nationalparks   nationalparks-workshop.%CLUSTER_SUBDOMAIN%             nationalparks   8080-tcp
-parksmap        parksmap-workshop.%CLUSTER_SUBDOMAIN%                  parksmap        8080-tcp        edge        none</code></pre>
+nationalparks   nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%             nationalparks   8080-tcp
+parksmap        parksmap-%PROJECT%.%CLUSTER_SUBDOMAIN%                  parksmap        8080-tcp        edge        none</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -711,7 +711,7 @@ parksmap        parksmap-workshop.%CLUSTER_SUBDOMAIN%                  parksmap 
 </div>
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">http://nationalparks-workshop.%CLUSTER_SUBDOMAIN%</code></pre>
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">http://nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -720,7 +720,7 @@ However, it can still be used with a browser. All backends that work with the pa
 frontend are required to implement a <code>/ws/info/</code> endpoint. To test, visit this URL in your browser:</p>
 </div>
 <div class="paragraph">
-<p><a href="http://nationalparks-workshop.%CLUSTER_SUBDOMAIN%/ws/info/" class="params-link" target="_blank" rel="noopener">National Parks Info Page</a>
+<p><a href="http://nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%/ws/info/" class="params-link" target="_blank" rel="noopener">National Parks Info Page</a>
 You will see a simple JSON string:</p>
 </div>
 <div class="listingblock">
