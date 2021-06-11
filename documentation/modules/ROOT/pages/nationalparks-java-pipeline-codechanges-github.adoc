@@ -33,7 +33,7 @@ Now let's create them all together for our Pipeline:
 [.console-input]
 [source,bash,subs="+attributes,macros+"]
 ----
-oc create -f +https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-triggers.yaml+ -n {project-namespace}
+oc create -f +https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-triggers.yaml+ -n %PROJECT%
 ----
 
 This will create a new Pod with a Route that we can use to setup our Webhook on GitHub to trigger the automatic start of the Pipeline.
@@ -81,7 +81,7 @@ Let's use a template to launch an Ngrok instance inside our project to link to o
 [.console-input]
 [source,bash,subs="+attributes"]
 ----
-oc new-app -f https://raw.githubusercontent.com/csrwng/ngrok/master/openshift/ngrok-template.yaml -p HOST=el-nationalparks -p PORT=8080 -n {project-namespace}
+oc new-app -f https://raw.githubusercontent.com/csrwng/ngrok/master/openshift/ngrok-template.yaml -p HOST=el-nationalparks -p PORT=8080 -n %PROJECT%
 ----
 
 You should see an output like this:
@@ -89,7 +89,7 @@ You should see an output like this:
 [.console-output]
 [source,bash,subs="+attributes"]
 ----
---> Deploying template "{project-namespace}/ngrok" for "https://raw.githubusercontent.com/csrwng/ngrok/master/openshift/ngrok-template.yaml" to project {project-namespace}
+--> Deploying template "%PROJECT%/ngrok" for "https://raw.githubusercontent.com/csrwng/ngrok/master/openshift/ngrok-template.yaml" to project %PROJECT%
 
      * With parameters:
         * Host=el-nationalparks
@@ -101,7 +101,7 @@ You should see an output like this:
     route.route.openshift.io "ngrok" created
     imagestream.image.openshift.io "ngrok" created
 --> Success
-    Access your application via route 'ngrok-{project-namespace}.%CLUSTER_SUBDOMAIN%' 
+    Access your application via route 'ngrok-%PROJECT%.%CLUSTER_SUBDOMAIN%' 
     Run 'oc status' to view your app.
 ----
 
@@ -109,7 +109,7 @@ Get the Ngrok Route URL:
 [.console-input]
 [source,bash,subs="+attributes"]
 ----
-oc get route ngrok -n {project-namespace}
+oc get route ngrok -n %PROJECT%
 ----
 
 Open it in the browser to get the Ngrok tunnel URL that we can use and copy the HTTP URL you see in the webpage as shown below, this will be the one we will use to configure the Github Webhook.
@@ -121,7 +121,7 @@ Verify that it is working, when opening in the browser you should get the respon
 [.console-output]
 [source,bash,subs="+attributes"]
 ----
-{"eventListener":"nationalparks","namespace":"{project-namespace}","eventID":"vzkx5"}
+{"eventListener":"nationalparks","namespace":"%PROJECT%","eventID":"vzkx5"}
 ----
 
 --
@@ -202,7 +202,7 @@ oc get pipelineruns
 Once the build and deploy has finished, verify your new image was automatically deployed by viewing the application in your browser:
 
 
-link:http://nationalparks-{project-namespace}.%CLUSTER_SUBDOMAIN%/ws/info/[National Parks Info Page,role='params-link',window='_blank']
+link:http://nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%/ws/info/[National Parks Info Page,role='params-link',window='_blank']
 
 
 You should now see the new name you have set in the JSON string returned.

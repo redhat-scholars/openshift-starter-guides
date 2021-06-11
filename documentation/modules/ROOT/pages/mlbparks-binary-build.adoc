@@ -110,7 +110,7 @@ This is the REST endpoint that gives basic info on the service and can be reache
 
 [source,bash,role="copypaste",subs="+attributes"]
 ----
-http://mlbparks-{project-namespace}.%CLUSTER_SUBDOMAIN%/ws/info/
+http://mlbparks-%PROJECT%.%CLUSTER_SUBDOMAIN%/ws/info/
 ----
 
 Please change line 23 to add a _AMAZING_ in front of "MLB Parks" look like this:
@@ -152,7 +152,7 @@ You can follow the deployment in progress from Topology view, and when it is com
 
 [source,bash,role="copypaste",subs="+attributes"]
 ----
-http://mlbparks-{project-namespace}.%CLUSTER_SUBDOMAIN%/ws/info/
+http://mlbparks-%PROJECT%.%CLUSTER_SUBDOMAIN%/ws/info/
 ----
 
 So now you have seen how we can speed up the build and deploy process.

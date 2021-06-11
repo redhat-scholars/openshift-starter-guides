@@ -29,7 +29,7 @@ The parksmap application wants to talk to the OpenShift API to learn about other
 
 The parksmap application runs as a *Service Account* in our project on the cluster: namely the `default` *Service Account*.  It is to this *Service Account* that we can grant the necessary `view``access that will allow it to query the API to see what resources are within the *Project*. This also has the added benefit of addressing the cause of the error message we witnessed previously in the logs.
 
-Choose an approach represented by the following tabs to update the `default` *Service Account* in the `{project-namespace}` project
+Choose an approach represented by the following tabs to update the `default` *Service Account* in the `%PROJECT%` project
 
 [tabs]
 ====
@@ -40,11 +40,11 @@ OpenShift Console::
 +
 image::parksmap-permissions-membership-serviceaccount-list.png[Service account list]
 +
-. Select *view* for the Role Binding Name *{project-namespace}* for the Namespace, *view* for the Role Name, *Service Account* for the Subject, *{project-namespace}* for the Subject Namespace, and *default* for the Subject Name.
+. Select *view* for the Role Binding Name *%PROJECT%* for the Namespace, *view* for the Role Name, *Service Account* for the Subject, *%PROJECT%* for the Subject Namespace, and *default* for the Subject Name.
 +
 image::parksmap-permissions-membership-serviceaccount-edit.png[Service account edit]
 +
-. Once you're finished editing permissions, click on the *Create* button.  You should then be able to see it on the `Role Bindings` list for the `{project-namespace}` project`
+. Once you're finished editing permissions, click on the *Create* button.  You should then be able to see it on the `Role Bindings` list for the `%PROJECT%` project`
 +
 image::parksmap-permissions-membership-serviceaccount-done.png[Service account changed]
 --
@@ -54,7 +54,7 @@ image::parksmap-permissions-membership-serviceaccount-done.png[Service account c
 [.console-input]
 [source,bash,subs="+attributes,macros+"]
 ----
-oc project {project-namespace}
+oc project %PROJECT%
 ----
 
 Then use the `oc policy add-role-to-user` command to give the predefined `view` _role_ to the user:
@@ -76,7 +76,7 @@ From the `-h` output on `oc policy`:
 
 The `-z` syntax is a special one that saves us from having to type out the
 entire string, which, in this case, is
-`system:serviceaccount:{project-namespace}:default`. It's a nifty shortcut.
+`system:serviceaccount:%PROJECT%:default`. It's a nifty shortcut.
 ****
 
 NOTE: The `-z` flag will only work for service accounts in the *current* project.  If you're referring to a service account in a different project, use the `-n <project>`switch.

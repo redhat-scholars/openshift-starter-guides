@@ -32,7 +32,7 @@ the source code repository. Execute the following command:
 [.console-input]
 [source,bash,subs="+attributes"]
 ----
-oc create -f https://raw.githubusercontent.com/openshift-roadshow/mlbparks/master/ose3/application-template-eap.json -n {project-namespace}
+oc create -f https://raw.githubusercontent.com/openshift-roadshow/mlbparks/master/ose3/application-template-eap.json -n %PROJECT%
 ----
 
 What just happened? What did you just `create`? The item that we passed to the `create`

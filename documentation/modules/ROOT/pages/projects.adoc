@@ -15,15 +15,15 @@ understand all of the terminology as we will cover it in detail in later labs.
 [#create_your_first_project]
 == Create your first Project
 
-Create a project named *{project-namespace}*. From left-side menu, click to *Projects*, then from top-right click
+Create a project named *%PROJECT%*. From left-side menu, click to *Projects*, then from top-right click
 to *Create Project*.
 
-From the form, insert the name of your project *{project-namespace}* and click to *Create*.
+From the form, insert the name of your project *%PROJECT%* and click to *Create*.
 
 image::prerequisites_create_project.png[Create Project]
 
 If you had multiple projects, the first thing you would want to do is to switch
-to the *{project-namespace}* project to make sure you're on the correct project from now on.
+to the *%PROJECT%* project to make sure you're on the correct project from now on.
 
 image::explore-webconsole2.png[Explore Project]
 
@@ -40,12 +40,12 @@ Right now, there are no applications or components to view, but once you begin w
 
 image::explore-topology-view.png[Topology View]
 
-You can also create and manage project from the CLI as well. Let's use our newly created project {project-namespace} as our default one:
+You can also create and manage project from the CLI as well. Let's use our newly created project %PROJECT% as our default one:
 
 [.console-input]
 [source,bash,subs="+attributes,macros+"]
 ----
-oc project {project-namespace}
+oc project %PROJECT%
 ----
 
 You should an output similar to the following:
@@ -53,7 +53,7 @@ You should an output similar to the following:
 [.console-output]
 [source,bash,subs="+attributes,macros+"]
 ----
-Now using project "{project-namespace}" on server "https://api.%CLUSTER_SUBDOMAIN%:6443"
+Now using project "%PROJECT%" on server "https://api.%CLUSTER_SUBDOMAIN%:6443"
 ----
 
 We will be using a mix of command line tooling and the web console for the labs.

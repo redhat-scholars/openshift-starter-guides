@@ -52,7 +52,7 @@ In this step we will create a MongoDB template inside our project, so that is on
 [.console-input]
 [source,bash,subs="+attributes,macros+"]
 ----
-oc create -f +https://raw.githubusercontent.com/openshift-labs/starter-guides/ocp-4.6/mongodb-template.yaml+ -n {project-namespace}
+oc create -f +https://raw.githubusercontent.com/openshift-labs/starter-guides/ocp-4.6/mongodb-template.yaml+ -n %PROJECT%
 ----
 
 What just happened? What did you just `create`? The item that we passed to the `create`
@@ -75,7 +75,7 @@ persistent storage!). The image will ensure that:
 - A user exists with the specified name
 - The user can access the specified database with the specified password
 
-In the Developer Perspective in your `{project-namespace}` project,
+In the Developer Perspective in your `%PROJECT%` project,
 click *+Add* and then *Database*. In the Databases view, you can click *Mongo* to filter for just MongoDB.
 
 NOTE: Make sure to uncheck *Operator Backed* option from *Type* section
@@ -223,7 +223,7 @@ service to query for data:
 
 [source,role="copypaste",subs="+attributes"]
 ----
-http://nationalparks-{project-namespace}.%CLUSTER_SUBDOMAIN%/ws/data/all
+http://nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%/ws/data/all
 ----
 
 And the result?
@@ -242,7 +242,7 @@ The application provides an endpoint to do just that:
 
 [source,role="copypaste",subs="+attributes"]
 ----
-http://nationalparks-{project-namespace}.%CLUSTER_SUBDOMAIN%/ws/data/load
+http://nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%/ws/data/load
 ----
 
 And the result?
@@ -261,7 +261,7 @@ a browser problem, and the application is working properly.
 
 [source,role="copypaste",subs="+attributes"]
 ----
-https://parksmap-{project-namespace}.%CLUSTER_SUBDOMAIN%
+https://parksmap-%PROJECT%.%CLUSTER_SUBDOMAIN%
 ----
 
 Hmm... There's just one thing. The main map **STILL** isn't displaying the parks.
@@ -321,7 +321,7 @@ oc describe route nationalparks
 [source,bash,subs="+attributes,macros+"]
 ----
 Name:                   nationalparks
-Namespace:              {project-namespace}
+Namespace:              %PROJECT%
 Created:                2 hours ago
 Labels:                 app=workshop
                         app.kubernetes.io/component=nationalparks
@@ -333,7 +333,7 @@ Labels:                 app=workshop
                         component=nationalparks
                         role=backend  
 Annotations:            openshift.io/host.generated=true                          
-Requested Host:         nationalparks-{project-namespace}.%CLUSTER_SUBDOMAIN%
+Requested Host:         nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%
                         exposed on router router 2 hours ago
 Path:                   <none>
 TLS Termination:        <none>
@@ -365,7 +365,7 @@ If you check your browser now:
 
 [source,role="copypaste",subs="+attributes"]
 ----
-https://parksmap-{project-namespace}.%CLUSTER_SUBDOMAIN%/
+https://parksmap-%PROJECT%.%CLUSTER_SUBDOMAIN%/
 ----
 
 image::nationalparks-databases-new-parks.png[MongoDB]

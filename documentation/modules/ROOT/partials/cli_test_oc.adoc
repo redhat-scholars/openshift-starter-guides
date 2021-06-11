@@ -12,7 +12,7 @@ You should see the following (or something similar):
 [.console-output]
 [source,bash]
 ----
-Client Version: 4.6.9
+Client Version: 4.7.0
 ----
 
 If you get an error message, you may not have not updated your path correctly. If after checking your `PATH` you

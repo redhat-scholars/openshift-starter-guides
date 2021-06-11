@@ -54,19 +54,19 @@ To start this workshop, follow the step by step tutorial link for your cluster a
 |Python Path  
 
 |link:https://www.openshift.com/try[OpenShift 4.7]
-|link:https://redhat-scholars.github.io/openshift-starter-guides/[Guide]
+|link:https://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.7/index.html?PROJECT=workshop[Guide]
 |link:https://redhat-scholars.github.io/openshift-starter-guides-dotnet/[Guide]
 |link:https://redhat-scholars.github.io/openshift-starter-guides-javascript/[Guide]
 |link:https://redhat-scholars.github.io/openshift-starter-guides-python/[Guide]
 
 |link:https://developers.redhat.com/products/codeready-containers/overview[CRC 4.7]
-|link:https://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.7/index.html?CLUSTER_SUBDOMAIN=apps-crc.testing[Guide]
+|link:https://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.7/index.html?CLUSTER_SUBDOMAIN=apps-crc.testing&PROJECT=workshop[Guide]
 |link:https://redhat-scholars.github.io/openshift-starter-guides-dotnet/rhs-openshift-starter-guides-dotnet/4.6/index.html?CLUSTER_SUBDOMAIN=apps-crc.testing[Guide]
 |link:https://redhat-scholars.github.io/openshift-starter-guides-javascript/rhs-openshift-starter-guides-javascript/4.6/index.html?CLUSTER_SUBDOMAIN=apps-crc.testing[Guide]
 |link:https://redhat-scholars.github.io/openshift-starter-guides-python/rhs-openshift-starter-guides-python/4.6/index.html?CLUSTER_SUBDOMAIN=apps-crc.testing[Guide]
 
 |link:https://learn.openshift.com/playgrounds/openshift47/[OpenShift 4.7 Playground] 
-|link:https://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.7/index.html?USERNAME=admin&PASSWORD=admin[Guide]
+|link:https://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.7/index.html?USERNAME=admin&PASSWORD=admin&PROJECT=workshop[Guide]
 |link:https://redhat-scholars.github.io/openshift-starter-guides-dotnet/rhs-openshift-starter-guides-dotnet/4.6/index.html?USERNAME=admin&PASSWORD=admin[Guide]
 |link:https://redhat-scholars.github.io/openshift-starter-guides-javascript/rhs-openshift-starter-guides-javascript/4.6/index.html?USERNAME=admin&PASSWORD=admin[Guide]
 |link:https://redhat-scholars.github.io/openshift-starter-guides-python/rhs-openshift-starter-guides-python/4.6/index.html?USERNAME=admin&PASSWORD=admin[Guide]
@@ -120,7 +120,7 @@ Here's the list of all query params used (they are all optional, but generated l
 
 Example:
 
-https://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.7/index.html?CLUSTER_SUBDOMAIN=apps-crc.testing&USERNAME=developer&PASSWORD=developer
+https://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.7/index.html?CLUSTER_SUBDOMAIN=apps-crc.testing&USERNAME=developer&PASSWORD=developer&PROJECT=workshop
 
 
 

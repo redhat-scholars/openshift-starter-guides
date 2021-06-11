@@ -54,7 +54,7 @@ Let's create now a Tekton pipeline for Nationalparks backend, select your OpenSh
 [.console-input]
 [source,bash,subs="+attributes"]
 ----
-oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipeline.yaml -n {project-namespace}
+oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipeline.yaml -n %PROJECT%
 ----
 
 Verify the Pipeline you created:
@@ -62,7 +62,7 @@ Verify the Pipeline you created:
 [.console-input]
 [source,bash,subs="+attributes,macros+"]
 ----
-oc get pipelines -n {project-namespace}
+oc get pipelines -n %PROJECT%
 ----
 
 You should see something like this:
@@ -79,7 +79,7 @@ Now let's review our Tekton Pipeline:
 [.console-input]
 [source,bash,subs="+attributes,macros+"]
 ----
-oc get pipeline nationalparks-pipeline -o yaml -n {project-namespace}
+oc get pipeline nationalparks-pipeline -o yaml -n %PROJECT%
 ----
 
 [source,yaml,role="copypaste"]

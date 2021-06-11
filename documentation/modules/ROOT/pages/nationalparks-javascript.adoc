@@ -187,15 +187,15 @@ Where you should see something like the following:
 [source,bash,subs="+attributes,macros+"]
 ----
 NAME            HOST/PORT                                                   PATH      SERVICES        PORT       TERMINATION       WILDCARD
-nationalparks   nationalparks-{project-namespace}.%CLUSTER_SUBDOMAIN%             nationalparks   8080-tcp
-parksmap        parksmap-{project-namespace}.%CLUSTER_SUBDOMAIN%                  parksmap        8080-tcp        edge        none
+nationalparks   nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%             nationalparks   8080-tcp
+parksmap        parksmap-%PROJECT%.%CLUSTER_SUBDOMAIN%                  parksmap        8080-tcp        edge        none
 ----
 
 In the above example, the URL is:
 
 [source,text,role="copypaste",subs="+attributes"]
 ----
-http://nationalparks-{project-namespace}.%CLUSTER_SUBDOMAIN%
+http://nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%
 ----
 
 Since this is a back-end application, it doesn't actually have a web interface.
@@ -203,7 +203,7 @@ However, it can still be used with a browser. All backends that work with the pa
 frontend are required to implement a `/ws/info/` endpoint. To test, visit this URL in your browser:
 
 
-link:http://nationalparks-{project-namespace}.%CLUSTER_SUBDOMAIN%/ws/info/[National Parks Info Page, role='params-link',window='_blank']
+link:http://nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%/ws/info/[National Parks Info Page, role='params-link',window='_blank']
 You will see a simple JSON string:
 
 [source,json]
