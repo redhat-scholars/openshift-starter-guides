@@ -36,6 +36,26 @@ After you successfully logged in, from right side pane, click *OpenShift web con
 image::roks-login4.png[ROKS Open-shift web console]
 
 --
+ROSA::
++
+--
+Access your cluster from https://console-openshift-console.%CLUSTER_SUBDOMAIN%[OpenShift Web Console,role='params-link',window='_blank'].
+
+Login to your ROSA cluster using one of the available https://docs.openshift.com/rosa/rosa_getting_started/rosa-config-identity-providers.html[Identity Provider].
+
+image::explore-rosa-login.png[ROSA Login]
+
+
+On the Identity Provider login screen, enter the your credentials:
+
+*Username*:
+[source,role="copypaste"]
+%USERNAME%
+
+*Password*:
+[source,role="copypaste"]
+%PASSWORD%
+--
 Others::
 +
 --
