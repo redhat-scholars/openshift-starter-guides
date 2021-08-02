@@ -123,8 +123,6 @@ Example:
 https://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.7/index.html?CLUSTER_SUBDOMAIN=apps-crc.testing&USERNAME=developer&PASSWORD=developer&PROJECT=workshop
 
 
-
-
 ## Contributing
 
 Please refer to the link:CONTRIBUTING.adoc#contributing-guide[how to contribute] on how you can contribute to the tutorial.
