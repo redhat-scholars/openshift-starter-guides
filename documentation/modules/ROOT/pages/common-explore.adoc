@@ -81,6 +81,47 @@ On the Identity Provider login screen, enter the your credentials:
 [source,role="copypaste"]
 %PASSWORD%
 --
+Sandbox::
++
+--
+https://developers.redhat.com/developer-sandbox[Developer Sandbox for Red Hat OpenShift,window='_blank'] is a free Kubernetes cloud environment in a shared, multi-tenant OpenShift cluster that is pre-configured with a set of developer tools. The Developer Sandbox is active for 30 days and renewable once it expires. 
+
+To create your account, register to https://developers.redhat.com/developer-sandbox[Developer Sandbox for Red Hat OpenShift,window='_blank']. From there, click on the red button that says **Get Started in the Sandbox** as shown in the following image.
+
+image::devsandbox-signup.png[Developer Sandbox Sign-up Page]
+
+Use your existing Red Hat account or create a new one, then follow the instructions on the screen. You should then be redirected to the Developer Sandbox page again, but this time, you should see a button labelled **Start using your sandbox**. 
+
+image::devsandbox-start.png[Developer Sandbox Start Page]
+
+Clicking on it opens up the OpenShift login screen where you can log in using the **DevSandbox** button, as seen below.
+
+image::devsandbox-login.png[Log in the Developer Sandbox]
+
+Clicking this button opens up your new OpenShift cluster console. Feel free to take the tour or skip it for now and continue with this workshop.
+
+.Resource restrictions
+****
+Your private OpenShift environment on Developer Sandbox includes quotas and limits of:
+
+* 7 GB RAM
+* 15GB storage
+
+which is enough to run this workshop.
+
+There are two fixed projects (namespaces):
+
+* `<your_username>-dev`
+* `<your_username>-stage`
+
+In this shared environment, it's **NOT** possible to create a new project as in xref:projects#create_your_first_project[Create your First Project,window='_blank']
+
+Please work in the `<your_username>-dev` project.
+
+This environment has no Operators support, so please skip the xref:prerequisites.adoc#openshift_pipelines[OpenShift Pipelines,window='_blank'] part.
+
+****
+--
 Others::
 +
 --
