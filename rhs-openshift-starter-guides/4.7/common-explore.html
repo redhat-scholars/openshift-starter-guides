@@ -453,6 +453,9 @@ perform various tasks via a browser.</p>
 <p><a id="tabset1_aro"></a>ARO</p>
 </li>
 <li>
+<p><a id="tabset1_sandbox"></a>Sandbox</p>
+</li>
+<li>
 <p><a id="tabset1_others"></a>Others</p>
 </li>
 </ul>
@@ -572,6 +575,81 @@ perform various tasks via a browser.</p>
 <div class="listingblock copypaste">
 <div class="content">
 <pre class="highlightjs highlight"><code>%PASSWORD%</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_sandbox">
+<div class="paragraph">
+<p><a href="https://developers.redhat.com/developer-sandbox" target="_blank" rel="noopener">Developer Sandbox for Red Hat OpenShift</a> is a free Kubernetes cloud environment in a shared, multi-tenant OpenShift cluster that is pre-configured with a set of developer tools. The Developer Sandbox is active for 30 days and renewable once it expires.</p>
+</div>
+<div class="paragraph">
+<p>To create your account, register to <a href="https://developers.redhat.com/developer-sandbox" target="_blank" rel="noopener">Developer Sandbox for Red Hat OpenShift</a>. From there, click on the red button that says <strong>Get Started in the Sandbox</strong> as shown in the following image.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devsandbox-signup.png" alt="Developer Sandbox Sign-up Page">
+</div>
+</div>
+<div class="paragraph">
+<p>Use your existing Red Hat account or create a new one, then follow the instructions on the screen. You should then be redirected to the Developer Sandbox page again, but this time, you should see a button labelled <strong>Start using your sandbox</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devsandbox-start.png" alt="Developer Sandbox Start Page">
+</div>
+</div>
+<div class="paragraph">
+<p>Clicking on it opens up the OpenShift login screen where you can log in using the <strong>DevSandbox</strong> button, as seen below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devsandbox-login.png" alt="Log in the Developer Sandbox">
+</div>
+</div>
+<div class="paragraph">
+<p>Clicking this button opens up your new OpenShift cluster console. Feel free to take the tour or skip it for now and continue with this workshop.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Resource restrictions</div>
+<div class="paragraph">
+<p>Your private OpenShift environment on Developer Sandbox includes quotas and limits of:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>7 GB RAM</p>
+</li>
+<li>
+<p>15GB storage</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>which is enough to run this workshop.</p>
+</div>
+<div class="paragraph">
+<p>There are two fixed projects (namespaces):</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>&lt;your_username&gt;-dev</code></p>
+</li>
+<li>
+<p><code>&lt;your_username&gt;-stage</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In this shared environment, it&#8217;s <strong>NOT</strong> possible to create a new project as in <a href="projects.html#create_your_first_project" class="page" target="_blank" rel="noopener">Create your First Project</a></p>
+</div>
+<div class="paragraph">
+<p>Please work in the <code>&lt;your_username&gt;-dev</code> project.</p>
+</div>
+<div class="paragraph">
+<p>This environment has no Operators support, so please skip the <a href="prerequisites.html#openshift_pipelines" class="page" target="_blank" rel="noopener">OpenShift Pipelines</a> part.</p>
+</div>
 </div>
 </div>
 </div>
