@@ -202,7 +202,7 @@ oc get pipelineruns
 Once the build and deploy has finished, verify your new image was automatically deployed by viewing the application in your browser:
 
 
-link:http://nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%/ws/info/[National Parks Info Page,role='params-link',window='_blank']
+link:http://nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%/ws/info/[National Parks Info Page,window='_blank']
 
 
 You should now see the new name you have set in the JSON string returned.

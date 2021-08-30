@@ -203,7 +203,7 @@ However, it can still be used with a browser. All backends that work with the pa
 frontend are required to implement a `/ws/info/` endpoint. To test, visit this URL in your browser:
 
 
-link:http://nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%/ws/info/[National Parks Info Page, role='params-link',window='_blank']
+link:http://nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%/ws/info/[National Parks Info Page, window='_blank']
 You will see a simple JSON string:
 
 [source,json]

@@ -219,7 +219,7 @@ Since this is a backend application, it doesn't actually have a web interface.
 However, it can still be used with a browser. All backends that work with the parksmap
 frontend are required to implement a `/ws/info/` endpoint. To test, visit this URL in your browser:
 
-link:http://nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%/ws/info/[National Parks Info Page, role='params-link',window='_blank']
+link:http://nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%/ws/info/[National Parks Info Page, window='_blank']
 
 WARNING: If the Pod is Running and the application is not available, please wait a few seconds and refresh the page, since we haven't configured yet Health Checks for that.
 

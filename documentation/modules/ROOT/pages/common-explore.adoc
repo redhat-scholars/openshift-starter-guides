@@ -39,7 +39,7 @@ image::roks-login4.png[ROKS Open-shift web console]
 ROSA::
 +
 --
-Access your cluster from https://console-openshift-console.%CLUSTER_SUBDOMAIN%[OpenShift Web Console,role='params-link',window='_blank'].
+Access your cluster from https://console-openshift-console.%CLUSTER_SUBDOMAIN%[OpenShift Web Console,window='_blank'].
 
 Login to your ROSA cluster using one of the available https://docs.openshift.com/rosa/rosa_getting_started/rosa-config-identity-providers.html[Identity Provider,window='_blank'].
 
@@ -59,7 +59,7 @@ On the Identity Provider login screen, enter the your credentials:
 ARO::
 +
 --
-Access your cluster from https://console-openshift-console.%CLUSTER_SUBDOMAIN%[OpenShift Web Console,role='params-link',window='_blank'].
+Access your cluster from https://console-openshift-console.%CLUSTER_SUBDOMAIN%[OpenShift Web Console,window='_blank'].
 
 Login to your ARO cluster using one of the available https://docs.openshift.com/container-platform/4.7/authentication/understanding-identity-provider.html[Identity Provider,window='_blank'].
 
@@ -125,7 +125,7 @@ You can start the workshop directly from here: xref:common-parksmap-architecture
 Others::
 +
 --
-To get a feel for how the web console works, click on this https://console-openshift-console.%CLUSTER_SUBDOMAIN%[Web Console,role='params-link',window='_blank'] link.
+To get a feel for how the web console works, click on this https://console-openshift-console.%CLUSTER_SUBDOMAIN%[Web Console,window='_blank'] link.
 
 On the login screen, enter the following credentials:
 
