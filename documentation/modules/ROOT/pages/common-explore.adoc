@@ -56,6 +56,31 @@ On the Identity Provider login screen, enter the your credentials:
 [source,role="copypaste"]
 %PASSWORD%
 --
+ARO::
++
+--
+Access your cluster from https://console-openshift-console.%CLUSTER_SUBDOMAIN%[OpenShift Web Console,role='params-link',window='_blank'].
+
+Login to your ARO cluster using one of the available https://docs.openshift.com/container-platform/4.7/authentication/understanding-identity-provider.html[Identity Provider,window='_blank'].
+
+.Azure Active Directory
+****
+If you configured https://docs.microsoft.com/en-us/azure/openshift/configure-azure-ad-ui[Azure Active Directory (AAD),window='_blank'], select this identity provider to login using Azure authentication.
+****
+
+image::explore-aro-login.png[ARO Login]
+
+
+On the Identity Provider login screen, enter the your credentials:
+
+*Username*:
+[source,role="copypaste"]
+%USERNAME%
+
+*Password*:
+[source,role="copypaste"]
+%PASSWORD%
+--
 Others::
 +
 --
@@ -168,16 +193,6 @@ include::partial$cli_instructions.adoc[]
 
 include::partial$cli_test_oc.adoc[]
 --
-Linux::
-+
---
-include::partial$cli_instructions_common.adoc[]
-
-:os-lower: linux
-include::partial$cli_instructions.adoc[]
-
-include::partial$cli_test_oc.adoc[]
---
 Windows::
 +
 --
@@ -192,6 +207,16 @@ path
 ----
 
 Checkout this blog post if you'd like to set it up with link:https://www.openshift.com/blog/installing-oc-tools-windows[Powershell,window='_blank']
+
+include::partial$cli_test_oc.adoc[]
+--
+Linux::
++
+--
+include::partial$cli_instructions_common.adoc[]
+
+:os-lower: linux
+include::partial$cli_instructions.adoc[]
 
 include::partial$cli_test_oc.adoc[]
 --
