@@ -450,6 +450,9 @@ perform various tasks via a browser.</p>
 <p><a id="tabset1_rosa"></a>ROSA</p>
 </li>
 <li>
+<p><a id="tabset1_aro"></a>ARO</p>
+</li>
+<li>
 <p><a id="tabset1_others"></a>Others</p>
 </li>
 </ul>
@@ -510,6 +513,46 @@ perform various tasks via a browser.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/explore-rosa-login.png" alt="ROSA Login">
+</div>
+</div>
+<div class="paragraph">
+<p>On the Identity Provider login screen, enter the your credentials:</p>
+</div>
+<div class="paragraph">
+<p><strong>Username</strong>:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code>%USERNAME%</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Password</strong>:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code>%PASSWORD%</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_aro">
+<div class="paragraph">
+<p>Access your cluster from <a href="https://console-openshift-console.%CLUSTER_SUBDOMAIN%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>.</p>
+</div>
+<div class="paragraph">
+<p>Login to your ARO cluster using one of the available <a href="https://docs.openshift.com/container-platform/4.7/authentication/understanding-identity-provider.html" target="_blank" rel="noopener">Identity Provider</a>.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Azure Active Directory</div>
+<div class="paragraph">
+<p>If you configured <a href="https://docs.microsoft.com/en-us/azure/openshift/configure-azure-ad-ui" target="_blank" rel="noopener">Azure Active Directory (AAD)</a>, select this identity provider to login using Azure authentication.</p>
+</div>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/explore-aro-login.png" alt="ARO Login">
 </div>
 </div>
 <div class="paragraph">
@@ -630,10 +673,10 @@ Kubernetes Version: v1.20.0+bd9e442</code></pre>
 <p><a id="tabset2_mac-osx"></a>Mac OSX</p>
 </li>
 <li>
-<p><a id="tabset2_linux"></a>Linux</p>
+<p><a id="tabset2_windows"></a>Windows</p>
 </li>
 <li>
-<p><a id="tabset2_windows"></a>Windows</p>
+<p><a id="tabset2_linux"></a>Linux</p>
 </li>
 </ul>
 </div>
@@ -771,6 +814,56 @@ out by printing the version of the <code>oc</code> command:</p>
 still cannot get the <code>oc</code> command to work, contact your lab instructor for assistence.</p>
 </div>
 </div>
+<div class="tab-pane" aria-labelledby="tabset2_windows">
+<div class="paragraph">
+<p>From top right menu bar, click to the little white question mark icon, then click to <strong>Command Line Tools</strong>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/prerequisites_cli_links.png" alt="Download CLI">
+</div>
+</div>
+<div class="paragraph">
+<p>Scroll down to <code>oc - OpenShift Command Line Interface (CLI)</code> and click on the link appropriate to your OS</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/prerequisites_cli_binaries.png" alt="CLI Binaries">
+</div>
+</div>
+<div class="paragraph">
+<p>The CLI for Windows is provided as a zip archive. Download and unzip the archive with a ZIP program and move the oc binary to a directory on your PATH. To check your PATH, open the Command Prompt and run:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">path</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Checkout this blog post if you&#8217;d like to set it up with <a href="https://www.openshift.com/blog/installing-oc-tools-windows" target="_blank" rel="noopener">Powershell</a></p>
+</div>
+<div class="paragraph">
+<p>At this point, we should have the oc tool available for use. Let&#8217;s test this
+out by printing the version of the <code>oc</code> command:</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc version</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see the following (or something similar):</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Client Version: 4.7.0</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you get an error message, you may not have not updated your path correctly. If after checking your <code>PATH</code> you
+still cannot get the <code>oc</code> command to work, contact your lab instructor for assistence.</p>
+</div>
+</div>
 <div class="tab-pane" aria-labelledby="tabset2_linux">
 <div class="paragraph">
 <p>From top right menu bar, click to the little white question mark icon, then click to <strong>Command Line Tools</strong>:</p>
@@ -829,56 +922,6 @@ The name of the oc packaged archive may vary. Adjust accordingly.
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export PATH=$PATH:~/OpenShift</code></pre>
 </div>
-</div>
-<div class="paragraph">
-<p>At this point, we should have the oc tool available for use. Let&#8217;s test this
-out by printing the version of the <code>oc</code> command:</p>
-</div>
-<div class="listingblock console-input">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc version</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>You should see the following (or something similar):</p>
-</div>
-<div class="listingblock console-output">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Client Version: 4.7.0</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If you get an error message, you may not have not updated your path correctly. If after checking your <code>PATH</code> you
-still cannot get the <code>oc</code> command to work, contact your lab instructor for assistence.</p>
-</div>
-</div>
-<div class="tab-pane" aria-labelledby="tabset2_windows">
-<div class="paragraph">
-<p>From top right menu bar, click to the little white question mark icon, then click to <strong>Command Line Tools</strong>:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/prerequisites_cli_links.png" alt="Download CLI">
-</div>
-</div>
-<div class="paragraph">
-<p>Scroll down to <code>oc - OpenShift Command Line Interface (CLI)</code> and click on the link appropriate to your OS</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/prerequisites_cli_binaries.png" alt="CLI Binaries">
-</div>
-</div>
-<div class="paragraph">
-<p>The CLI for Windows is provided as a zip archive. Download and unzip the archive with a ZIP program and move the oc binary to a directory on your PATH. To check your PATH, open the Command Prompt and run:</p>
-</div>
-<div class="listingblock console-input">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">path</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Checkout this blog post if you&#8217;d like to set it up with <a href="https://www.openshift.com/blog/installing-oc-tools-windows" target="_blank" rel="noopener">Powershell</a></p>
 </div>
 <div class="paragraph">
 <p>At this point, we should have the oc tool available for use. Let&#8217;s test this
