@@ -114,11 +114,11 @@ There are two fixed projects (namespaces):
 * `<your_username>-dev`
 * `<your_username>-stage`
 
-In this shared environment, it's **NOT** possible to create a new project as in xref:projects#create_your_first_project[Create your First Project,window='_blank']
+In this shared environment, it's **NOT** possible to create a new project as in xref:projects#create_your_first_project[Create your First Project,window='_blank']. This environment doesn't support Pipelines Operator, so you can skip the xref:prerequisites.adoc#openshift_pipelines[OpenShift Pipelines,window='_blank'] prerequisite.
 
 Please work in the `<your_username>-dev` project.
 
-This environment has no Operators support, so please skip the xref:prerequisites.adoc#openshift_pipelines[OpenShift Pipelines,window='_blank'] part.
+You can start the workshop directly from here: xref:common-parksmap-architecture.adoc[Parksmap Architecture,window='_blank']
 
 ****
 --
@@ -303,11 +303,6 @@ Mac OS X::
 --
 include::partial$common_proxy_instructions.adoc[]
 --
-Linux::
-+
---
-include::partial$common_proxy_instructions.adoc[]
---
 Windows::
 +
 --
@@ -322,6 +317,11 @@ CAUTION: Replace the proxy server with the one for your environment/machine.
 https_proxy=http://proxy-server.mycorp.com:3128/
 HTTPS_PROXY=http://proxy-server.mycorp.com:3128/
 ----
+--
+Linux::
++
+--
+include::partial$common_proxy_instructions.adoc[]
 --
 ====
 
