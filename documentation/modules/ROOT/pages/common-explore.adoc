@@ -41,7 +41,7 @@ ROSA::
 --
 Access your cluster from https://console-openshift-console.%CLUSTER_SUBDOMAIN%[OpenShift Web Console,role='params-link',window='_blank'].
 
-Login to your ROSA cluster using one of the available https://docs.openshift.com/rosa/rosa_getting_started/rosa-config-identity-providers.html[Identity Provider].
+Login to your ROSA cluster using one of the available https://docs.openshift.com/rosa/rosa_getting_started/rosa-config-identity-providers.html[Identity Provider,window='_blank'].
 
 image::explore-rosa-login.png[ROSA Login]
 
