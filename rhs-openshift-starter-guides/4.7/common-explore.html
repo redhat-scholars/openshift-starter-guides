@@ -642,13 +642,13 @@ perform various tasks via a browser.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>In this shared environment, it&#8217;s <strong>NOT</strong> possible to create a new project as in <a href="projects.html#create_your_first_project" class="page" target="_blank" rel="noopener">Create your First Project</a></p>
+<p>In this shared environment, it&#8217;s <strong>NOT</strong> possible to create a new project as in <a href="projects.html#create_your_first_project" class="page" target="_blank" rel="noopener">Create your First Project</a>. This environment doesn&#8217;t support Pipelines Operator, so you can skip the <a href="prerequisites.html#openshift_pipelines" class="page" target="_blank" rel="noopener">OpenShift Pipelines</a> prerequisite.</p>
 </div>
 <div class="paragraph">
 <p>Please work in the <code>&lt;your_username&gt;-dev</code> project.</p>
 </div>
 <div class="paragraph">
-<p>This environment has no Operators support, so please skip the <a href="prerequisites.html#openshift_pipelines" class="page" target="_blank" rel="noopener">OpenShift Pipelines</a> part.</p>
+<p>You can start the workshop directly from here: <a href="common-parksmap-architecture.html" class="page" target="_blank" rel="noopener">Parksmap Architecture</a></p>
 </div>
 </div>
 </div>
@@ -1071,35 +1071,15 @@ some additional environment variables for the oc command line to work.  Select t
 <p><a id="tabset3_mac-os-x"></a>Mac OS X</p>
 </li>
 <li>
-<p><a id="tabset3_linux"></a>Linux</p>
+<p><a id="tabset3_windows"></a>Windows</p>
 </li>
 <li>
-<p><a id="tabset3_windows"></a>Windows</p>
+<p><a id="tabset3_linux"></a>Linux</p>
 </li>
 </ul>
 </div>
 <div class="content">
 <div class="tab-pane" aria-labelledby="tabset3_mac-os-x">
-<div class="admonitionblock caution">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-caution" title="Caution"></i>
-</td>
-<td class="content">
-Replace the proxy server with the one for your environment/machine.
-</td>
-</tr>
-</table>
-</div>
-<div class="listingblock console-input">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export https_proxy=http://proxy-server.mycorp.com:3128/
-export HTTPS_PROXY=http://proxy-server.mycorp.com:3128/</code></pre>
-</div>
-</div>
-</div>
-<div class="tab-pane" aria-labelledby="tabset3_linux">
 <div class="admonitionblock caution">
 <table>
 <tr>
@@ -1140,6 +1120,26 @@ Replace the proxy server with the one for your environment/machine.
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">https_proxy=http://proxy-server.mycorp.com:3128/
 HTTPS_PROXY=http://proxy-server.mycorp.com:3128/</code></pre>
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset3_linux">
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Replace the proxy server with the one for your environment/machine.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export https_proxy=http://proxy-server.mycorp.com:3128/
+export HTTPS_PROXY=http://proxy-server.mycorp.com:3128/</code></pre>
 </div>
 </div>
 </div>
