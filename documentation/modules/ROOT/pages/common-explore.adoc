@@ -117,8 +117,34 @@ There are two fixed projects (namespaces):
 In this shared environment, it's **NOT** possible to create a new project as in xref:projects#create_your_first_project[Create your First Project,role='params-link',window='_blank']. This environment doesn't support Pipelines Operator, so you can skip the xref:prerequisites.adoc#openshift_pipelines[OpenShift Pipelines,role='params-link',window='_blank'] prerequisite.
 
 Please work in the `<your_username>-dev` project.
-
 ****
+
+After you login to Developer Sandbox, you will be redirected into a **Developer Perspective**  with your default project.
+
+To continue working with the Lab, please do the following:
+
+1 - Copy your cluster subdomain as shown in the image above, part **1** e.g. `apps.sandbox-m2.ll9k.p1.openshiftapps.com`. This is used to generate automatically all URLs during the workshop.
+
+image::devsandbox-topology.png[Topology View]
+
+Go to the top menu of this Lab guide, and paste the copied hostname into the first textfield, where there is **Enter Cluster Subdomain**.
+
+image::devsandbox-form1.png[Add Cluster Subdomain]
+
+Press **Enter** to Submit.
+
+2 - Copy the project name of your Developer Sandbox as shown in the image above, part **2** e.g. `user-dev`. This is also used to generate automatically all URLs and instructions during the workshop.
+
+image::devsandbox-form2.png[Add Project Name]
+
+Go to the top menu of this Lab guide, and paste the copied project name into the second textfield, where there is **Enter Project Name**.
+
+Press **Enter** to Submit.
+
+Your Lab Guide is now customized with your Developer Sandbox environment hostname and settings:
+
+image::devsandbox-forms_ok.png[Lab Guide OK]
+
 --
 Others::
 +
@@ -137,7 +163,7 @@ On the login screen, enter the following credentials:
 --
 ====
 
-The first time you access the web console, you will most likely be in the Administrator perspective. If you are also the Cluster Administrator, you will be presented with an overview of the whole Cluster status:
+In general, the first time you access the web console, you will most likely be in the Administrator perspective. In case you are also the Cluster Administrator, you will be presented with an overview of the whole Cluster status:
 
 image::prerequisites_overview.png[Web Console Overview]
 
