@@ -118,8 +118,6 @@ In this shared environment, it's **NOT** possible to create a new project as in 
 
 Please work in the `<your_username>-dev` project.
 
-You can start the workshop directly from here: xref:common-parksmap-architecture.adoc[Parksmap Architecture,role='params-link']
-
 ****
 --
 Others::
