@@ -100,7 +100,7 @@ image::devsandbox-login.png[Log in the Developer Sandbox]
 
 Clicking this button opens up your new OpenShift cluster console. Feel free to take the tour or skip it for now and continue with this workshop.
 
-.Resource restrictions
+.Quotas and Limits
 ****
 Your private OpenShift environment on Developer Sandbox includes quotas and limits of:
 
@@ -114,11 +114,11 @@ There are two fixed projects (namespaces):
 * `<your_username>-dev`
 * `<your_username>-stage`
 
-In this shared environment, it's **NOT** possible to create a new project as in xref:projects#create_your_first_project[Create your First Project,window='_blank']. This environment doesn't support Pipelines Operator, so you can skip the xref:prerequisites.adoc#openshift_pipelines[OpenShift Pipelines,window='_blank'] prerequisite.
+In this shared environment, it's **NOT** possible to create a new project as in xref:projects#create_your_first_project[Create your First Project,role='params-link',window='_blank']. This environment doesn't support Pipelines Operator, so you can skip the xref:prerequisites.adoc#openshift_pipelines[OpenShift Pipelines,role='params-link',window='_blank'] prerequisite.
 
 Please work in the `<your_username>-dev` project.
 
-You can start the workshop directly from here: xref:common-parksmap-architecture.adoc[Parksmap Architecture,window='_blank']
+You can start the workshop directly from here: xref:common-parksmap-architecture.adoc[Parksmap Architecture,role='params-link']
 
 ****
 --
