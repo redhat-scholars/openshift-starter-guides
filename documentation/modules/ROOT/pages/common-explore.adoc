@@ -98,7 +98,9 @@ Clicking on it opens up the OpenShift login screen where you can log in using th
 
 image::devsandbox-login.png[Log in the Developer Sandbox]
 
-Clicking this button opens up your new OpenShift cluster console. Feel free to take the tour or skip it for now and continue with this workshop.
+Clicking this button opens up your new OpenShift cluster console.
+
+image::devsandbox-topology-view.png[Topology View]
 
 .Quotas and Limits
 ****
@@ -119,13 +121,11 @@ In this shared environment, it's **NOT** possible to create a new project as in 
 Please work in the `<your_username>-dev` project.
 ****
 
-After you login to Developer Sandbox, you will be redirected into a **Developer Perspective**  with your default project.
-
 To continue working with the Lab, please do the following:
 
 1 - Copy your cluster subdomain as shown in the image above, part **1** e.g. `apps.sandbox-m2.ll9k.p1.openshiftapps.com`. This is used to generate automatically all URLs during the workshop.
 
-image::devsandbox-topology.png[Topology View]
+image::devsandbox-topology.png[Topology Detail]
 
 Go to the top menu of this Lab guide, and paste the copied hostname into the first textfield, where there is **Enter Cluster Subdomain**.
 
