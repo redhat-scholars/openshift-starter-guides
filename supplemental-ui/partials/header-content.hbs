@@ -8,7 +8,7 @@
         showCluster( clusterName );
       }
       else {
-        showForm();
+        showClusterForm();
       }
 
       if (projectName) {
@@ -22,22 +22,27 @@
       document.getElementById('navbar-form-empty').style.display = "none";
       document.getElementById('navbar-form-filled').style.display = "flex";
       document.getElementById('cluster_subdomain').textContent = clusterName;
+      document.getElementById('clusterfield2').value = clusterName;
+
     }
 
-    function showForm( clusterName ) {
+    function showClusterForm( clusterName ) {
       document.getElementById('navbar-form-empty').style.display = "flex";
       document.getElementById('navbar-form-filled').style.display = "none";
     }
 
     function gowithcluster() {
-      elInput = document.getElementById('clusterfield');
-      window.location.search = ('&CLUSTER_SUBDOMAIN=' + elInput.value);
+      elClusterInput = document.getElementById('clusterfield');
+      elProjectInput = document.getElementById('projectfield2');
+
+      window.location.search = ('&CLUSTER_SUBDOMAIN=' + elClusterInput.value + '&PROJECT=' + elProjectInput.value);
     }
 
     function showProject( projectName ) {
       document.getElementById('navbar-form-project-empty').style.display = "none";
       document.getElementById('navbar-form-project-filled').style.display = "flex";
       document.getElementById('project').textContent = projectName;
+      document.getElementById('projectfield2').value = projectName;
     }
 
     function showProjectForm( projectName ) {
@@ -46,8 +51,9 @@
     }
 
     function gowithproject() {
-      elInput = document.getElementById('projectfield');
-      window.location.search = ('&PROJECT=' + elInput.value);
+      elProjectInput = document.getElementById('projectfield');
+      elClusterInput = document.getElementById('clusterfield2');
+      window.location.search = ('&CLUSTER_SUBDOMAIN=' + elClusterInput.value + '&PROJECT=' + elProjectInput.value);
     }
 
   </script>
@@ -70,6 +76,7 @@
 
           <form action="javascript:void(0);" onsubmit="gowithcluster();">
             <input size="40" id="clusterfield" type="text" placeholder="Enter Cluster Subdomain">
+            <input type="hidden" id="projectfield2" name="projectfield2" value="">
           </form>
         </div>
 
@@ -85,6 +92,7 @@
 
           <form action="javascript:void(0);" onsubmit="gowithproject();">
             <input size="40" id="projectfield" type="text" placeholder="Enter Project Name">
+            <input type="hidden" id="clusterfield2" name="clusterfield2" value="">
           </form>
         </div>
 
