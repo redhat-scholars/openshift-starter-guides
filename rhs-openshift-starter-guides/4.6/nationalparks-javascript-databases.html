@@ -31,10 +31,19 @@
       }
     } );
 
+
+    function sliceCluster(clusterName){
+      if (clusterName.length > 70) {
+          return "..." + clusterName.slice(35);
+      } else {
+        return clusterName;
+      }
+    }
+
     function showCluster( clusterName ) {
       document.getElementById('navbar-form-empty').style.display = "none";
       document.getElementById('navbar-form-filled').style.display = "flex";
-      document.getElementById('cluster_subdomain').textContent = clusterName;
+      document.getElementById('cluster_subdomain').textContent = sliceCluster(clusterName);
       document.getElementById('clusterfield2').value = clusterName;
 
     }
