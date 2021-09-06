@@ -1,6 +1,8 @@
 = Automation with Pipelines
 :navtitle: Automation with Pipelines
 
+In addition to the OpenShift built-in components, OpenShift Pipelines provide additional triggers and automation to pipelines thanks to **Tekton Triggers**.
+
 [#webhooks]
 == Background: Web Hooks
 
@@ -64,7 +66,7 @@ Your repository is forked now, we can start adding our automation to that.
 
 [tabs, subs="attributes+,+macros"]
 ====
-OCP::
+ROKS/ROSA/ARO/Sandbox/OCP::
 +
 --
 From Topology, click to `el-nationalparks` Deployment, go into *Routes* section and and copy the *el-nationparks* Route URL.
@@ -170,14 +172,7 @@ hand corner as shown here:
 
 image::nationalparks-codechanges-github-change-code.png[Webhook]
 
-Change line number 20:
-
-[source,java]
-----
-return new Backend("nationalparks","National Parks", new Coordinates("47.039304", "14.505178"), 4);
-----
-
-To
+Change line number 20 to:
 
 [source,java,role="copypaste"]
 ----

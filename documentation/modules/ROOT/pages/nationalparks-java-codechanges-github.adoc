@@ -1,0 +1,124 @@
+= Automation with OpenShift
+:navtitle: Automation with OpenShift
+
+As we discussed in the previous module, OpenShift provides the Source-2-Image mechanism to create containers by defining a `BuildConfig`. In addition to that, it provides link:https://docs.openshift.com/container-platform/{openshift-version}/cicd/builds/triggering-builds-build-hooks.html[triggers,window='_blank'] to control the circumstances in which the BuildConfig should be run, such as Webhooks.
+
+[#webhooks]
+== Background: Webhooks
+
+Most Git repository servers support the concept of web hooks -- calling to an
+external source via HTTP(S) when a change in the code repository happens.
+OpenShift provides an API endpoint that supports receiving hooks from
+remote systems in order to trigger builds. By pointing the code repository's
+hook at the OpenShift API, automated code/build/deploy can be
+achieved.
+
+[#webhooks_with_openshift]
+== Exercise: Webhooks with OpenShift
+In this lab you can use a build webhook to trigger a build execution every time there is a change in your copy of the nationalparks GitHub repository. In the OpenShift web console, navigate to your **%PROJECT%** project, and then click to **Builds**. Click the `nationalparks` BuildConfig and then go to the **Webhooks** section.
+
+On this screen you will see the option to copy the GitHub webhook URL, click to **Copy URL with Secret** as shown in the following image:
+
+image::nationalparks-codechanges-webhook-config.png[Webhook]
+
+
+[#fork_repository_from_github]
+== Exercise: Fork NationalParks repository from GitHub
+
+A link:https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo[fork,window='_blank'] is a copy of a repository. Forking a repository allows you to freely experiment with changes without affecting the original project.
+
+In this step we will fork the original `nationalparks` repository to apply our changes and automatically trigger the Pipeline through a link:https://docs.github.com/en/free-pro-team@latest/developers/webhooks-and-events/about-webhooks[GitHub Webhook,window='_blank'] that we're going to configure.
+
+Go to link:https://github.com/openshift-roadshow/nationalparks[Nationalparks,window='_blank'] repository. From top-right side, click to *Fork* to start forking it into your account.
+
+image::nationalparks-codechanges-github-fork-1.png[Fork Repository]
+
+Select your account, and click *Fork*
+
+image::nationalparks-codechanges-github-fork-2.png[Fork in progress]
+
+Your repository is forked now, we can start adding our automation to that.
+
+[#configuring_github_webhooks]
+== Exercise: Configuring GitHub Web Hooks
+
+
+Once you have forked the repository and you have the Webhook URL with Secret copied to your clipboard, navigate to the code repository fork that you have on GitHub.
+
+From your fork page top-right menu, click *Settings*. Then from result left-side menu, click *Webhook*, then from right side click *Add webhooks*.
+
+image::nationalparks-codechanges-github-webhook-settings.png[Add Webhook]
+
+In the next screen, paste your link into the "Payload URL" field. You can leave the
+secret token field blank -- the secret is already in the URL and does not need
+to be in the payload.
+
+Change the `Content Type` to `application/json`.
+
+Finally, click on *Add Webhook*.
+
+image::nationalparks-codechanges-github-automation-webhook.png[Webhook]
+
+Boom! From now on, every time you commit new source code to your GitHub
+repository, a new build and deploy will occur inside of OpenShift.  Let's try
+this out.
+
+[#using_github_webhooks]
+== Exercise: Using GitHub Web Hooks
+Click the *Code* tab in GitHub. This is GitHub's repository view.  
+
+CAUTION: Make sure that the drop-down menu at the upper right is set for 
+the *`master`* branch. Navigate to the
+following path:
+
+[.console-output]
+[source,bash]
+----
+src/main/java/com/openshift/evg/roadshow/parks/rest/
+----
+
+Then click on the `BackendController.java` file.
+
+Once you have the file on the screen, click the edit button in the top right
+hand corner as shown here:
+
+image::nationalparks-codechanges-github-change-code.png[Webhook]
+
+Change line number 20:
+
+[source,java]
+----
+return new Backend("nationalparks","National Parks", new Coordinates("47.039304", "14.505178"), 4);
+----
+
+To
+
+[source,java,role="copypaste"]
+----
+return new Backend("nationalparks","Awesome National Parks", new Coordinates("47.039304", "14.505178"), 4);
+----
+
+Click on *Commit changes* at the bottom of the screen. Feel free to enter a commit message.
+
+Once you have committed your changes, a new *Build* should almost instantaneously be
+triggered in OpenShift. From OpenShift Web Console, click **Builds**->**nationalparks** and then navigate to the **Builds**. You should see a new one running: 
+
+image::nationalparks-codechanges-build-running.png[Webhook]
+
+or run the following command to verify:
+
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
+----
+oc get builds
+----
+
+Once the build and deploy has finished, verify your new image was automatically deployed by viewing the application in your browser:
+
+
+link:http://nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%/ws/info/[National Parks Info Page,role='params-link',window='_blank']
+
+
+You should now see the new name you have set in the JSON string returned.
+
+NOTE: To see this in the map's legend itself, you will need to scale down your parksmap to 0, then back up to 1 to force the app to refresh its cache.
