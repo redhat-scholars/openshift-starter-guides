@@ -3,6 +3,13 @@
 
 In addition to the OpenShift built-in components, OpenShift Pipelines provide additional triggers and automation to pipelines thanks to **Tekton Triggers**.
 
+[#prerequisite_github_account]
+== Prerequisite: GitHub Account
+
+We will demonstrate the automation capability with OpenShift, and in order to do this, we need you to have an account on https://github.com[GitHub].
+
+If you don't have an account on GitHub, please create one https://github.com/join[here].
+
 [#webhooks]
 == Background: Web Hooks
 

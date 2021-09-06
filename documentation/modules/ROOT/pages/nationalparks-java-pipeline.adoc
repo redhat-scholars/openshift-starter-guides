@@ -15,6 +15,29 @@ OpenShift Pipelines is a cloud-native, continuous integration and delivery (CI/C
 
 image::devops-pipeline-flow.png[Pipelines]
 
+
+[#install_openshift_pipelines_from_operatorhub]
+== Install OpenShift Pipelines from OperatorHub
+
+OpenShift provides a marketplace of installable software packaged as link:https://kubernetes.io/docs/concepts/extend-kubernetes/operator/[Kubernetes Operator] called https://operatorhub.io[OperatorHub] .
+You can add Kubernetes-native CI/CD to your cluster installing OpenShift Pipelines directly from OperatorHub embedded marketplace inside OpenShift.
+
+From the left-side menu under Administrator perspective, go to *Operators*-> *OperatorHub*. In the search box, search for _pipelines_, then click to *OpenShift Pipelines Operator*:
+
+image::prerequisites_operatorhub.png[OperatorHub]
+
+From the description view, click *Install* to review all installation settings.
+
+image::prerequisites_operatorhub_install_pipelines.png[Install Pipelines]
+
+Ensure *Update Channel* is set to *stable* , and click *Install* to start installing the Operator.
+
+image::prerequisites_operatorhub_install_operator.png[Install Operator]
+
+After few seconds, the installation should be completed with success and you can verify it looking at *Status* column, check if the status is *Succeeded*.
+
+image::prerequisites_operatorhub_pipelines_installed.png[Pipelines Installed]
+
 [#understanding_tekton]
 == Understanding Tekton
 
@@ -42,7 +65,7 @@ For further details on pipeline concepts, refer to the https://github.com/tekton
 [#create_your_pipeline]
 == Create Your Pipeline
 
-NOTE: Ensure you met all xref:prerequisites.adoc[Prerequisites] before proceeding. xref:prerequisites.adoc#openshift_pipelines[OpenShift Pipelines] installed in your cluster and a xref:prerequisites.adoc#github_account[GitHub account] are required.
+NOTE: Ensure you installed OpenShift Pipelines Operator before proceeding.
 
 As pipelines provide the ability to promote applications between different stages of the delivery cycle, Tekton, which is our Continuous Integration server that will execute our pipelines, will be deployed on a project with a Continuous Integration role. Pipelines executed in this project will have permissions to interact with all the projects modeling the different stages of our delivery cycle. 
 
