@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Nationalparks Java App :: OpenShift Starter Guides</title>
-    <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.7/nationalparks-java.html">
-    <link rel="prev" href="parksmap-rsh.html">
-    <link rel="next" href="nationalparks-java-databases.html">
+    <title>Automation with OpenShift :: OpenShift Starter Guides</title>
+    <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.7/nationalparks-java-codechanges-github.html">
+    <link rel="prev" href="nationalparks-application-health.html">
+    <link rel="next" href="nationalparks-java-pipeline.html">
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../../_/css/site.css">
 <link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
@@ -292,25 +292,25 @@
   </li>
 </ul>
   </li>
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="nationalparks-java.html">Nationalparks Java App</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#source_to_image">Background: Source-to-Image (S2I)</a>
+    <a class="nav-link" href="nationalparks-java.html#source_to_image">Background: Source-to-Image (S2I)</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="#creating_java_application">Exercise: Creating a Java application</a>
+    <a class="nav-link" href="nationalparks-java.html#creating_java_application">Exercise: Creating a Java application</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="#add_to_project">Add to Project</a>
+    <a class="nav-link" href="nationalparks-java.html#add_to_project">Add to Project</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="#using_application_code_on_git_server">Using Application Code on a Git Server</a>
+    <a class="nav-link" href="nationalparks-java.html#using_application_code_on_git_server">Using Application Code on a Git Server</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="#build_code_on_openshift">Build the Code on OpenShift</a>
+    <a class="nav-link" href="nationalparks-java.html#build_code_on_openshift">Build the Code on OpenShift</a>
   </li>
 </ul>
   </li>
@@ -352,24 +352,24 @@
   </li>
 </ul>
   </li>
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item is-current-page" data-depth="1">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="nationalparks-java-codechanges-github.html">Automation with OpenShift</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nationalparks-java-codechanges-github.html#prerequisite_github_account">Prerequisite: GitHub Account</a>
+    <a class="nav-link" href="#prerequisite_github_account">Prerequisite: GitHub Account</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nationalparks-java-codechanges-github.html#webhooks">Webhooks</a>
+    <a class="nav-link" href="#webhooks">Webhooks</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nationalparks-java-codechanges-github.html#webhooks_with_openshift">Webhooks with OpenShift</a>
+    <a class="nav-link" href="#webhooks_with_openshift">Webhooks with OpenShift</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nationalparks-java-codechanges-github.html#configuring_github_webhooks">Exercise: Configuring GitHub Web Hooks</a>
+    <a class="nav-link" href="#configuring_github_webhooks">Exercise: Configuring GitHub Web Hooks</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nationalparks-java-codechanges-github.html#using_github_webhooks">Exercise: Using GitHub Web Hooks</a>
+    <a class="nav-link" href="#using_github_webhooks">Exercise: Using GitHub Web Hooks</a>
   </li>
 </ul>
   </li>
@@ -527,165 +527,216 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">OpenShift Starter Guides</a></li>
-    <li><a href="nationalparks-java.html">Nationalparks Java App</a></li>
+    <li><a href="nationalparks-java-codechanges-github.html">Automation with OpenShift</a></li>
   </ul>
 </nav>
 <div class="page-versions">
   <button class="version-menu-toggle" title="Show other versions of page">4.7</button>
   <div class="version-menu">
-    <a class="version is-current" href="nationalparks-java.html">4.7</a>
-    <a class="version" href="../4.6/nationalparks-java.html">4.6</a>
+    <a class="version is-current" href="nationalparks-java-codechanges-github.html">4.7</a>
+    <a class="version is-missing" href="../4.6/index.html">4.6</a>
   </div>
 </div>
-  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-starter-guides/edit/ocp-4.7/documentation/modules/ROOT/pages/nationalparks-java.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-starter-guides/edit/ocp-4.7/documentation/modules/ROOT/pages/nationalparks-java-codechanges-github.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Nationalparks Java App</h1>
+<h1 class="page">Automation with OpenShift</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this section, we&#8217;re going to deploy a backend service, developed in Java that will expose 2 main REST endpoints to the visualizer
-application (<code>parksmap</code> web component that was deployed in the previous labs).
-The application will query for national parks information (including its
-coordinates) that is stored in a MongoDB database.  This application will also
-provide an external access point, so that the API provided can be directly used
-by the end user.</p>
+<p>As we discussed in the previous module, OpenShift provides the Source-2-Image mechanism to create containers by defining a <code>BuildConfig</code>. In addition to that, it provides <a href="https://docs.openshift.com/container-platform/4.7/cicd/builds/triggering-builds-build-hooks.html" target="_blank" rel="noopener">triggers</a> to control the circumstances in which the BuildConfig should be run, such as Webhooks.</p>
 </div>
-<div class="imageblock text-center">
+</div>
+</div>
+<div class="sect1">
+<h2 id="prerequisite_github_account"><a class="anchor" href="#prerequisite_github_account"></a>Prerequisite: GitHub Account</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We will demonstrate the automation capability with OpenShift, and in order to do this, we need you to have an account on <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>.</p>
+</div>
+<div class="paragraph">
+<p>If you don&#8217;t have an account on GitHub, please create one <a href="https://github.com/join" target="_blank" rel="noopener">here</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="webhooks"><a class="anchor" href="#webhooks"></a>Background: Webhooks</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Most Git repository servers support the concept of web hooks&#8201;&#8212;&#8201;calling to an
+external source via HTTP(S) when a change in the code repository happens.
+OpenShift provides an API endpoint that supports receiving hooks from
+remote systems in order to trigger builds. By pointing the code repository&#8217;s
+hook at the OpenShift API, automated code/build/deploy can be
+achieved.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="webhooks_with_openshift"><a class="anchor" href="#webhooks_with_openshift"></a>Exercise: Webhooks with OpenShift</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this lab you can use a build webhook to trigger a build execution every time there is a change in your copy of the nationalparks GitHub repository. In the OpenShift web console, navigate to your <strong>%PROJECT%</strong> project, and then click to <strong>Builds</strong>. Click the <code>nationalparks</code> BuildConfig and then go to the <strong>Webhooks</strong> section.</p>
+</div>
+<div class="paragraph">
+<p>On this screen you will see the option to copy the GitHub webhook URL, click to <strong>Copy URL with Secret</strong> as shown in the following image:</p>
+</div>
+<div class="imageblock">
 <div class="content">
-<img src="_images/roadshow-app-architecture-nationalparks-1.png" alt="Application architecture" width="800">
+<img src="_images/nationalparks-codechanges-webhook-config.png" alt="Webhook">
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="source_to_image"><a class="anchor" href="#source_to_image"></a>Background: Source-to-Image (S2I)</h2>
+<h2 id="fork_repository_from_github"><a class="anchor" href="#fork_repository_from_github"></a>Exercise: Fork NationalParks repository from GitHub</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In a previous lab, we learned how to deploy a pre-existing image
-image. Now we will expand on that by learning how OpenShift builds
-container images using source code from an existing repository.  This is accomplished using the Source-to-Image project.</p>
+<p>A <a href="https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo" target="_blank" rel="noopener">fork</a> is a copy of a repository. Forking a repository allows you to freely experiment with changes without affecting the original project.</p>
 </div>
 <div class="paragraph">
-<p><a href="https://github.com/openshift/source-to-image">Source-to-Image (S2I)</a> is a
-open source project sponsored by Red Hat that has the following goal:</p>
+<p>In this step we will fork the original <code>nationalparks</code> repository to apply our changes and automatically trigger the Pipeline through a <a href="https://docs.github.com/en/free-pro-team@latest/developers/webhooks-and-events/about-webhooks" target="_blank" rel="noopener">GitHub Webhook</a> that we&#8217;re going to configure.</p>
+</div>
+<div class="paragraph">
+<p>Go to <a href="https://github.com/openshift-roadshow/nationalparks" target="_blank" rel="noopener">Nationalparks</a> repository. From top-right side, click to <strong>Fork</strong> to start forking it into your account.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-codechanges-github-fork-1.png" alt="Fork Repository">
+</div>
+</div>
+<div class="paragraph">
+<p>Select your account, and click <strong>Fork</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-codechanges-github-fork-2.png" alt="Fork in progress">
+</div>
+</div>
+<div class="paragraph">
+<p>Your repository is forked now, we can start adding our automation to that.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configuring_github_webhooks"><a class="anchor" href="#configuring_github_webhooks"></a>Exercise: Configuring GitHub Web Hooks</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Once you have forked the repository and you have the Webhook URL with Secret copied to your clipboard, navigate to the code repository fork that you have on GitHub.</p>
+</div>
+<div class="paragraph">
+<p>From your fork page top-right menu, click <strong>Settings</strong>. Then from result left-side menu, click <strong>Webhook</strong>, then from right side click <strong>Add webhooks</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-codechanges-github-webhook-settings.png" alt="Add Webhook">
+</div>
+</div>
+<div class="paragraph">
+<p>In the next screen, paste your link into the "Payload URL" field. You can leave the
+secret token field blank&#8201;&#8212;&#8201;the secret is already in the URL and does not need
+to be in the payload.</p>
+</div>
+<div class="paragraph">
+<p>Change the <code>Content Type</code> to <code>application/json</code>.</p>
+</div>
+<div class="paragraph">
+<p>Finally, click on <strong>Add Webhook</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-codechanges-github-automation-webhook.png" alt="Webhook">
+</div>
+</div>
+<div class="paragraph">
+<p>Boom! From now on, every time you commit new source code to your GitHub
+repository, a new build and deploy will occur inside of OpenShift.  Let&#8217;s try
+this out.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="using_github_webhooks"><a class="anchor" href="#using_github_webhooks"></a>Exercise: Using GitHub Web Hooks</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Click the <strong>Code</strong> tab in GitHub. This is GitHub&#8217;s repository view.</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Make sure that the drop-down menu at the upper right is set for
+the <strong><code>master</code></strong> branch. Navigate to the
+following path:
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">src/main/java/com/openshift/evg/roadshow/parks/rest/</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then click on the <code>BackendController.java</code> file.</p>
+</div>
+<div class="paragraph">
+<p>Once you have the file on the screen, click the edit button in the top right
+hand corner as shown here:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-codechanges-github-change-code.png" alt="Webhook">
+</div>
+</div>
+<div class="paragraph">
+<p>Change line number 20:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code>Source-to-image (S2I) is a tool for building reproducible container images. S2I
-produces ready-to-run images by injecting source code into a container image and
-assembling a new container image which incorporates the builder image and built
-source. The result is then ready to use with docker run. S2I supports
-incremental builds which re-use previously downloaded dependencies, previously
-built artifacts, etc.</code></pre>
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">return new Backend("nationalparks","National Parks", new Coordinates("47.039304", "14.505178"), 4);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>OpenShift is S2I-enabled and can use S2I as one of its build mechanisms (in
-addition to building container images from Dockerfiles, and "custom" builds).</p>
-</div>
-<div class="paragraph">
-<p>OpenShift runs the S2I process inside a special <strong>Pod</strong>, called a Build
-Pod, and thus builds are subject to quotas, limits, resource scheduling, and
-other aspects of OpenShift.</p>
-</div>
-<div class="paragraph">
-<p>A full discussion of S2I is beyond the scope of this class, but you can find
-more information about it either in the
-<a href="https://docs.openshift.com/container-platform/4.7/creating_images/s2i.html">OpenShift S2I documentation</a>
-or on <a href="https://github.com/openshift/source-to-image">GitHub</a>. The only key concept you need to
-remember about S2I is that it&#8217;s magic.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="creating_java_application"><a class="anchor" href="#creating_java_application"></a>Exercise: Creating a Java application</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The backend service that we will be deploying as part of this exercise is
-called <code>nationalparks</code>.  This is a Java Spring Boot application that performs 2D
-geo-spatial queries against a MongoDB database to locate and return map
-coordinates of all National Parks in the world. That was just a fancy way of
-saying that we are going to deploy a webservice that returns a JSON list of
-places.</p>
-</div>
-<div class="sect2">
-<h3 id="add_to_project"><a class="anchor" href="#add_to_project"></a>Add to Project</h3>
-<div class="paragraph">
-<p>Because the <code>nationalparks</code> component is a backend to serve data that our
-existing frontend (parksmap) will consume, we are going to build it inside the existing
-project that we have been working with. To illustrate how you can interact with OpenShift via the CLI or the web console, we will deploy the nationalparks component using the web console.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="using_application_code_on_git_server"><a class="anchor" href="#using_application_code_on_git_server"></a>Using Application Code on Git Server</h3>
-<div class="paragraph">
-<p>OpenShift can work with any accessible Git repository. This could be GitHub,
-GitLab, or any other server that speaks Git. You can even register webhooks in
-your Git server to initiate OpenShift builds triggered by any update to the
-application code!</p>
-</div>
-<div class="paragraph">
-<p><a href="https://github.com/openshift-roadshow/nationalparks.git">NationalParks GitHub Repository</a></p>
-</div>
-<div class="paragraph">
-<p>Later in the lab, we want you to make a code change and then rebuild your
-application. This is a fairly simple Spring framework Java application.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="build_code_on_openshift"><a class="anchor" href="#build_code_on_openshift"></a>Build the Code on OpenShift</h3>
-<div class="paragraph">
-<p>Similar to how we used <strong>+Add</strong> before with an existing image, we
-can do the same for specifying a source code repository. Since for this lab you
-have your own git repository, let&#8217;s use it with a simple Java S2I image.</p>
-</div>
-<div class="paragraph">
-<p>In the <strong>Developer Perspective</strong>, click <strong>+Add</strong> in the left navigation and then choose "<strong>From Git</strong>.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/nationalparks-show-add-options.png" alt="Add to Project">
-</div>
-</div>
-<div class="paragraph">
-<p>The <strong>Import from Git</strong> workflow will guide you through the process of deploying your app based on a few selections.</p>
-</div>
-<div class="paragraph">
-<p>Enter the following for Git Repo URL:</p>
+<p>To</p>
 </div>
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">https://github.com/openshift-roadshow/nationalparks.git</code></pre>
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">return new Backend("nationalparks","Awesome National Parks", new Coordinates("47.039304", "14.505178"), 4);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>OpenShift will automatically guess the Git server type and the programming language used by the source code. Verify that <strong>Java</strong> has been selected as your Builder Image, and be sure to select version <code>openjdk-11-ubi8</code> to have OpenJDK 11.</p>
+<p>Click on <strong>Commit changes</strong> at the bottom of the screen. Feel free to enter a commit message.</p>
+</div>
+<div class="paragraph">
+<p>Once you have committed your changes, a new <strong>Build</strong> should almost instantaneously be
+triggered in OpenShift. From OpenShift Web Console, click <strong>Builds</strong>&#8594;<strong>nationalparks</strong> and then navigate to the <strong>Builds</strong>. You should see a new one running:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/nationalparks-import-from-git-url-builder.png" alt="Import from Git">
+<img src="_images/nationalparks-codechanges-build-running.png" alt="Webhook">
 </div>
 </div>
 <div class="paragraph">
-<p>Scroll down to the <strong>General</strong> section. Select:</p>
+<p>or run the following command to verify:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Application Name</strong> : workshop</p>
-</li>
-<li>
-<p><strong>Name</strong> : nationalparks</p>
-</li>
-</ul>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get builds</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>In <strong>Resources</strong> section, select <strong>Deployment</strong>.</p>
+<p>Once the build and deploy has finished, verify your new image was automatically deployed by viewing the application in your browser:</p>
 </div>
 <div class="paragraph">
-<p>Under <strong>Advanced Options</strong>, ensure <strong>Create a route to the application</strong> is <strong>checked</strong> here.</p>
+<p><a href="http://nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%/ws/info/" class="params-link" target="_blank" rel="noopener">National Parks Info Page</a></p>
+</div>
+<div class="paragraph">
+<p>You should now see the new name you have set in the JSON string returned.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -694,187 +745,16 @@ have your own git repository, let&#8217;s use it with a simple Java S2I image.</
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Leave Pipeline section empty here as we will implement it in the next modules
+To see this in the map&#8217;s legend itself, you will need to scale down your parksmap to 0, then back up to 1 to force the app to refresh its cache.
 </td>
 </tr>
 </table>
-</div>
-<div class="paragraph">
-<p>Expand the <strong>Labels</strong> section and add 3 labels.</p>
-</div>
-<div class="paragraph">
-<p>The name of the Application group:</p>
-</div>
-<div class="listingblock copypaste">
-<div class="content">
-<pre class="highlightjs highlight"><code>app=workshop</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Next the name of this deployment.</p>
-</div>
-<div class="listingblock copypaste">
-<div class="content">
-<pre class="highlightjs highlight"><code>component=nationalparks</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>And finally, the role this component plays in the overall application.</p>
-</div>
-<div class="listingblock copypaste">
-<div class="content">
-<pre class="highlightjs highlight"><code>role=backend</code></pre>
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/nationalparks-configure-service.png" alt="Runtimes">
-</div>
-</div>
-<div class="paragraph">
-<p>To see the build logs, in Topology view, click the <code>nationalparks</code> entry, then click on <strong>View Logs</strong> in the <strong>Builds</strong> section of the <strong>Resources</strong> tab.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/nationalparks-java-new-java-build.png" alt="Nationalparks build">
-</div>
-</div>
-<div class="paragraph">
-<p>This is a Java-based application that uses Maven as the build and dependency system.  For this reason, the initial build
-will take a few minutes as Maven downloads all of the dependencies needed for
-the application. You can see all of this happening in real time!</p>
-</div>
-<div class="paragraph">
-<p>From the command line, you can also see the <strong>Builds</strong>:</p>
-</div>
-<div class="listingblock console-input">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get builds</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>You&#8217;ll see output like:</p>
-</div>
-<div class="listingblock console-output">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME              TYPE      FROM          STATUS     STARTED              DURATION
-nationalparks-1   Source    Git@b052ae6   Running    About a minute ago   1m2s</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>You can also view the build logs with the following command:</p>
-</div>
-<div class="listingblock console-input">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc logs -f builds/nationalparks-1</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>After the build has completed and successfully:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>The S2I process will push the resulting image to the internal OpenShift registry</p>
-</li>
-<li>
-<p>The <strong>Deployment</strong> (D) will detect that the image has changed, and this
-will cause a new deployment to happen.</p>
-</li>
-<li>
-<p>A <strong>ReplicaSet</strong> (RS) will be spawned for this new deployment.</p>
-</li>
-<li>
-<p>The RS will detect no <strong>Pods</strong> are running and will cause one to be deployed, as our default replica count is just 1.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>In the end, when issuing the <code>oc get pods</code> command, you will see that the build Pod
-has finished (exited) and that an application <strong>Pod</strong> is in a ready and running state:</p>
-</div>
-<div class="listingblock console-output">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME                    READY     STATUS      RESTARTS   AGE
-nationalparks-1-tkid3   1/1       Running     3          2m
-nationalparks-1-build   0/1       Completed   0          3m
-parksmap-57df75c46d-xltcs        1/1       Running     0          2h</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If you look again at the web console, you will notice that, when you create the
-application this way, OpenShift also creates a <strong>Route</strong> for you. You can see the
-URL in the web console, or via the command line:</p>
-</div>
-<div class="listingblock console-input">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get routes</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Where you should see something like the following:</p>
-</div>
-<div class="listingblock console-output">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME            HOST/PORT                                                   PATH      SERVICES        PORT       TERMINATION       WILDCARD
-nationalparks   nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%             nationalparks   8080-tcp
-parksmap        parksmap-%PROJECT%.%CLUSTER_SUBDOMAIN%                  parksmap        8080-tcp        edge        none</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>In the above example, the URL is:</p>
-</div>
-<div class="listingblock copypaste">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">http://nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Since this is a backend application, it doesn&#8217;t actually have a web interface.
-However, it can still be used with a browser. All backends that work with the parksmap
-frontend are required to implement a <code>/ws/info/</code> endpoint. To test, visit this URL in your browser:</p>
-</div>
-<div class="paragraph">
-<p><a href="http://nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%/ws/info/" class="params-link" target="_blank" rel="noopener">National Parks Info Page</a></p>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-If the Pod is Running and the application is not available, please wait a few seconds and refresh the page, since we haven&#8217;t configured yet Health Checks for that.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>You will see a simple JSON string:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{"id":"nationalparks","displayName":"National Parks","center":{"latitude":"47.039304","longitude":"14.505178"},"zoom":4}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Earlier we said:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">This is a Java Spring Boot application that performs 2D geo-spatial queries
-against a MongoDB database</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>But we don&#8217;t have a database. Yet.</p>
-</div>
 </div>
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="parksmap-rsh.html" class="query-params-link">Connecting to a Container</a></span>
-  <span class="next"><a href="nationalparks-java-databases.html" class="query-params-link">Connecting to a Database</a></span>
+  <span class="prev"><a href="nationalparks-application-health.html" class="query-params-link">Application Healthchecks</a></span>
+  <span class="next"><a href="nationalparks-java-pipeline.html" class="query-params-link">Continuous Integration and Pipelines</a></span>
 </nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">

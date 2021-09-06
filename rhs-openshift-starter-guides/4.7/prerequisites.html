@@ -38,7 +38,7 @@
       if (clusterName.length > 70) {
           return "..." + clusterName.slice(35);
       } else {
-        return clusterName;
+          return clusterName;
       }
     }
 
@@ -185,22 +185,7 @@
 </ul>
   </li>
   <li class="nav-item is-current-page" data-depth="1">
-    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="prerequisites.html">Prerequisites</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="#openshift_pipelines">OpenShift Pipelines</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="#install_openshift_pipelines_from_operatorhub">Install OpenShift Pipelines from OperatorHub</a>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#github_account">GitHub Account</a>
-  </li>
-</ul>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
@@ -369,8 +354,32 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="nationalparks-java-codechanges-github.html">Automation with OpenShift</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-codechanges-github.html#prerequisite_github_account">Prerequisite: GitHub Account</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-codechanges-github.html#webhooks">Webhooks</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-codechanges-github.html#webhooks_with_openshift">Webhooks with OpenShift</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-codechanges-github.html#configuring_github_webhooks">Exercise: Configuring GitHub Web Hooks</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-codechanges-github.html#using_github_webhooks">Exercise: Using GitHub Web Hooks</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="nationalparks-java-pipeline.html">Continuous Integration and Pipelines</a>
 <ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-pipeline.html#install_openshift_pipelines_from_operatorhub">Install OpenShift Pipelines from OperatorHub</a>
+  </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="nationalparks-java-pipeline.html#understanding_tekton">Understanding Tekton</a>
   </li>
@@ -386,6 +395,9 @@
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html">Automation with Pipelines</a>
 <ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#prerequisite_github_account">Prerequisite: GitHub Account</a>
+  </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="nationalparks-java-pipeline-codechanges-github.html#webhooks">Web Hooks</a>
   </li>
@@ -530,8 +542,6 @@
   <div class="content">
 <article class="doc">
 <h1 class="page">Prerequisites</h1>
-<div id="preamble">
-<div class="sectionbody">
 <div class="paragraph">
 <p>In order to run the lab in your cluster, you need to meet the requirements discussed below.</p>
 </div>
@@ -551,76 +561,10 @@
 <td class="tableblock halign-center valign-top"><p class="tableblock"><a href="https://www.openshift.com/try">OpenShift</a></p></td>
 <td class="tableblock halign-center valign-top"><p class="tableblock"><code>4.7</code></p></td>
 </tr>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="#openshift_pipelines">OpenShift Pipelines</a></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><code>1.4.x</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><a href="#github_account">Git</a></p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><code>2.x</code></p></td>
-</tr>
 </tbody>
 </table>
-</div>
-</div>
-<div class="sect1">
-<h2 id="openshift_pipelines"><a class="anchor" href="#openshift_pipelines"></a>OpenShift Pipelines</h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>For this lab we will use <strong>OpenShift Pipelines</strong> based on Tekton.
-OpenShift provides a marketplace of installable software packaged as <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/operator/">Kubernetes Operator</a> called <a href="https://operatorhub.io">OperatorHub</a> .
-You can add Kubernetes-native CI/CD to your cluster installing OpenShift Pipelines directly from OperatorHub embedded marketplace inside OpenShift.</p>
-</div>
-<div class="sect2">
-<h3 id="install_from_operatorhub"><a class="anchor" href="#install_from_operatorhub"></a>Install OpenShift Pipelines from OperatorHub</h3>
-<div class="paragraph">
-<p>From the left-side menu under Administrator perspective, go to <strong>Operators</strong>&#8594; <strong>OperatorHub</strong>. In the search box, search for <em>pipelines</em>, then click to <strong>OpenShift Pipelines Operator</strong>:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/prerequisites_operatorhub.png" alt="OperatorHub">
-</div>
-</div>
-<div class="paragraph">
-<p>From the description view, click <strong>Install</strong> to review all installation settings.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/prerequisites_operatorhub_install_pipelines.png" alt="Install Pipelines">
-</div>
-</div>
-<div class="paragraph">
-<p>Ensure <strong>Update Channel</strong> is set to <strong>stable</strong> , and click <strong>Install</strong> to start installing the Operator.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/prerequisites_operatorhub_install_operator.png" alt="Install Operator">
-</div>
-</div>
-<div class="paragraph">
-<p>After few seconds, the installation should be completed with success and you can verify it looking at <strong>Status</strong> column, check if the status is <strong>Succeeded</strong>.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/prerequisites_operatorhub_pipelines_installed.png" alt="Pipelines Installed">
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="github_account"><a class="anchor" href="#github_account"></a>GitHub Account</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>We will demonstrate the automation capability with OpenShift Pipelines, and in order to do this, we need you to have an account on <a href="https://github.com">GitHub</a>.</p>
-</div>
-<div class="paragraph">
-<p>If you don&#8217;t have an account on GitHub, please create one <a href="https://github.com/join">here</a>.</p>
-</div>
-<div class="paragraph">
-<p>Also ensure <a href="https://git-scm.com/">Git</a> is available in your environment.</p>
-</div>
-</div>
+<p>In the following modules you will find out other prerequisites when needed.</p>
 </div>
 <nav class="pagination">
   <span class="prev"><a href="common-explore.html" class="query-params-link">Explore OpenShift</a></span>
