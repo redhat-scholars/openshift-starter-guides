@@ -47,6 +47,8 @@ version control system.
 [#create_mongodb_template]
 == Exercise: Create a MongoDB Template
 
+NOTE: If you are using https://developers.redhat.com/developer-sandbox[Developer Sandbox for Red Hat OpenShift,window='_blank'], you can *skip* this section and jump to the next one called *Exercise: Deploy MongoDB* because MongoDB Template it's already available on Developer Sandbox.
+
 In this step we will create a MongoDB template inside our project, so that is only visible to our user and we can access it from Developer Perspective to create a MongoDB instance.
 
 [.console-input]

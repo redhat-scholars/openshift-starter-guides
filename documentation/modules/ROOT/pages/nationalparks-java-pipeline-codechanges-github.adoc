@@ -73,7 +73,7 @@ Your repository is forked now, we can start adding our automation to that.
 
 [tabs, subs="attributes+,+macros"]
 ====
-ROKS/ROSA/ARO/Sandbox/OCP::
+ROKS/ROSA/ARO/OCP::
 +
 --
 From Topology, click to `el-nationalparks` Deployment, go into *Routes* section and and copy the *el-nationparks* Route URL.
