@@ -3,8 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: OpenShift Starter Guides</title>
-    <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.7/mlbparks-clustering.html">
+    <title>GitHub Actions with OpenShift :: OpenShift Starter Guides</title>
+    <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.7/nationalparks-java-codechanges-github-actions.html">
+    <link rel="prev" href="nationalparks-java-codechanges-github.html">
+    <link rel="next" href="nationalparks-java-pipeline.html">
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../../_/css/site.css">
 <link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
@@ -371,18 +373,18 @@
   </li>
 </ul>
   </li>
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item is-current-page" data-depth="1">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="nationalparks-java-codechanges-github-actions.html">GitHub Actions with OpenShift</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nationalparks-java-codechanges-github-actions.html#disable_openshift_triggers">Disable OpenShift Triggers</a>
+    <a class="nav-link" href="#disable_openshift_triggers">Disable OpenShift Triggers</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nationalparks-java-codechanges-github-actions.html#add_action">Add Action</a>
+    <a class="nav-link" href="#add_action">Add Action</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="nationalparks-java-codechanges-github-actions.html#disable_openshift_triggers">Enable OpenShift Triggers</a>
+    <a class="nav-link" href="#disable_openshift_triggers">Enable OpenShift Triggers</a>
   </li>
 </ul>
   </li>
@@ -538,87 +540,169 @@
 <button class="nav-toggle"></button>
   <a href="index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Starter Guides</a></li>
+    <li><a href="nationalparks-java-codechanges-github-actions.html">GitHub Actions with OpenShift</a></li>
+  </ul>
 </nav>
 <div class="page-versions">
   <button class="version-menu-toggle" title="Show other versions of page">4.7</button>
   <div class="version-menu">
-    <a class="version is-current" href="mlbparks-clustering.html">4.7</a>
-    <a class="version" href="../4.6/mlbparks-clustering.html">4.6</a>
+    <a class="version is-current" href="nationalparks-java-codechanges-github-actions.html">4.7</a>
+    <a class="version is-missing" href="../4.6/index.html">4.6</a>
   </div>
 </div>
-  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-starter-guides/edit/ocp-4.7/documentation/modules/ROOT/pages/mlbparks-clustering.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/redhat-scholars/openshift-starter-guides/edit/ocp-4.7/documentation/modules/ROOT/pages/nationalparks-java-codechanges-github-actions.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<div class="sect1">
-<h2 id="_jboss_eap_clustering"><a class="anchor" href="#_jboss_eap_clustering"></a>JBoss EAP Clustering</h2>
+<h1 class="page">GitHub Actions with OpenShift</h1>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Clustering in JBoss EAP is achieved using the Kubernetes discovery mechanism for
-finding other JBoss EAP containers and forming a cluster. This is done by
-configuring the JGroups protocol stack in <code>standalone-openshift.xml</code> with
-<code>&lt;openshift.KUBE_PING/&gt;</code> elements.</p>
+<p>OpenShift includes comprehensive features for automation in-cluster as seen in <a href="nationalparks-java-codechanges-github.html" class="page">Webhooks with OpenShift</a> and in the next chapter <a href="nationalparks-java-pipeline.html" class="page">Continuous Integration and Pipelines</a>, but it also provides great interoperability and integrations for external CI/CD systems such as <strong>GitHub Actions</strong>.</p>
 </div>
 <div class="paragraph">
-<p>For <code>KUBE_PING</code> to work, the following steps must be taken:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>The <code>OPENSHIFT_KUBE_PING_NAMESPACE</code> environment variable must be set. If not
-set, the server will act as if it is a single-node cluster (a "cluster of
-one").</p>
-</li>
-<li>
-<p>The <code>OPENSHIFT_KUBE_PING_LABELS</code> environment variables should be set. If not
-set, pods outside of your application (albeit in your namespace) will try to
-join.</p>
-</li>
-<li>
-<p>Authorization must be granted to the service account the pod is running under
-to be allowed to access Kubernetes' REST api.</p>
-</li>
-</ol>
+<p><a href="https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions#overview" target="_blank" rel="noopener">GitHub Actions</a> are event-driven automation tasks available for any GitHub repository. An event automatically triggers the workflow, which contains a job. The job then uses steps to control the order in which actions are run. These actions are the commands that automate software build, test and deploy.</p>
 </div>
 <div class="paragraph">
-<p>You have already configured the default service account to have access to
-Kubernetes' REST API during previous labs. Now you can scale up the <strong>mlbparks</strong>
-pod to two by clicking on the upper arrows on the console. Alternatively, you
-can use the command line to scale up the pods and form a two-member cluster.</p>
+<p>In this chapter, you will add a GitHub Action for building the Nationalparks backend container image, and pushing it to the GitHub Container Image Registry. Any change to the repository will trigger the container image build and push outside OpenShift this time, and this will be used to deploy it on OpenShift.</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="disable_openshift_triggers"><a class="anchor" href="#disable_openshift_triggers"></a>Disable OpenShift Triggers</h2>
+<div class="sectionbody">
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc scale dc/mlbparks --replicas=2</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc annotate deployment nationalparks image.openshift.io/triggers-</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>For pods based on Java images, the web console also exposes access to a
-hawt.io-based JVM console for viewing and managing any relevant Java components.
-A link is displayed in the pod&#8217;s details on the <strong>Workloads &#8594; Pods</strong> page,
-provided the container has a port named jolokia. On the console, click on
-mlbparks pods, then on any of the two pods deployed. On the <strong>Details</strong> tab, click
-on <strong>Open Java Console</strong>.</p>
 </div>
-<div class="imageblock text-center">
+</div>
+<div class="sect1">
+<h2 id="configure_action"><a class="anchor" href="#configure_action"></a>Configure Action</h2>
+<div class="sectionbody">
+<div class="imageblock">
 <div class="content">
-<img src="_images/mlbparks-clustering-details.png" alt="Java Console Link" width="880">
+<img src="_images/nationalparks-codechanges-github-actions-env.png" alt="Environment">
 </div>
 </div>
-<div class="paragraph">
-<p>In the Java Console, use the <strong>JMX</strong> browser and click on <strong>jgroups &rarr; channel
-&rarr; ee</strong>. The right pane shows the list of clustering JMX attributes including
-<strong>view</strong> which is the current state of the cluster. This attribute shows the name
-of two pods which are currently members of the cluster. When <strong>mlbparks</strong> pod gets
-scaled up or down, JBoss EAP gets notified by calling Kubernetes' REST API and
-updates the cluster status based on the number of pods available.</p>
-</div>
-<div class="imageblock text-center">
+<div class="imageblock">
 <div class="content">
-<img src="_images/mlbparks-clustering-hawtio.png" alt="Java Console - Clustering" width="1000">
+<img src="_images/nationalparks-codechanges-github-actions-addenv.png" alt="Add Environment">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-codechanges-github-actions-addsecrets.png" alt="Add Environment Secrets">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-codechanges-github-actions-addsecret.png" alt="Add Secret">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-codechanges-github-actions-env-secrets.png" alt="Added Environment Secrets">
 </div>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="add_action"><a class="anchor" href="#add_action"></a>Add Action</h2>
+<div class="sectionbody">
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">name: OpenShift
+
+env:
+  IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
+  REGISTRY_USER: ${{ github.actor }}
+  REGISTRY_PASSWORD: ${{ github.token }}
+  APP_NAME: nationalparks
+  IMAGE_TAGS: latest ${{ github.sha }}
+
+  OPENSHIFT_SERVER: ${{ secrets.OPENSHIFT_SERVER }}
+  OPENSHIFT_TOKEN: ${{ secrets.OPENSHIFT_TOKEN }}
+  OPENSHIFT_NAMESPACE: "%PROJECT%"
+
+  APP_PORT: "8080"
+
+on:
+  # https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows
+  push:
+    branches: [ master ]
+
+jobs:
+  build-and-push:
+    name: Build and push to github container registry
+    runs-on: ubuntu-18.04
+    environment: development
+
+    outputs:
+        ROUTE: ${{ steps.deploy-and-expose.outputs.route }}
+        SELECTOR: ${{ steps.deploy-and-expose.outputs.selector }}
+
+    steps:
+    - name: Checkout
+      id: checkout
+      uses: actions/checkout@v2
+
+   # https://github.com/redhat-actions/s2i-build#readme
+    - name: S2I Build
+      id: build_image
+      uses: redhat-actions/s2i-build@v2
+      with:
+        path_context: '.'
+        builder_image: 'registry.access.redhat.com/ubi8/openjdk-11'
+        image: ${{ env.APP_NAME }}
+        tags: ${{ env.IMAGE_TAGS }}
+
+    # https://github.com/redhat-actions/push-to-registry#readme
+    - name: Push to Registry
+      id: push-to-registry
+      uses: redhat-actions/push-to-registry@v2
+      with:
+        image: ${{ steps.build_image.outputs.image }}
+        tags: ${{ steps.build_image.outputs.tags }}
+        registry: ${{ env.IMAGE_REGISTRY }}
+        username: ${{ env.REGISTRY_USER }}
+        password: ${{ env.REGISTRY_PASSWORD }}
+
+    # The path the image was pushed to is now stored in ${{ steps.push-to-registry.outputs.registry-path }}
+
+    # https://github.com/redhat-actions/oc-login#readme
+    - name: Log in to OpenShift
+      uses: redhat-actions/oc-login@v1
+      with:
+        openshift_server_url: ${{ env.OPENSHIFT_SERVER }}
+        openshift_token: ${{ env.OPENSHIFT_TOKEN }}
+        insecure_skip_tls_verify: true
+        namespace: ${{ env.OPENSHIFT_NAMESPACE }}
+
+    # Run a script to create a new app or update the current one with the previously pushed container image
+    - run: |
+         "${GITHUB_WORKSPACE}/.github/script.sh" ${{ env.APP_NAME }} ${{ env.IMAGE_REGISTRY }}/${{ steps.build_image.outputs.image }}:${{ github.sha }} ${{ env.OPENSHIFT_NAMESPACE }}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="enable_openshift_triggers"><a class="anchor" href="#enable_openshift_triggers"></a>Enable OpenShift Triggers</h2>
+<div class="sectionbody">
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc set triggers deployment nationalparks --from-image=nationalparks:latest --containers=nationalparks</code></pre>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="nationalparks-java-codechanges-github.html" class="query-params-link">Webhooks with OpenShift</a></span>
+  <span class="next"><a href="nationalparks-java-pipeline.html" class="query-params-link">Continuous Integration and Pipelines</a></span>
+</nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
   <div class="toc-menu"></div>
