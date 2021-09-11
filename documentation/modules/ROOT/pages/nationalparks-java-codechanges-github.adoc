@@ -1,5 +1,5 @@
-= Automation with OpenShift
-:navtitle: Automation with OpenShift
+= Webhooks with OpenShift
+:navtitle: Webhooks with OpenShift
 
 As we discussed in the previous module, OpenShift provides the Source-2-Image mechanism to create containers by defining a `BuildConfig`. In addition to that, it provides link:https://docs.openshift.com/container-platform/{openshift-version}/cicd/builds/triggering-builds-build-hooks.html[triggers,window='_blank'] to control the circumstances in which the BuildConfig should be run, such as Webhooks.
 
