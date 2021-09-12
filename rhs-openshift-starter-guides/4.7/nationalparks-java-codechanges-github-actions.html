@@ -566,19 +566,47 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>OpenShift includes comprehensive features for automation in-cluster as seen in <a href="nationalparks-java-codechanges-github.html" class="page">Webhooks with OpenShift</a> and in the next chapter <a href="nationalparks-java-pipeline.html" class="page">Continuous Integration and Pipelines</a>, but it also provides great interoperability and integrations for external CI/CD systems such as <strong>GitHub Actions</strong>.</p>
+<p>OpenShift includes comprehensive features for automation in-cluster as seen in <a href="nationalparks-java-codechanges-github.html" class="page">Webhooks with OpenShift</a> and as you will see in the next chapter <a href="nationalparks-java-pipeline.html" class="page">Continuous Integration and Pipelines</a>. In addition to that, it provides great interoperability and integrations for external CI/CD systems such as <strong>GitHub Actions</strong>.</p>
 </div>
 <div class="paragraph">
 <p><a href="https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions#overview" target="_blank" rel="noopener">GitHub Actions</a> are event-driven automation tasks available for any GitHub repository. An event automatically triggers the workflow, which contains a job. The job then uses steps to control the order in which actions are run. These actions are the commands that automate software build, test and deploy.</p>
 </div>
 <div class="paragraph">
-<p>In this chapter, you will add a GitHub Action for building the Nationalparks backend container image, and pushing it to the GitHub Container Image Registry. Any change to the repository will trigger the container image build and push outside OpenShift this time, and this will be used to deploy it on OpenShift.</p>
+<p>In this chapter, you will add a GitHub Action for building the Nationalparks backend container image, and pushing it to the <a href="https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry" target="_blank" rel="noopener">GitHub Container Registry</a>. Any change to your fork will trigger the container image build and push outside OpenShift this time, and this will be used afterwards to deploy the new container image to OpenShift.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="disable_github_webhook"><a class="anchor" href="#disable_github_webhook"></a>Disable GitHub Webhook</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In the previous chapter we also used Webhooks to trigger the container image build and deploy through the BuildConfig automation.
+At this point, we need to disable or cancel it because we will use GitHub Actions for that.</p>
+</div>
+<div class="paragraph">
+<p>Come back to your Nationalparks fork page on GitHub. From top-right menu, click <strong>Settings</strong>. Then from result left-side menu, click <strong>Webhook</strong>, then click <strong>Delete</strong> next to your previously created Webhook.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You can also just disable it, by clicking on <strong>Edit</strong> and then navigate to the bottom of the section to uncheck <strong>Active</strong> box.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="disable_openshift_triggers"><a class="anchor" href="#disable_openshift_triggers"></a>Disable OpenShift Triggers</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>As we discussed in the previous chapter, OpenShift provides in-cluster automation out the box with Webhooks and BuildConfigs.
+Because now we want to delegate this automation externally to GitHub Actions, we need to disable such triggers for the Nationalparks Deployment with this command:</p>
+</div>
 <div class="listingblock copypaste">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc annotate deployment nationalparks image.openshift.io/triggers-</code></pre>
@@ -587,27 +615,97 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="configure_action"><a class="anchor" href="#configure_action"></a>Configure Action</h2>
+<h2 id="configure_github_action"><a class="anchor" href="#configure_github_action"></a>Configure GitHub Action</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>GitHub Actions workflows run into <a href="https://docs.github.com/en/actions/reference/environments" target="_blank" rel="noopener">Environments</a> and they can reference an environment to use the environment&#8217;s protection rules and secrets.</p>
+</div>
+<div class="paragraph">
+<p>In this step, you will add a new Environment named <code>development</code>.</p>
+</div>
+<div class="paragraph">
+<p>From your previously forked Nationalparks repository on GitHub, go to the top-right menu, click <strong>Settings</strong>. Then from result left-side menu, click <strong>Environments</strong>, then from right side click <strong>New environment</strong>.</p>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/nationalparks-codechanges-github-actions-env.png" alt="Environment">
 </div>
+</div>
+<div class="paragraph">
+<p>In the following window, insert into <strong>Name</strong> the name of the GitHub Environment that will be used by the Action:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code>development</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Click <strong>Configure Environment</strong> to create it.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/nationalparks-codechanges-github-actions-addenv.png" alt="Add Environment">
 </div>
 </div>
+<div class="paragraph">
+<p>In the result screen from your just created GitHub Environment <code>development</code>, you will see all details of the newly created Enviroment. Navigate to the bottom of section, go to <strong>Environment secrets</strong> and click <strong>Add Secret</strong> to add new secrets.</p>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/nationalparks-codechanges-github-actions-addsecrets.png" alt="Add Environment Secrets">
 </div>
 </div>
+<div class="paragraph">
+<p>You will now configure two secrets that will be used by the GitHub Action to connect to your OpenShift clusters.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>OPENSHIFT_SERVER</code>: The OpenShift API server</p>
+</li>
+<li>
+<p><code>OPENSHIFT_TOKEN</code>: The authentication token to connect with</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You can retrieve both from your OpenShift cluster as shown in previous chapter: <a href="common-explore.html#connect_to_the_cluster_with_cli" class="page" target="_blank" rel="noopener">Connect to the OpenShift Cluster from CLI</a>:</p>
+</div>
+<div class="paragraph">
+<p>In another tab, go back to OpenShift Web Console. Then go to top-right menu bar and click to the dropdown menu containing your username, then click <strong>Copy Login Command</strong>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/prerequisites_copy_login_command.png" alt="Copy Login Command">
+</div>
+</div>
+<div class="paragraph">
+<p>Click on <strong>Display Token</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Copy your <strong>OPENSHIFT_SERVER</strong> as shown in the image below, in the <strong>Log in with this token</strong> section (e.g. <code>https://api.sandbox-m2.cafe.p1.openshiftapps.com:6443</code>)</p>
+</div>
+<div class="paragraph">
+<p>Copy your <strong>OPENSHIFT_TOKEN</strong> as shown in the image below, in the <strong>Your API token is</strong> section (e.g. <code>sha256~IJlITptYEdthK-&#8230;&#8203;&#8230;&#8203;</code>)</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-codechanges-github-actions-token.png" alt="Environment">
+</div>
+</div>
+<div class="paragraph">
+<p>Add both <code>OPENSHIFT_SERVER</code> and <code>OPENSHIFT_TOKEN</code> with the values you just copied:</p>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/nationalparks-codechanges-github-actions-addsecret.png" alt="Add Secret">
 </div>
+</div>
+<div class="paragraph">
+<p>Click <strong>Add Secret</strong> to add one and repeat for the other.</p>
+</div>
+<div class="paragraph">
+<p>Your Environment screen should be similar to the following:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -617,13 +715,22 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="add_action"><a class="anchor" href="#add_action"></a>Add Action</h2>
+<h2 id="add_github_action"><a class="anchor" href="#add_github_action"></a>Add GitHub Action</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Everything is now ready to start your automation with GitHub Action and OpenShift. GitHub actions workflows and jobs are defined with a YAML file containing all the needed steps.</p>
+</div>
+<div class="paragraph">
+<p>Review the follow workflow that will be used to trigger build of the Nationalparks backend on GitHub, and then deploy it to OpenShift referencing container image from the already created Deployment <code>nationalparks</code>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Copy</strong> the YAML file to be added in your Nationalparks fork repository on GitHub.</p>
+</div>
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">name: OpenShift
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">name: OpenShift <i class="conum" data-value="1"></i><b>(1)</b>
 
-env:
+env: <i class="conum" data-value="2"></i><b>(2)</b>
   IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
   REGISTRY_USER: ${{ github.actor }}
   REGISTRY_PASSWORD: ${{ github.token }}
@@ -638,11 +745,11 @@ env:
 
 on:
   # https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows
-  push:
+  push: <i class="conum" data-value="3"></i><b>(3)</b>
     branches: [ master ]
 
 jobs:
-  build-and-push:
+  build-and-push: <i class="conum" data-value="4"></i><b>(4)</b>
     name: Build and push to github container registry
     runs-on: ubuntu-18.04
     environment: development
@@ -657,7 +764,7 @@ jobs:
       uses: actions/checkout@v2
 
    # https://github.com/redhat-actions/s2i-build#readme
-    - name: S2I Build
+    - name: S2I Build <i class="conum" data-value="5"></i><b>(5)</b>
       id: build_image
       uses: redhat-actions/s2i-build@v2
       with:
@@ -667,7 +774,7 @@ jobs:
         tags: ${{ env.IMAGE_TAGS }}
 
     # https://github.com/redhat-actions/push-to-registry#readme
-    - name: Push to Registry
+    - name: Push to Registry <i class="conum" data-value="6"></i><b>(6)</b>
       id: push-to-registry
       uses: redhat-actions/push-to-registry@v2
       with:
@@ -680,7 +787,7 @@ jobs:
     # The path the image was pushed to is now stored in ${{ steps.push-to-registry.outputs.registry-path }}
 
     # https://github.com/redhat-actions/oc-login#readme
-    - name: Log in to OpenShift
+    - name: Log in to OpenShift <i class="conum" data-value="7"></i><b>(7)</b>
       uses: redhat-actions/oc-login@v1
       with:
         openshift_server_url: ${{ env.OPENSHIFT_SERVER }}
@@ -689,18 +796,215 @@ jobs:
         namespace: ${{ env.OPENSHIFT_NAMESPACE }}
 
     # Run a script to create a new app or update the current one with the previously pushed container image
-    - run: |
+    - run: | <i class="conum" data-value="8"></i><b>(8)</b>
          "${GITHUB_WORKSPACE}/.github/script.sh" ${{ env.APP_NAME }} ${{ env.IMAGE_REGISTRY }}/${{ steps.build_image.outputs.image }}:${{ github.sha }} ${{ env.OPENSHIFT_NAMESPACE }}</code></pre>
 </div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Name of the Action.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Environment variables to be used in the workflow. This includes <a href="https://docs.github.com/en/actions/reference/environment-variables" target="_blank" rel="noopener">default environment variables</a> and the Secret you added to the Enviroment.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Here&#8217;s if where you define which type of trigger you want for this workflow. In this case, any change to the repository (Push) to the <code>master</code> branch will trigger the action start. Check out the documentation for a full list of triggers that can be used: <a href="https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows" class="bare">https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows</a></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Name of the job running in this Action. This will use an ubuntu image containing OpenShift CLI <code>oc</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td><a href="https://github.com/redhat-actions/s2i-build#readme" target="_blank" rel="noopener">S2I action</a> : Red Hat provides a set of already available actions for OpenShift, in this case there is the . Similarly to what you implemented in the previous chapters, it will create a container image from the source code thanks to the S2I mechanism.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td><a href="https://github.com/redhat-actions/push-to-registry#readme" target="_blank" rel="noopener">Push to Registry</a> : This action is used to push to the GitHub Registry using built-in credentials available for GitHub repository owners.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td><a href="https://github.com/redhat-actions/oc-login#readme" target="_blank" rel="noopener">OC Login</a>: This action is used to login to the OpenShift cluster with the Environment Secrets previously created.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>Run a script already available in the path for GitHub actions (it was provided to make the flow easier and available with the fork of the repository).</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>GitHub Actions can invoke script in the path of the workflow.
+This script will check if the update the image hash into the Nationalpark Deployment with the one created within this job, otherwise if will create a new Deployment if this is not present yet.</p>
+</div>
+<div class="listingblock">
+<div class="title"><a href="https://github.com/openshift-roadshow/nationalparks/blob/master/.github/script.sh" target="_blank" rel="noopener">script.sh</a></div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">#!/bin/bash
+
+app_name=$1
+image=$2
+namespace=$3
+
+deploy=`oc get deployment $app_name`
+if [[ "$?" -eq 0 ]]; then
+    oc set image deployment/$app_name $app_name=$image
+    oc rollout restart deployment/$app_name
+else
+    oc new-app $image --name $app_name -n $namespace
+fi</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>From your Nationalparks repository fork on GitHub, go to the top-right menu, click <strong>Actions</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Then click to <strong>set up a workflow yourself</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-codechanges-github-actions-create1.png" alt="Create Workflow">
+</div>
+</div>
+<div class="paragraph">
+<p>Rename the <code>main.yml</code> example new file to:</p>
+</div>
+<div class="listingblock copypaste">
+<div class="content">
+<pre class="highlightjs highlight"><code>openshift.yml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Paste the previously copied YAML content into the code text box under <strong>Edit new file</strong>, replacing the example one.</p>
+</div>
+<div class="paragraph">
+<p>Click <strong>Start Commit</strong>. Add a title for your commit and click <strong>Commit new file</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-codechanges-github-actions-create2.png" alt="Create OpenShift Action">
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If you are not using GitHub web interface, you can just commit and push the YAML content in a new file under this path <code>.github/workflows/openshift.yml</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Commit and push your new file as shown in the following picture, this will trigger the Action start.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-codechanges-github-actions-add-action.png" alt="Add GitHub Action">
+</div>
+</div>
+<div class="paragraph">
+<p>You can click to your newly created action to gather info about execution and logs as follows:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-codechanges-github-actions-created.png" alt="GitHub Action created">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-codechanges-github-actions-running.png" alt="GitHub Action running">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-codechanges-github-actions-running-logs.png" alt="GitHub Action logs">
+</div>
+</div>
+<div class="paragraph">
+<p>If everything is fine, you should see a successful status of your OpenShift GitHub action.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-codechanges-github-actions-completed.png" alt="GitHub Action completed">
+</div>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s now verify that the Nationparks deployment is pointing to container image on GitHub Registry.</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc get deployment nationalparks -o=jsonpath='{$.spec.template.spec.containers[:1].image}'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should have an output similar to the following:</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ghcr.io/blues-man/nationalparks:ced212c4391ffb2ef42af60d295fce4f1551d0e</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Congratulations! Any new change to the Nationalparks backend will be now managed by GitHub Actions.</p>
+</div>
+<div class="paragraph">
+<p>If you are interested in bringing more automation to your OpenShift cluster with GitHub actions, please explore all available <a href="https://github.com/redhat-actions" target="_blank" rel="noopener">Red Hat Actions</a> and <a href="https://docs.github.com/en/actions" target="_blank" rel="noopener">GitHub Actions documentation</a>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Your workshop is completed at this point if you are using <a href="https://developers.redhat.com/developer-sandbox" target="_blank" rel="noopener">Developer Sandbox for Red Hat OpenShift</a>, since in the following chapters there will be functionalities which are not available yet on Sandbox environments (OpenShift Pipelines Operator).
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="enable_openshift_triggers"><a class="anchor" href="#enable_openshift_triggers"></a>Enable OpenShift Triggers</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>If you want to bring back OpenShift automation for this component, you can enable OpenShift triggers again.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Your GitHub Actions won&#8217;t work again if you re-enable OpenShift triggers since there would be two automation system on the same component.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>In the following labs you will explore more about Kubernetes-native automation in-cluster with <strong>OpenShift Pipelines</strong>.</p>
+</div>
+<div class="paragraph">
+<p>In order to keep working with automation in-cluster, we need to enable again the triggers managed by OpenShift for the Nationalparks Deployment, as we disabled them in the first steps of this lab.</p>
+</div>
 <div class="listingblock copypaste">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc set triggers deployment nationalparks --from-image=nationalparks:latest --containers=nationalparks</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see an output as the following:</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">deployment.apps/nationalparks triggers updated</code></pre>
 </div>
 </div>
 </div>
