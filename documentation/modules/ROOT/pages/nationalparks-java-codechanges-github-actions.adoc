@@ -1,43 +1,105 @@
 = GitHub Actions with OpenShift
 :navtitle: GitHub Actions with OpenShift
 
-OpenShift includes comprehensive features for automation in-cluster as seen in xref:nationalparks-{lab}-codechanges-github.adoc[Webhooks with OpenShift] and in the next chapter xref:nationalparks-{lab}-pipeline.adoc[Continuous Integration and Pipelines], but it also provides great interoperability and integrations for external CI/CD systems such as *GitHub Actions*.
+OpenShift includes comprehensive features for automation in-cluster as seen in xref:nationalparks-{lab}-codechanges-github.adoc[Webhooks with OpenShift] and as you will see in the next chapter xref:nationalparks-{lab}-pipeline.adoc[Continuous Integration and Pipelines]. In addition to that, it provides great interoperability and integrations for external CI/CD systems such as *GitHub Actions*.
 
 link:https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions#overview[GitHub Actions,window='_blank'] are event-driven automation tasks available for any GitHub repository. An event automatically triggers the workflow, which contains a job. The job then uses steps to control the order in which actions are run. These actions are the commands that automate software build, test and deploy.
 
-In this chapter, you will add a GitHub Action for building the Nationalparks backend container image, and pushing it to the GitHub Container Image Registry. Any change to the repository will trigger the container image build and push outside OpenShift this time, and this will be used to deploy it on OpenShift.
+In this chapter, you will add a GitHub Action for building the Nationalparks backend container image, and pushing it to the link:https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry[GitHub Container Registry,window='_blank']. Any change to your fork will trigger the container image build and push outside OpenShift this time, and this will be used afterwards to deploy the new container image to OpenShift.
 
+[#disable_github_webhook]
+== Disable GitHub Webhook
+
+In the previous chapter we also used Webhooks to trigger the container image build and deploy through the BuildConfig automation.
+At this point, we need to disable or cancel it because we will use GitHub Actions for that.
+
+Come back to your Nationalparks fork page on GitHub. From top-right menu, click *Settings*. Then from result left-side menu, click *Webhook*, then click *Delete* next to your previously created Webhook.
+
+TIP: You can also just disable it, by clicking on *Edit* and then navigate to the bottom of the section to uncheck *Active* box. 
 
 [#disable_openshift_triggers]
 == Disable OpenShift Triggers
+
+As we discussed in the previous chapter, OpenShift provides in-cluster automation out the box with Webhooks and BuildConfigs.
+Because now we want to delegate this automation externally to GitHub Actions, we need to disable such triggers for the Nationalparks Deployment with this command:
 
 [source,bash,role="copypaste"]
 ----
 oc annotate deployment nationalparks image.openshift.io/triggers-
 ----
 
-[#configure_action]
-== Configure Action
+[#configure_github_action]
+== Configure GitHub Action
+
+GitHub Actions workflows run into link:https://docs.github.com/en/actions/reference/environments[Environments,window='_blank'] and they can reference an environment to use the environment's protection rules and secrets.
+
+In this step, you will add a new Environment named `development`.
+
+From your previously forked Nationalparks repository on GitHub, go to the top-right menu, click *Settings*. Then from result left-side menu, click *Environments*, then from right side click *New environment*.
 
 image::nationalparks-codechanges-github-actions-env.png[Environment]
 
+In the following window, insert into *Name* the name of the GitHub Environment that will be used by the Action:
+
+[source,role=copypaste]
+----
+development
+----
+
+Click *Configure Environment* to create it.
+
 image::nationalparks-codechanges-github-actions-addenv.png[Add Environment]
+
+In the result screen from your just created GitHub Environment `development`, you will see all details of the newly created Enviroment. Navigate to the bottom of section, go to *Environment secrets* and click *Add Secret* to add new secrets.
 
 image::nationalparks-codechanges-github-actions-addsecrets.png[Add Environment Secrets]
 
+You will now configure two secrets that will be used by the GitHub Action to connect to your OpenShift clusters.
+
+* `OPENSHIFT_SERVER`: The OpenShift API server
+* `OPENSHIFT_TOKEN`: The authentication token to connect with
+
+You can retrieve both from your OpenShift cluster as shown in previous chapter: xref:common-explore.adoc#connect_to_the_cluster_with_cli[Connect to the OpenShift Cluster from CLI,window='_blank']:
+
+In another tab, go back to OpenShift Web Console. Then go to top-right menu bar and click to the dropdown menu containing your username, then click *Copy Login Command*:
+
+image::prerequisites_copy_login_command.png[Copy Login Command]
+
+Click on *Display Token*.
+
+Copy your *OPENSHIFT_SERVER* as shown in the image below, in the *Log in with this token* section (e.g. `+https://api.sandbox-m2.cafe.p1.openshiftapps.com:6443+`)
+
+Copy your *OPENSHIFT_TOKEN* as shown in the image below, in the *Your API token is* section (e.g. `sha256~IJlITptYEdthK-......`)
+
+image::nationalparks-codechanges-github-actions-token.png[Environment]
+
+
+Add both `OPENSHIFT_SERVER` and `OPENSHIFT_TOKEN` with the values you just copied:
+
 image::nationalparks-codechanges-github-actions-addsecret.png[Add Secret]
+
+Click *Add Secret* to add one and repeat for the other.
+
+Your Environment screen should be similar to the following:
 
 image::nationalparks-codechanges-github-actions-env-secrets.png[Added Environment Secrets]
 
 
-[#add_action]
-== Add Action
+[#add_github_action]
+== Add GitHub Action
+
+Everything is now ready to start your automation with GitHub Action and OpenShift. GitHub actions workflows and jobs are defined with a YAML file containing all the needed steps.
+
+Review the follow workflow that will be used to trigger build of the Nationalparks backend on GitHub, and then deploy it to OpenShift referencing container image from the already created Deployment `nationalparks`. 
+
+*Copy* the YAML file to be added in your Nationalparks fork repository on GitHub.
+
 
 [source,yaml,role="copypaste"]
 ----
-name: OpenShift
+name: OpenShift <1>
 
-env:
+env: <2>
   IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
   REGISTRY_USER: ${{ github.actor }}
   REGISTRY_PASSWORD: ${{ github.token }}
@@ -52,11 +114,11 @@ env:
 
 on:
   # https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows
-  push:
+  push: <3>
     branches: [ master ]
 
 jobs:
-  build-and-push:
+  build-and-push: <4>
     name: Build and push to github container registry
     runs-on: ubuntu-18.04
     environment: development
@@ -71,7 +133,7 @@ jobs:
       uses: actions/checkout@v2
     
    # https://github.com/redhat-actions/s2i-build#readme
-    - name: S2I Build
+    - name: S2I Build <5>
       id: build_image
       uses: redhat-actions/s2i-build@v2
       with:
@@ -81,7 +143,7 @@ jobs:
         tags: ${{ env.IMAGE_TAGS }}
         
     # https://github.com/redhat-actions/push-to-registry#readme
-    - name: Push to Registry
+    - name: Push to Registry <6>
       id: push-to-registry
       uses: redhat-actions/push-to-registry@v2
       with:
@@ -94,7 +156,7 @@ jobs:
     # The path the image was pushed to is now stored in ${{ steps.push-to-registry.outputs.registry-path }}
 
     # https://github.com/redhat-actions/oc-login#readme
-    - name: Log in to OpenShift
+    - name: Log in to OpenShift <7>
       uses: redhat-actions/oc-login@v1
       with:
         openshift_server_url: ${{ env.OPENSHIFT_SERVER }}
@@ -103,14 +165,119 @@ jobs:
         namespace: ${{ env.OPENSHIFT_NAMESPACE }}
 
     # Run a script to create a new app or update the current one with the previously pushed container image
-    - run: |
+    - run: | <8>
          "${GITHUB_WORKSPACE}/.github/script.sh" ${{ env.APP_NAME }} ${{ env.IMAGE_REGISTRY }}/${{ steps.build_image.outputs.image }}:${{ github.sha }} ${{ env.OPENSHIFT_NAMESPACE }}
 ----
+<1> Name of the Action.
+<2> Environment variables to be used in the workflow. This includes link:https://docs.github.com/en/actions/reference/environment-variables[default environment variables,window='_blank'] and the Secret you added to the Enviroment.
+<3> Here's if where you define which type of trigger you want for this workflow. In this case, any change to the repository (Push) to the `master` branch will trigger the action start. Check out the documentation for a full list of triggers that can be used: https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows
+<4> Name of the job running in this Action. This will use an ubuntu image containing OpenShift CLI `oc`.
+<5> link:https://github.com/redhat-actions/s2i-build#readme[S2I action,window=_blank] : Red Hat provides a set of already available actions for OpenShift, in this case there is the . Similarly to what you implemented in the previous chapters, it will create a container image from the source code thanks to the S2I mechanism.
+<6> link:https://github.com/redhat-actions/push-to-registry#readme[Push to Registry, window=_blank] : This action is used to push to the GitHub Registry using built-in credentials available for GitHub repository owners.
+<7> link:https://github.com/redhat-actions/oc-login#readme[OC Login, window=_blank]: This action is used to login to the OpenShift cluster with the Environment Secrets previously created.
+<8> Run a script already available in the path for GitHub actions (it was provided to make the flow easier and available with the fork of the repository). 
+
+GitHub Actions can invoke script in the path of the workflow.
+This script will check if the update the image hash into the Nationalpark Deployment with the one created within this job, otherwise if will create a new Deployment if this is not present yet.
+
+.link:https://github.com/openshift-roadshow/nationalparks/blob/master/.github/script.sh[script.sh,window='_blank']
+[source,bash]
+----
+#!/bin/bash
+
+app_name=$1
+image=$2
+namespace=$3
+
+deploy=`oc get deployment $app_name`
+if [[ "$?" -eq 0 ]]; then
+    oc set image deployment/$app_name $app_name=$image
+    oc rollout restart deployment/$app_name
+else
+    oc new-app $image --name $app_name -n $namespace
+fi
+----
+
+From your Nationalparks repository fork on GitHub, go to the top-right menu, click *Actions*.
+
+Then click to *set up a workflow yourself*.
+
+image::nationalparks-codechanges-github-actions-create1.png[Create Workflow]
+
+Rename the `main.yml` example new file to:
+
+[source,role=copypaste]
+----
+openshift.yml
+----
+
+Paste the previously copied YAML content into the code text box under *Edit new file*, replacing the example one.
+
+Click *Start Commit*. Add a title for your commit and click *Commit new file*
+
+image::nationalparks-codechanges-github-actions-create2.png[Create OpenShift Action]
+
+TIP: If you are not using GitHub web interface, you can just commit and push the YAML content in a new file under this path `.github/workflows/openshift.yml`.
+
+Commit and push your new file as shown in the following picture, this will trigger the Action start.
+
+image::nationalparks-codechanges-github-actions-add-action.png[Add GitHub Action]
+
+You can click to your newly created action to gather info about execution and logs as follows:
+
+image::nationalparks-codechanges-github-actions-created.png[GitHub Action created]
+
+image::nationalparks-codechanges-github-actions-running.png[GitHub Action running]
+
+image::nationalparks-codechanges-github-actions-running-logs.png[GitHub Action logs]
+
+If everything is fine, you should see a successful status of your OpenShift GitHub action.
+
+image::nationalparks-codechanges-github-actions-completed.png[GitHub Action completed]
+
+Let's now verify that the Nationparks deployment is pointing to container image on GitHub Registry.
+
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
+----
+oc get deployment nationalparks -o=jsonpath='{$.spec.template.spec.containers[:1].image}'
+----
+
+You should have an output similar to the following:
+
+[.console-output]
+[source,bash]
+----
+ghcr.io/blues-man/nationalparks:ced212c4391ffb2ef42af60d295fce4f1551d0e
+----
+
+Congratulations! Any new change to the Nationalparks backend will be now managed by GitHub Actions.
+
+If you are interested in bringing more automation to your OpenShift cluster with GitHub actions, please explore all available link:https://github.com/redhat-actions[Red Hat Actions, window=_blank] and link:https://docs.github.com/en/actions[GitHub Actions documentation, window=_blank].
+
+NOTE: Your workshop is completed at this point if you are using https://developers.redhat.com/developer-sandbox[Developer Sandbox for Red Hat OpenShift,window='_blank'], since in the following chapters there will be functionalities which are not available yet on Sandbox environments (OpenShift Pipelines Operator).
 
 [#enable_openshift_triggers]
 == Enable OpenShift Triggers
 
+If you want to bring back OpenShift automation for this component, you can enable OpenShift triggers again.
+
+NOTE: Your GitHub Actions won't work again if you re-enable OpenShift triggers since there would be two automation system on the same component.
+
+In the following labs you will explore more about Kubernetes-native automation in-cluster with *OpenShift Pipelines*.
+
+In order to keep working with automation in-cluster, we need to enable again the triggers managed by OpenShift for the Nationalparks Deployment, as we disabled them in the first steps of this lab.
+
+[.console-input]
 [source,bash,role="copypaste"]
 ----
 oc set triggers deployment nationalparks --from-image=nationalparks:latest --containers=nationalparks
+----
+
+You should see an output as the following:
+
+[.console-output]
+[source,bash]
+----
+deployment.apps/nationalparks triggers updated
 ----
