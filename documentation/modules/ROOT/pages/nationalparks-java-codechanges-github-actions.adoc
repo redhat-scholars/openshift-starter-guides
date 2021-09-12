@@ -222,10 +222,6 @@ image::nationalparks-codechanges-github-actions-create2.png[Create OpenShift Act
 
 TIP: If you are not using GitHub web interface, you can just commit and push the YAML content in a new file under this path `.github/workflows/openshift.yml`.
 
-Commit and push your new file as shown in the following picture, this will trigger the Action start.
-
-image::nationalparks-codechanges-github-actions-add-action.png[Add GitHub Action]
-
 You can click to your newly created action to gather info about execution and logs as follows:
 
 image::nationalparks-codechanges-github-actions-created.png[GitHub Action created]
