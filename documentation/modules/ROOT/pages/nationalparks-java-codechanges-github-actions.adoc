@@ -1,7 +1,10 @@
 = GitHub Actions with OpenShift
 :navtitle: GitHub Actions with OpenShift
 
-OpenShift includes comprehensive features for automation in-cluster as seen in xref:nationalparks-{lab}-codechanges-github.adoc[Webhooks with OpenShift] and as you will see in the next chapter xref:nationalparks-{lab}-pipeline.adoc[Continuous Integration and Pipelines]. In addition to that, it provides great interoperability and integrations for external CI/CD systems such as *GitHub Actions*.
+OpenShift includes comprehensive features for automation in-cluster as seen in xref:nationalparks-{lab}-codechanges-github.adoc[Webhooks with OpenShift] and as you will see in the next chapter xref:nationalparks-{lab}-pipeline.adoc[Continuous Integration and Pipelines]. In addition to that, it provides great interoperability and integrations for external CI/CD systems such as Jenkins, GitLab, Azure DevOps and *GitHub Actions*.
+
+image::openshift-cicd-integrations.png[OpenShift CI/CD Offering]
+
 
 link:https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions#overview[GitHub Actions,window='_blank'] are event-driven automation tasks available for any GitHub repository. An event automatically triggers the workflow, which contains a job. The job then uses steps to control the order in which actions are run. These actions are the commands that automate software build, test and deploy.
 
