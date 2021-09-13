@@ -132,6 +132,8 @@ And finally, the role this component plays in the overall application.
 role=backend
 ----
 
+Click *Create* to submit.
+
 image::nationalparks-configure-service.png[Runtimes]
 
 To see the build logs, in Topology view, click the `nationalparks` entry, then click on *View Logs* in the *Builds* section of the *Resources* tab.

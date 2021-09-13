@@ -29,6 +29,7 @@ Because now we want to delegate this automation externally to GitHub Actions, we
 [source,bash,role="copypaste"]
 ----
 oc annotate deployment nationalparks image.openshift.io/triggers-
+oc annotate deployment nationalparks alpha.image.policy.openshift.io/resolve-names-
 ----
 
 [#configure_github_action]
