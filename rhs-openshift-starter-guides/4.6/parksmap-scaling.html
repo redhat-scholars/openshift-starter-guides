@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Scaling Apps :: OpenShift Starter Guides</title>
-    <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.8/parksmap-scaling.html">
+    <link rel="canonical" href="http://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.7/parksmap-scaling.html">
     <link rel="prev" href="parksmap-container-image.html">
     <link rel="next" href="parksmap-routes.html">
     <meta name="generator" content="Antora 2.3.4">
@@ -496,9 +496,6 @@
       <span class="title">OpenShift Starter Guides</span>
       <ul class="versions">
         <li class="version is-latest">
-          <a href="../4.8/index.html">4.8</a>
-        </li>
-        <li class="version">
           <a href="../4.7/index.html">4.7</a>
         </li>
         <li class="version is-current">
@@ -514,7 +511,7 @@
 <main class="article">
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="../4.8/index.html" class="home-link"></a>
+  <a href="../4.7/index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">OpenShift Starter Guides</a></li>
@@ -524,7 +521,6 @@
 <div class="page-versions">
   <button class="version-menu-toggle" title="Show other versions of page">4.6</button>
   <div class="version-menu">
-    <a class="version" href="../4.8/parksmap-scaling.html">4.8</a>
     <a class="version" href="../4.7/parksmap-scaling.html">4.7</a>
     <a class="version is-current" href="parksmap-scaling.html">4.6</a>
   </div>
@@ -546,7 +542,7 @@ you always want your application server to be scaled to 3 <strong>Pods</strong> 
 somehow die/exit are not automatically restarted. <strong>ReplicaSets</strong> and <strong>ReplicationController</strong> are how OpenShift "self heals" and while <strong>Deployments</strong> control <strong>ReplicaSets</strong>, <strong>ReplicationController</strong> here are controlled by <strong>DeploymentConfigs</strong>.</p>
 </div>
 <div class="paragraph">
-<p>From the <a href="https://docs.openshift.com/container-platform/4.8/applications/deployments/what-deployments-are.html">deployments documentation</a>:</p>
+<p>From the <a href="https://docs.openshift.com/container-platform/4.7/applications/deployments/what-deployments-are.html">deployments documentation</a>:</p>
 </div>
 <div class="quoteblock">
 <blockquote>
@@ -615,7 +611,7 @@ set of instances and then manipulates the RCs accordingly.</p>
 </div>
 <div class="paragraph">
 <p>You can learn more about the CPU-based
-<a href="https://docs.openshift.com/container-platform/4.8/nodes/pods/nodes-pods-autoscaling.html#nodes-pods-autoscaling-about_nodes-pods-autoscaling">Horizontal Pod Autoscaler here</a></p>
+<a href="https://docs.openshift.com/container-platform/4.7/nodes/pods/nodes-pods-autoscaling.html#nodes-pods-autoscaling-about_nodes-pods-autoscaling">Horizontal Pod Autoscaler here</a></p>
 </div>
 </div>
 </div>
@@ -797,7 +793,7 @@ it, always ensuring that the desired number of replicas was in place.</p>
 </div>
 <div class="paragraph">
 <p>More information on probing applications is available in the
-<a href="https://docs.openshift.com/container-platform/4.8/applications/application-health.html">Application
+<a href="https://docs.openshift.com/container-platform/4.7/applications/application-health.html">Application
 Health</a> section of the documentation and later in this guide.</p>
 </div>
 </div>
