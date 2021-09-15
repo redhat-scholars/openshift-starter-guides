@@ -21,6 +21,15 @@ https://www.redhat.com/en/topics/containers/whats-a-linux-container-vb[Container
 
 For developers looking to kickstart their projets, OpenShift enables efficient application development through streamlined workflows and validated integrations.
 
+You can run this Lab on any OpenShift cluster, either Managed and Self-Managed, just git it a https://www.redhat.com/en/technologies/cloud-computing/openshift/try-it[try,window=_blank]!
+
+* OCP
+* Developer Sandbox
+* CRC
+* ARO
+* ROKS
+* ROSA
+
 image::topology.gif[Workshop Topology]
 
 ### Objectives
@@ -53,25 +62,37 @@ To start this workshop, follow the step by step tutorial link for your cluster a
 |Javascript Path
 |Python Path  
 
+|link:https://www.openshift.com/try[OpenShift 4.8]
+|link:https://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.8/index.html?PROJECT=workshop[Guide]
+|
+|
+|
+
+|link:https://developers.redhat.com/products/codeready-containers/overview[CRC 4.8]
+|link:https://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.8/index.html?CLUSTER_SUBDOMAIN=apps-crc.testing&PROJECT=workshop[Guide]
+|
+|
+|
+
 |link:https://www.openshift.com/try[OpenShift 4.7]
 |link:https://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.7/index.html?PROJECT=workshop[Guide]
-|link:https://redhat-scholars.github.io/openshift-starter-guides-dotnet/[Guide]
-|link:https://redhat-scholars.github.io/openshift-starter-guides-javascript/[Guide]
-|link:https://redhat-scholars.github.io/openshift-starter-guides-python/[Guide]
+|
+|
+|
 
 |link:https://developers.redhat.com/products/codeready-containers/overview[CRC 4.7]
 |link:https://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.7/index.html?CLUSTER_SUBDOMAIN=apps-crc.testing&PROJECT=workshop[Guide]
-|link:https://redhat-scholars.github.io/openshift-starter-guides-dotnet/rhs-openshift-starter-guides-dotnet/4.6/index.html?CLUSTER_SUBDOMAIN=apps-crc.testing[Guide]
-|link:https://redhat-scholars.github.io/openshift-starter-guides-javascript/rhs-openshift-starter-guides-javascript/4.6/index.html?CLUSTER_SUBDOMAIN=apps-crc.testing[Guide]
-|link:https://redhat-scholars.github.io/openshift-starter-guides-python/rhs-openshift-starter-guides-python/4.6/index.html?CLUSTER_SUBDOMAIN=apps-crc.testing[Guide]
+|
+|
+|
 
 |link:https://learn.openshift.com/playgrounds/openshift47/[OpenShift 4.7 Playground] 
 |link:https://redhat-scholars.github.io/openshift-starter-guides/rhs-openshift-starter-guides/4.7/index.html?USERNAME=admin&PASSWORD=admin&PROJECT=workshop[Guide]
-|link:https://redhat-scholars.github.io/openshift-starter-guides-dotnet/rhs-openshift-starter-guides-dotnet/4.6/index.html?USERNAME=admin&PASSWORD=admin[Guide]
-|link:https://redhat-scholars.github.io/openshift-starter-guides-javascript/rhs-openshift-starter-guides-javascript/4.6/index.html?USERNAME=admin&PASSWORD=admin[Guide]
-|link:https://redhat-scholars.github.io/openshift-starter-guides-python/rhs-openshift-starter-guides-python/4.6/index.html?USERNAME=admin&PASSWORD=admin[Guide]
+|
+|
+|
 
-|link:https://www.openshift.com/try[ROKS/OpenShift 4.6]
+|link:https://www.openshift.com/try[OpenShift 4.6]
 |link:https://redhat-scholars.github.io/openshift-starter-guides/[Guide]
 |link:https://redhat-scholars.github.io/openshift-starter-guides-dotnet/[Guide]
 |link:https://redhat-scholars.github.io/openshift-starter-guides-javascript/[Guide]
