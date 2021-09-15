@@ -80,7 +80,7 @@ Similar to how we used *+Add* before with an existing image, we
 can do the same for specifying a source code repository. Since for this lab you
 have your own git repository, let's use it with a simple Java S2I image.
 
-In the *Developer Perspective*, click *+Add* in the left navigation and then choose "*From Git*.
+In the Developer Perspective, click *+Add* in the left navigation, go to the *Git Repository* section and then choose *From Git* option.
 
 image::nationalparks-show-add-options.png[Add to Project]
 
@@ -93,15 +93,24 @@ Enter the following for Git Repo URL:
 https://github.com/openshift-roadshow/nationalparks.git
 ----
 
-OpenShift will automatically guess the Git server type and the programming language used by the source code. Verify that *Java* has been selected as your Builder Image, and be sure to select version `openjdk-11-ubi8` to have OpenJDK 11.
+OpenShift will automatically guess the Git server type and the programming language used by the source code. Verify that *Java* has been selected as your Builder Image, and be sure to select version *openjdk-11-ubi8* to have OpenJDK 11.
 
 image::nationalparks-import-from-git-url-builder.png[Import from Git]
 
 
 Scroll down to the *General* section. Select:
 
-* *Application Name* : workshop
-* *Name* : nationalparks
+*Application Name* :
+[source,role=copypaste]
+----
+workshop
+----
+
+*Name* :
+[source,role=copypaste]
+----
+nationalparks
+----
 
 In *Resources* section, select *Deployment*.
 

@@ -8,7 +8,7 @@ In order to run the lab in your cluster, you need to meet the requirements discu
 |**Component**|**Version**
 
 | https://www.openshift.com/try[OpenShift]
-| `4.7`
+| `4.8`
 |===
 
 In the following modules you will find out other prerequisites when needed.

@@ -31,11 +31,11 @@ At the top of the left navigation menu, you can toggle between the *Administrato
 
 image::explore-perspective-toggle.png[Toggle Between Perspectives]
 
-Select *Developer* to switch to the Developer perspective. Once the Developer perspective loads, you should be in the *Topology* view.
+Select *Developer* to switch to the Developer perspective. Once the Developer perspective loads, you should be in the *+Add* view.
 
-Right now, there are no applications or components to view, but once you begin working on the lab, you'll be able to visualize and interact with the components in your application here.
+image::explore-add-application.png[Add New Applications]
 
-image::explore-topology-view.png[Topology View]
+Right now, there are no applications or components to view, but once you begin working on the lab, you'll be able to visualize and interact with the components in your application in the *Topology* view.
 
 You can also create and manage project from the CLI as well. Let's use our newly created project %PROJECT% as our default one:
 

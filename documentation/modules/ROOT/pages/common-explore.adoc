@@ -61,7 +61,7 @@ ARO::
 --
 Access your cluster from https://console-openshift-console.%CLUSTER_SUBDOMAIN%[OpenShift Web Console,role='params-link',window='_blank'].
 
-Login to your ARO cluster using one of the available https://docs.openshift.com/container-platform/4.7/authentication/understanding-identity-provider.html[Identity Provider,window='_blank'].
+Login to your ARO cluster using one of the available {openshift-docs-url}/authentication/understanding-identity-provider.html[Identity Provider,window='_blank'].
 
 .Azure Active Directory
 ****
@@ -193,9 +193,9 @@ You should see the following (or something similar):
 [.console-output]
 [source,bash]
 ----
-Client Version: 4.7.13
-Server Version: 4.7.0 <.>
-Kubernetes Version: v1.20.0+bd9e442
+Client Version: 4.8.2
+Server Version: 4.8.0 <.>
+Kubernetes Version: v1.21.0+bd9e442
 ----
 <.> NOTE: you will only see the `Server Version` and `Kubernetes Version` if you are currently connected to a Kubenetes or OpenShift cluster
 

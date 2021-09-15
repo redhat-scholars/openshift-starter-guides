@@ -14,7 +14,9 @@ With OpenShift it can be done directly from the web console.
 
 Return to the https://console-openshift-console.%CLUSTER_SUBDOMAIN%/k8s/cluster/projects[Web Console, role='params-link', window='_blank'].
 
-If you're no longer on the *Topology* view in the Developer perspective, return there now. Click *Container Image* to open a dialog that will allow you to specify the information for the image you want to deploy.
+If you're no longer on the Developer perspective, return there now. 
+
+From the left menu, click *+Add*. You will see a screen where you have multiple options to deploy application to OpenShift. Click *Container Image* to open a dialog that will allow you to specify the information for the image you want to deploy.
 
 image::parksmap-devconsole-container-image.png[Add from Container Image]
 
@@ -32,12 +34,21 @@ Your screen will end up looking something like this:
 
 image::parksmap-image.png[Explore Project]
 
-In *Runtime Icon* you can select the icon to use in OpenShift Topology View for the app. You can leave the default OpenShift icon, or since this Frontend is made with Spring boot, you can pick Spring boot icon if you want.
+In *Runtime Icon* you can select the icon to use in OpenShift Topology View for the app. You can leave the default OpenShift icon, or since this Frontend is made with Spring Boot, you can pick *spring-boot*.
 
 Make sure to have the correct values in:
 
-* *Application Name* : workshop
-* *Name* : parksmap
+*Application Name* :
+[source,role=copypaste]
+----
+workshop
+----
+
+*Name* :
+[source,role=copypaste]
+----
+parksmap
+----
 
 Ensure *Deployment* is selected from *Resource* section.
 

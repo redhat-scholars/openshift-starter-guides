@@ -77,7 +77,7 @@ Let's create now a Tekton pipeline for Nationalparks backend, select your OpenSh
 [.console-input]
 [source,bash,subs="+attributes"]
 ----
-oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipeline.yaml -n %PROJECT%
+oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-pipeline-new.yaml -n %PROJECT%
 ----
 
 Verify the Pipeline you created:
@@ -194,12 +194,7 @@ spec:
     - name: redeploy
       params:
         - name: SCRIPT
-          value: oc $@
-        - name: ARGS
-          value:
-            - rollout
-            - restart
-            - deployment/$(params.APP_NAME)
+          value: oc rollout restart deployment/$(params.APP_NAME)
       runAfter:
         - build-image
       taskRef:
