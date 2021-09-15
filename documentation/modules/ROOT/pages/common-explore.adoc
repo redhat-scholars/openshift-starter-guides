@@ -61,7 +61,36 @@ ARO::
 --
 Access your cluster from https://console-openshift-console.%CLUSTER_SUBDOMAIN%[OpenShift Web Console,role='params-link',window='_blank'].
 
-Login to your ARO cluster using one of the available https://docs.openshift.com/container-platform/4.7/authentication/understanding-identity-provider.html[Identity Provider,window='_blank'].
+.Cluster administrator
+****
+If you are the administrator of your ARO cluster (`kubeadmin`), you can login with your credentials if you already have them. 
+
+If don't have them yet, as an admin for the cluster in https://portal.azure.com[Azure Portal,window=_blank], you can also retrieve credentials with the https://docs.microsoft.com/en-us/cli/azure/[az CLI,window=_blank].
+
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
+----
+export RESOURCEGROUP=<Resource_group_name>
+export CLUSTER=<Cluster_name>
+
+az aro list-credentials \
+  --name $CLUSTER \
+  --resource-group $RESOURCEGROUP
+----
+
+You should get something similar with the following output containing your cluster admin credentials:
+
+[.console-output]
+[source,json,subs="+attributes,macros+"]
+----
+{
+  "kubeadminPassword": "<generated password>",
+  "kubeadminUsername": "kubeadmin"
+}
+----
+****
+
+If available, you can also login to your ARO cluster using one of the https://docs.openshift.com/container-platform/4.7/authentication/understanding-identity-provider.html[Identity Providers,window='_blank'] such as Azure Active Directory.
 
 .Azure Active Directory
 ****
@@ -71,7 +100,7 @@ If you configured https://docs.microsoft.com/en-us/azure/openshift/configure-azu
 image::explore-aro-login.png[ARO Login]
 
 
-On the Identity Provider login screen, enter the your credentials:
+Enter the your credentials:
 
 *Username*:
 [source,role="copypaste"]
