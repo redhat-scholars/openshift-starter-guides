@@ -676,8 +676,40 @@ perform various tasks via a browser.</p>
 <div class="paragraph">
 <p>Access your cluster from <a href="https://console-openshift-console.%CLUSTER_SUBDOMAIN%" class="params-link" target="_blank" rel="noopener">OpenShift Web Console</a>.</p>
 </div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Cluster administrator</div>
 <div class="paragraph">
-<p>Login to your ARO cluster using one of the available <a href="https://docs.openshift.com/container-platform/4.8/authentication/understanding-identity-provider.html" target="_blank" rel="noopener">Identity Provider</a>.</p>
+<p>If you are the administrator of your ARO cluster (<code>kubeadmin</code>), you can login with your credentials if you already have them.</p>
+</div>
+<div class="paragraph">
+<p>If don&#8217;t have them yet, as an admin for the cluster in <a href="https://portal.azure.com" target="_blank" rel="noopener">Azure Portal</a>, you can also retrieve credentials with the <a href="https://docs.microsoft.com/en-us/cli/azure/" target="_blank" rel="noopener">az CLI</a>.</p>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">export RESOURCEGROUP=&lt;Resource_group_name&gt;
+export CLUSTER=&lt;Cluster_name&gt;
+
+az aro list-credentials \
+  --name $CLUSTER \
+  --resource-group $RESOURCEGROUP</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should get something similar with the following output containing your cluster admin credentials:</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "kubeadminPassword": "&lt;generated password&gt;",
+  "kubeadminUsername": "kubeadmin"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>If available, you can also login to your ARO cluster using one of the <a href="https://docs.openshift.com/container-platform/4.7/authentication/understanding-identity-provider.html" target="_blank" rel="noopener">Identity Providers</a> such as Azure Active Directory.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -693,7 +725,7 @@ perform various tasks via a browser.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>On the Identity Provider login screen, enter the your credentials:</p>
+<p>Enter the your credentials:</p>
 </div>
 <div class="paragraph">
 <p><strong>Username</strong>:</p>
