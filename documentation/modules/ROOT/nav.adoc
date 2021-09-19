@@ -1,5 +1,5 @@
 * xref:common-workshop-summary.adoc[Workshop Summary]
-* xref:common-environment.adoc[OCP architecture]
+* xref:common-environment.adoc[OpenShift Architecture]
 * xref:common-explore.adoc[Explore OpenShift]
 ** xref:common-explore.adoc#the_web_console[The Web Console]
 ** xref:common-explore.adoc#command_line_interface[Command Line Interface]

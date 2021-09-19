@@ -1,7 +1,7 @@
-= OCP architecture
-:navtitle: OCP architecture
+= OpenShift Architecture
+:navtitle: OpenShift Architecture
 
-image::common-environment-ocp-architecture.png[OCP Architecture]
+image::common-environment-ocp-architecture.png[OpenShift Architecture]
 
 The workshop is hosted in an OpenShift environment that is running on a
 public cloud. The environment consists of the following systems:
