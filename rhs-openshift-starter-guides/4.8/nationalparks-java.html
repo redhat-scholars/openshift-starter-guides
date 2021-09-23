@@ -715,9 +715,6 @@ have your own git repository, let&#8217;s use it with a simple Java S2I image.</
 <div class="paragraph">
 <p>In <strong>Resources</strong> section, select <strong>Deployment</strong>.</p>
 </div>
-<div class="paragraph">
-<p>Under <strong>Advanced Options</strong>, ensure <strong>Create a route to the application</strong> is <strong>checked</strong> here.</p>
-</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -725,13 +722,31 @@ have your own git repository, let&#8217;s use it with a simple Java S2I image.</
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Leave Pipeline section empty here as we will implement it in the next modules
+If present, leave Pipeline section empty here as we will implement it in the next modules
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Expand the <strong>Labels</strong> section and add 3 labels.</p>
+<p>Under <strong>Advanced Options</strong>, ensure <strong>Create a route to the application</strong> is <strong>checked</strong> here.</p>
+</div>
+<div class="paragraph">
+<p>We are going to create another <strong>Secure Route</strong>, this time directly from this view.</p>
+</div>
+<div class="paragraph">
+<p>Click <strong>Show advanced Routing options</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Leave all default options, go under <strong>Security</strong> section.</p>
+</div>
+<div class="paragraph">
+<p>Check <strong>Secure Route</strong> option.</p>
+</div>
+<div class="paragraph">
+<p>Under <strong>TLS termination</strong>, select <strong>Edge</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Scroll down and expand the <strong>Labels</strong> section to add 3 labels.</p>
 </div>
 <div class="paragraph">
 <p>The name of the Application group:</p>
@@ -762,7 +777,22 @@ Leave Pipeline section empty here as we will implement it in the next modules
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/nationalparks-configure-service.png" alt="Runtimes">
+<img src="_images/nationalparks-configure-service1.png" alt="Select Builder">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-configure-service2.png" alt="Advanced Options">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-configure-service3.png" alt="Secure Route">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-configure-service4.png" alt="Label">
 </div>
 </div>
 <div class="paragraph">
@@ -851,7 +881,7 @@ URL in the web console, or via the command line:</p>
 <div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">NAME            HOST/PORT                                                   PATH      SERVICES        PORT       TERMINATION       WILDCARD
-nationalparks   nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%             nationalparks   8080-tcp
+nationalparks   nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%             nationalparks   8080-tcp        edge
 parksmap        parksmap-%PROJECT%.%CLUSTER_SUBDOMAIN%                  parksmap        8080-tcp        edge        none</code></pre>
 </div>
 </div>
@@ -860,7 +890,7 @@ parksmap        parksmap-%PROJECT%.%CLUSTER_SUBDOMAIN%                  parksmap
 </div>
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">http://nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%</code></pre>
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">https://nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -869,7 +899,7 @@ However, it can still be used with a browser. All backends that work with the pa
 frontend are required to implement a <code>/ws/info/</code> endpoint. To test, visit this URL in your browser:</p>
 </div>
 <div class="paragraph">
-<p><a href="http://nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%/ws/info/" class="params-link" target="_blank" rel="noopener">National Parks Info Page</a></p>
+<p><a href="https://nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%/ws/info/" class="params-link" target="_blank" rel="noopener">National Parks Info Page</a></p>
 </div>
 <div class="admonitionblock warning">
 <table>
