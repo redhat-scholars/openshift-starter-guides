@@ -117,7 +117,11 @@ server, a log analyzer, and a file service to help manage uploaded files.
 [#examining_the_pod]
 == Exercise: Examining the Pod
 
-If you click on the `parksmap` entry in the Topology view, you will see some information about that deployment config. The *Resources* tab may be displayed by default. If so, click on the *Details* tab. On that panel, you will see that there is a single *Pod* that was created by your actions.
+If you click on the `parksmap` entry in the Topology view, you will see some information about that deployment config. The *Resources* tab may be displayed by default. If so, click on the *Details* tab. 
+
+image::switchtoresources.png[Details Tab image]
+
+On that panel, you will see that there is a single *Pod* that was created by your actions.
 
 image::parksmap-overview.png[Pod overview]
 
@@ -211,13 +215,23 @@ find the details page. You can also get there by clicking on the `parksmap` depl
 
 image::parksmap-dc-resources.png[Parksmap Resources]
 
-image::parksmap-pod.png[Pod list]
+From here you can see configuration, metrics, environment variables, logs, events and get a Terminal shell on the running pod.
+
+image::parksmap-pod.png[Pod Details]
+
+image::parksmap-pod-events.png[Pod Events]
 
 Getting the `parksmap` image running may take a little while to complete. Each
 OpenShift node that is asked to run the image has to pull (download) it, if the
 node does not already have it cached locally. You can check on the status of the
 image download and deployment in the *Pod* details page, or from the command
 line with the `oc get pods` command that you used before.
+
+The default view in the *Developer* console is *Graph View*. You can switch between *Graph* and *List* views by using the toggle in the top right of the console.
+
+image::nationalparks-listview.png[List View Toggle]
+
+image::nationalparks-graphview.png[Topology View Toggle]
 
 [#customizing_image_lifecycle_behavior]
 == Background: Customizing the Image Lifecycle Behavior
