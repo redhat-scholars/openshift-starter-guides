@@ -114,11 +114,21 @@ nationalparks
 
 In *Resources* section, select *Deployment*.
 
+NOTE: If present, leave Pipeline section empty here as we will implement it in the next modules
+
 Under *Advanced Options*, ensure *Create a route to the application* is *checked* here.
 
-NOTE: Leave Pipeline section empty here as we will implement it in the next modules
+We are going to create another *Secure Route*, this time directly from this view.
 
-Expand the *Labels* section and add 3 labels.
+Click *Show advanced Routing options*. 
+
+Leave all default options, go under *Security* section.
+
+Check *Secure Route* option.
+
+Under *TLS termination*, select *Edge*.
+
+Scroll down and expand the *Labels* section to add 3 labels.
 
 The name of the Application group:
 
@@ -143,7 +153,13 @@ role=backend
 
 Click *Create* to submit.
 
-image::nationalparks-configure-service.png[Runtimes]
+image::nationalparks-configure-service1.png[Select Builder]
+
+image::nationalparks-configure-service2.png[Advanced Options]
+
+image::nationalparks-configure-service3.png[Secure Route]
+
+image::nationalparks-configure-service4.png[Label]
 
 To see the build logs, in Topology view, click the `nationalparks` entry, then click on *View Logs* in the *Builds* section of the *Resources* tab.
 
@@ -215,7 +231,7 @@ Where you should see something like the following:
 [source,bash,subs="+attributes,macros+"]
 ----
 NAME            HOST/PORT                                                   PATH      SERVICES        PORT       TERMINATION       WILDCARD
-nationalparks   nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%             nationalparks   8080-tcp
+nationalparks   nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%             nationalparks   8080-tcp        edge 
 parksmap        parksmap-%PROJECT%.%CLUSTER_SUBDOMAIN%                  parksmap        8080-tcp        edge        none
 ----
 
@@ -223,14 +239,14 @@ In the above example, the URL is:
 
 [source,text,role="copypaste",subs="+attributes"]
 ----
-http://nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%
+https://nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%
 ----
 
 Since this is a backend application, it doesn't actually have a web interface.
 However, it can still be used with a browser. All backends that work with the parksmap
 frontend are required to implement a `/ws/info/` endpoint. To test, visit this URL in your browser:
 
-link:http://nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%/ws/info/[National Parks Info Page, role='params-link', window='_blank']
+link:https://nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%/ws/info/[National Parks Info Page, role='params-link', window='_blank']
 
 WARNING: If the Pod is Running and the application is not available, please wait a few seconds and refresh the page, since we haven't configured yet Health Checks for that.
 

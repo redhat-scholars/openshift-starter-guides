@@ -225,7 +225,7 @@ service to query for data:
 
 [source,role="copypaste",subs="+attributes"]
 ----
-http://nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%/ws/data/all
+https://nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%/ws/data/all
 ----
 
 And the result?
@@ -244,7 +244,7 @@ The application provides an endpoint to do just that:
 
 [source,role="copypaste",subs="+attributes"]
 ----
-http://nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%/ws/data/load
+https://nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%/ws/data/load
 ----
 
 And the result?
