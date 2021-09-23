@@ -752,7 +752,15 @@ server, a log analyzer, and a file service to help manage uploaded files.</p>
 <h2 id="examining_the_pod"><a class="anchor" href="#examining_the_pod"></a>Exercise: Examining the Pod</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>If you click on the <code>parksmap</code> entry in the Topology view, you will see some information about that deployment config. The <strong>Resources</strong> tab may be displayed by default. If so, click on the <strong>Details</strong> tab. On that panel, you will see that there is a single <strong>Pod</strong> that was created by your actions.</p>
+<p>If you click on the <code>parksmap</code> entry in the Topology view, you will see some information about that deployment config. The <strong>Resources</strong> tab may be displayed by default. If so, click on the <strong>Details</strong> tab.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/switchtoresources.png" alt="Details Tab image">
+</div>
+</div>
+<div class="paragraph">
+<p>On that panel, you will see that there is a single <strong>Pod</strong> that was created by your actions.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -880,9 +888,17 @@ find the details page. You can also get there by clicking on the <code>parksmap<
 <img src="_images/parksmap-dc-resources.png" alt="Parksmap Resources">
 </div>
 </div>
+<div class="paragraph">
+<p>From here you can see configuration, metrics, environment variables, logs, events and get a Terminal shell on the running pod.</p>
+</div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/parksmap-pod.png" alt="Pod list">
+<img src="_images/parksmap-pod.png" alt="Pod Details">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/parksmap-pod-events.png" alt="Pod Events">
 </div>
 </div>
 <div class="paragraph">
@@ -891,6 +907,19 @@ OpenShift node that is asked to run the image has to pull (download) it, if the
 node does not already have it cached locally. You can check on the status of the
 image download and deployment in the <strong>Pod</strong> details page, or from the command
 line with the <code>oc get pods</code> command that you used before.</p>
+</div>
+<div class="paragraph">
+<p>The default view in the <strong>Developer</strong> console is <strong>Graph View</strong>. You can switch between <strong>Graph</strong> and <strong>List</strong> views by using the toggle in the top right of the console.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-listview.png" alt="List View Toggle">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/nationalparks-graphview.png" alt="Topology View Toggle">
+</div>
 </div>
 </div>
 </div>
