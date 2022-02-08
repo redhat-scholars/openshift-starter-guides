@@ -222,15 +222,19 @@ You should see the following (or something similar):
 [.console-output]
 [source,bash]
 ----
-Client Version: 4.8.2
-Server Version: 4.8.0 <.>
-Kubernetes Version: v1.21.0+bd9e442
+Client Version: 4.9.2
+Server Version: 4.9.15 <.>
+Kubernetes Version: v1.22.3+e790d7f
 ----
 <.> NOTE: you will only see the `Server Version` and `Kubernetes Version` if you are currently connected to a Kubenetes or OpenShift cluster
 
 If you see output like the above you can skip to <<Connect to the OpenShift Cluster from CLI,Connect to the OpenShift Cluster from CLI>>.  
 
 However, if the `oc` command doesn't exist or you have an older version of the OpenShift CLI (e.g. < `4.4.x`), select the tab appropriate to your OS and follow the instructions to install or update the OpenShift CLI. 
+
+
+[#download_openshift_cli]
+=== Download OpenShift CLI
 
 [tabs]
 ====
@@ -315,6 +319,41 @@ include::partial$cli_instructions.adoc[]
 include::partial$cli_test_oc.adoc[]
 --
 ====
+
+
+[#use_web_terminal]
+=== Web Terminal
+
+OpenShift Web Console supports a web based Terminal called link:https://docs.openshift.com/container-platform/4.9/web_console/odc-about-web-terminal.html[Web Terminal]. Instead of installing the `oc` CLI locally, you could just run this web based terminal containing useful tools such as:
+
+* `oc`
+* `kubectl`
+* `odo`
+* `helm`
+* `tkn`
+* `kn`
+
+If you want to have it in your current cluster, you can install it from OperatorHub following the link:https://docs.openshift.com/container-platform/4.9/web_console/odc-about-web-terminal.html[documentation].
+
+TIP: If you are using link:https://developers.redhat.com/developer-sandbox[Developer Sandbox for OpenShift], this has been already installed to your cluster!
+
+Navigate to top-right, click the command line terminal icon.
+
+image::explore-web-terminal.png[Web Terminal]
+
+From bottom-left, click the *Start* button. 
+
+image::explore-web-terminal-start.png[Start Web Terminal]
+
+Start using `oc` from the web terminal. The session is usually already authenticated to the cluster so you can *skip* the following section on how to connect from CLI.
+
+image::explore-web-terminal-cmd.png[Use Web Terminal]
+
+[source,bash]
+----
+oc whoami
+----
+
 
 [#connect_to_the_cluster_with_cli]
 === Connect to the OpenShift Cluster from CLI

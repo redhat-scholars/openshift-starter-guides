@@ -15,6 +15,8 @@ understand all of the terminology as we will cover it in detail in later labs.
 [#create_your_first_project]
 == Create your first Project
 
+NOTE: If you are using link:https://developers.redhat.com/developer-sandbox[Developer Sandbox for OpenShift], a project has been already created for you and you can *skip* this chapter.
+
 Create a project named *%PROJECT%*. From left-side menu, click to *Projects*, then from top-right click
 to *Create Project*.
 

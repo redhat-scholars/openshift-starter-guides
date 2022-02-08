@@ -93,12 +93,29 @@ Enter the following for Git Repo URL:
 https://github.com/openshift-roadshow/nationalparks.git
 ----
 
-OpenShift will automatically guess the Git server type and the programming language used by the source code. Verify that *Java* has been selected as your Builder Image, and be sure to select version *openjdk-11-ubi8* to have OpenJDK 11.
+OpenShift will automatically guess the Git server type and the programming language used by the source code. You will be now asked to select an *Import Strategy*.
 
-image::nationalparks-import-from-git-url-builder.png[Import from Git]
+Click *Edit Import Strategy*.
+
+image::nationalparks-import-strategy.png[Select Import Strategy]
+
+You have three options: 
+
+* *Devfile*: this will use link:https://devfile.io/docs/devfile/2.1.0/user-guide/index.html[Devfile v2] spec to create an application stack. The repo has to contain a file named `devfile.yaml` in the Devfile v2 format .
+* *Dockerfile*: this will create a Container image from an existing Dockerfile. 
+* *Builder Image*: this will use a mechanism called Source-to-Image to create automatically a container image directly from the source code.
+
+Select *Build Image* as we are going to create the container image from the source code, as discussed in the next section.
+
+image::nationalparks-import-strategy-build.png[Select Import Strategy]
 
 
-Scroll down to the *General* section. Select:
+TIP: You could also use Dockerfile, the repo contains a multi-stage Dockerfile. For this exercise, we want to show the Build Image feature.
+
+
+Verify that *Java* has been selected as your Builder Image, and be sure to select version *openjdk-11-ubi8* to have OpenJDK 11.
+
+Scroll down to the *General* section. Add the followin:
 
 *Application Name* :
 [source,role=copypaste]
