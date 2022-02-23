@@ -27,7 +27,7 @@ image::parksmap-permissions-membership.png[Membership]
 The parksmap application wants to talk to the OpenShift API to learn about other
 *Pods*, *Services*, and resources within the *Project*. You'll soon learn why!
 
-The parksmap application runs as a *Service Account* in our project on the cluster: namely the `default` *Service Account*.  It is to this *Service Account* that we can grant the necessary `view``access that will allow it to query the API to see what resources are within the *Project*. This also has the added benefit of addressing the cause of the error message we witnessed previously in the logs.
+The parksmap application runs as a *Service Account* in our project on the cluster: namely the `default` *Service Account*.  It is to this *Service Account* that we can grant the necessary `view` access that will allow it to query the API to see what resources are within the *Project*. This also has the added benefit of addressing the cause of the error message we witnessed previously in the logs.
 
 Choose an approach represented by the following tabs to update the `default` *Service Account* in the `%PROJECT%` project
 
@@ -44,7 +44,7 @@ image::parksmap-permissions-membership-serviceaccount-list.png[Service account l
 +
 image::parksmap-permissions-membership-serviceaccount-edit.png[Service account edit]
 +
-. Once you're finished editing permissions, click on the *Create* button.  You should then be able to see it on the `Role Bindings` list for the `%PROJECT%` project`
+. Once you're finished editing permissions, click on the *Create* button.  You should then be able to see it on the `Role Bindings` list for the `%PROJECT%` project.
 +
 image::parksmap-permissions-membership-serviceaccount-done.png[Service account changed]
 --
@@ -79,7 +79,7 @@ entire string, which, in this case, is
 `system:serviceaccount:%PROJECT%:default`. It's a nifty shortcut.
 ****
 
-NOTE: The `-z` flag will only work for service accounts in the *current* project.  If you're referring to a service account in a different project, use the `-n <project>`switch.
+NOTE: The `-z` flag will only work for service accounts in the *current* project. If you're referring to a service account in a different project, use the `-n <project>` switch.
 --
 ====
 
@@ -96,4 +96,4 @@ A new deployment is immediately started. Return to Topology view and click the `
 
 image::parksmap-permissions-redeployed.png[Application deployed]
 
-If you look at the logs for the application now, you should see no errors.  That's great.
+If you look at the logs for the application now, you should see no errors. That's great.
