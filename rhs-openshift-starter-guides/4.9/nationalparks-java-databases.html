@@ -660,6 +660,23 @@ If you are using <a href="https://developers.redhat.com/developer-sandbox" targe
 command is a <strong>Template</strong>. <code>create</code> simply makes the template available in
 your <strong>Project</strong>.</p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you are runnning OKD the mongodb image is missing and you will need to provide it.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc import-image mongodb:3.6 --from=registry.access.redhat.com/rhscl/mongodb-36-rhel7 --confirm</code></pre>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
