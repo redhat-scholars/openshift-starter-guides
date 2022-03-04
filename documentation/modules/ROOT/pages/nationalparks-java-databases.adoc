@@ -61,6 +61,13 @@ What just happened? What did you just `create`? The item that we passed to the `
 command is a *Template*. `create` simply makes the template available in
 your *Project*.
 
+NOTE: If you are runnning OKD the mongodb image is missing and you will need to provide it.
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
+----
+oc import-image mongodb:3.6 --from=registry.access.redhat.com/rhscl/mongodb-36-rhel7 --confirm
+----
+
 [#deploy_mongodb]
 == Exercise: Deploy MongoDB
 
