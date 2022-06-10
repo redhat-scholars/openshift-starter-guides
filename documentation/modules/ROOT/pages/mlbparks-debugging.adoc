@@ -157,7 +157,7 @@ IntelliJ::
 Setting up remote debugging is quite easy in IntelliJ. First edit the run/debug configurations.
 Under the Run menu (kbd:[ALT + u]), choose edit configurations. This will bring up the new configuration dialog.
 
-Click the plus in the top left corner, scroll down, and choose remote.
+Click the plus in the top left corner, scroll down, and choose Remote JVM Debug.
 
 image::mlbparks-debugging-intellij-debug-new.png[IntelliJ New Configuration]
 
