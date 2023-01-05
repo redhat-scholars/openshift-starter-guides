@@ -324,7 +324,7 @@ include::partial$cli_test_oc.adoc[]
 [#use_web_terminal]
 === Web Terminal
 
-OpenShift Web Console supports a web based Terminal called link:https://docs.openshift.com/container-platform/4.9/web_console/odc-about-web-terminal.html[Web Terminal]. Instead of installing the `oc` CLI locally, you could just run this web based terminal containing useful tools such as:
+OpenShift Web Console supports a web based Terminal called link:https://docs.openshift.com/container-platform/4.11/web_console/odc-about-web-terminal.html[Web Terminal]. Instead of installing the `oc` CLI locally, you could just run this web based terminal containing useful tools such as:
 
 * `oc`
 * `kubectl`
@@ -333,7 +333,7 @@ OpenShift Web Console supports a web based Terminal called link:https://docs.ope
 * `tkn`
 * `kn`
 
-If you want to have it in your current cluster, you can install it from OperatorHub following the link:https://docs.openshift.com/container-platform/4.9/web_console/odc-about-web-terminal.html[documentation].
+If you want to have it in your current cluster, you can install it from OperatorHub following the link:https://docs.openshift.com/container-platform/4.11/web_console/odc-about-web-terminal.html#odc-installing-web-terminal_odc-about-web-terminal[documentation].
 
 TIP: If you are using link:https://developers.redhat.com/developer-sandbox[Developer Sandbox for OpenShift], this has been already installed to your cluster!
 
