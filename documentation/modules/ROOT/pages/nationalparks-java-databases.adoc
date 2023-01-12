@@ -19,13 +19,7 @@ usually achieved with a database or other data storage. In this lab we are
 going to add MongoDB to our `nationalparks` application and then rewire it to
 talk to the database using environment variables via a secret.
 
-We are going to use the MongoDB image that is included with OpenShift.
-
-By default, this will use *EmptyDir* for data storage, which means if the *Pod*
-disappears the data does as well. In a real application you would use
-OpenShift's persistent storage mechanism to attach real-world storage (NFS,
-Ceph, EBS, iSCSI, etc) to the *Pods* to give them a persistent place to store their
-data.
+We'll take two approaches, using MongoDB Atlas (a fully-managed cloud database), as well as a containerized package of MongoDB.
 
 [#create_mongodb_instance]
 == Exercise: Deploy MongoDB
@@ -35,14 +29,97 @@ data.
 MongoDB Atlas::
 +
 --
-Placeholder text
+Using the MongoDB Atlas Operator provides native integration between OpenShift and https://www.mongodb.com/atlas/database[MongoDB Atlas].
+Let's take a look at how to use the Atlas Operator, which allows you the full benefits of MongoDB Atlas which still managing everything from your cluster.
+
+.Installing the MongoDB Atlas Operator
+****
+TIP: The Atlas Operator is already installed on https://developers.redhat.com/developer-sandbox[Developer Sandbox] clusters
+
+To install the MongoDB Atlas Operator, head to the Administrator Perspective and select the **OperatorHub** within the **Operators** tab.
+
+image::mongodb-operator-selection.png[MongoDB Operator Selection]
+
+Select the **Certified** Operator, and begin the installation process. You can leave all settings default, and click *Install* to finish the process.
+
+image::mongodb-operator-install.png[MongoDB Operator Install]
+
+After a few minutes, the MongoDB Atlas Operator will be installed on your cluster in the `openshift-operators` namespace and created several new custom resources to create and manage Atlas projects.
+****
+
+The first step in using the Atlas Operator is to provide it with the appropriate permissions from your Atlas account.
+If you haven't yet already, https://www.mongodb.com/cloud/atlas/register[create a MongoDB Atlas account] or https://account.mongodb.com/account/login[login] and navigate to your organization settings by clicking the **Gear** icon from your Atlas homepage.
+
+image::mongodb-atlas-settings.png[MongoDB Atlas Settings]
+
+Here, copy the Organization ID, and we'll use the OpenShift Web Terminal or CLI to save this to our cluster in preparation for future use, like so:
+
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
+----
+export ORG_ID=<your-org-id>
+----
+
+image::web-terminal-org-id.png[Entering MongoDB Org ID into Web Terminal]
+
+Back in MongoDB Atlas, you'll also need to create an API key with the appropriate permissions.
+In the left hand tab, select **Access Manager**, and click **Create API Key**
+
+image::mongodb-atlas-access-manager.png[MongoDB Atlas Access Manager]
+
+For the API Key, choose any name, and ensure the Key has **Organization Owner & Organization Project Creator** permissions before continuing.
+
+image::mongodb-atlas-api-key.png[MongoDB Atlas API Key]
+
+Here, save your public and private keys to your cluster enviroment, as we'll be using them in addition to the organization ID to create our Kubernetes secrets.
+
+image::mongodb-atlas-api-key-details.png[MongoDB Atlas API Key Details]
+
+You can do so similar to before, using the `export` command.
+
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
+----
+export ATLAS_PUBLIC_KEY=<your-public-key>
+export ATLAS_PRIVATE_KEY=<your-private-key>
+----
+
+image::web-terminal-api-key.png[Entering MongoDB API Key into Web Terminal]
+
+Now, let's specify these values to the MongoDB Atlas Operator, and create a secret. 
+
+TIP: If you aren't using the OpenShift Developer Sandbox, replace your current namespace below with `openshift-operators`.
+
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
+----
+oc create secret generic mongodb-atlas-operator-api-key \
+    --from-literal="orgId=$ORG_ID" \
+    --from-literal="publicApiKey=$ATLAS_PUBLIC_KEY" \
+    --from-literal="privateApiKey=$ATLAS_PRIVATE_KEY" \
+    -n %PROJECT%
+----
+
+image::web-terminal-api-key-terminal.png[Creating Kubernetes secret]
+
+You'll also need to label this secret so the Atlas Operator can find it.
+
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
+----
+oc label secret mongodb-atlas-operator-api-key atlas.mongodb.com/type=credentials -n %PROJECT%
+----
+
+With the OpenShift secret created, we can now create an AtlasProject custom resource,
+which will in turn create an Atlas Project on our MongoDB Atlas account.
 
 --
 MongoDB Community Image::
 +
 --
-Placeholder text
+For Hans-Peter :)
 
+--
 ====
 
 [#create_mongodb_template]

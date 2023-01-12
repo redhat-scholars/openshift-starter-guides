@@ -226,7 +226,7 @@ Client Version: 4.12.0
 Server Version: 4.11.13
 Kubernetes Version: v1.24.6
 ----
-<.> NOTE: you will only see the `Server Version` and `Kubernetes Version` if you are currently connected to a Kubenetes or OpenShift cluster
+TIP: You will only see the `Server Version` and `Kubernetes Version` if you are currently connected to a Kubenetes or OpenShift cluster
 
 If you see output like the above you can skip to <<Connect to the OpenShift Cluster from CLI,Connect to the OpenShift Cluster from CLI>>.  
 

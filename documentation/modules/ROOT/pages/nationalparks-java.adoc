@@ -133,7 +133,7 @@ In *Resources* section, select *Deployment*.
 
 NOTE: If present, leave Pipeline section empty here as we will implement it in the next modules
 
-Under *Advanced Options*, ensure *Create a route to the application* is *checked* here.
+Under *Advanced Options*, ensure *Create a route* is *checked* here.
 
 We are going to create another *Secure Route*, this time directly from this view.
 

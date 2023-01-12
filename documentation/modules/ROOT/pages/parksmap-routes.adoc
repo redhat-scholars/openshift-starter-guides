@@ -39,9 +39,7 @@ OpenShift Console::
 . In *Security* section, check *Secure route*. Select *Edge* from *TLS Termination* list.
 . Leave all other fields blank and click *Create*:
 +
-image::parksmap-route-create-1.png[Create Route Part 1,align="center"]
-+
-image::parksmap-route-create-2.png[Create Route Part 2,align="center"]
+image::parksmap-route-create-1.png[Create Route,align="center"]
 
 TIP: The TLS certificate for cluster Apps domains is used by default, so you don't need to add any certificate. In case you would like a custom domain resolving to OpenShift Nodes hosting Routers, you can add certificates also on a per-route basis.
 
