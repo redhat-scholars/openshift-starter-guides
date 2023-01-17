@@ -29,38 +29,14 @@ We'll take two approaches, using MongoDB Atlas (a fully-managed cloud database),
 MongoDB Atlas::
 +
 --
-Using the MongoDB Atlas Operator provides native integration between OpenShift and https://www.mongodb.com/atlas/database[MongoDB Atlas].
-Let's take a look at how to use the Atlas Operator, which allows you the full benefits of MongoDB Atlas which still managing everything from your cluster.
-
-.Installing the MongoDB Atlas Operator
-****
-TIP: The Atlas Operator is already installed on https://developers.redhat.com/developer-sandbox[Developer Sandbox] clusters
-
-To install the MongoDB Atlas Operator, head to the Administrator Perspective and select the **OperatorHub** within the **Operators** tab.
-
-image::mongodb-operator-selection.png[MongoDB Operator Selection]
-
-Select the **Certified** Operator, and begin the installation process. You can leave all settings default, and click *Install* to finish the process.
-
-image::mongodb-operator-install.png[MongoDB Operator Install]
-
-After a few minutes, the MongoDB Atlas Operator will be installed on your cluster in the `openshift-operators` namespace and created several new custom resources to create and manage Atlas projects.
-****
+OpenShift provides support for https://www.mongodb.com/atlas/database[MongoDB Atlas], as well as various other 3rd party database services using OpenShift Database Access (RHODA).
 
 The first step in using the Atlas Operator is to provide it with the appropriate permissions from your Atlas account.
 If you haven't yet already, https://www.mongodb.com/cloud/atlas/register[create a MongoDB Atlas account] or https://account.mongodb.com/account/login[login] and navigate to your organization settings by clicking the **Gear** icon from your Atlas homepage.
 
 image::mongodb-atlas-settings.png[MongoDB Atlas Settings]
 
-Here, copy the Organization ID, and we'll use the OpenShift Web Terminal or CLI to save this to our cluster in preparation for future use, like so:
-
-[.console-input]
-[source,bash,subs="+attributes,macros+"]
-----
-export ORG_ID=<your-org-id>
-----
-
-image::web-terminal-org-id.png[Entering MongoDB Org ID into Web Terminal]
+Here, copy the Organization ID, and save it somewhere for future usage.
 
 Back in MongoDB Atlas, you'll also need to create an API key with the appropriate permissions.
 In the left hand tab, select **Access Manager**, and click **Create API Key**
@@ -71,48 +47,87 @@ For the API Key, choose any name, and ensure the Key has **Organization Owner & 
 
 image::mongodb-atlas-api-key.png[MongoDB Atlas API Key]
 
-Here, save your public and private keys to your cluster enviroment, as we'll be using them in addition to the organization ID to create our Kubernetes secrets.
+Here, save your public and private keys to for future usage, as we'll be using the RHODA operator with these saved credentials.
 
 image::mongodb-atlas-api-key-details.png[MongoDB Atlas API Key Details]
 
-You can do so similar to before, using the `export` command.
+.Using the RHODA operator
+****
+From the left navigation bar on the **Developer** perspective, click on **+Add**. Click on the "All Services" card under the "Developer Catalog" section.
+
+This will open up the *Developer Catalog*. In the search bar, enter "Provider Account", and scroll down to find the "Provider Account" card. Click on it to open the side panel, and click on "Create".
+
+image::openshift-provider-account.png[OpenShift Provider Account]
+
+If you don't already happen to have a "Provider Account Policy", select the **create a Policy** link to create a DBaaSPolicy. Feel free to use a name such as `openshift-mongodb-policy`, and click **Create**.
+
+image::dbaas-policy.png[OpenShift DBaaS Policy Creation]
+
+From here, using the left nagivation bar, click on *+Add*. Return to the *Developer Catalog*, click "All Services" and again search for "Provider Account", this time being greeted by a page to enter our previously saved values.
+
+image::import-provider-account.png[Import Database Provider Account]
+
+Hit **Import**. If you have clusters already provisioned you should see a success message, along with a list of all of your MongoDB projects. If none were provisioned you'll see an error message that no instances were found.
+
+image::databases-fetched.png[Fetched Databases]
+****
+
+From the **+Add** menu again, go to "All Services" in "Developer Catalog", and seach for "Atlas". Scroll down and pick "MongoDB Atlas Cloud Database Service". Click on *Add to Topology*.
+
+image::databases-fetched.png[MongoDB Atlas Cloud Database Service]
+
+TIP: If you don't want to create a new database, you should be able to use the one you created with the RHODA operator.
+
+From the Provider Account dropdown, pick openshift-mongodb. Then, click on the *Create New Database Instance* on the right side, just above the list of existing databases.
+
+image::atlas-create-new-database.png[MongoDB Atlas Create New Database]
+
+In the "Create New Instance" form, use the following values.
+
+*Database Provider:* MongoDB Atlas Cloud Database Service Provider
+
+*Account:* openshift-mongodb
+
+*Instance Name:*
 
 [.console-input]
 [source,bash,subs="+attributes,macros+"]
 ----
-export ATLAS_PUBLIC_KEY=<your-public-key>
-export ATLAS_PRIVATE_KEY=<your-private-key>
+mongodb
 ----
 
-image::web-terminal-api-key.png[Entering MongoDB API Key into Web Terminal]
+*Project Name:*
+
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
+----
+mongodb-nationalparks
+----
+
+image::atlas-new-instance.png[MongoDB Atlas Create New Instance]
+
+Once finished and you've clicked **Create**, in Atlas you should now see a new project called `mongodb-nationalparks` (you might need to refresh the page). If you select that project, you will see a new cluster called `mongodb` being created.
+
+You'll also need to allow all IP access on MongoDB Atlas so our pods can access Atlas. For a production setting, however, you would either set up a PrivateLink or add the IPs of your OpenShift hosts.
+
+image::atlas-allow-ip.png[MongoDB Atlas Allow All IP's]
+
+Finally, from the *+Add* menu, go to "All Services" in "Developer Catalog", seach for "Atlas", and pick "MongoDB Atlas Cloud Database Service". Click on *Add to Topology*.
+
+image::openshift-developer-catalog-mongodb.png[OpenShift Developer Catalog MongoDB]
 
 Now, let's specify these values to the MongoDB Atlas Operator, and create a secret. 
 
-TIP: If you aren't using the OpenShift Developer Sandbox, replace your current namespace below with `openshift-operators`.
+In the Provider Account dropdown, pick *openshift-mongodb*. From the list of available database instances, pick the newly created `mongodb`. Click on *Add to Topology*.
 
-[.console-input]
-[source,bash,subs="+attributes,macros+"]
-----
-oc create secret generic mongodb-atlas-operator-api-key \
-    --from-literal="orgId=$ORG_ID" \
-    --from-literal="publicApiKey=$ATLAS_PUBLIC_KEY" \
-    --from-literal="privateApiKey=$ATLAS_PRIVATE_KEY" \
-    -n %PROJECT%
-----
+image::openshift-mongodb-add-topology.png[OpenShift MongoDB Add To Topology]
 
-image::web-terminal-api-key-terminal.png[Creating Kubernetes secret]
+From the Topology view, you should now see the Database as a Service Connection (DBSC). 
+Hover the "nationalparks" icon. You will see a dotted arrow. Hover that arrow, then drag and drop it inside the square area of the DBSC (just the grey area, not the icon inside of it). A modal will popup, click on *Create* to create the service bindings.
 
-You'll also need to label this secret so the Atlas Operator can find it.
+image::openshift-service-binding.png[OpenShift Service Binding]
 
-[.console-input]
-[source,bash,subs="+attributes,macros+"]
-----
-oc label secret mongodb-atlas-operator-api-key atlas.mongodb.com/type=credentials -n %PROJECT%
-----
-
-With the OpenShift secret created, we can now create an AtlasProject custom resource,
-which will in turn create an Atlas Project on our MongoDB Atlas account.
-
+The application will redeploy with the new service bindings. After successfully creating the service binding application will be connected to the database.
 --
 MongoDB Community Image::
 +
@@ -122,132 +137,10 @@ For Hans-Peter :)
 --
 ====
 
-[#create_mongodb_template]
-== Exercise: Create a MongoDB Template
+[#adding_labels]
+== Exercise: Adding Labels
 
-NOTE: If you are using https://developers.redhat.com/developer-sandbox[Developer Sandbox for Red Hat OpenShift,window='_blank'], you can *skip* this section and jump to the next one called *Exercise: Deploy MongoDB* because MongoDB Template it's already available on Developer Sandbox.
-
-In this step we will create a MongoDB template inside our project, so that is only visible to our user and we can access it from Developer Perspective to create a MongoDB instance.
-
-[.console-input]
-[source,bash,subs="+attributes,macros+"]
-----
-oc create -f +https://raw.githubusercontent.com/openshift-labs/starter-guides/ocp-4.8/mongodb-template.yaml+ -n %PROJECT%
-----
-
-What just happened? What did you just `create`? The item that we passed to the `create`
-command is a *Template*. `create` simply makes the template available in
-your *Project*.
-
-NOTE: If you are runnning OKD the mongodb image is missing and you will need to provide it.
-[.console-input]
-[source,bash,subs="+attributes,macros+"]
-----
-oc import-image mongodb:3.6 --from=registry.access.redhat.com/rhscl/mongodb-36-rhel7 --confirm
-----
-
-
-
-[#deploy_mongodb]
-== Exercise: Deploy MongoDB
-
-As you've seen so far, the web console makes it very easy to deploy things onto
-OpenShift. When we deploy the database, we pass in some values for configuration.
-These values are used to set the username, password, and name of
-the database.
-
-The database image is built in a way that it will automatically configure itself
-using the supplied information (assuming there is no data already present in the
-persistent storage!). The image will ensure that:
-
-- A database exists with the specified name
-- A user exists with the specified name
-- The user can access the specified database with the specified password
-
-In the Developer Perspective in your `%PROJECT%` project,
-click *+Add* and then *Database*. In the Databases view, you can click *Mongo* to filter for just MongoDB.
-
-NOTE: Make sure to uncheck *Operator Backed* option from *Type* section
-
-image::nationalparks-databases-catalog-databases.png[Data Stores]
-
-Alternatively, you could type `mongodb` in the search box. Once you have drilled down to see MongoDB, find the *MongoDB (Ephemeral)* template and select it.  You will notice that there are multiple
-MongoDB templates available.  We do not need a database with persistent storage, so the ephemeral Mongo
-template is what you should choose.  Go ahead and select the ephemeral template and click the *Instantiate Template* button.
-
-When we performed the application build, there was no template. Rather, we selected the
-builder image directly and OpenShift presented only the standard build workflow.
-Now we are using a template - a preconfigured set of resources that includes
-parameters that can be customized. In our case, the parameters we are concerned
-with are -- user, password, database, and
-admin password.
-
-image::nationalparks-databases-catalog-databases-mongodb-config.png[MongoDB Deploy]
-
-CAUTION: Make sure you name your database service name *mongodb-nationalparks*
-
-You can see that some of the fields say *"generated if empty"*. This is a
-feature of *Templates* in OpenShift. For
-now, be sure to use the following values in their respective fields:
-
-*Database Service Name*:
-[source,role=copypaste]
-----
-mongodb-nationalparks
-----
-
-*MongoDB Connection Username*:
-[source,role=copypaste]
-----
-mongodb
-----
-
-*MongoDB Connection Password*:
-[source,role=copypaste]
-----
-mongodb
-----
-
-*MongoDB Database Name*:
-[source,role=copypaste]
-----
-mongodb
-----
-
-*MongoDB Admin Password*:
-[source,role=copypaste]
-----
-mongodb
-----
-
-CAUTION: Make sure to have configured the *`MongoDB Database Name`* parameter with the appropriate value as by default it will already have a value of `sampledb`.
-
-Once you have entered in the above information, click on *Create* to go to the next step which will allow us to add a binding.
-
-From left-side menu, click to *Secrets*.
-
-image::nationalparks-databases-list-secrets.png[List Secrets]
-
-Click the secret name listed that we will use for *Parameters*. The secret can be used in other components, such as the `nationalparks` backend, to authenticate to the database.
-
-Now that the connection and authentication information stored in a secret in our project, we need to add it to the `nationalparks` backend. Click the *Add Secret to Workload* button.
-
-image::nationalparks-databases-binding-view-secret.png[National Parks Binding]
-
-Select the `nationalparks` workload and click *Save*.
-
-image::nationalparks-databases-binding-add-binding-to-nationalparks.png[Add binding to application]
-
-This change in configuration will trigger a new deployment of the `nationalparks` application with the environment variables properly injected.
-
-[TIP]
-====
-Back in the *Topology* view, if your `mongodb-nationalparks` component is not already in the light gray area that denotes the `workshop` application, click and drag the component whilst holding down kbd:[Shift] to add it to the group with the other two components (as shown below)
-
-image::nationalparks-databases-add-mongodb-to-workshop-app.png[Add mongodb to the workshop app]
-====
-
-Next, let's fix the labels assigned to the `mongodb-nationalparks` deployment. Currently, we cannot set labels when using the database template from the catalog, so we will fix these labels manually. 
+Next, let's fix the labels assigned to the MongoDB deployment. 
 
 Like before, we'll add 3 labels:
 
@@ -272,17 +165,10 @@ And finally, the role this component plays in the overall application.
 role=database
 ----
 
-Execute the following command:
-[.console-input]
-[source,bash,subs="+attributes,macros+"]
-----
-oc label dc/mongodb-nationalparks svc/mongodb-nationalparks app=workshop component=nationalparks role=database --overwrite
-----
-
 [#exploring_openshift_magic]
 == Exercise: Exploring OpenShift Magic
 
-As soon as we attached the Secret to the *Deployment*, some
+As soon as we connected our database, some
 magic happened. OpenShift decided that this was a significant enough change to
 warrant updating the internal version number of the *ReplicaSet*. You
 can verify this by looking at the output of `oc get rs`:
