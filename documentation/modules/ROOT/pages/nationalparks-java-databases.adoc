@@ -26,6 +26,7 @@ We'll take two approaches, using MongoDB Atlas (a fully-managed cloud database),
 
 [tabs, subs="attributes+,+macros"]
 ====
+////
 MongoDB Atlas::
 +
 --
@@ -129,10 +130,85 @@ image::openshift-service-binding.png[OpenShift Service Binding]
 
 The application will redeploy with the new service bindings. After successfully creating the service binding application will be connected to the database.
 --
+////
 MongoDB Community Image::
 +
 --
-For Hans-Peter :)
+From the left navigation bar on the **Developer** perspective, click on **+Add**. Then choose the tile for adding **Container images** which will open up the *Deploy Image* dialog. Fill in the following details:
+
+* Image section:
+    - Image name from external registry -> *mongo:6.0.4*
+    - Runtime icon -> choose *mongodb*
+
+image::mongodb_deploy_image_image.png[MongoDB Image Deployment Image Setting]
+
+* General section:
+    - Application -> *workshop*
+    - Name -> *mongodb*
+
+image::mongodb_deploy_image_general.png[MongoDB Image Deployment General Settings]
+
+* Advanced options:
+    - Create route -> *uncheck* because no route is needed to the DB instance itself
+
+image::mongodb_deploy_image_advanced.png[MongoDB Image Deployment Advanced Settings]
+
+Click on **Resource type** to show its settings and make sure the **Deployment** option is chosen.
+
+image::mongodb_deploy_image_option_resource_type.png[MongoDB Image Deployment Resource Type Settings]
+
+image::mongodb_deploy_image_resource_type.png[MongoDB Image Deployment Resource Type Settings]
+
+Click on **Deployment** to show its settings and add the following environment variables: 
+
+image::mongodb_deploy_image_option_deployment.png[MongoDB Image Deployment Deployment Settings]
+
+* Deployment Environment variables:
+    - MONGO_INITDB_ROOT_USERNAME: `admin`
+    - MONGO_INITDB_ROOT_PASSWORD: `secret`
+
+image::mongodb_deploy_image_deployment_env_vars.png[MongoDB Image Deployment Environment Variable Settings]
+
+Finally click the **Create** button at the bottom of the page to deploy MongoDB into your topology.
+
+The next step is to create a specific user in this MongoDB instance which the nationalparks application will use to create a connection. For this click the **MongoDB deployment** in your topology view, then click on the corresponding **pod** shown in the right view pane.
+
+image::mongodb_deployment_topology_pod.png[MongoDB Deployment Pod]
+
+You will end up in the pod details view where you can click **Terminal** to start a terminal session in the underlying container. 
+
+image::mongodb_pod_details_terminal.png[MongoDB Deployment Pod Details Terminal]
+
+Copy and paste the following snippet into the terminal window to create a database user with the proper settings and roles:
+
+[.console-input]
+[source,bash,subs="+attributes,macros+"]
+----
+mongosh -u admin -p secret --authenticationDatabase admin --eval 'use parksapp' --eval 'db.createUser({user: "parksapp", pwd: "keepsafe", roles: [{ role: "dbAdmin", db: "parksapp" },{ role: "readWrite", db: "parksapp" }]})' --quiet
+----
+
+If the command is successful you see the output below:
+
+[.console-output]
+[source,bash,subs="+attributes,macros+"]
+----
+{ ok: 1 }
+----
+
+With that, everything regarding the database is prepared and we can switch our focus back to the nationalparks application. Go back to the **Topology View**, click the **nationalparks deployment** and choose _Actions > Edit Deployment_ from the drop-down in the right view pane. 
+
+image::nationalparks_deployment_edit.png[Edit Nationalparks Deployment]
+
+In the **Edit Deployment** dialog, scroll down to the **Environment Variables** section and add the following four entries:
+
+    - MONGODB_SERVER_HOST: `mongodb`
+    - MONGODB_USER: `parksapp` 
+    - MONGODB_PASSWORD: `keepsafe` 
+    - MONGODB_DATABASE: `parksapp` 
+
+image::nationalparks_deployment_env_vars.png[Nationalparks Deployment Env Vars]
+
+Finally hit the *Save* button at the bottom of the dialog. This will trigger a re-creation of a new pod and restart the application which should now be able to successfully talk to the MongoDB instance you just deployed earlier.
 
 --
 ====
