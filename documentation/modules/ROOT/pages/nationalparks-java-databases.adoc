@@ -134,7 +134,23 @@ The application will redeploy with the new service bindings. After successfully 
 MongoDB Community Image::
 +
 --
-From the left navigation bar on the **Developer** perspective, click on **+Add**. Then choose the tile for adding **Container images** which will open up the *Deploy Image* dialog. Fill in the following details:
+The first step is to create Kubernetes **Secrets** which are used to store database-related configuration and credentials. In the Developer perspective, choose Secrets in the left nagivation menu, then click the **Create** button in the upper right and select **key/value secret**.
+
+image::mongodb_create_secret.png[MongoDB Create K/V Secret]
+ 
+In the dialog, fill in the entries shown below, by **adding four key/value pairs** in total.
+
+* Secret Name -> `mongodb-credentials`
+    - key: `admin-usr` | value: `admin`
+    - key: `admin-pwd` | value: `secret`
+    - key: `app-usr` | value: `parksapp`
+    - key: `app-pwd` | value: `keepsafe`
+
+image::mongodb_create_secret_dialog.png[MongoDB Create K/V Secret]
+
+Click the **Create** button at the bottom of the form.
+
+With the secret in place, click on **+Add** from the left navigation bar on the **Developer** perspective. Then choose the tile for adding **Container images** which will open up the *Deploy Image* dialog. Fill in the following details:
 
 * Image section:
     - Image name from external registry -> *mongo:6.0.4*
@@ -153,21 +169,25 @@ image::mongodb_deploy_image_general.png[MongoDB Image Deployment General Setting
 
 image::mongodb_deploy_image_advanced.png[MongoDB Image Deployment Advanced Settings]
 
-Click on **Resource type** to show its settings and make sure the **Deployment** option is chosen.
+Click on **Resource type** to show its settings.
 
 image::mongodb_deploy_image_option_resource_type.png[MongoDB Image Deployment Resource Type Settings]
 
+Make sure that the drop-down for resource type is set to the **Deployment** option.
+
 image::mongodb_deploy_image_resource_type.png[MongoDB Image Deployment Resource Type Settings]
 
-Click on **Deployment** to show its settings and add the following environment variables: 
+Click on **Deployment** to show its settings.
 
 image::mongodb_deploy_image_option_deployment.png[MongoDB Image Deployment Deployment Settings]
 
-* Deployment Environment variables:
-    - MONGO_INITDB_ROOT_USERNAME: `admin`
-    - MONGO_INITDB_ROOT_PASSWORD: `secret`
+Add the following two environment variables which will be sourced from the previously created secret named `mongodb-credentials`.
 
-image::mongodb_deploy_image_deployment_env_vars.png[MongoDB Image Deployment Environment Variable Settings]
+Click *+Add from ConfigMap or Secret* and enter `MONGO_INITDB_ROOT_USERNAME` as the name. For the value, choose `mongodb-credentials` as resource and `admin-usr` as key.
+
+Again, click *+Add from ConfigMap or Secret* and enter `MONGO_INITDB_ROOT_PASSWORD` as the name. For the value, choose `mongodb-credentials` as resource and `admin-pwd` as key.
+
+image::mongodb_deploy_image_deployment_env_vars_secrets.png[MongoDB Image Deployment Environment Variable Settings]
 
 Finally click the **Create** button at the bottom of the page to deploy MongoDB into your topology.
 
@@ -199,14 +219,18 @@ With that, everything regarding the database is prepared and we can switch our f
 
 image::nationalparks_deployment_edit.png[Edit Nationalparks Deployment]
 
-In the **Edit Deployment** dialog, scroll down to the **Environment Variables** section and add the following four entries:
+In the **Edit Deployment** dialog, scroll down to the **Environment Variables** section and add the following four entries. First set the server host and the database:
 
     - MONGODB_SERVER_HOST: `mongodb`
-    - MONGODB_USER: `parksapp` 
-    - MONGODB_PASSWORD: `keepsafe` 
-    - MONGODB_DATABASE: `parksapp` 
+    - MONGODB_DATABASE: `parksapp`
 
-image::nationalparks_deployment_env_vars.png[Nationalparks Deployment Env Vars]
+The other two are credentials which are sourced from the `mongodb-credentials` secret.
+
+Click *+Add from ConfigMap or Secret* and enter `MONGODB_USER` as the name. For the value, choose `mongodb-credentials` as resource and `app-usr` as key.
+
+Again, click *+Add from ConfigMap or Secret* and enter `MONGODB_PASSWORD` as the name. For the value, choose `mongodb-credentials` as resource and `app-pwd` as key.
+
+image::nationalparks_deployment_env_vars_secrets.png[Nationalparks Deployment Env Vars Secrets]
 
 Finally hit the *Save* button at the bottom of the dialog. This will trigger a re-creation of a new pod and restart the application which should now be able to successfully talk to the MongoDB instance you just deployed earlier.
 
