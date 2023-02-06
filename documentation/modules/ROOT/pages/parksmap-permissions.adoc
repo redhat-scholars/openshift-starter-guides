@@ -27,7 +27,7 @@ image::parksmap-permissions-membership.png[Membership]
 The parksmap application wants to talk to the OpenShift API to learn about other
 *Pods*, *Services*, and resources within the *Project*. You'll soon learn why!
 
-The parksmap application runs as a *Service Account* in our project on the cluster: namely the `default` *Service Account*.  It is to this *Service Account* that we can grant the necessary `view``access that will allow it to query the API to see what resources are within the *Project*. This also has the added benefit of addressing the cause of the error message we witnessed previously in the logs.
+The parksmap application runs as a *Service Account* in our project on the cluster: namely the `default` *Service Account*.  It is to this *Service Account* that we can grant the necessary `view` access that will allow it to query the API to see what resources are within the *Project*. This also has the added benefit of addressing the cause of the error message we witnessed previously in the logs.
 
 Choose an approach represented by the following tabs to update the `default` *Service Account* in the `%PROJECT%` project
 

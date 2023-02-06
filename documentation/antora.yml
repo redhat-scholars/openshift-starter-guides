@@ -1,6 +1,6 @@
 name: rhs-openshift-starter-guides
 title: OpenShift Starter Guides
-version: 4.9
+version: 4.11
 nav:
   - modules/ROOT/nav.adoc
 

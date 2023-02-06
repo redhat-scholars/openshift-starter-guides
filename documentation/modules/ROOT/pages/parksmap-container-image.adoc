@@ -79,8 +79,8 @@ And finally, the role this component plays in the overall application.
 role=frontend
 ----
 
-
 image::parksmap-image-options.png[Deploy image]
+image::parksmap-advanced-image-options.png[Deploy image]
 
 Next, click the blue *Create* button. You will be directed to the *Topology* page, where you should see the visualization for the `parksmap` deployment config in the `workshop` application.
 
@@ -226,12 +226,6 @@ OpenShift node that is asked to run the image has to pull (download) it, if the
 node does not already have it cached locally. You can check on the status of the
 image download and deployment in the *Pod* details page, or from the command
 line with the `oc get pods` command that you used before.
-
-The default view in the *Developer* console is *Graph View*. You can switch between *Graph* and *List* views by using the toggle in the top right of the console.
-
-image::nationalparks-listview.png[List View Toggle]
-
-image::nationalparks-graphview.png[Topology View Toggle]
 
 [#customizing_image_lifecycle_behavior]
 == Background: Customizing the Image Lifecycle Behavior
