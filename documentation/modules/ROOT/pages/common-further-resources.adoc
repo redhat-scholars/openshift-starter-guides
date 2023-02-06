@@ -12,9 +12,8 @@ If you have finished this workshop early and want to experiment some more,
 we have additional exercises you can try out using our online interactive
 learning environment.
 
-* *link:https://learn.openshift.com/[OpenShift Interactive Learning
-Portal]* - An online interactive learning environment where you can run
-through various scenarios related to using OpenShift.
+* *link:https://developers.redhat.com/learn[Red Hat Developer Learning Portal]* - An online interactive learning environment where you can run
+through various scenarios related to using OpenShift and more.
 
 The online interactive learning environment is always available so you
 can continue to work on those exercises even after the workshop is over.
@@ -25,9 +24,9 @@ Online or other OpenShift related products and services.
 
 * *link:https://docs.openshift.com[OpenShift Documentation]* - The landing page for OpenShift documentation.
 
-* *link:https://developers.redhat.com/openshift/[OpenShift Resources on developers.redhat.com]* - A collection of resources for developers who are building and deploying applications on OpenShift.
+* *link:https://developers.redhat.com/learn/openshift[OpenShift Resources on developers.redhat.com]* - A collection of resources for developers who are building and deploying applications on OpenShift.
 
-* *link:https://developers.redhat.com/products/codeready-containers/overview[CodeReady Containers]* - A tool which can
+* *link:https://developers.redhat.com/products/openshift-local/overview[Red Hat OpenShift Local]* - A tool which can
 be used to install a local OpenShift cluster on your own computer, running
 in a virtual machine.
 
@@ -44,15 +43,10 @@ cloud environments.
 The following free online eBooks are also available for download related to
 OpenShift.
 
-* *link:https://www.openshift.com/for-developers/[OpenShift
-for Developers]*
+* *link:https://developers.redhat.com/e-books/openshift-for-developers[OpenShift for Developers, Second Edition]*
 
 image::further-resources-openshift-for-developers.png[OpenShift for Developers]
 
-* *link:https://developers.redhat.com/books/openshift-developers-guide-impatient-beginners/old[DevOps with OpenShift]*
+* *link:https://developers.redhat.com/e-books/path-gitops[The Path to GitOps]*
 
 image::further-resources-devops-with-openshift.png[DevOps with OpenShift]
-
-* *link:https://developers.redhat.com/books/deploying-openshift/old[Deploying with OpenShift]*
-
-image::further-resources-deploying-to-openshift.png[Deploying to OpenShift]

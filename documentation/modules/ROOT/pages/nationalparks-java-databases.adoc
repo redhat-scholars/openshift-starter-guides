@@ -19,7 +19,7 @@ usually achieved with a database or other data storage. In this lab we are
 going to add MongoDB to our `nationalparks` application and then rewire it to
 talk to the database using environment variables via a secret.
 
-We'll take two approaches, using MongoDB Atlas (a fully-managed cloud database), as well as a containerized package of MongoDB.
+// We'll take two approaches, using MongoDB Atlas (a fully-managed cloud database), as well as a containerized package of MongoDB.
 
 [#create_mongodb_instance]
 == Exercise: Deploy MongoDB
@@ -181,7 +181,7 @@ Click on **Deployment** to show its settings.
 
 image::mongodb_deploy_image_option_deployment.png[MongoDB Image Deployment Deployment Settings]
 
-Add the following two environment variables which will be sourced from the previously created secret named `mongodb-credentials`.
+Here, we'll add the following two environment variables which will be sourced from the previously created secret named `mongodb-credentials`.
 
 Click *+Add from ConfigMap or Secret* and enter `MONGO_INITDB_ROOT_USERNAME` as the name. For the value, choose `mongodb-credentials` as resource and `admin-usr` as key.
 
@@ -240,7 +240,9 @@ Finally hit the *Save* button at the bottom of the dialog. This will trigger a r
 [#adding_labels]
 == Exercise: Adding Labels
 
-Next, let's fix the labels assigned to the MongoDB deployment. 
+Next, let's fix the labels assigned to the MongoDB deployment. From the **Topology** view, select the MongoDB deployment and choose _Actions > Edit Labels_.
+
+image::mongodb_deployment_labels.png[MongoDB Deployment Labels Option]
 
 Like before, we'll add 3 labels:
 
@@ -264,6 +266,8 @@ And finally, the role this component plays in the overall application.
 ----
 role=database
 ----
+
+image::mongodb_deployment_labels_save.png[MongoDB Deployment Labels Save]
 
 [#exploring_openshift_magic]
 == Exercise: Exploring OpenShift Magic
