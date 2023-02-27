@@ -4,10 +4,16 @@ ifndef::lab[]
 :lab-name: Java
 endif::[]
 
-== Developing {lab-name} Applications on OpenShift - Starter Lab
+image::openshift-logo.png[OpenShift Logo, 400]
+
+== What is OpenShift?
+
+link:https://www.redhat.com/en/technologies/cloud-computing/openshift[OpenShift] is a container application platform that allows developers to deploy, manage, and scale their applications on any infrastructure, whether it's on-premise, public, or hybrid cloud.
+
+== Introduction to the lab
 
 link:https://www.redhat.com/en/topics/containers/whats-a-linux-container-vb[Containers,window='_blank'] are a standardized way to package apps with all of their dependencies to simplify deployment and speed delivery. Unlike virtual machines, containers do not bundle to the operating system. Only the application code, run time, libraries, and settings are packaged inside of containers. Thus, containers are more lightweight, portable, and efficient as compared to virtual machines.
 
 For developers looking to kickstart their projects, link:https://openshift.com/[OpenShift,window='_blank'] enables efficient application development through streamlined workflows and validated integrations.
 
-This Lab is accompanied by the slide deck available at link:https://dn.dev/openshift-workshop[dn.dev/openshift-workshop,window='_blank']
+This lab is accompanied by the slide deck available at link:https://dn.dev/openshift-workshop[dn.dev/openshift-workshop,window='_blank']

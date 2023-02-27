@@ -1,7 +1,7 @@
-= Nationalparks Java App
-:navtitle: Nationalparks Java App
+= Nationalparks Backend App
+:navtitle: Nationalparks Backend App
 
-In this section, we're going to deploy a backend service, developed in Java that will expose 2 main REST endpoints to the visualizer
+In this section, we're going to deploy a backend service, developed in either Java, .NET, NodeJS, or Python, that will expose 2 main REST endpoints to the visualizer
 application (`parksmap` web component that was deployed in the previous labs).
 The application will query for national parks information (including its
 coordinates) that is stored in a MongoDB database.  This application will also
@@ -39,15 +39,15 @@ other aspects of OpenShift.
 
 A full discussion of S2I is beyond the scope of this class, but you can find
 more information about it either in the
-{openshift-docs-url}/creating_images/s2i.html[OpenShift S2I documentation]
+{openshift-docs-url}/openshift_images/create-images.html[OpenShift S2I documentation]
 or on https://github.com/openshift/source-to-image[GitHub]. The only key concept you need to
 remember about S2I is that it's magic.
 
 [#creating_java_application]
-== Exercise: Creating a Java application
+== Exercise: Creating a backend application
 
 The backend service that we will be deploying as part of this exercise is
-called `nationalparks`.  This is a Java Spring Boot application that performs 2D
+called `nationalparks`.  This is an application that performs 2D
 geo-spatial queries against a MongoDB database to locate and return map
 coordinates of all National Parks in the world. That was just a fancy way of
 saying that we are going to deploy a webservice that returns a JSON list of
@@ -67,18 +67,20 @@ GitLab, or any other server that speaks Git. You can even register webhooks in
 your Git server to initiate OpenShift builds triggered by any update to the
 application code!
 
-link:https://github.com/openshift-roadshow/nationalparks.git[NationalParks GitHub Repository]
-
-
 Later in the lab, we want you to make a code change and then rebuild your
-application. This is a fairly simple Spring framework Java application.
+application. Now, let's take a look at deploying a backend service.
 
-[#build_code_on_openshift]
-=== Build the Code on OpenShift
+[#deploying_the_backend_service]
+=== Deploying the Backend Service
 
+[tabs, subs="attributes+,+macros"]
+====
+Java::
++
+--
 Similar to how we used *+Add* before with an existing image, we
 can do the same for specifying a source code repository. Since for this lab you
-have your own git repository, let's use it with a simple Java S2I image.
+have your own git repository, let's use it with a simple link:https://github.com/openshift-roadshow/nationalparks.git[Java] S2I image.
 
 In the Developer Perspective, click *+Add* in the left navigation, go to the *Git Repository* section and then choose *From Git* option.
 
@@ -114,8 +116,84 @@ TIP: You could also use Dockerfile, the repo contains a multi-stage Dockerfile. 
 
 
 Verify that *Java* has been selected as your Builder Image, and be sure to select version *openjdk-11-ubi8* to have OpenJDK 11.
+--
+.NET::
++
+--
+Similar to how we used *+Add* before with an existing image, we
+can do the same for specifying a source code repository. Since for this lab you
+have your own git repository, let's use it with a simple link:https://github.com/openshift-roadshow/nationalparks-dotnet.git[.NET] S2I image.
 
-Scroll down to the *General* section. Add the followin:
+In the Developer Perspective, click *+Add* in the left navigation, go to the *Git Repository* section and then choose *From Git* option.
+
+image::nationalparks-show-add-options.png[Add to Project]
+
+The *Import from Git* workflow will guide you through the process of deploying your app based on a few selections.
+
+Enter the following for Git Repo URL:
+
+[source,bash,role=copypaste]
+----
+https://github.com/openshift-roadshow/nationalparks-dotnet.git
+----
+
+Select *.NET Core* as your Builder Image.
+
+image::nationalparks-import-from-git-url-builder-dotnet.png[Import from Git]
+--
+Javascript::
++
+--
+Similar to how we used *+Add* before with an existing image, we
+can do the same for specifying a source code repository. Since for this lab you
+have your own git repository, let's use it with a simple link:https://github.com/openshift-roadshow/nationalparks-js.git[NodeJS] S2I image.
+
+In the Developer Perspective, click *+Add* in the left navigation, go to the *Git Repository* section and then choose *From Git* option.
+
+image::nationalparks-show-add-options.png[Add to Project]
+
+The *Import from Git* workflow will guide you through the process of deploying your app based on a few selections.
+
+Enter the following for Git Repo URL:
+
+[source,bash,role=copypaste]
+----
+https://github.com/openshift-roadshow/nationalparks-js.git
+----
+
+Select *NodeJS* as your Builder Image.
+
+image::nationalparks-import-from-git-url-builder-js.png[Import from Git]
+--
+Python::
++
+--
+Similar to how we used *+Add* before with an existing image, we
+can do the same for specifying a source code repository. Since for this lab you
+have your own git repository, let's use it with a simple link:https://github.com/openshift-roadshow/nationalparks-py.git[Python] S2I image.
+
+In the Developer Perspective, click *+Add* in the left navigation, go to the *Git Repository* section and then choose *From Git* option.
+
+image::nationalparks-show-add-options.png[Add to Project]
+
+The *Import from Git* workflow will guide you through the process of deploying your app based on a few selections.
+
+Enter the following for Git Repo URL:
+
+[source,bash,role=copypaste]
+----
+https://github.com/openshift-roadshow/nationalparks-py.git
+----
+
+Select *Python Core* as your Builder Image.
+
+image::nationalparks-import-from-git-url-builder-py.png[Import from Git]
+--
+====
+
+
+
+Scroll down to the *General* section. Add the following:
 
 *Application Name* :
 [source,role=copypaste]
@@ -178,14 +256,14 @@ image::nationalparks-configure-service3.png[Secure Route]
 
 image::nationalparks-configure-service4.png[Label]
 
+[#monitoring-the-build]
+=== Monitoring the Build
+
 To see the build logs, in Topology view, click the `nationalparks` entry, then click on *View Logs* in the *Builds* section of the *Resources* tab.
 
 image::nationalparks-java-new-java-build.png[Nationalparks build]
 
-
-This is a Java-based application that uses Maven as the build and dependency system.  For this reason, the initial build
-will take a few minutes as Maven downloads all of the dependencies needed for
-the application. You can see all of this happening in real time!
+Based on the application's language, the build process will be different. However, the initial build will take a few minutes as the dependencies are downloaded. You can see all of this happening in real time!
 
 From the command line, you can also see the *Builds*:
 
