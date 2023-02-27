@@ -75,7 +75,7 @@ this out.
 Click the *Code* tab in GitHub. This is GitHub's repository view.  
 
 CAUTION: Make sure that the drop-down menu at the upper right is set for 
-the *`master`* branch. Navigate to the
+the *`main`* branch. Navigate to the
 following path:
 
 [.console-output]
