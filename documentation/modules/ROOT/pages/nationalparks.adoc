@@ -43,7 +43,7 @@ more information about it either in the
 or on https://github.com/openshift/source-to-image[GitHub]. The only key concept you need to
 remember about S2I is that it's magic.
 
-[#creating_java_application]
+[#creating_a_application]
 == Exercise: Creating a backend application
 
 The backend service that we will be deploying as part of this exercise is
@@ -137,9 +137,23 @@ Enter the following for Git Repo URL:
 https://github.com/openshift-roadshow/nationalparks-dotnet.git
 ----
 
-Select *.NET Core* as your Builder Image.
+OpenShift will automatically guess the Git server type and the programming language used by the source code. You will be now asked to select an *Import Strategy*.
+
+Click *Edit Import Strategy*.
+
+image::nationalparks-import-strategy.png[Select Import Strategy]
+
+You have three options: 
+
+* *Devfile*: this will use link:https://devfile.io/docs/devfile/2.1.0/user-guide/index.html[Devfile v2] spec to create an application stack. The repo has to contain a file named `devfile.yaml` in the Devfile v2 format .
+* *Dockerfile*: this will create a Container image from an existing Dockerfile. 
+* *Builder Image*: this will use a mechanism called Source-to-Image to create automatically a container image directly from the source code.
+
+Select *Build Image* as we are going to create the container image from the source code, as discussed in the next section.
 
 image::nationalparks-import-from-git-url-builder-dotnet.png[Import from Git]
+
+Select *.NET Core* as your Builder Image, and be sure to select *3.1-el7* to run .NET Core 3.1 applications on a RHEL 7 image.
 --
 Javascript::
 +
@@ -161,9 +175,23 @@ Enter the following for Git Repo URL:
 https://github.com/openshift-roadshow/nationalparks-js.git
 ----
 
-Select *NodeJS* as your Builder Image.
+OpenShift will automatically guess the Git server type and the programming language used by the source code. You will be now asked to select an *Import Strategy*.
+
+Click *Edit Import Strategy*.
+
+image::nationalparks-import-strategy.png[Select Import Strategy]
+
+You have three options: 
+
+* *Devfile*: this will use link:https://devfile.io/docs/devfile/2.1.0/user-guide/index.html[Devfile v2] spec to create an application stack. The repo has to contain a file named `devfile.yaml` in the Devfile v2 format .
+* *Dockerfile*: this will create a Container image from an existing Dockerfile. 
+* *Builder Image*: this will use a mechanism called Source-to-Image to create automatically a container image directly from the source code.
+
+Select *Build Image* as we are going to create the container image from the source code, as discussed in the next section.
 
 image::nationalparks-import-from-git-url-builder-js.png[Import from Git]
+
+Select *NodeJS* as your Builder Image, and be sure to select *14-ubi8* for this lab.
 --
 Python::
 +
@@ -185,9 +213,23 @@ Enter the following for Git Repo URL:
 https://github.com/openshift-roadshow/nationalparks-py.git
 ----
 
-Select *Python Core* as your Builder Image.
+OpenShift will automatically guess the Git server type and the programming language used by the source code. You will be now asked to select an *Import Strategy*.
+
+Click *Edit Import Strategy*.
+
+image::nationalparks-import-strategy.png[Select Import Strategy]
+
+You have three options: 
+
+* *Devfile*: this will use link:https://devfile.io/docs/devfile/2.1.0/user-guide/index.html[Devfile v2] spec to create an application stack. The repo has to contain a file named `devfile.yaml` in the Devfile v2 format .
+* *Dockerfile*: this will create a Container image from an existing Dockerfile. 
+* *Builder Image*: this will use a mechanism called Source-to-Image to create automatically a container image directly from the source code.
+
+Select *Build Image* as we are going to create the container image from the source code, as discussed in the next section.
 
 image::nationalparks-import-from-git-url-builder-py.png[Import from Git]
+
+Select *Python* as your Builder Image, and be sure to select *3.8-ubi7* for this lab.
 --
 ====
 
@@ -356,8 +398,7 @@ Earlier we said:
 
 [source,bash]
 ----
-This is a Java Spring Boot application that performs 2D geo-spatial queries
-against a MongoDB database
+This is an application that performs 2D geo-spatial queries against a MongoDB database
 ----
 
 But we don't have a database. Yet.

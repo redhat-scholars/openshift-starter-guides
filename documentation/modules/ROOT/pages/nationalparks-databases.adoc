@@ -64,7 +64,7 @@ If you don't already happen to have a "Provider Account Policy", select the **cr
 
 image::dbaas-policy.png[OpenShift DBaaS Policy Creation]
 
-From here, using the left nagivation bar, click on *+Add*. Return to the *Developer Catalog*, click "All Services" and again search for "Provider Account", this time being greeted by a page to enter our previously saved values.
+From here, using the left navigation bar, click on *+Add*. Return to the *Developer Catalog*, click "All Services" and again search for "Provider Account", this time being greeted by a page to enter our previously saved values.
 
 image::import-provider-account.png[Import Database Provider Account]
 
@@ -134,7 +134,7 @@ The application will redeploy with the new service bindings. After successfully 
 MongoDB Community Image::
 +
 --
-The first step is to create Kubernetes **Secrets** which are used to store database-related configuration and credentials. In the Developer perspective, choose Secrets in the left nagivation menu, then click the **Create** button in the upper right and select **key/value secret**.
+The first step is to create Kubernetes **Secrets** which are used to store database-related configuration and credentials. In the Developer perspective, choose Secrets in the left navigation menu, then click the **Create** button in the upper right and select **key/value secret**.
 
 image::mongodb_create_secret.png[MongoDB Create K/V Secret]
  
