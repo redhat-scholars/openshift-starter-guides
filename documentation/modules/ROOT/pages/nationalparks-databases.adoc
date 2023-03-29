@@ -24,9 +24,10 @@ talk to the database using environment variables via a secret.
 [#create_mongodb_instance]
 == Exercise: Deploy MongoDB
 
+////
 [tabs, subs="attributes+,+macros"]
 ====
-////
+
 MongoDB Atlas::
 +
 --
@@ -130,11 +131,12 @@ image::openshift-service-binding.png[OpenShift Service Binding]
 
 The application will redeploy with the new service bindings. After successfully creating the service binding application will be connected to the database.
 --
-////
+
 MongoDB Community Image::
 +
 --
-The first step is to create Kubernetes **Secrets** which are used to store database-related configuration and credentials. In the Developer perspective, choose Secrets in the left navigation menu, then click the **Create** button in the upper right and select **key/value secret**.
+////
+The first step is to create Kubernetes **Secrets** which are used to store database-related configuration and credentials. In the Developer perspective, choose Secrets in the left navigation menu, then click the **Create** button in the upper right and select **Key/value secret**.
 
 image::mongodb_create_secret.png[MongoDB Create K/V Secret]
  
@@ -153,14 +155,14 @@ Click the **Create** button at the bottom of the form.
 With the secret in place, click on **+Add** from the left navigation bar on the **Developer** perspective. Then choose the tile for adding **Container images** which will open up the *Deploy Image* dialog. Fill in the following details:
 
 * Image section:
-    - Image name from external registry -> *mongo:6.0.4*
-    - Runtime icon -> choose *mongodb*
+    - Image name from external registry -> `mongo:6.0.4`
+    - Runtime icon -> choose `mongodb`
 
 image::mongodb_deploy_image_image.png[MongoDB Image Deployment Image Setting]
 
 * General section:
-    - Application -> *workshop*
-    - Name -> *mongodb*
+    - Application -> `workshop`
+    - Name -> `mongodb`
 
 image::mongodb_deploy_image_general.png[MongoDB Image Deployment General Settings]
 
@@ -207,7 +209,7 @@ Copy and paste the following snippet into the terminal window to create a databa
 mongosh -u admin -p secret --authenticationDatabase admin --eval 'use parksapp' --eval 'db.createUser({user: "parksapp", pwd: "keepsafe", roles: [{ role: "dbAdmin", db: "parksapp" },{ role: "readWrite", db: "parksapp" }]})' --quiet
 ----
 
-If the command is successful you see the output below:
+If the command is successful you'll see the output below:
 
 [.console-output]
 [source,bash,subs="+attributes,macros+"]
@@ -221,8 +223,8 @@ image::nationalparks_deployment_edit.png[Edit Nationalparks Deployment]
 
 In the **Edit Deployment** dialog, scroll down to the **Environment Variables** section and add the following four entries. First set the server host and the database:
 
-    - MONGODB_SERVER_HOST: `mongodb`
-    - MONGODB_DATABASE: `parksapp`
+    - `MONGODB_SERVER_HOST`: `mongodb`
+    - `MONGODB_DATABASE`: `parksapp`
 
 The other two are credentials which are sourced from the `mongodb-credentials` secret.
 
@@ -233,9 +235,6 @@ Again, click *+Add from ConfigMap or Secret* and enter `MONGODB_PASSWORD` as the
 image::nationalparks_deployment_env_vars_secrets.png[Nationalparks Deployment Env Vars Secrets]
 
 Finally hit the *Save* button at the bottom of the dialog. This will trigger a re-creation of a new pod and restart the application which should now be able to successfully talk to the MongoDB instance you just deployed earlier.
-
---
-====
 
 [#adding_labels]
 == Exercise: Adding Labels
