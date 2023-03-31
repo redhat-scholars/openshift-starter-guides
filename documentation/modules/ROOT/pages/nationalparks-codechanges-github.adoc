@@ -36,6 +36,11 @@ A link:https://docs.github.com/en/free-pro-team@latest/github/getting-started-wi
 
 In this step we will fork the original `nationalparks` repository to apply our changes and automatically trigger the Pipeline through a link:https://docs.github.com/en/free-pro-team@latest/developers/webhooks-and-events/about-webhooks[GitHub Webhook,window='_blank'] that we're going to configure.
 
+[tabs, subs="attributes+,+macros"]
+====
+Java::
++
+--
 Go to link:https://github.com/openshift-roadshow/nationalparks[Nationalparks,window='_blank'] repository. From top-right side, click to *Fork* to start forking it into your account.
 
 image::nationalparks-codechanges-github-fork-1.png[Fork Repository]
@@ -45,12 +50,55 @@ Select your account, and click *Fork*
 image::nationalparks-codechanges-github-fork-2.png[Fork in progress]
 
 Your repository is forked now, we can start adding our automation to that.
+--
+.NET::
++
+--
+Go to link:https://github.com/openshift-roadshow/nationalparks-dotnet[nationalparks-dotnet,window='_blank'] repository. From top-right side, click to *Fork* to start forking it into your account.
+
+image::nationalparks-codechanges-github-fork-dotnet-1.png[Fork Repository]
+
+Select your account, and click *Fork*
+
+image::nationalparks-codechanges-github-fork-dotnet-2.png[Fork in progress]
+
+Your repository is forked now, we can start adding our automation to that.
+--
+Javascript::
++
+--
+Go to link:https://github.com/openshift-roadshow/nationalparks-js[Nationalparks-js,window='_blank'] repository. From top-right side, click to *Fork* to start forking it into your account.
+
+image::nationalparks-codechanges-github-fork-js-1.png[Fork Repository]
+
+Select your account, and click *Fork*
+
+image::nationalparks-codechanges-github-fork-js-2.png[Fork in progress]
+
+Your repository is forked now, we can start adding our automation to that.
+--
+Python::
++
+--
+Go to link:https://github.com/openshift-roadshow/nationalparks-py[Nationalparks-py,window='_blank'] repository. From top-right side, click to *Fork* to start forking it into your account.
+
+image::nationalparks-codechanges-github-fork-py-1.png[Fork Repository]
+
+Select your account, and click *Fork*
+
+image::nationalparks-codechanges-github-fork-py-2.png[Fork in progress]
+
+Your repository is forked now, we can start adding our automation to that.
+--
+====
+
+
 
 [#configuring_github_webhooks]
 == Exercise: Configuring GitHub Web Hooks
 
 
-Once you have forked the repository and you have the Webhook URL with Secret copied to your clipboard, navigate to the code repository fork that you have on GitHub.
+Once you have forked the repository for your specific language and you have the Webhook URL with Secret copied to your clipboard, navigate to the code repository fork that you have on GitHub.
 
 From your fork page top-right menu, click *Settings*. Then from result left-side menu, click *Webhook*, then from right side click *Add webhooks*.
 
@@ -72,6 +120,12 @@ this out.
 
 [#using_github_webhooks]
 == Exercise: Using GitHub Web Hooks
+
+[tabs, subs="attributes+,+macros"]
+====
+Java::
++
+--
 Click the *Code* tab in GitHub. This is GitHub's repository view.  
 
 CAUTION: Make sure that the drop-down menu at the upper right is set for 
@@ -104,6 +158,118 @@ To
 ----
 return new Backend("nationalparks","Awesome National Parks", new Coordinates("47.039304", "14.505178"), 4);
 ----
+--
+.NET::
++
+--
+Click the *Code* tab in GitHub. This is GitHub's repository view.  
+
+CAUTION: Make sure that the drop-down menu at the upper right is set for 
+the *`main`* branch. Navigate to the
+following path:
+
+[.console-output]
+[source,bash]
+----
+Controllers/
+----
+
+Then click on the `ParksController.cs` file.
+
+Once you have the file on the screen, click the edit button in the top right
+hand corner as shown here:
+
+image::nationalparks-codechanges-github-change-code-dotnet.png[Webhook]
+
+Change line number 45:
+
+[source,java]
+----
+displayName = "National Parks (C#)",
+----
+
+To
+
+[source,java,role="copypaste"]
+----
+displayName = "Amazing National Parks (C#)",
+----
+--
+Javascript::
++
+--
+Click the *Code* tab in GitHub. This is GitHub's repository view.  
+
+CAUTION: Make sure that the drop-down menu at the upper right is set for 
+the *`main`* branch. Navigate to the
+following path:
+
+[.console-output]
+[source,bash]
+----
+bin
+----
+
+Then click on the `config.js` file.
+
+Once you have the file on the screen, click the edit button in the top right
+hand corner as shown here:
+
+image::nationalparks-codechanges-github-javascript-change-code.png[Webhook]
+
+Change line number 17:
+
+[source,javascript]
+----
+ displayName: "National Parks (JS)",
+----
+
+To
+
+[source,javascript,role="copypaste"]
+----
+ displayName: "Amazing National Parks (JS)",
+----
+--
+Python::
++
+--
+Click the *Code* tab in GitHub. This is GitHub's repository view.  
+
+CAUTION: Make sure that the drop-down menu at the upper right is set for 
+the *`main`* branch. Navigate to the
+following path:
+
+[.console-output]
+[source,bash]
+----
+/
+----
+
+Then click on the `wsgi.py` file.
+
+Once you have the file on the screen, click the edit button in the top right
+hand corner as shown here:
+
+image::nationalparks-codechanges-github-change-code-python.png[Webhook]
+
+Change line number 50:
+
+[source,python]
+----
+ 'displayName': 'National Parks (PY)',
+----
+
+To
+
+[source,python,role="copypaste"]
+----
+ 'displayName': 'Amazing National Parks (PY)',
+----
+--
+====
+
+
 
 Click on *Commit changes* at the bottom of the screen. Feel free to enter a commit message.
 
