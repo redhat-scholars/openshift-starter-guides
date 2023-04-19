@@ -171,8 +171,7 @@ spec:
         - name: IMAGE
           value: image-registry.openshift-image-registry.svc:5000/$(context.pipelineRun.namespace)/$(params.APP_NAME):latest
         - name: BUILDER_IMAGE
-          value: >-
-            registry.redhat.io/rhel8/buildah@sha256:180c4d9849b6ab0e5465d30d4f3a77765cf0d852ca1cb1efb59d6e8c9f90d467
+          value: registry.redhat.io/rhel8/buildah:latest
         - name: STORAGE_DRIVER
           value: vfs
         - name: DOCKERFILE
@@ -244,116 +243,102 @@ spec:
     - default: nationalparks
       name: APP_NAME
       type: string
-    - default: 'https://github.com/openshift-roadshow/nationalparks.git'
+    - default: 'https://github.com/openshift-roadshow/nationalparks-dotnet.git'
       description: The application git repository url
       name: APP_GIT_URL
       type: string
     - default: master
-      description: The application git repository revision
-      name: APP_GIT_REVISION
+      name: GIT_REVISION
       type: string
+    - default: 'image-registry.openshift-image-registry.svc:5000/$(context.pipelineRun.namespace)/$(params.APP_NAME):latest'
+      name: IMAGE_NAME
+      type: string
+    - default: .
+      name: PATH_CONTEXT
+      type: string
+    - default: '1'
+      name: MINOR_VERSION
+      type: string
+  resources: []
+  workspaces:
+    - name: workspace
   tasks:
-    - name: git-clone
+    - name: fetch-repository
       params:
         - name: url
           value: $(params.APP_GIT_URL)
         - name: revision
-          value: $(params.APP_GIT_REVISION)
-        - name: submodules
-          value: 'true'
-        - name: depth
-          value: '1'
-        - name: sslVerify
-          value: 'true'
+          value: $(params.GIT_REVISION)
+        - name: subdirectory
+          value: ''
         - name: deleteExisting
-          value: 'true'
-        - name: verbose
           value: 'true'
       taskRef:
         kind: ClusterTask
         name: git-clone
       workspaces:
         - name: output
-          workspace: app-source
-    - name: build-and-test
-      params:
-        - name: MAVEN_IMAGE
-          value: gcr.io/cloud-builders/mvn
-        - name: GOALS
-          value:
-            - package
-        - name: PROXY_PROTOCOL
-          value: http
-      runAfter:
-        - git-clone
-      taskRef:
-        kind: ClusterTask
-        name: maven
-      workspaces:
-        - name: source
-          workspace: app-source
-        - name: maven-settings
-          workspace: maven-settings
-    - name: build-image
-      params:
-        - name: IMAGE
-          value: image-registry.openshift-image-registry.svc:5000/$(context.pipelineRun.namespace)/$(params.APP_NAME):latest
-        - name: BUILDER_IMAGE
-          value: >-
-            registry.redhat.io/rhel8/buildah@sha256:180c4d9849b6ab0e5465d30d4f3a77765cf0d852ca1cb1efb59d6e8c9f90d467
-        - name: STORAGE_DRIVER
-          value: vfs
-        - name: DOCKERFILE
-          value: ./Dockerfile
-        - name: CONTEXT
-          value: .
-        - name: TLSVERIFY
-          value: 'true'
-        - name: FORMAT
-          value: oci
-      runAfter:
-        - build-and-test
-      taskRef:
-        kind: ClusterTask
-        name: buildah
-      workspaces:
-        - name: source
-          workspace: app-source
-    - name: redeploy
+          workspace: workspace
+    - name: deploy
       params:
         - name: SCRIPT
-          value: oc rollout restart deployment/$(params.APP_NAME)
+          value: kubectl $@
+        - name: ARGS
+          value:
+            - rollout
+            - status
+            - deploy/$(params.APP_NAME)
       runAfter:
-        - build-image
+        - s2i-dotnet
       taskRef:
         kind: ClusterTask
         name: openshift-client
-  workspaces:
-    - name: app-source
-    - name: maven-settings
+    - name: s2i-dotnet
+      runAfter:
+        - fetch-repository
+      taskRef:
+        kind: ClusterTask
+        name: s2i-dotnet
+      params:
+        - name: BUILDER_IMAGE
+          value: registry.redhat.io/rhel8/buildah
+        - name: VERSION
+          value: latest
+        - name: PATH_CONTEXT
+          value: .
+        - name: TLSVERIFY
+          value: 'true'
+        - name: IMAGE
+          value: >-
+            image-registry.openshift-image-registry.svc:5000/$(context.pipelineRun.namespace)/$(params.APP_NAME):latest
+        - name: SKIP_PUSH
+          value: 'false'
+        - name: ENV_VARS
+          value: []
+      workspaces:
+        - name: source
+          workspace: workspace
 ----
 
 Now, let's head back to the *Pipeline builder* view to see it visually.
 
-image::devops_pipeline_builder_java.png[Pipeline Builder Java]
+image::devops_pipeline_builder_dotnet.png[Pipeline Builder Java]
 
-This pipeline has 4 Tasks defined:
+This pipeline has 3 Tasks defined:
 
-- *git clone*: this is a `ClusterTask` that will clone our source repository for nationalparks and store it to a `Workspace` `app-source` which will use the PVC created for it `app-source-workspace`
-- *build-and-test*: will build and test our Java application using `maven` `ClusterTask`
-- *build-image*: this is a link:https://buildah.io/[buildah] ClusterTask that will build an image using a binary file as input in OpenShift, in our case a JAR artifact generated in the previous task
-- *redeploy*: it will use an `openshift-client` ClusterTask to deploy the created image on OpenShift using the Deployment named `nationalparks` we created in the previous lab
+- *fetch-repository*: this is a `ClusterTask` that will clone our source repository for nationalparks and store it to a `Workspace` `app-source` which will use the PVC created for it `app-source-workspace`
+- *build*: will build and test our .NET Core C# application, generate and push a container image automatically with compiled binaries inside OpenShift Container Registry
+- *deploy*: will deploy the created image on OpenShift using the Deployment named `nationalparks` we created in the previous lab
 
-image::devops_pipeline_tasks_java.png[Pipeline Tasks Java]
+image::devops_pipeline_tasks_dotnet.png[Pipeline Tasks Java]
 
 The Pipeline is parametric, with default values already preconfigured.
 
-It is using two *Workspaces*:
+It is using one *Workspace*:
 
-- *app-source*: linked to a *PersistentVolumeClaim* `app-source-pvc` previously created.  This will be used to store the artifact to be used in different *Task*
-- *maven-settings*: an *EmptyDir* volume for the maven cache, this can be extended also with a PVC to make subsequent Maven builds faster
+- *app-source*: this need to be linked to a *PersistentVolumeClaim* since will be used to store the code and the compiled binary to be used in different *Tasks*
 
-image::devops_pipeline_workspaces_java.png[Pipeline Workspaces Java]
+image::devops_pipeline_workspaces_dotnet.png[Pipeline Workspaces Java]
 --
 Javascript::
 +
@@ -372,116 +357,94 @@ spec:
     - default: nationalparks
       name: APP_NAME
       type: string
-    - default: 'https://github.com/openshift-roadshow/nationalparks.git'
+    - default: 'https://github.com/openshift-roadshow/nationalparks-js.git'
       description: The application git repository url
       name: APP_GIT_URL
       type: string
     - default: master
-      description: The application git repository revision
-      name: APP_GIT_REVISION
+      name: GIT_REVISION
+      type: string
+    - default: 'image-registry.openshift-image-registry.svc:5000/$(context.pipelineRun.namespace)/$(params.APP_NAME):latest'
+      name: IMAGE_NAME
+      type: string
+    - default: .
+      name: PATH_CONTEXT
+      type: string
+    - default: '1'
+      name: MINOR_VERSION
       type: string
   tasks:
-    - name: git-clone
+    - name: fetch-repository
       params:
         - name: url
           value: $(params.APP_GIT_URL)
         - name: revision
-          value: $(params.APP_GIT_REVISION)
-        - name: submodules
-          value: 'true'
-        - name: depth
-          value: '1'
-        - name: sslVerify
-          value: 'true'
+          value: $(params.GIT_REVISION)
+        - name: subdirectory
+          value: ''
         - name: deleteExisting
-          value: 'true'
-        - name: verbose
           value: 'true'
       taskRef:
         kind: ClusterTask
         name: git-clone
       workspaces:
         - name: output
-          workspace: app-source
-    - name: build-and-test
-      params:
-        - name: MAVEN_IMAGE
-          value: gcr.io/cloud-builders/mvn
-        - name: GOALS
-          value:
-            - package
-        - name: PROXY_PROTOCOL
-          value: http
-      runAfter:
-        - git-clone
-      taskRef:
-        kind: ClusterTask
-        name: maven
-      workspaces:
-        - name: source
-          workspace: app-source
-        - name: maven-settings
-          workspace: maven-settings
-    - name: build-image
+          workspace: workspace
+    - name: build
       params:
         - name: IMAGE
-          value: image-registry.openshift-image-registry.svc:5000/$(context.pipelineRun.namespace)/$(params.APP_NAME):latest
-        - name: BUILDER_IMAGE
-          value: >-
-            registry.redhat.io/rhel8/buildah@sha256:180c4d9849b6ab0e5465d30d4f3a77765cf0d852ca1cb1efb59d6e8c9f90d467
-        - name: STORAGE_DRIVER
-          value: vfs
-        - name: DOCKERFILE
-          value: ./Dockerfile
-        - name: CONTEXT
-          value: .
+          value: $(params.IMAGE_NAME)
         - name: TLSVERIFY
-          value: 'true'
-        - name: FORMAT
-          value: oci
+          value: 'false'
+        - name: PATH_CONTEXT
+          value: $(params.PATH_CONTEXT)
+        - name: MINOR_VERSION
+          value: $(params.MINOR_VERSION)
       runAfter:
-        - build-and-test
+        - fetch-repository
       taskRef:
         kind: ClusterTask
-        name: buildah
+        name: s2i-nodejs-12
       workspaces:
         - name: source
-          workspace: app-source
-    - name: redeploy
+          workspace: workspace
+    - name: deploy
       params:
         - name: SCRIPT
-          value: oc rollout restart deployment/$(params.APP_NAME)
+          value: kubectl $@
+        - name: ARGS
+          value:
+            - rollout
+            - status
+            - deploy/$(params.APP_NAME)
       runAfter:
-        - build-image
+        - build
       taskRef:
         kind: ClusterTask
         name: openshift-client
   workspaces:
-    - name: app-source
-    - name: maven-settings
+    - name: workspace
 ----
 
 Now, let's head back to the *Pipeline builder* view to see it visually.
 
-image::devops_pipeline_builder_java.png[Pipeline Builder Java]
+image::devops_pipeline_builder_js.png[Pipeline Builder Java]
 
 This pipeline has 4 Tasks defined:
 
-- *git clone*: this is a `ClusterTask` that will clone our source repository for nationalparks and store it to a `Workspace` `app-source` which will use the PVC created for it `app-source-workspace`
-- *build-and-test*: will build and test our Java application using `maven` `ClusterTask`
-- *build-image*: this is a link:https://buildah.io/[buildah] ClusterTask that will build an image using a binary file as input in OpenShift, in our case a JAR artifact generated in the previous task
-- *redeploy*: it will use an `openshift-client` ClusterTask to deploy the created image on OpenShift using the Deployment named `nationalparks` we created in the previous lab
+- *fetch-repository*: this is a `ClusterTask` that will clone our source repository for nationalparks and store it to a `Workspace` `app-source` which will use the PVC created for it `app-source-workspace`
+- *build*: will build and test our NodeJS application, generate and push a container image automatically with compiled binaries inside OpenShift Container Registry
+- *deploy*: will deploy the created image on OpenShift using the Deployment named `nationalparks` we created in the previous lab
 
-image::devops_pipeline_tasks_java.png[Pipeline Tasks Java]
+image::devops_pipeline_tasks_js.png[Pipeline Tasks Java]
 
 The Pipeline is parametric, with default values already preconfigured.
 
-It is using two *Workspaces*:
+It is using one *Workspace*:
 
-- *app-source*: linked to a *PersistentVolumeClaim* `app-source-pvc` previously created.  This will be used to store the artifact to be used in different *Task*
-- *maven-settings*: an *EmptyDir* volume for the maven cache, this can be extended also with a PVC to make subsequent Maven builds faster
+- *app-source*: this need to be linked to a *PersistentVolumeClaim* since will be used to store the code and the compiled binary to be used in different *Tasks*
 
-image::devops_pipeline_workspaces_java.png[Pipeline Workspaces Java]
+image::devops_pipeline_workspaces_js.png[Pipeline Workspaces Java]
 --
 Python::
 +
@@ -500,126 +463,106 @@ spec:
     - default: nationalparks
       name: APP_NAME
       type: string
-    - default: 'https://github.com/openshift-roadshow/nationalparks.git'
+    - default: 'https://github.com/openshift-roadshow/nationalparks-py.git'
       description: The application git repository url
       name: APP_GIT_URL
       type: string
     - default: master
-      description: The application git repository revision
-      name: APP_GIT_REVISION
+      name: GIT_REVISION
+      type: string
+    - default: 'image-registry.openshift-image-registry.svc:5000/$(context.pipelineRun.namespace)/$(params.APP_NAME):latest'
+      name: IMAGE_NAME
+      type: string
+    - default: .
+      name: PATH_CONTEXT
+      type: string
+    - default: '1'
+      name: MINOR_VERSION
       type: string
   tasks:
-    - name: git-clone
+    - name: fetch-repository
       params:
         - name: url
           value: $(params.APP_GIT_URL)
         - name: revision
-          value: $(params.APP_GIT_REVISION)
-        - name: submodules
-          value: 'true'
-        - name: depth
-          value: '1'
-        - name: sslVerify
-          value: 'true'
+          value: $(params.GIT_REVISION)
+        - name: subdirectory
+          value: ''
         - name: deleteExisting
-          value: 'true'
-        - name: verbose
           value: 'true'
       taskRef:
         kind: ClusterTask
         name: git-clone
       workspaces:
         - name: output
-          workspace: app-source
-    - name: build-and-test
-      params:
-        - name: MAVEN_IMAGE
-          value: gcr.io/cloud-builders/mvn
-        - name: GOALS
-          value:
-            - package
-        - name: PROXY_PROTOCOL
-          value: http
-      runAfter:
-        - git-clone
-      taskRef:
-        kind: ClusterTask
-        name: maven
-      workspaces:
-        - name: source
-          workspace: app-source
-        - name: maven-settings
-          workspace: maven-settings
-    - name: build-image
+          workspace: workspace
+    - name: build
       params:
         - name: IMAGE
-          value: image-registry.openshift-image-registry.svc:5000/$(context.pipelineRun.namespace)/$(params.APP_NAME):latest
-        - name: BUILDER_IMAGE
-          value: >-
-            registry.redhat.io/rhel8/buildah@sha256:180c4d9849b6ab0e5465d30d4f3a77765cf0d852ca1cb1efb59d6e8c9f90d467
-        - name: STORAGE_DRIVER
-          value: vfs
-        - name: DOCKERFILE
-          value: ./Dockerfile
-        - name: CONTEXT
-          value: .
+          value: $(params.IMAGE_NAME)
         - name: TLSVERIFY
-          value: 'true'
-        - name: FORMAT
-          value: oci
+          value: 'false'
+        - name: PATH_CONTEXT
+          value: $(params.PATH_CONTEXT)
+        - name: MINOR_VERSION
+          value: $(params.MINOR_VERSION)
       runAfter:
-        - build-and-test
+        - fetch-repository
       taskRef:
         kind: ClusterTask
-        name: buildah
+        name: s2i-python
       workspaces:
         - name: source
-          workspace: app-source
-    - name: redeploy
+          workspace: workspace
+    - name: deploy
       params:
         - name: SCRIPT
-          value: oc rollout restart deployment/$(params.APP_NAME)
+          value: kubectl $@
+        - name: ARGS
+          value:
+            - rollout
+            - status
+            - deploy/$(params.APP_NAME)
       runAfter:
-        - build-image
+        - build
       taskRef:
         kind: ClusterTask
         name: openshift-client
   workspaces:
-    - name: app-source
-    - name: maven-settings
+    - name: workspace
 ----
 
 Now, let's head back to the *Pipeline builder* view to see it visually.
 
-image::devops_pipeline_builder_java.png[Pipeline Builder Java]
+image::devops_pipeline_builder_python.png[Pipeline Builder Java]
 
-This pipeline has 4 Tasks defined:
+This pipeline has 3 Tasks defined:
 
-- *git clone*: this is a `ClusterTask` that will clone our source repository for nationalparks and store it to a `Workspace` `app-source` which will use the PVC created for it `app-source-workspace`
-- *build-and-test*: will build and test our Java application using `maven` `ClusterTask`
-- *build-image*: this is a link:https://buildah.io/[buildah] ClusterTask that will build an image using a binary file as input in OpenShift, in our case a JAR artifact generated in the previous task
-- *redeploy*: it will use an `openshift-client` ClusterTask to deploy the created image on OpenShift using the Deployment named `nationalparks` we created in the previous lab
+- *fetch-repository*: this is a `ClusterTask` that will clone our source repository for nationalparks and store it to a `Workspace` `app-source` which will use the PVC created for it `app-source-workspace`
+- *build*: will build and test our Python application, generate and push a container image automatically with compiled binaries inside OpenShift Container Registry
+- *deploy*: it will deploy the created image on OpenShift using the Deployment named `nationalparks` we created in the previous lab
 
-image::devops_pipeline_tasks_java.png[Pipeline Tasks Java]
+image::devops_pipeline_tasks_python.png[Pipeline Tasks Java]
 
 The Pipeline is parametric, with default values already preconfigured.
 
-It is using two *Workspaces*:
+It is using one *Workspace*:
 
-- *app-source*: linked to a *PersistentVolumeClaim* `app-source-pvc` previously created.  This will be used to store the artifact to be used in different *Task*
-- *maven-settings*: an *EmptyDir* volume for the maven cache, this can be extended also with a PVC to make subsequent Maven builds faster
+- *app-source*: this need to be linked to a *PersistentVolumeClaim* since will be used to store the code and the compiled binary to be used in different *Tasks*
 
-image::devops_pipeline_workspaces_java.png[Pipeline Workspaces Java]
+image::devops_pipeline_workspaces_python.png[Pipeline Workspaces Java]
 --
 ====
+
+Finally, make sure to click the *Create* button to create the Pipeline.
 
 [#add_storage_for_pipeline]
 == Exercise: Add Storage for your Pipeline
 
-OpenShift manages Storage with link:https://kubernetes.io/docs/concepts/storage/persistent-volumes/[Persistent Volumes] to be attached to Pods running our applications through *Persistent Volume Claim* requests, and it also provides the capability to manage it at ease from Web Console. 
-From *Administrator Perspective*, go to *Storage*-> *Persistent Volume Claims*.
+OpenShift manages Storage with link:https://kubernetes.io/docs/concepts/storage/persistent-volumes/[Persistent Volumes] to be attached to Pods running our applications through *Persistent Volume Claim* requests, and it also provides the capability to manage it at ease from the Web Console. 
+From the *Administrator Perspective*, go to *Storage* -> *Persistent Volume Claims*.
 
-Go to top-right side and click *Create Persistent Volume Claim* button.
+Go to the top-right side and click *Create Persistent Volume Claim* button.
 
 Inside *Persistent Volume Claim name* insert *app-source-pvc*.
 
