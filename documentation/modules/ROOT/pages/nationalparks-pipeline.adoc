@@ -150,7 +150,7 @@ spec:
     - name: build-and-test
       params:
         - name: MAVEN_IMAGE
-          value: gcr.io/cloud-builders/mvn
+          value: maven:3.8.3-openjdk-11
         - name: GOALS
           value:
             - package
@@ -404,7 +404,7 @@ spec:
         - fetch-repository
       taskRef:
         kind: ClusterTask
-        name: s2i-nodejs-12
+        name: s2i-nodejs
       workspaces:
         - name: source
           workspace: workspace
@@ -564,6 +564,8 @@ From the *Administrator Perspective*, go to *Storage* -> *Persistent Volume Clai
 
 Go to the top-right side and click *Create Persistent Volume Claim* button.
 
+image::nationalparks-codechanges-pipeline-pvc-1.png[Create PVC]
+
 Inside *Persistent Volume Claim name* insert *app-source-pvc*.
 
 In *Size* section, insert *1* as we are going to create 1 GiB Persistent Volume for our Pipeline, using RWO Single User access mode.
@@ -577,22 +579,11 @@ TIP: The *Storage Class* is the type of storage available in the cluster.
 [#run_the_pipeline]
 == Run the Pipeline
 
-We can start now the Pipeline from the Web Console. Within *Developer Perspective* go to left-side menu, click on *Pipeline*, then click on *nationalparks-pipeline*. From top-right *Actions* list, click on *Start*.
+We can start now the Pipeline from the Web Console. Within the *Developer Perspective* go to left-side menu, click on *Pipelines*, then click on *nationalparks-pipeline*. From top-right *Actions* list, click on *Start*.
 
 image::devops-pipeline-start-1.png[Start Pipeline]
 
-You will be prompted with parameters to add the Pipeline, showing default ones. 
-
-In *APP_GIT_URL*, verify the `nationalparks` repository from GitHub:
-
-[source,bash,role=copypaste]
-----
-https://github.com/openshift-roadshow/nationalparks.git
-----
-
-In *Workspaces*-> *app-source* select *PVC* from the list, then select *app-source-pvc*. This is the share volume used by Pipeline Tasks in your Pipeline containing the source code and compiled artifacts.
-
-Click on *Start* to run your Pipeline.
+You will be prompted with parameters to add the Pipeline, showing default ones. Your appropriate values are already preconfigured depending on which language's pipeline you chose. However, in *Workspaces* -> select *PersistentVolumeClaim* from the list, and then select *app-source-pvc*. This is the share volume used by Pipeline Tasks in your Pipeline containing the source code and compiled artifacts. Click on *Start* to run your Pipeline.
 
 image::devops-pipeline-start-2.png[Add parameters]
 
