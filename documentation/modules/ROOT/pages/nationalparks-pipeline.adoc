@@ -245,7 +245,7 @@ spec:
       type: string
     - default: 'https://github.com/openshift-roadshow/nationalparks-dotnet.git'
       description: The application git repository url
-      name: APP_GIT_URL
+      name: GIT_REPO
       type: string
     - default: master
       name: GIT_REVISION
@@ -266,7 +266,7 @@ spec:
     - name: fetch-repository
       params:
         - name: url
-          value: $(params.APP_GIT_URL)
+          value: $(params.GIT_REPO)
         - name: revision
           value: $(params.GIT_REVISION)
         - name: subdirectory
@@ -359,7 +359,7 @@ spec:
       type: string
     - default: 'https://github.com/openshift-roadshow/nationalparks-js.git'
       description: The application git repository url
-      name: APP_GIT_URL
+      name: GIT_REPO
       type: string
     - default: master
       name: GIT_REVISION
@@ -377,7 +377,7 @@ spec:
     - name: fetch-repository
       params:
         - name: url
-          value: $(params.APP_GIT_URL)
+          value: $(params.GIT_REPO)
         - name: revision
           value: $(params.GIT_REVISION)
         - name: subdirectory
@@ -465,7 +465,7 @@ spec:
       type: string
     - default: 'https://github.com/openshift-roadshow/nationalparks-py.git'
       description: The application git repository url
-      name: APP_GIT_URL
+      name: GIT_REPO
       type: string
     - default: master
       name: GIT_REVISION
@@ -483,7 +483,7 @@ spec:
     - name: fetch-repository
       params:
         - name: url
-          value: $(params.APP_GIT_URL)
+          value: $(params.GIT_REPO)
         - name: revision
           value: $(params.GIT_REVISION)
         - name: subdirectory
