@@ -1,4 +1,9 @@
+= Using Homeroom
+:navtitle: Using Homeroom
+
 Access to the workshop is provided by link:https://github.com/openshift-homeroom[Homeroom], an interactive training environment you can use in your web browser without needing to install anything on your local machine.
+
+== How to use Homeroom
 
 The Homeroom dashboard provides you access to the workshop content and one or more terminals.
 
@@ -56,6 +61,8 @@ change-this-to-your-username
 Clicking on the displayed value will again copy it into the system paste buffer and you can then paste it to the required location. Before the value is used though, you should make any changes as instructed.
 
 How to paste a value into the terminals will depend on the operating system and browser being used. For macOS you should be able to use `<command-v>`. On Linux and Windows, try `<ctrl-v>` or `<ctrl-shift-v>`.
+
+== If case of problems
 
 If at any time a glitch occurs and the workshop content does not display properly because of a network issue, and so an error is displayed, or it shows as a white page, select the dropdown hamburger menu top right in the banner above the terminals and select "Reload Workshop". That menu item will reload just the workshop content and leave you on the same page.
 

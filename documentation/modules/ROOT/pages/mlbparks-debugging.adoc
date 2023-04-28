@@ -8,8 +8,6 @@ and our pod. This is useful for operations like connecting to a database running
 interface we don't want to expose to the public, or, in our case, attaching a debugger to the JVM running our application
 server.
 
-You can read more about port-forwarding from the link:{openshift-docs-url}/dev_guide/port_forwarding.html[developer documentation].
-
 By port forwarding the debugging port for the application server, we can attach the debugger from our IDE and actually
 step through the code in the pod as it is running in real time. By default EAP is not in debug mode, therefore we first
 need to turn on the debug ports

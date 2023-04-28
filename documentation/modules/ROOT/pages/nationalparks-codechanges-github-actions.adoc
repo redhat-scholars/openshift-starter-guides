@@ -98,7 +98,11 @@ Review the follow workflow that will be used to trigger build of the Nationalpar
 
 *Copy* the YAML file to be added in your Nationalparks fork repository on GitHub.
 
-
+[tabs, subs="attributes+,+macros"]
+====
+Java::
++
+--
 [source,yaml,role="copypaste"]
 ----
 name: OpenShift <1>
@@ -172,14 +176,248 @@ jobs:
     - run: | <8>
          "${GITHUB_WORKSPACE}/.github/script.sh" ${{ env.APP_NAME }} ${{ env.IMAGE_REGISTRY }}/${{ steps.build_image.outputs.image }}:${{ github.sha }} ${{ env.OPENSHIFT_NAMESPACE }}
 ----
+--
+.NET::
++
+--
+[source,yaml,role="copypaste"]
+----
+name: OpenShift <1>
+
+env: <2>
+  IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
+  REGISTRY_USER: ${{ github.actor }}
+  REGISTRY_PASSWORD: ${{ github.token }}
+  APP_NAME: nationalparks
+  IMAGE_TAGS: latest ${{ github.sha }}
+  
+  OPENSHIFT_SERVER: ${{ secrets.OPENSHIFT_SERVER }}
+  OPENSHIFT_TOKEN: ${{ secrets.OPENSHIFT_TOKEN }}
+  OPENSHIFT_NAMESPACE: "%PROJECT%"
+  
+  APP_PORT: "8080"
+
+on:
+  # https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows
+  push: <3>
+    branches: [ master ]
+
+jobs:
+  build-and-push: <4>
+    name: Build and push to github container registry
+    runs-on: ubuntu-18.04
+    environment: development
+
+    outputs:
+        ROUTE: ${{ steps.deploy-and-expose.outputs.route }}
+        SELECTOR: ${{ steps.deploy-and-expose.outputs.selector }}
+
+    steps:
+    - name: Checkout
+      id: checkout
+      uses: actions/checkout@v2
+    
+   # https://github.com/redhat-actions/s2i-build#readme
+    - name: S2I Build <5>
+      id: build_image
+      uses: redhat-actions/s2i-build@v2
+      with:
+        path_context: '.'
+        builder_image: 'registry.access.redhat.com/dotnet/dotnet-31-rhel7'
+        image: ${{ env.APP_NAME }}
+        tags: ${{ env.IMAGE_TAGS }}
+        
+    # https://github.com/redhat-actions/push-to-registry#readme
+    - name: Push to Registry <6>
+      id: push-to-registry
+      uses: redhat-actions/push-to-registry@v2
+      with:
+        image: ${{ steps.build_image.outputs.image }}
+        tags: ${{ steps.build_image.outputs.tags }}
+        registry: ${{ env.IMAGE_REGISTRY }}
+        username: ${{ env.REGISTRY_USER }}
+        password: ${{ env.REGISTRY_PASSWORD }}
+
+    # The path the image was pushed to is now stored in ${{ steps.push-to-registry.outputs.registry-path }}
+
+    # https://github.com/redhat-actions/oc-login#readme
+    - name: Log in to OpenShift <7>
+      uses: redhat-actions/oc-login@v1
+      with:
+        openshift_server_url: ${{ env.OPENSHIFT_SERVER }}
+        openshift_token: ${{ env.OPENSHIFT_TOKEN }}
+        insecure_skip_tls_verify: true
+        namespace: ${{ env.OPENSHIFT_NAMESPACE }}
+
+    # Run a script to create a new app or update the current one with the previously pushed container image
+    - run: | <8>
+         "${GITHUB_WORKSPACE}/.github/script.sh" ${{ env.APP_NAME }} ${{ env.IMAGE_REGISTRY }}/${{ steps.build_image.outputs.image }}:${{ github.sha }} ${{ env.OPENSHIFT_NAMESPACE }}
+----
+--
+Javascript::
++
+--
+[source,yaml,role="copypaste"]
+----
+name: OpenShift <1>
+
+env: <2>
+  IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
+  REGISTRY_USER: ${{ github.actor }}
+  REGISTRY_PASSWORD: ${{ github.token }}
+  APP_NAME: nationalparks
+  IMAGE_TAGS: latest ${{ github.sha }}
+  
+  OPENSHIFT_SERVER: ${{ secrets.OPENSHIFT_SERVER }}
+  OPENSHIFT_TOKEN: ${{ secrets.OPENSHIFT_TOKEN }}
+  OPENSHIFT_NAMESPACE: "%PROJECT%"
+  
+  APP_PORT: "8080"
+
+on:
+  # https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows
+  push: <3>
+    branches: [ master ]
+
+jobs:
+  build-and-push: <4>
+    name: Build and push to github container registry
+    runs-on: ubuntu-18.04
+    environment: development
+
+    outputs:
+        ROUTE: ${{ steps.deploy-and-expose.outputs.route }}
+        SELECTOR: ${{ steps.deploy-and-expose.outputs.selector }}
+
+    steps:
+    - name: Checkout
+      id: checkout
+      uses: actions/checkout@v2
+    
+   # https://github.com/redhat-actions/s2i-build#readme
+    - name: S2I Build <5>
+      id: build_image
+      uses: redhat-actions/s2i-build@v2
+      with:
+        path_context: '.'
+        builder_image: 'registry.access.redhat.com/ubi8/nodejs-14'
+        image: ${{ env.APP_NAME }}
+        tags: ${{ env.IMAGE_TAGS }}
+        
+    # https://github.com/redhat-actions/push-to-registry#readme
+    - name: Push to Registry <6>
+      id: push-to-registry
+      uses: redhat-actions/push-to-registry@v2
+      with:
+        image: ${{ steps.build_image.outputs.image }}
+        tags: ${{ steps.build_image.outputs.tags }}
+        registry: ${{ env.IMAGE_REGISTRY }}
+        username: ${{ env.REGISTRY_USER }}
+        password: ${{ env.REGISTRY_PASSWORD }}
+
+    # The path the image was pushed to is now stored in ${{ steps.push-to-registry.outputs.registry-path }}
+
+    # https://github.com/redhat-actions/oc-login#readme
+    - name: Log in to OpenShift <7>
+      uses: redhat-actions/oc-login@v1
+      with:
+        openshift_server_url: ${{ env.OPENSHIFT_SERVER }}
+        openshift_token: ${{ env.OPENSHIFT_TOKEN }}
+        insecure_skip_tls_verify: true
+        namespace: ${{ env.OPENSHIFT_NAMESPACE }}
+
+    # Run a script to create a new app or update the current one with the previously pushed container image
+    - run: | <8>
+         "${GITHUB_WORKSPACE}/.github/script.sh" ${{ env.APP_NAME }} ${{ env.IMAGE_REGISTRY }}/${{ steps.build_image.outputs.image }}:${{ github.sha }} ${{ env.OPENSHIFT_NAMESPACE }}
+----
+--
+Python::
++
+--
+[source,yaml,role="copypaste"]
+----
+name: OpenShift <1>
+
+env: <2>
+  IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
+  REGISTRY_USER: ${{ github.actor }}
+  REGISTRY_PASSWORD: ${{ github.token }}
+  APP_NAME: nationalparks
+  IMAGE_TAGS: latest ${{ github.sha }}
+  
+  OPENSHIFT_SERVER: ${{ secrets.OPENSHIFT_SERVER }}
+  OPENSHIFT_TOKEN: ${{ secrets.OPENSHIFT_TOKEN }}
+  OPENSHIFT_NAMESPACE: "%PROJECT%"
+  
+  APP_PORT: "8080"
+
+on:
+  # https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows
+  push: <3>
+    branches: [ master ]
+
+jobs:
+  build-and-push: <4>
+    name: Build and push to github container registry
+    runs-on: ubuntu-18.04
+    environment: development
+
+    outputs:
+        ROUTE: ${{ steps.deploy-and-expose.outputs.route }}
+        SELECTOR: ${{ steps.deploy-and-expose.outputs.selector }}
+
+    steps:
+    - name: Checkout
+      id: checkout
+      uses: actions/checkout@v2
+    
+   # https://github.com/redhat-actions/s2i-build#readme
+    - name: S2I Build <5>
+      id: build_image
+      uses: redhat-actions/s2i-build@v2
+      with:
+        path_context: '.'
+        builder_image: 'registry.access.redhat.com/ubi7/python-38'
+        image: ${{ env.APP_NAME }}
+        tags: ${{ env.IMAGE_TAGS }}
+        
+    # https://github.com/redhat-actions/push-to-registry#readme
+    - name: Push to Registry <6>
+      id: push-to-registry
+      uses: redhat-actions/push-to-registry@v2
+      with:
+        image: ${{ steps.build_image.outputs.image }}
+        tags: ${{ steps.build_image.outputs.tags }}
+        registry: ${{ env.IMAGE_REGISTRY }}
+        username: ${{ env.REGISTRY_USER }}
+        password: ${{ env.REGISTRY_PASSWORD }}
+
+    # The path the image was pushed to is now stored in ${{ steps.push-to-registry.outputs.registry-path }}
+
+    # https://github.com/redhat-actions/oc-login#readme
+    - name: Log in to OpenShift <7>
+      uses: redhat-actions/oc-login@v1
+      with:
+        openshift_server_url: ${{ env.OPENSHIFT_SERVER }}
+        openshift_token: ${{ env.OPENSHIFT_TOKEN }}
+        insecure_skip_tls_verify: true
+        namespace: ${{ env.OPENSHIFT_NAMESPACE }}
+
+    # Run a script to create a new app or update the current one with the previously pushed container image
+    - run: | <8>
+         "${GITHUB_WORKSPACE}/.github/script.sh" ${{ env.APP_NAME }} ${{ env.IMAGE_REGISTRY }}/${{ steps.build_image.outputs.image }}:${{ github.sha }} ${{ env.OPENSHIFT_NAMESPACE }}
+----
+--
+====
+
 <1> Name of the Action.
 <2> Environment variables to be used in the workflow. This includes link:https://docs.github.com/en/actions/reference/environment-variables[default environment variables,window='_blank'] and the Secret you added to the Enviroment.
-<3> Here's if where you define which type of trigger you want for this workflow. In this case, any change to the repository (Push) to the `master` branch will trigger the action start. Check out the documentation for a full list of triggers that can be used: https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows
+<3> Here's where you define which type of trigger you want for this workflow. In this case, any change to the repository (Push) to the `master` branch will trigger the action start. Check out the documentation for a full list of triggers that can be used: https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows
 <4> Name of the job running in this Action. This will use an ubuntu image containing OpenShift CLI `oc`.
-<5> link:https://github.com/redhat-actions/s2i-build#readme[S2I action,window=_blank] : Red Hat provides a set of already available actions for OpenShift, in this case there is the . Similarly to what you implemented in the previous chapters, it will create a container image from the source code thanks to the S2I mechanism.
+<5> link:https://github.com/redhat-actions/s2i-build#readme[S2I action,window=_blank] : Red Hat provides a set of already available actions for OpenShift. Similarly to what you implemented in the previous chapters, it will create a container image from the source code thanks to the S2I mechanism.
 <6> link:https://github.com/redhat-actions/push-to-registry#readme[Push to Registry, window=_blank] : This action is used to push to the GitHub Registry using built-in credentials available for GitHub repository owners.
 <7> link:https://github.com/redhat-actions/oc-login#readme[OC Login, window=_blank]: This action is used to login to the OpenShift cluster with the Environment Secrets previously created.
-<8> Run a script already available in the path for GitHub actions (it was provided to make the flow easier and available with the fork of the repository). 
+<8> Run a script already available in the path for GitHub actions (this was provided to make the flow easier and available with the fork of the repository). 
 
 GitHub Actions can invoke script in the path of the workflow.
 This script will check if the update the image hash into the Nationalpark Deployment with the one created within this job, otherwise if will create a new Deployment if this is not present yet.

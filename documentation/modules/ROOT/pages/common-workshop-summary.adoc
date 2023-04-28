@@ -18,4 +18,4 @@ Topics which this workshop will cover include:
 * Configuring an application so it can access a database.
 * Setting up web hooks to enable automated application builds.
 
-Additional topics may also be covered relevant to the specific programming language used by the applications being deployed.
+Additional topics may also be covered relevant to the specific programming language used by the applications being deployed. While the default language used in this workshop is Java, you can choose to use a .NET, NodeJS, or Python backend service.

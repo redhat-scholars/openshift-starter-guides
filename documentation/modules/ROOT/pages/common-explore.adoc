@@ -9,32 +9,69 @@ perform various tasks via a browser.
 
 [tabs, subs="attributes+,+macros"]
 ====
-ROKS::
+Sandbox::
 +
 --
-Login to IBM Cloud, copy this link and open in your browser:
+https://developers.redhat.com/developer-sandbox[Developer Sandbox for Red Hat OpenShift,window='_blank'] is a free Kubernetes cloud environment in a shared, multi-tenant OpenShift cluster that is pre-configured with a set of developer tools. The Developer Sandbox is active for 30 days and renewable once it expires. 
 
-[source,role="copypaste"]
-%LOGIN%
+To create your account, register to https://developers.redhat.com/developer-sandbox[Developer Sandbox for Red Hat OpenShift,window='_blank']. From there, click on the red button that says **Start your sandbox for free** as shown in the following image.
 
-Enter following credentials:
+image::devsandbox-signup.png[Developer Sandbox Sign-up Page]
 
-*Username*:
-[source,role="copypaste"]
-%USERNAME%
+Use your existing Red Hat account or create a new one, then follow the instructions on the screen. You should then be redirected to the Developer Sandbox page again, but this time, you should see a button labelled **Start using your sandbox**. 
 
-*Password*:
-[source,role="copypaste"]
-%PASSWORD%
+image::devsandbox-start.png[Developer Sandbox Start Page]
 
-Click *Sign In*.
+Clicking on it opens up the OpenShift login screen where you can log in using the **DevSandbox** button, as seen below.
 
-image::roks-login1.png[ROKS Login]
+image::devsandbox-login.png[Log in the Developer Sandbox]
 
-After you successfully logged in, from right side pane, click *OpenShift web console* to access your OpenShift Cluster Dashboard:
+Clicking this button opens up your new OpenShift cluster console.
 
-image::roks-login4.png[ROKS Open-shift web console]
+image::devsandbox-topology-view.png[Topology View]
 
+.Quotas and Limits
+****
+Your private OpenShift environment on Developer Sandbox includes quotas and limits of:
+
+* 7 GB RAM
+* 15GB storage
+
+which is enough to run this workshop.
+
+There are two fixed projects (namespaces):
+
+* `<your_username>-dev`
+* `<your_username>-stage`
+
+In this shared environment, it's **NOT** possible to create a new project as in xref:projects#create_your_first_project[Create your First Project,role='params-link',window='_blank']. This environment doesn't support Pipelines Operator, so you can skip the xref:prerequisites.adoc#openshift_pipelines[OpenShift Pipelines,role='params-link',window='_blank'] prerequisite.
+
+Please work in the `<your_username>-dev` project.
+****
+
+To continue working with the Lab, please do the following:
+
+1 - Copy your cluster subdomain as shown in the image above, part **1** e.g. `apps.sandbox-m2.ll9k.p1.openshiftapps.com`. This is used to generate automatically all URLs during the workshop.
+
+image::devsandbox-topology.png[Topology Detail]
+
+Go to the top menu of this Lab guide, and paste the copied hostname into the first textfield, where there is **Enter Cluster Subdomain**.
+
+image::devsandbox-form1.png[Add Cluster Subdomain]
+
+Press **Enter** to Submit.
+
+2 - Copy the project name of your Developer Sandbox as shown in the image above, part **2** e.g. `user-dev`. This is also used to generate automatically all URLs and instructions during the workshop.
+
+image::devsandbox-form2.png[Add Project Name]
+
+Go to the top menu of this Lab guide, and paste the copied project name into the second textfield, where there is **Enter Project Name**.
+
+Press **Enter** to Submit.
+
+Your Lab Guide is now customized with your Developer Sandbox environment hostname and settings:
+
+image::devsandbox-forms_ok.png[Lab Guide OK]
 --
 ROSA::
 +
@@ -110,70 +147,31 @@ Enter the your credentials:
 [source,role="copypaste"]
 %PASSWORD%
 --
-Sandbox::
+ROKS::
 +
 --
-https://developers.redhat.com/developer-sandbox[Developer Sandbox for Red Hat OpenShift,window='_blank'] is a free Kubernetes cloud environment in a shared, multi-tenant OpenShift cluster that is pre-configured with a set of developer tools. The Developer Sandbox is active for 30 days and renewable once it expires. 
+Login to IBM Cloud, copy this link and open in your browser:
 
-To create your account, register to https://developers.redhat.com/developer-sandbox[Developer Sandbox for Red Hat OpenShift,window='_blank']. From there, click on the red button that says **Start your sandbox for free** as shown in the following image.
+[source,role="copypaste"]
+%LOGIN%
 
-image::devsandbox-signup.png[Developer Sandbox Sign-up Page]
+Enter following credentials:
 
-Use your existing Red Hat account or create a new one, then follow the instructions on the screen. You should then be redirected to the Developer Sandbox page again, but this time, you should see a button labelled **Start using your sandbox**. 
+*Username*:
+[source,role="copypaste"]
+%USERNAME%
 
-image::devsandbox-start.png[Developer Sandbox Start Page]
+*Password*:
+[source,role="copypaste"]
+%PASSWORD%
 
-Clicking on it opens up the OpenShift login screen where you can log in using the **DevSandbox** button, as seen below.
+Click *Sign In*.
 
-image::devsandbox-login.png[Log in the Developer Sandbox]
+image::roks-login1.png[ROKS Login]
 
-Clicking this button opens up your new OpenShift cluster console.
+After you successfully logged in, from right side pane, click *OpenShift web console* to access your OpenShift Cluster Dashboard:
 
-image::devsandbox-topology-view.png[Topology View]
-
-.Quotas and Limits
-****
-Your private OpenShift environment on Developer Sandbox includes quotas and limits of:
-
-* 7 GB RAM
-* 15GB storage
-
-which is enough to run this workshop.
-
-There are two fixed projects (namespaces):
-
-* `<your_username>-dev`
-* `<your_username>-stage`
-
-In this shared environment, it's **NOT** possible to create a new project as in xref:projects#create_your_first_project[Create your First Project,role='params-link',window='_blank']. This environment doesn't support Pipelines Operator, so you can skip the xref:prerequisites.adoc#openshift_pipelines[OpenShift Pipelines,role='params-link',window='_blank'] prerequisite.
-
-Please work in the `<your_username>-dev` project.
-****
-
-To continue working with the Lab, please do the following:
-
-1 - Copy your cluster subdomain as shown in the image above, part **1** e.g. `apps.sandbox-m2.ll9k.p1.openshiftapps.com`. This is used to generate automatically all URLs during the workshop.
-
-image::devsandbox-topology.png[Topology Detail]
-
-Go to the top menu of this Lab guide, and paste the copied hostname into the first textfield, where there is **Enter Cluster Subdomain**.
-
-image::devsandbox-form1.png[Add Cluster Subdomain]
-
-Press **Enter** to Submit.
-
-2 - Copy the project name of your Developer Sandbox as shown in the image above, part **2** e.g. `user-dev`. This is also used to generate automatically all URLs and instructions during the workshop.
-
-image::devsandbox-form2.png[Add Project Name]
-
-Go to the top menu of this Lab guide, and paste the copied project name into the second textfield, where there is **Enter Project Name**.
-
-Press **Enter** to Submit.
-
-Your Lab Guide is now customized with your Developer Sandbox environment hostname and settings:
-
-image::devsandbox-forms_ok.png[Lab Guide OK]
-
+image::roks-login4.png[ROKS Open-shift web console]
 --
 Others::
 +
