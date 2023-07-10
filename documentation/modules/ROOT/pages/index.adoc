@@ -16,4 +16,4 @@ link:https://www.redhat.com/en/topics/containers/whats-a-linux-container-vb[Cont
 
 For developers looking to kickstart their projects, link:https://openshift.com/[OpenShift,window='_blank'] enables efficient application development through streamlined workflows and validated integrations.
 
-This lab is accompanied by the slide deck available at link:https://dn.dev/openshift-workshop[dn.dev/openshift-workshop,window='_blank']
+This lab is accompanied by the slide deck available at link:https://dn.dev/openshift[dn.dev/openshift,window='_blank']
