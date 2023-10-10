@@ -128,7 +128,7 @@ on:
 jobs:
   build-and-push: <4>
     name: Build and push to github container registry
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     environment: development
 
     outputs:
@@ -205,7 +205,7 @@ on:
 jobs:
   build-and-push: <4>
     name: Build and push to github container registry
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     environment: development
 
     outputs:
@@ -282,7 +282,7 @@ on:
 jobs:
   build-and-push: <4>
     name: Build and push to github container registry
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     environment: development
 
     outputs:
@@ -359,7 +359,7 @@ on:
 jobs:
   build-and-push: <4>
     name: Build and push to github container registry
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     environment: development
 
     outputs:
