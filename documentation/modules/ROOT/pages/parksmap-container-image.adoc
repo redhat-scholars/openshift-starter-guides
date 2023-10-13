@@ -188,7 +188,7 @@ metadata:
   labels:
     app: parksmap
     component: parksmap
-    deploymentconfig: parksmap
+    deployment: parksmap
     pod-template-hash: 65c4f8b676
     role: frontend
 ...............
@@ -313,7 +313,7 @@ spec:
     targetPort: 8080
   selector:
     app: parksmap
-    deploymentconfig: parksmap
+    deployment: parksmap
   sessionAffinity: None
   type: ClusterIP
 status:
@@ -360,13 +360,13 @@ Under the `metadata` section you should see the following:
 ----
   labels:
     app: parksmap
-    deploymentconfig: parksmap
+    deployment: parksmap
 ----
 
-* The *Service* has `selector` stanza that refers to `deploymentconfig=parksmap`.
+* The *Service* has `selector` stanza that refers to `deployment=parksmap`.
 * The *Pod* has multiple *Labels*:
 ** `app=parksmap`
-** `deploymentconfig=parksmap`
+** `deployment=parksmap`
 
 *Labels* are just key/value pairs. Any *Pod* in this *Project* that has a *Label* that
 matches the *Selector* will be associated with the *Service*. To see this in
@@ -392,7 +392,7 @@ Labels:            app=workshop
                    component=parksmap
                    role=frontend
 Annotations:       openshift.io/generated-by: OpenShiftWebConsole
-Selector:          app=parksmap,deploymentconfig=parksmap
+Selector:          app=parksmap,deployment=parksmap
 Type:              ClusterIP
 IP:                172.30.22.209
 Port:              8080-tcp  8080/TCP
