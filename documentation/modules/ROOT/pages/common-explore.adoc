@@ -44,7 +44,7 @@ There are two fixed projects (namespaces):
 * `<your_username>-dev`
 * `<your_username>-stage`
 
-In this shared environment, it's **NOT** possible to create a new project as in xref:projects#create_your_first_project[Create your First Project,role='params-link',window='_blank']. This environment doesn't support Pipelines Operator, so you can skip the xref:prerequisites.adoc#openshift_pipelines[OpenShift Pipelines,role='params-link',window='_blank'] prerequisite.
+In this shared environment, it's **NOT** possible to create a new project as in xref:projects#create_your_first_project[Create your First Project,role='params-link',window='_blank']. The OpenShift Pipelines Operator is already installed cluster-wide, so you can skip the xref:nationalparks-pipeline.adoc#install_openshift_pipelines_from_operatorhub[Install OpenShift Pipelines,role='params-link',window='_blank'] section (you don't have the permissions to install Operators yourself anyway).
 
 Please work in the `<your_username>-dev` project.
 ****
@@ -127,7 +127,7 @@ You should get something similar with the following output containing your clust
 ----
 ****
 
-If available, you can also login to your ARO cluster using one of the https://docs.openshift.com/container-platform/4.7/authentication/understanding-identity-provider.html[Identity Providers,window='_blank'] such as Azure Active Directory.
+If available, you can also login to your ARO cluster using one of the {openshift-docs-url}/authentication/understanding-identity-provider.html[Identity Providers,window='_blank'] such as Azure Active Directory.
 
 .Azure Active Directory
 ****
@@ -190,7 +190,7 @@ On the login screen, enter the following credentials:
 --
 ====
 
-In general, the first time you access the web console, you will most likely be in the Administrator perspective. In case you are also the Cluster Administrator, you will be presented with an overview of the whole Cluster status:
+Starting with OpenShift {openshift-version}, the web console no longer splits into *Administrator* and *Developer* perspectives: there is a single, unified navigation on the left. The first page you land on is *Home -> Overview*, which summarizes the status of the resources you have access to. If you are also the Cluster Administrator, you will be presented with an overview of the whole cluster status:
 
 image::prerequisites_overview.png[Web Console Overview]
 
@@ -220,9 +220,10 @@ You should see the following (or something similar):
 [.console-output]
 [source,bash]
 ----
-Client Version: 4.12.0
-Server Version: 4.11.13
-Kubernetes Version: v1.24.6
+Client Version: 4.21.0
+Kustomize Version: v5.4.2
+Server Version: 4.21.30
+Kubernetes Version: v1.34.9
 ----
 TIP: You will only see the `Server Version` and `Kubernetes Version` if you are currently connected to a Kubenetes or OpenShift cluster
 
@@ -322,7 +323,7 @@ include::partial$cli_test_oc.adoc[]
 [#use_web_terminal]
 === Web Terminal
 
-OpenShift Web Console supports a web based Terminal called link:https://docs.openshift.com/container-platform/4.11/web_console/odc-about-web-terminal.html[Web Terminal]. Instead of installing the `oc` CLI locally, you could just run this web based terminal containing useful tools such as:
+OpenShift Web Console supports a web based Terminal called link:{openshift-docs-url}/web_console/odc-about-web-terminal.html[Web Terminal]. Instead of installing the `oc` CLI locally, you could just run this web based terminal containing useful tools such as:
 
 * `oc`
 * `kubectl`
@@ -331,7 +332,7 @@ OpenShift Web Console supports a web based Terminal called link:https://docs.ope
 * `tkn`
 * `kn`
 
-If you want to have it in your current cluster, you can install it from OperatorHub following the link:https://docs.openshift.com/container-platform/4.11/web_console/odc-about-web-terminal.html#odc-installing-web-terminal_odc-about-web-terminal[documentation].
+If you want to have it in your current cluster, you can install it from *Ecosystem* -> *Software Catalog* following the link:{openshift-docs-url}/web_console/odc-about-web-terminal.html#odc-installing-web-terminal_odc-about-web-terminal[documentation].
 
 TIP: If you are using link:https://developers.redhat.com/developer-sandbox[Developer Sandbox for OpenShift], this has been already installed to your cluster!
 
@@ -339,9 +340,9 @@ Navigate to top-right, click the command line terminal icon.
 
 image::explore-web-terminal.png[Web Terminal]
 
-From bottom-left, click the *Start* button. 
+The terminal opens in a drawer at the bottom of the console, on a *Terminal 1* tab. The first time you open it, OpenShift creates the terminal workspace for you, so it may take a few seconds before the prompt appears.
 
-image::explore-web-terminal-start.png[Start Web Terminal]
+NOTE: If your cluster asks you to select a *Project* before starting the terminal, pick `%PROJECT%` and click *Start*.
 
 Start using `oc` from the web terminal. The session is usually already authenticated to the cluster so you can *skip* the following section on how to connect from CLI.
 
@@ -358,7 +359,7 @@ oc whoami
 
 Once your `oc` client is setup on your Workstation, you can connect to cluster and start working also with OpenShift CLI.
 
-From Web Console overview, go to top-right menu bar and click to the dropdown menu containing your username, then click *Copy Login Command*:
+From Web Console overview, go to top-right menu bar and click to the dropdown menu containing your username, then click *Copy login command*:
 
 image::prerequisites_copy_login_command.png[Copy Login Command]
 

@@ -1,7 +1,7 @@
 = Webhooks with OpenShift
 :navtitle: Webhooks with OpenShift
 
-As we discussed in the previous module, OpenShift provides the Source-2-Image mechanism to create containers by defining a `BuildConfig`. In addition to that, it provides link:https://docs.openshift.com/container-platform/{openshift-version}/cicd/builds/triggering-builds-build-hooks.html[triggers,window='_blank'] to control the circumstances in which the BuildConfig should be run, such as Webhooks.
+As we discussed in the previous module, OpenShift provides the Source-2-Image mechanism to create containers by defining a `BuildConfig`. In addition to that, it provides link:{openshift-docs-url}/cicd/builds/triggering-builds-build-hooks.html[triggers,window='_blank'] to control the circumstances in which the BuildConfig should be run, such as Webhooks.
 
 [#prerequisite_github_account]
 == Prerequisite: GitHub Account
@@ -22,7 +22,7 @@ achieved.
 
 [#webhooks_with_openshift]
 == Exercise: Webhooks with OpenShift
-In this lab you can use a build webhook to trigger a build execution every time there is a change in your copy of the nationalparks GitHub repository. In the OpenShift web console, navigate to your **%PROJECT%** project, and then click to **Builds**. Click the `nationalparks` BuildConfig and then go to the **Webhooks** section.
+In this lab you can use a build webhook to trigger a build execution every time there is a change in your copy of the nationalparks GitHub repository. In the OpenShift web console, navigate to your **%PROJECT%** project, then from the left navigation click **Builds -> BuildConfigs**. Click the `nationalparks` BuildConfig and scroll down to the **Webhooks** section.
 
 On this screen you will see the option to copy the GitHub webhook URL, click to **Copy URL with Secret** as shown in the following image:
 
@@ -274,7 +274,7 @@ To
 Click on *Commit changes* at the bottom of the screen. Feel free to enter a commit message.
 
 Once you have committed your changes, a new *Build* should almost instantaneously be
-triggered in OpenShift. From OpenShift Web Console, click **Builds**->**nationalparks** and then navigate to the **Builds**. You should see a new one running: 
+triggered in OpenShift. From OpenShift Web Console, click **Builds -> BuildConfigs**, then **nationalparks**, and open the **Builds** tab. You should see a new one running:
 
 image::nationalparks-codechanges-build-running.png[Webhook]
 

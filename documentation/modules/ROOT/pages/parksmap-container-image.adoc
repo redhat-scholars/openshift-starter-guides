@@ -14,11 +14,15 @@ With OpenShift it can be done directly from the web console.
 
 Return to the https://console-openshift-console.%CLUSTER_SUBDOMAIN%/k8s/cluster/projects[Web Console, role='params-link', window='_blank'].
 
-If you're no longer on the Developer perspective, return there now. 
+NOTE: Starting with OpenShift {openshift-version}, the web console no longer has separate *Developer* and *Administrator* perspectives. There is a single, unified navigation, so you no longer need to switch perspectives before starting an exercise.
 
-From the left menu, click *+Add*. You will see a screen where you have multiple options to deploy application to OpenShift. Click *Container Image* to open a dialog that will allow you to specify the information for the image you want to deploy.
+Make sure your project is selected in the *Project* dropdown at the top of the page.
+
+In the masthead (the top bar), click the *Quick create* button — the *+* icon — and choose *Container images*. This opens the *Deploy Image* form, where you can specify the information for the image you want to deploy.
 
 image::parksmap-devconsole-container-image.png[Add from Container Image]
+
+TIP: The *Quick create* menu is the fastest way to reach the three most common workflows: *Import YAML*, *Import from Git* and *Container images*. A larger set of options is available from *Ecosystem -> Software Catalog* in the left navigation.
 
 In the *Image Name* field, copy/paste the following into the box:
 
@@ -34,11 +38,11 @@ Your screen will end up looking something like this:
 
 image::parksmap-image.png[Explore Project]
 
-In *Runtime Icon* you can select the icon to use in OpenShift Topology View for the app. You can leave the default OpenShift icon, or since this Frontend is made with Spring Boot, you can pick *spring-boot*.
+Next to the image field you can select a *Runtime icon*, which is the icon used for the app in the Topology view. You can leave the default OpenShift icon, or since this Frontend is made with Spring Boot, you can pick *spring-boot*.
 
-Make sure to have the correct values in:
+Scroll down to the *General* section and make sure to have the correct values in:
 
-*Application Name* :
+*Application name* :
 [source,role=copypaste]
 ----
 workshop
@@ -50,13 +54,20 @@ workshop
 parksmap
 ----
 
-Ensure *Deployment* is selected from *Resource* section.
+image::parksmap-image-options.png[Deploy image general options]
 
-NOTE: We will discuss in details about *Deployment* and *DeploymentConfig* in next chapters.
+In the *Deploy* section, set *Resource type* to *Deployment*.
 
-*Un-check* the checkbox next to *Create a route to the application*. For learning purposes, we will create a *Route* for the application later in the workshop.
+[IMPORTANT]
+====
+If OpenShift Serverless is installed on your cluster, *Resource type* defaults to *Serverless Deployment*. That is not what we want for this workshop — a Serverless Deployment scales to zero when idle and creates Knative resources instead of a plain *Deployment*. Make sure you explicitly select *Deployment* from the dropdown.
+====
 
-At the bottom of the page, click *Labels* in the Advanced Options section and add some labels to better identify this deployment later. Labels will help us identify and filter components in the web console and in the command line.
+NOTE: We will discuss *Deployment* and *DeploymentConfig* in detail in the next chapters. *DeploymentConfig* is deprecated in recent OpenShift releases; new applications should use *Deployment*.
+
+Scroll down to *Advanced options* and *un-check* the checkbox next to *Create a route*. For learning purposes, we will create a *Route* for the application later in the workshop.
+
+Just below, in the *Labels* section, add some labels to better identify this deployment later. Labels will help us identify and filter components in the web console and in the command line.
 
 We will add 3 labels. After you enter the name=value pair for each label, press kbd:[Return] (or kbd:[Enter] depending on your keyboard) before typing the next. The first label that we'll enter  is the name to be given to the application.
 
@@ -79,12 +90,13 @@ And finally, the role this component plays in the overall application.
 role=frontend
 ----
 
-image::parksmap-image-options.png[Deploy image]
-image::parksmap-advanced-image-options.png[Deploy image]
+image::parksmap-advanced-image-options.png[Deploy image advanced options]
 
-Next, click the blue *Create* button. You will be directed to the *Topology* page, where you should see the visualization for the `parksmap` deployment config in the `workshop` application.
+Next, click the blue *Create* button. You will be directed to the *Topology* page, where you should see the visualization for the `parksmap` *Deployment* in the `workshop` application.
 
 image::parksmap-dc-topology.png[Topology View with Parksmap]
+
+TIP: You can return to this page at any time from *Workloads -> Topology* in the left navigation.
 
 These few steps are the only ones you need to run to get a
 container image deployed on OpenShift. This should work with any
@@ -117,17 +129,17 @@ server, a log analyzer, and a file service to help manage uploaded files.
 [#examining_the_pod]
 == Exercise: Examining the Pod
 
-If you click on the `parksmap` entry in the Topology view, you will see some information about that deployment config. The *Resources* tab may be displayed by default. If so, click on the *Details* tab. 
+If you click on the `parksmap` entry in the Topology view, a side panel opens with information about that *Deployment*. The *Resources* tab may be displayed by default. If so, click on the *Details* tab.
 
 image::switchtoresources.png[Details Tab image]
 
-On that panel, you will see that there is a single *Pod* that was created by your actions.
+On the *Resources* tab, you will see that there is a single *Pod* that was created by your actions.
 
 image::parksmap-overview.png[Pod overview]
 
 NOTE: You'll notice in this view an info box suggesting to add Health checks for our app. We will discuss it in details later, so for the moment you can just close this info box by clicking on the top-right X icon.
 
-You can also get a list of all the *Pods* created within your *Project*, by navigating to *Workloads -> Pods* in the *Administrator perspective* of the web console.
+You can also get a list of all the *Pods* created within your *Project*, by navigating to *Workloads -> Pods* in the left navigation of the web console.
 
 image::parksmap-podlist.png[Pod list]
 
@@ -148,7 +160,7 @@ You should see output that looks similar to:
 [source,bash]
 ----
 NAME                READY   STATUS      RESTARTS   AGE
-parksmap-65c4f8b676-k5gkk    1/1     Running     0          20s
+parksmap-5d5f84ffcc-fxmk9   1/1     Running     0          20s
 ----
 
 The above output lists all of the *Pods* in the current *Project*, including the
@@ -164,7 +176,7 @@ NOTE: Make sure you use the correct *Pod* name from your output.
 [.console-input]
 [source,bash,subs="+attributes,macros+"]
 ----
-oc get pod parksmap-1-gxbgq -o yaml
+oc get pod parksmap-5d5f84ffcc-fxmk9 -o yaml
 ----
 
 You should see something like the following output (which has been truncated due
@@ -178,40 +190,32 @@ metadata:
   annotations:
     k8s.v1.cni.cncf.io/network-status: |-
       [{
-          "name": "",
+          "name": "ovn-kubernetes",
           "interface": "eth0",
           "ips": [
-              "10.131.0.93"
+              "10.128.3.49"
           ],
-          "default": true,
-          "dns": {}
-      }]
-    k8s.v1.cni.cncf.io/networks-status: |-
-      [{
-          "name": "",
-          "interface": "eth0",
-          "ips": [
-              "10.131.0.93"
-          ],
+          "mac": "0a:58:0a:80:03:31",
           "default": true,
           "dns": {}
       }]
     openshift.io/generated-by: OpenShiftWebConsole
-    openshift.io/scc: restricted
-  creationTimestamp: "2021-01-05T17:00:32Z"
-  generateName: parksmap-65c4f8b676-
+    openshift.io/scc: restricted-v2
+    seccomp.security.alpha.kubernetes.io/pod: runtime/default
+  creationTimestamp: "2026-09-11T08:52:57Z"
+  generateName: parksmap-5d5f84ffcc-
   labels:
-    app: parksmap
+    app: workshop
     component: parksmap
-    deploymentconfig: parksmap
-    pod-template-hash: 65c4f8b676
+    deployment: parksmap
+    pod-template-hash: 5d5f84ffcc
     role: frontend
 ...............
 ----
 
 The web interface also shows a lot of the same information on the *Pod* details
 page. If you click on the name of the *Pod*, you will
-find the details page. You can also get there by clicking on the `parksmap` deployment config on the *Topology* page, selecting *Resources*, and then clicking the *Pod* name.
+find the details page. You can also get there by clicking on the `parksmap` *Deployment* on the *Topology* page, selecting *Resources*, and then clicking the *Pod* name.
 
 image::parksmap-dc-resources.png[Parksmap Resources]
 
@@ -278,16 +282,16 @@ You should see output similar to the following:
 [.console-output]
 [source,bash]
 ----
-NAME       TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
-parksmap   ClusterIP   172.30.22.209  <none>        8080/TCP   3h
+NAME       TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+parksmap   ClusterIP   172.30.208.102   <none>        8080/TCP   3h
 ----
 
 In the above output, we can see that we have a *Service* named `parksmap` with an
-IP/Port combination of 172.30.22.209/8080TCP. Your IP address may be different, as
+IP/Port combination of 172.30.208.102/8080TCP. Your IP address may be different, as
 each *Service* receives a unique IP address upon creation. *Service* IPs are
 fixed and never change for the life of the *Service*.
 
-In the Developer perspective from the *Topology* view, service information is available by clicking the `parksmap` deployment config, then *Resources*, and then you should see the `parksmap` entry in the *Services* section.
+From the *Topology* view, service information is available by clicking the `parksmap` *Deployment*, then *Resources*, and then you should see the `parksmap` entry in the *Services* section.
 
 image::parksmap-serviceslist.png[Services list]
 
@@ -310,7 +314,7 @@ kind: Service
 metadata:
   annotations:
     openshift.io/generated-by: OpenShiftWebConsole
-  creationTimestamp: "2020-09-30T14:10:12Z"
+  creationTimestamp: "2026-09-11T08:52:57Z"
   labels:
     app: workshop
     app.kubernetes.io/component: parksmap
@@ -320,19 +324,26 @@ metadata:
     role: frontend
   name: parksmap
   namespace: workshop
-  resourceVersion: "1062269"
-  selfLink: /api/v1/namespaces/workshop/services/parksmap
-  uid: e1ff69c8-cb2f-11e9-82a1-0267eec7e1a0
+  resourceVersion: "8666578095"
+  uid: 7931c747-d2c6-4103-b7a6-d21cbc65ebd0
 spec:
-  clusterIP: 172.30.22.209
+  clusterIP: 172.30.208.102
+  clusterIPs:
+  - 172.30.208.102
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
   ports:
   - name: 8080-tcp
     port: 8080
     protocol: TCP
     targetPort: 8080
   selector:
-    app: parksmap
-    deploymentconfig: parksmap
+    app: workshop
+    component: parksmap
+    deployment: parksmap
+    role: frontend
   sessionAffinity: None
   type: ClusterIP
 status:
@@ -361,7 +372,7 @@ You should see output similar to the following:
 [source,bash]
 ----
 NAME                        READY   STATUS    RESTARTS   AGE
-parksmap-65c4f8b676-k5gkk   1/1     Running   0          5m12s
+parksmap-5d5f84ffcc-fxmk9   1/1     Running   0          5m12s
 ----
 
 Now you can view the detailed data for your *Pod* with the following command:
@@ -369,7 +380,7 @@ Now you can view the detailed data for your *Pod* with the following command:
 [.console-input]
 [source,bash,subs="+attributes,macros+"]
 ----
-oc get pod parksmap-1-gxbgq -o yaml
+oc get pod parksmap-5d5f84ffcc-fxmk9 -o yaml
 ----
 
 Under the `metadata` section you should see the following:
@@ -378,14 +389,20 @@ Under the `metadata` section you should see the following:
 [source,bash]
 ----
   labels:
-    app: parksmap
-    deploymentconfig: parksmap
+    app: workshop
+    component: parksmap
+    deployment: parksmap
+    role: frontend
 ----
 
-* The *Service* has `selector` stanza that refers to `deploymentconfig=parksmap`.
+* The *Service* has a `selector` stanza that refers to `deployment=parksmap`.
 * The *Pod* has multiple *Labels*:
-** `app=parksmap`
-** `deploymentconfig=parksmap`
+** `app=workshop`
+** `component=parksmap`
+** `deployment=parksmap`
+** `role=frontend`
+
+NOTE: In older OpenShift releases these resources were created by a *DeploymentConfig*, and the label was `deploymentconfig=parksmap`. With a *Deployment*, the label generated by OpenShift is `deployment=parksmap`.
 
 *Labels* are just key/value pairs. Any *Pod* in this *Project* that has a *Label* that
 matches the *Selector* will be associated with the *Service*. To see this in
@@ -402,23 +419,27 @@ You should see something like the following output:
 [.console-output]
 [source,text]
 ----
-Name:              parksmap
-Namespace:         workshop
-Labels:            app=workshop
-                   app.kubernetes.io/component=parksmap
-                   app.kubernetes.io/instance=parksmap
-                   app.kubernetes.io/part-of=workshop
-                   component=parksmap
-                   role=frontend
-Annotations:       openshift.io/generated-by: OpenShiftWebConsole
-Selector:          app=parksmap,deploymentconfig=parksmap
-Type:              ClusterIP
-IP:                172.30.22.209
-Port:              8080-tcp  8080/TCP
-TargetPort:        8080/TCP
-Endpoints:         10.128.2.90:8080
-Session Affinity:  None
-Events:            <none>
+Name:                     parksmap
+Namespace:                workshop
+Labels:                   app=workshop
+                          app.kubernetes.io/component=parksmap
+                          app.kubernetes.io/instance=parksmap
+                          app.kubernetes.io/part-of=workshop
+                          component=parksmap
+                          role=frontend
+Annotations:              openshift.io/generated-by: OpenShiftWebConsole
+Selector:                 app=workshop,component=parksmap,deployment=parksmap,role=frontend
+Type:                     ClusterIP
+IP Family Policy:         SingleStack
+IP Families:              IPv4
+IP:                       172.30.208.102
+IPs:                      172.30.208.102
+Port:                     8080-tcp  8080/TCP
+TargetPort:               8080/TCP
+Endpoints:                10.128.3.49:8080
+Session Affinity:         None
+Internal Traffic Policy:  Cluster
+Events:                   <none>
 ----
 
 You may be wondering why only one endpoint is listed. That is because there is

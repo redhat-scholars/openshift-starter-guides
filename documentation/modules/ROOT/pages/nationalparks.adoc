@@ -78,11 +78,11 @@ application. Now, let's take a look at deploying a backend service.
 Java::
 +
 --
-Similar to how we used *+Add* before with an existing image, we
+Similar to how we used *Quick create* before with an existing image, we
 can do the same for specifying a source code repository. Since for this lab you
 have your own git repository, let's use it with a simple link:https://github.com/openshift-roadshow/nationalparks.git[Java] S2I image.
 
-In the Developer Perspective, click *+Add* in the left navigation, go to the *Git Repository* section and then choose *From Git* option.
+From the masthead in the top-right corner of the web console, click the *Quick create* (*+*) button and choose *Import from Git*.
 
 image::nationalparks-show-add-options.png[Add to Project]
 
@@ -107,7 +107,7 @@ You have three options:
 * *Dockerfile*: this will create a Container image from an existing Dockerfile. 
 * *Builder Image*: this will use a mechanism called Source-to-Image to create automatically a container image directly from the source code.
 
-Select *Build Image* as we are going to create the container image from the source code, as discussed in the next section.
+Select *Builder Image* as we are going to create the container image from the source code, as discussed in the next section.
 
 image::nationalparks-import-strategy-build.png[Select Import Strategy]
 
@@ -115,16 +115,16 @@ image::nationalparks-import-strategy-build.png[Select Import Strategy]
 TIP: You could also use Dockerfile, the repo contains a multi-stage Dockerfile. For this exercise, we want to show the Build Image feature.
 
 
-Verify that *Java* has been selected as your Builder Image, and be sure to select version *openjdk-11-ubi8* to have OpenJDK 11.
+Verify that *Java* has been selected as your Builder Image, and be sure to select *Builder Image version* *openjdk-11-ubi8* to have OpenJDK 11.
 --
 .NET::
 +
 --
-Similar to how we used *+Add* before with an existing image, we
+Similar to how we used *Quick create* before with an existing image, we
 can do the same for specifying a source code repository. Since for this lab you
 have your own git repository, let's use it with a simple link:https://github.com/openshift-roadshow/nationalparks-dotnet.git[.NET] S2I image.
 
-In the Developer Perspective, click *+Add* in the left navigation, go to the *Git Repository* section and then choose *From Git* option.
+From the masthead in the top-right corner of the web console, click the *Quick create* (*+*) button and choose *Import from Git*.
 
 image::nationalparks-show-add-options.png[Add to Project]
 
@@ -149,20 +149,20 @@ You have three options:
 * *Dockerfile*: this will create a Container image from an existing Dockerfile. 
 * *Builder Image*: this will use a mechanism called Source-to-Image to create automatically a container image directly from the source code.
 
-Select *Build Image* as we are going to create the container image from the source code, as discussed in the next section.
+Select *Builder Image* as we are going to create the container image from the source code, as discussed in the next section.
 
 image::nationalparks-import-from-git-url-builder-dotnet.png[Import from Git]
 
-Select *.NET Core* as your Builder Image, and be sure to select *3.1-el7* to run .NET Core 3.1 applications on a RHEL 7 image.
+Select *.NET* as your Builder Image, and be sure to select *Builder Image version* *8.0-ubi8* to run .NET 8 applications on a UBI 8 image.
 --
 Javascript::
 +
 --
-Similar to how we used *+Add* before with an existing image, we
+Similar to how we used *Quick create* before with an existing image, we
 can do the same for specifying a source code repository. Since for this lab you
 have your own git repository, let's use it with a simple link:https://github.com/openshift-roadshow/nationalparks-js.git[NodeJS] S2I image.
 
-In the Developer Perspective, click *+Add* in the left navigation, go to the *Git Repository* section and then choose *From Git* option.
+From the masthead in the top-right corner of the web console, click the *Quick create* (*+*) button and choose *Import from Git*.
 
 image::nationalparks-show-add-options.png[Add to Project]
 
@@ -187,20 +187,20 @@ You have three options:
 * *Dockerfile*: this will create a Container image from an existing Dockerfile. 
 * *Builder Image*: this will use a mechanism called Source-to-Image to create automatically a container image directly from the source code.
 
-Select *Build Image* as we are going to create the container image from the source code, as discussed in the next section.
+Select *Builder Image* as we are going to create the container image from the source code, as discussed in the next section.
 
 image::nationalparks-import-from-git-url-builder-js.png[Import from Git]
 
-Select *NodeJS* as your Builder Image, and be sure to select *14-ubi8* for this lab.
+Select *Node.js* as your Builder Image, and be sure to select *Builder Image version* *20-ubi9* for this lab.
 --
 Python::
 +
 --
-Similar to how we used *+Add* before with an existing image, we
+Similar to how we used *Quick create* before with an existing image, we
 can do the same for specifying a source code repository. Since for this lab you
 have your own git repository, let's use it with a simple link:https://github.com/openshift-roadshow/nationalparks-py.git[Python] S2I image.
 
-In the Developer Perspective, click *+Add* in the left navigation, go to the *Git Repository* section and then choose *From Git* option.
+From the masthead in the top-right corner of the web console, click the *Quick create* (*+*) button and choose *Import from Git*.
 
 image::nationalparks-show-add-options.png[Add to Project]
 
@@ -225,11 +225,11 @@ You have three options:
 * *Dockerfile*: this will create a Container image from an existing Dockerfile. 
 * *Builder Image*: this will use a mechanism called Source-to-Image to create automatically a container image directly from the source code.
 
-Select *Build Image* as we are going to create the container image from the source code, as discussed in the next section.
+Select *Builder Image* as we are going to create the container image from the source code, as discussed in the next section.
 
 image::nationalparks-import-from-git-url-builder-py.png[Import from Git]
 
-Select *Python* as your Builder Image, and be sure to select *3.8-ubi7* for this lab.
+Select *Python* as your Builder Image, and be sure to select *Builder Image version* *3.9-ubi9* for this lab.
 --
 ====
 
@@ -237,7 +237,7 @@ Select *Python* as your Builder Image, and be sure to select *3.8-ubi7* for this
 
 Scroll down to the *General* section. Add the following:
 
-*Application Name* :
+*Application* :
 [source,role=copypaste]
 ----
 workshop
@@ -249,15 +249,22 @@ workshop
 nationalparks
 ----
 
-In *Resources* section, select *Deployment*.
+In the *Build* section, leave *Build option* set to *BuildConfig*: this is the classic OpenShift build mechanism that runs the S2I process we just described.
+
+In the *Deploy* section, set *Resource type* to *Deployment*.
+
+[IMPORTANT]
+====
+When OpenShift Serverless is installed on the cluster, *Resource type* defaults to *Serverless Deployment*. Make sure you change it to *Deployment*, otherwise a Knative Service is created instead of the *Deployment*, *ReplicaSet* and *Route* objects this workshop works with.
+====
 
 NOTE: If present, leave Pipeline section empty here as we will implement it in the next modules
 
-Under *Advanced Options*, ensure *Create a route* is *checked* here.
+Under *Advanced options*, ensure *Create a route* is *checked* here.
 
 We are going to create another *Secure Route*, this time directly from this view.
 
-Click *Show advanced Routing options*. 
+Click *Show advanced Routing options*.
 
 Leave all default options, go under *Security* section.
 
@@ -265,7 +272,7 @@ Check *Secure Route* option.
 
 Under *TLS termination*, select *Edge*.
 
-Scroll down and expand the *Labels* section to add 3 labels.
+Scroll down to the bottom and click *Labels* to expand the section, then add 3 labels.
 
 The name of the Application group:
 
@@ -301,7 +308,7 @@ image::nationalparks-configure-service4.png[Label]
 [#monitoring-the-build]
 === Monitoring the Build
 
-To see the build logs, in Topology view, click the `nationalparks` entry, then click on *View Logs* in the *Builds* section of the *Resources* tab.
+To see the build logs, go to *Workloads -> Topology*, click the `nationalparks` entry, then click on *View logs* in the *Builds* section of the *Resources* tab of the side panel.
 
 image::nationalparks-java-new-java-build.png[Nationalparks build]
 
@@ -320,8 +327,8 @@ You'll see output like:
 [.console-output]
 [source,bash]
 ----
-NAME              TYPE      FROM          STATUS     STARTED              DURATION
-nationalparks-1   Source    Git@b052ae6   Running    About a minute ago   1m2s
+NAME              TYPE     FROM          STATUS    STARTED              DURATION
+nationalparks-1   Source   Git@7e863e5   Running   About a minute ago   1m3s
 ----
 
 You can also view the build logs with the following command:
@@ -346,10 +353,10 @@ has finished (exited) and that an application *Pod* is in a ready and running st
 [.console-output]
 [source,bash]
 ----
-NAME                    READY     STATUS      RESTARTS   AGE
-nationalparks-1-tkid3   1/1       Running     3          2m
-nationalparks-1-build   0/1       Completed   0          3m
-parksmap-57df75c46d-xltcs        1/1       Running     0          2h
+NAME                             READY   STATUS      RESTARTS   AGE
+nationalparks-1-build            0/1     Completed   0          86s
+nationalparks-867b7d84f4-z5vhs   1/1     Running     0          25s
+parksmap-5b66975f9b-zsktf        1/1     Running     0          31m
 ----
 
 If you look again at the web console, you will notice that, when you create the
@@ -367,9 +374,9 @@ Where you should see something like the following:
 [.console-output]
 [source,bash,subs="+attributes,macros+"]
 ----
-NAME            HOST/PORT                                                   PATH      SERVICES        PORT       TERMINATION       WILDCARD
-nationalparks   nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%             nationalparks   8080-tcp        edge 
-parksmap        parksmap-%PROJECT%.%CLUSTER_SUBDOMAIN%                  parksmap        8080-tcp        edge        none
+NAME            HOST/PORT                                       PATH   SERVICES        PORT       TERMINATION   WILDCARD
+nationalparks   nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%          nationalparks   8080-tcp   edge          None
+parksmap        parksmap-%PROJECT%.%CLUSTER_SUBDOMAIN%               parksmap        8080-tcp   edge          None
 ----
 
 In the above example, the URL is:

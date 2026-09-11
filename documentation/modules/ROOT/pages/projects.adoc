@@ -17,27 +17,30 @@ understand all of the terminology as we will cover it in detail in later labs.
 
 NOTE: If you are using link:https://developers.redhat.com/developer-sandbox[Developer Sandbox for OpenShift], a project has been already created for you and you can *skip* this chapter.
 
-Create a project named *%PROJECT%*. Within the **Administrator** perspective, from left-side menu click to *Projects*, then from top-right click
+Create a project named *%PROJECT%*. From the left navigation, click *Home -> Projects*, then from top-right click
 to *Create Project*.
-
-From the form, insert the name of your project *%PROJECT%* and click to *Create*.
 
 image::prerequisites_create_project.png[Create Project]
 
+From the form, insert the name of your project *%PROJECT%* and click to *Create*.
+
 If you had multiple projects, the first thing you would want to do is to switch
-to the *%PROJECT%* project to make sure you're on the correct project from now on.
+to the *%PROJECT%* project to make sure you're on the correct project from now on. Every namespaced page of the console has a *Project* selector at the top:
 
 image::explore-webconsole2.png[Explore Project]
 
-At the top of the left navigation menu, you can toggle between the *Administrator* perspective and the *Developer* perspective.
+[NOTE]
+====
+Starting with OpenShift {openshift-version}, the web console no longer has separate *Administrator* and *Developer* perspectives. Everything you need for this workshop -- *Topology*, *Workloads*, *Networking*, *Builds*, *Pipelines*, *Observe* -- lives in the single left navigation. The dropdown at the very top of the navigation only switches between the *Core platform* views and *Virtualization*, so leave it on *Core platform*.
+====
 
-image::explore-perspective-toggle.png[Toggle Between Perspectives]
+image::explore-perspective-toggle.png[Core platform navigation]
 
-Select *Developer* to switch to the Developer perspective. Once the Developer perspective loads, you should be in the *+Add* view.
+To create applications, use the *Quick create* (*+*) button in the top-right masthead, which offers *Import YAML*, *Import from Git* and *Container images*. You can also browse *Ecosystem -> Software Catalog* for Operator-backed services, Helm charts and samples.
 
 image::explore-add-application.png[Add New Applications]
 
-Right now, there are no applications or components to view, but once you begin working on the lab, you'll be able to visualize and interact with the components in your application in the *Topology* view.
+Right now, there are no applications or components to view, but once you begin working on the lab, you'll be able to visualize and interact with the components in your application in the *Workloads -> Topology* view.
 
 You can also create and manage project from the CLI as well. Let's use our newly created project %PROJECT% as our default one:
 

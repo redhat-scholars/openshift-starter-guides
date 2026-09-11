@@ -17,14 +17,16 @@ image::devops-pipeline-flow.png[Pipelines]
 
 
 [#install_openshift_pipelines_from_operatorhub]
-== Install OpenShift Pipelines from OperatorHub
+== Install OpenShift Pipelines from the Software Catalog
 
-NOTE: Those using the https://developers.redhat.com/developer-sandbox[Developer Sandbox] will already have the Pipelines Operator installed, feel free to skip this section.
+NOTE: Those using the https://developers.redhat.com/developer-sandbox[Developer Sandbox] will already have the Pipelines Operator installed, feel free to skip this section. Installing an Operator also requires cluster administrator privileges.
 
 OpenShift provides a marketplace of installable software packaged as link:https://kubernetes.io/docs/concepts/extend-kubernetes/operator/[Kubernetes Operator] called https://operatorhub.io[OperatorHub] .
-You can add Kubernetes-native CI/CD to your cluster installing OpenShift Pipelines directly from OperatorHub embedded marketplace inside OpenShift.
+You can add Kubernetes-native CI/CD to your cluster installing OpenShift Pipelines directly from the embedded marketplace inside OpenShift.
 
-From the left-side menu under Administrator perspective, go to *Operators*-> *OperatorHub*. In the search box, search for _pipelines_, then click to *Red Hat OpenShift Pipelines*:
+TIP: Starting with OpenShift {openshift-version} the *OperatorHub* page has been merged into the unified *Software Catalog*, reachable from *Ecosystem* -> *Software Catalog*. The install flow itself is unchanged.
+
+From the left navigation, go to *Ecosystem* -> *Software Catalog* and select the *Operators* catalog type. In the search box, search for _pipelines_, then click to *Red Hat OpenShift Pipelines*:
 
 image::prerequisites_operatorhub.png[OperatorHub]
 
@@ -67,13 +69,31 @@ As pipelines provide the ability to promote applications between different stage
 
 A `Pipeline` is a user-defined model of a CD pipeline. A Pipeline’s code defines your entire build process, which typically includes stages for building an application, testing it and then delivering it.
 
-A `Task` and a `ClusterTask` contain some step to be executed. *ClusterTasks* are available to all user within a cluster where OpenShift Pipelines has been installed, while *Tasks* can be custom.
+A `Task` contains some steps to be executed. OpenShift Pipelines ships a set of ready-to-use *Tasks* in the `openshift-pipelines` namespace, and you can of course write your own custom ones in your project.
 
-TIP: You can explore all available *ClusterTasks* in the cluster either from the Web Console than from CLI:
+[IMPORTANT]
+====
+The cluster-scoped `ClusterTask` resource is deprecated and no longer shipped. The tasks provided by the Operator are now regular namespaced `Tasks` living in the `openshift-pipelines` namespace, and you reference them from any project through the link:https://tekton.dev/docs/pipelines/cluster-resolver/[cluster resolver] instead of `taskRef.kind: ClusterTask`:
+
+[source,yaml]
+----
+taskRef:
+  resolver: cluster
+  params:
+    - name: kind
+      value: task
+    - name: name
+      value: git-clone
+    - name: namespace
+      value: openshift-pipelines
+----
+====
+
+TIP: You can explore all the *Tasks* provided by the Operator either from the Web Console (*Pipelines* -> *Tasks*) or from the CLI:
 [.console-input]
 [source,bash,subs="+attributes,macros+"]
 ----
-oc get clustertasks
+oc get tasks -n openshift-pipelines
 ----
 
 [#create_your_pipeline]
@@ -81,13 +101,9 @@ oc get clustertasks
 
 NOTE: Ensure you installed OpenShift Pipelines Operator before proceeding.
 
-// *ClusterTasks* are available to all user within a cluster where OpenShift Pipelines has been installed, while *Tasks* can be custom.
-
-// TIP: You can explore all available *ClusterTasks* in the cluster either from the Web Console than from CLI using `oc get clustertasks`
-
 // For this example, we're going to deploy our pipeline which is stored in the same GitHub repository where we have our code. In a more real scenario, and in order to honor https://en.wikipedia.org/wiki/Infrastructure_as_Code[infrastructure as code] principles, we would store all the pipeline definitions along with every OpenShift resources definitions we would use.
 
-Let's now create a Tekton pipeline for Nationalparks backend. In the Developer Perspective, click *Pipelines* in the left navigation, then click *Create*.
+Let's now create a Tekton pipeline for Nationalparks backend. From the left navigation, click *Pipelines* -> *Pipelines*, then click *Create* -> *Pipeline*.
 
 image::devops_create_pipeline.png[Create Pipeline]
 
@@ -107,7 +123,7 @@ Here, we can copy this Tekton Pipeline in the YAML text area. This pipeline will
 [.console-input]
 [source,bash,subs="+attributes,macros+"]
 ----
-apiVersion: tekton.dev/v1beta1
+apiVersion: tekton.dev/v1
 kind: Pipeline
 metadata:
   name: nationalparks-pipeline
@@ -124,69 +140,84 @@ spec:
       description: The application git repository revision
       name: APP_GIT_REVISION
       type: string
+  workspaces:
+    - name: app-source
+    - name: maven-settings
   tasks:
     - name: git-clone
       params:
-        - name: url
+        - name: URL
           value: $(params.APP_GIT_URL)
-        - name: revision
+        - name: REVISION
           value: $(params.APP_GIT_REVISION)
-        - name: submodules
+        - name: SUBMODULES
           value: 'true'
-        - name: depth
+        - name: DEPTH
           value: '1'
-        - name: sslVerify
+        - name: SSL_VERIFY
           value: 'true'
-        - name: deleteExisting
+        - name: DELETE_EXISTING
           value: 'true'
-        - name: verbose
+        - name: VERBOSE
           value: 'true'
       taskRef:
-        kind: ClusterTask
-        name: git-clone
+        resolver: cluster
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: git-clone
+          - name: namespace
+            value: openshift-pipelines
       workspaces:
         - name: output
           workspace: app-source
     - name: build-and-test
       params:
-        - name: MAVEN_IMAGE
-          value: maven:3.8.3-openjdk-11
         - name: GOALS
           value:
             - package
-        - name: PROXY_PROTOCOL
-          value: http
+        - name: JAVA_VERSION
+          value: '11'
       runAfter:
         - git-clone
       taskRef:
-        kind: ClusterTask
-        name: maven
+        resolver: cluster
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: maven
+          - name: namespace
+            value: openshift-pipelines
       workspaces:
         - name: source
           workspace: app-source
-        - name: maven-settings
+        - name: maven_settings
           workspace: maven-settings
     - name: build-image
       params:
         - name: IMAGE
           value: image-registry.openshift-image-registry.svc:5000/$(context.pipelineRun.namespace)/$(params.APP_NAME):latest
-        - name: BUILDER_IMAGE
-          value: registry.redhat.io/rhel8/buildah:latest
-        - name: STORAGE_DRIVER
-          value: vfs
         - name: DOCKERFILE
           value: ./Dockerfile
         - name: CONTEXT
           value: .
-        - name: TLSVERIFY
+        - name: TLS_VERIFY
           value: 'true'
         - name: FORMAT
           value: oci
       runAfter:
         - build-and-test
       taskRef:
-        kind: ClusterTask
-        name: buildah
+        resolver: cluster
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: buildah
+          - name: namespace
+            value: openshift-pipelines
       workspaces:
         - name: source
           workspace: app-source
@@ -197,11 +228,14 @@ spec:
       runAfter:
         - build-image
       taskRef:
-        kind: ClusterTask
-        name: openshift-client
-  workspaces:
-    - name: app-source
-    - name: maven-settings
+        resolver: cluster
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: openshift-client
+          - name: namespace
+            value: openshift-pipelines
 ----
 
 Now, let's head back to the *Pipeline builder* view to see it visually.
@@ -210,10 +244,10 @@ image::devops_pipeline_builder_java.png[Pipeline Builder Java]
 
 This pipeline has 4 Tasks defined:
 
-- *git clone*: this is a `ClusterTask` that will clone our source repository for nationalparks and store it to a `Workspace` `app-source` which will use the PVC created for it `app-source-workspace`
-- *build-and-test*: will build and test our Java application using `maven` `ClusterTask`
-- *build-image*: this is a link:https://buildah.io/[buildah] ClusterTask that will build an image using a binary file as input in OpenShift, in our case a JAR artifact generated in the previous task
-- *redeploy*: it will use an `openshift-client` ClusterTask to deploy the created image on OpenShift using the Deployment named `nationalparks` we created in the previous lab
+- *git clone*: this uses the `git-clone` *Task* to clone our source repository for nationalparks and store it into the `app-source` `Workspace`, which is backed by the PVC we are going to create for it
+- *build-and-test*: will build and test our Java application using the `maven` *Task*
+- *build-image*: this is the link:https://buildah.io/[buildah] *Task* that will build an image using a binary file as input in OpenShift, in our case a JAR artifact generated in the previous task
+- *redeploy*: it will use the `openshift-client` *Task* to deploy the created image on OpenShift using the Deployment named `nationalparks` we created in the previous lab
 
 image::devops_pipeline_tasks_java.png[Pipeline Tasks Java]
 
@@ -234,7 +268,7 @@ Here, we can copy this Tekton Pipeline in the YAML text area. This pipeline will
 [.console-input]
 [source,bash,subs="+attributes,macros+"]
 ----
-apiVersion: tekton.dev/v1beta1
+apiVersion: tekton.dev/v1
 kind: Pipeline
 metadata:
   name: nationalparks-pipeline
@@ -254,91 +288,96 @@ spec:
       name: IMAGE_NAME
       type: string
     - default: .
-      name: PATH_CONTEXT
+      name: CONTEXT
       type: string
-    - default: '1'
-      name: MINOR_VERSION
+    - default: '8.0-ubi8'
+      name: VERSION
       type: string
-  resources: []
   workspaces:
     - name: workspace
   tasks:
     - name: fetch-repository
       params:
-        - name: url
+        - name: URL
           value: $(params.GIT_REPO)
-        - name: revision
+        - name: REVISION
           value: $(params.GIT_REVISION)
-        - name: subdirectory
+        - name: SUBDIRECTORY
           value: ''
-        - name: deleteExisting
+        - name: DELETE_EXISTING
           value: 'true'
       taskRef:
-        kind: ClusterTask
-        name: git-clone
+        resolver: cluster
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: git-clone
+          - name: namespace
+            value: openshift-pipelines
       workspaces:
         - name: output
+          workspace: workspace
+    - name: build
+      params:
+        - name: IMAGE
+          value: $(params.IMAGE_NAME)
+        - name: VERSION
+          value: $(params.VERSION)
+        - name: CONTEXT
+          value: $(params.CONTEXT)
+        - name: TLS_VERIFY
+          value: 'true'
+      runAfter:
+        - fetch-repository
+      taskRef:
+        resolver: cluster
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: s2i-dotnet
+          - name: namespace
+            value: openshift-pipelines
+      workspaces:
+        - name: source
           workspace: workspace
     - name: deploy
       params:
         - name: SCRIPT
-          value: kubectl $@
-        - name: ARGS
-          value:
-            - rollout
-            - status
-            - deploy/$(params.APP_NAME)
+          value: oc rollout status deploy/$(params.APP_NAME)
       runAfter:
-        - s2i-dotnet
+        - build
       taskRef:
-        kind: ClusterTask
-        name: openshift-client
-    - name: s2i-dotnet
-      runAfter:
-        - fetch-repository
-      taskRef:
-        kind: ClusterTask
-        name: s2i-dotnet
-      params:
-        - name: BUILDER_IMAGE
-          value: registry.redhat.io/rhel8/buildah
-        - name: VERSION
-          value: latest
-        - name: PATH_CONTEXT
-          value: .
-        - name: TLSVERIFY
-          value: 'true'
-        - name: IMAGE
-          value: >-
-            image-registry.openshift-image-registry.svc:5000/$(context.pipelineRun.namespace)/$(params.APP_NAME):latest
-        - name: SKIP_PUSH
-          value: 'false'
-        - name: ENV_VARS
-          value: []
-      workspaces:
-        - name: source
-          workspace: workspace
+        resolver: cluster
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: openshift-client
+          - name: namespace
+            value: openshift-pipelines
 ----
 
 Now, let's head back to the *Pipeline builder* view to see it visually.
 
-image::devops_pipeline_builder_dotnet.png[Pipeline Builder Java]
+image::devops_pipeline_builder_dotnet.png[Pipeline Builder .NET]
 
 This pipeline has 3 Tasks defined:
 
-- *fetch-repository*: this is a `ClusterTask` that will clone our source repository for nationalparks and store it to a `Workspace` `app-source` which will use the PVC created for it `app-source-workspace`
+- *fetch-repository*: this uses the `git-clone` *Task* to clone our source repository for nationalparks and store it into the `workspace` `Workspace`, which is backed by the PVC we are going to create for it
 - *build*: will build and test our .NET Core C# application, generate and push a container image automatically with compiled binaries inside OpenShift Container Registry
 - *deploy*: will deploy the created image on OpenShift using the Deployment named `nationalparks` we created in the previous lab
 
-image::devops_pipeline_tasks_dotnet.png[Pipeline Tasks Java]
+image::devops_pipeline_tasks_dotnet.png[Pipeline Tasks .NET]
 
 The Pipeline is parametric, with default values already preconfigured.
 
 It is using one *Workspace*:
 
-- *app-source*: this need to be linked to a *PersistentVolumeClaim* since will be used to store the code and the compiled binary to be used in different *Tasks*
+- *workspace*: this needs to be linked to a *PersistentVolumeClaim* since it will be used to store the code and the compiled binary to be used in different *Tasks*
 
-image::devops_pipeline_workspaces_dotnet.png[Pipeline Workspaces Java]
+image::devops_pipeline_workspaces_dotnet.png[Pipeline Workspaces .NET]
 --
 Javascript::
 +
@@ -348,7 +387,7 @@ Here, we can copy this Tekton Pipeline in the YAML text area. This pipeline will
 [.console-input]
 [source,bash,subs="+attributes,macros+"]
 ----
-apiVersion: tekton.dev/v1beta1
+apiVersion: tekton.dev/v1
 kind: Pipeline
 metadata:
   name: nationalparks-pipeline
@@ -368,25 +407,33 @@ spec:
       name: IMAGE_NAME
       type: string
     - default: .
-      name: PATH_CONTEXT
+      name: CONTEXT
       type: string
-    - default: '1'
-      name: MINOR_VERSION
+    - default: '20-ubi9'
+      name: VERSION
       type: string
+  workspaces:
+    - name: workspace
   tasks:
     - name: fetch-repository
       params:
-        - name: url
+        - name: URL
           value: $(params.GIT_REPO)
-        - name: revision
+        - name: REVISION
           value: $(params.GIT_REVISION)
-        - name: subdirectory
+        - name: SUBDIRECTORY
           value: ''
-        - name: deleteExisting
+        - name: DELETE_EXISTING
           value: 'true'
       taskRef:
-        kind: ClusterTask
-        name: git-clone
+        resolver: cluster
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: git-clone
+          - name: namespace
+            value: openshift-pipelines
       workspaces:
         - name: output
           workspace: workspace
@@ -394,57 +441,62 @@ spec:
       params:
         - name: IMAGE
           value: $(params.IMAGE_NAME)
-        - name: TLSVERIFY
-          value: 'false'
-        - name: PATH_CONTEXT
-          value: $(params.PATH_CONTEXT)
-        - name: MINOR_VERSION
-          value: $(params.MINOR_VERSION)
+        - name: VERSION
+          value: $(params.VERSION)
+        - name: CONTEXT
+          value: $(params.CONTEXT)
+        - name: TLS_VERIFY
+          value: 'true'
       runAfter:
         - fetch-repository
       taskRef:
-        kind: ClusterTask
-        name: s2i-nodejs
+        resolver: cluster
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: s2i-nodejs
+          - name: namespace
+            value: openshift-pipelines
       workspaces:
         - name: source
           workspace: workspace
     - name: deploy
       params:
         - name: SCRIPT
-          value: kubectl $@
-        - name: ARGS
-          value:
-            - rollout
-            - status
-            - deploy/$(params.APP_NAME)
+          value: oc rollout status deploy/$(params.APP_NAME)
       runAfter:
         - build
       taskRef:
-        kind: ClusterTask
-        name: openshift-client
-  workspaces:
-    - name: workspace
+        resolver: cluster
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: openshift-client
+          - name: namespace
+            value: openshift-pipelines
 ----
 
 Now, let's head back to the *Pipeline builder* view to see it visually.
 
-image::devops_pipeline_builder_js.png[Pipeline Builder Java]
+image::devops_pipeline_builder_js.png[Pipeline Builder JS]
 
-This pipeline has 4 Tasks defined:
+This pipeline has 3 Tasks defined:
 
-- *fetch-repository*: this is a `ClusterTask` that will clone our source repository for nationalparks and store it to a `Workspace` `app-source` which will use the PVC created for it `app-source-workspace`
+- *fetch-repository*: this uses the `git-clone` *Task* to clone our source repository for nationalparks and store it into the `workspace` `Workspace`, which is backed by the PVC we are going to create for it
 - *build*: will build and test our NodeJS application, generate and push a container image automatically with compiled binaries inside OpenShift Container Registry
 - *deploy*: will deploy the created image on OpenShift using the Deployment named `nationalparks` we created in the previous lab
 
-image::devops_pipeline_tasks_js.png[Pipeline Tasks Java]
+image::devops_pipeline_tasks_js.png[Pipeline Tasks JS]
 
 The Pipeline is parametric, with default values already preconfigured.
 
 It is using one *Workspace*:
 
-- *app-source*: this need to be linked to a *PersistentVolumeClaim* since will be used to store the code and the compiled binary to be used in different *Tasks*
+- *workspace*: this needs to be linked to a *PersistentVolumeClaim* since it will be used to store the code and the compiled binary to be used in different *Tasks*
 
-image::devops_pipeline_workspaces_js.png[Pipeline Workspaces Java]
+image::devops_pipeline_workspaces_js.png[Pipeline Workspaces JS]
 --
 Python::
 +
@@ -454,7 +506,7 @@ Here, we can copy this Tekton Pipeline in the YAML text area. This pipeline will
 [.console-input]
 [source,bash,subs="+attributes,macros+"]
 ----
-apiVersion: tekton.dev/v1beta1
+apiVersion: tekton.dev/v1
 kind: Pipeline
 metadata:
   name: nationalparks-pipeline
@@ -474,25 +526,33 @@ spec:
       name: IMAGE_NAME
       type: string
     - default: .
-      name: PATH_CONTEXT
+      name: CONTEXT
       type: string
-    - default: '1'
-      name: MINOR_VERSION
+    - default: '3.9-ubi9'
+      name: VERSION
       type: string
+  workspaces:
+    - name: workspace
   tasks:
     - name: fetch-repository
       params:
-        - name: url
+        - name: URL
           value: $(params.GIT_REPO)
-        - name: revision
+        - name: REVISION
           value: $(params.GIT_REVISION)
-        - name: subdirectory
+        - name: SUBDIRECTORY
           value: ''
-        - name: deleteExisting
+        - name: DELETE_EXISTING
           value: 'true'
       taskRef:
-        kind: ClusterTask
-        name: git-clone
+        resolver: cluster
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: git-clone
+          - name: namespace
+            value: openshift-pipelines
       workspaces:
         - name: output
           workspace: workspace
@@ -500,57 +560,62 @@ spec:
       params:
         - name: IMAGE
           value: $(params.IMAGE_NAME)
-        - name: TLSVERIFY
-          value: 'false'
-        - name: PATH_CONTEXT
-          value: $(params.PATH_CONTEXT)
-        - name: MINOR_VERSION
-          value: $(params.MINOR_VERSION)
+        - name: VERSION
+          value: $(params.VERSION)
+        - name: CONTEXT
+          value: $(params.CONTEXT)
+        - name: TLS_VERIFY
+          value: 'true'
       runAfter:
         - fetch-repository
       taskRef:
-        kind: ClusterTask
-        name: s2i-python
+        resolver: cluster
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: s2i-python
+          - name: namespace
+            value: openshift-pipelines
       workspaces:
         - name: source
           workspace: workspace
     - name: deploy
       params:
         - name: SCRIPT
-          value: kubectl $@
-        - name: ARGS
-          value:
-            - rollout
-            - status
-            - deploy/$(params.APP_NAME)
+          value: oc rollout status deploy/$(params.APP_NAME)
       runAfter:
         - build
       taskRef:
-        kind: ClusterTask
-        name: openshift-client
-  workspaces:
-    - name: workspace
+        resolver: cluster
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: openshift-client
+          - name: namespace
+            value: openshift-pipelines
 ----
 
 Now, let's head back to the *Pipeline builder* view to see it visually.
 
-image::devops_pipeline_builder_python.png[Pipeline Builder Java]
+image::devops_pipeline_builder_python.png[Pipeline Builder Python]
 
 This pipeline has 3 Tasks defined:
 
-- *fetch-repository*: this is a `ClusterTask` that will clone our source repository for nationalparks and store it to a `Workspace` `app-source` which will use the PVC created for it `app-source-workspace`
+- *fetch-repository*: this uses the `git-clone` *Task* to clone our source repository for nationalparks and store it into the `workspace` `Workspace`, which is backed by the PVC we are going to create for it
 - *build*: will build and test our Python application, generate and push a container image automatically with compiled binaries inside OpenShift Container Registry
 - *deploy*: it will deploy the created image on OpenShift using the Deployment named `nationalparks` we created in the previous lab
 
-image::devops_pipeline_tasks_python.png[Pipeline Tasks Java]
+image::devops_pipeline_tasks_python.png[Pipeline Tasks Python]
 
 The Pipeline is parametric, with default values already preconfigured.
 
 It is using one *Workspace*:
 
-- *app-source*: this need to be linked to a *PersistentVolumeClaim* since will be used to store the code and the compiled binary to be used in different *Tasks*
+- *workspace*: this needs to be linked to a *PersistentVolumeClaim* since it will be used to store the code and the compiled binary to be used in different *Tasks*
 
-image::devops_pipeline_workspaces_python.png[Pipeline Workspaces Java]
+image::devops_pipeline_workspaces_python.png[Pipeline Workspaces Python]
 --
 ====
 
@@ -560,15 +625,17 @@ Finally, make sure to click the *Create* button to create the Pipeline.
 == Exercise: Add Storage for your Pipeline
 
 OpenShift manages Storage with link:https://kubernetes.io/docs/concepts/storage/persistent-volumes/[Persistent Volumes] to be attached to Pods running our applications through *Persistent Volume Claim* requests, and it also provides the capability to manage it at ease from the Web Console. 
-From the *Administrator Perspective*, go to *Storage* -> *Persistent Volume Claims*.
+From the left navigation, go to *Storage* -> *PersistentVolumeClaims*.
 
-Go to the top-right side and click *Create Persistent Volume Claim* button.
+Go to the top-right side and click the *Create PersistentVolumeClaim* button.
 
 image::nationalparks-codechanges-pipeline-pvc-1.png[Create PVC]
 
-Inside *Persistent Volume Claim name* insert *app-source-pvc*.
+Inside *PersistentVolumeClaim name* insert *app-source-pvc*.
 
-In *Size* section, insert *1* as we are going to create 1 GiB Persistent Volume for our Pipeline, using RWO Single User access mode.
+In *Size* section, insert *1* as we are going to create 1 GiB Persistent Volume for our Pipeline.
+
+The *Access mode* is already set to *Single user (RWO)*, which is what our Pipeline needs. Depending on the *StorageClass* available in your cluster, this field may be preset and not editable.
 
 Leave all other default settings, and click *Create*.
 
@@ -579,7 +646,7 @@ TIP: The *Storage Class* is the type of storage available in the cluster.
 [#run_the_pipeline]
 == Run the Pipeline
 
-We can start now the Pipeline from the Web Console. Within the *Developer Perspective* go to left-side menu, click on *Pipelines*, then click on *nationalparks-pipeline*. From top-right *Actions* list, click on *Start*.
+We can start now the Pipeline from the Web Console. From the left navigation click on *Pipelines* -> *Pipelines*, then click on *nationalparks-pipeline*. From top-right *Actions* list, click on *Start*.
 
 image::devops-pipeline-start-1.png[Start Pipeline]
 
@@ -588,15 +655,15 @@ You will be prompted with parameters to add the Pipeline, showing default ones. 
 image::devops-pipeline-start-2.png[Add parameters]
 
 
-You can follow the Pipeline execution at ease from Web Console. Open *Developer Perspective* and go to left-side menu, click on *Pipeline*, then click on *nationalparks-pipeline*. Switch to *Pipeline Runs* tab to watch all the steps in progress:
+You can follow the Pipeline execution at ease from Web Console. From the left navigation, click on *Pipelines* -> *Pipelines*, then click on *nationalparks-pipeline*. Switch to the *PipelineRuns* tab to watch all the steps in progress:
 
 image::devops-pipeline-run-1.png[Pipeline running]
 
-The click on the `PipelineRun` *national-parks-deploy-run-*:
+Then click on the `PipelineRun` *nationalparks-pipeline-run-*:
 
 image::devops-pipeline-run-java-2.png[Pipeline running animation]
 
-Then click on the *Task* running to check logs:
+Switch to the *Logs* tab and select a *Task* from the list on the left to check its logs:
 
 image::devops-pipeline-run-java-3.png[Pipeline Task log]
 

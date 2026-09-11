@@ -30,11 +30,11 @@ various log information to various files, fear not.
 == Exercise: Examining Logs
 
 Since we already deployed our application, we can take some time to examine its
-logs. In the *Developer Perspective*, from Topology view, click the `parksmap` entry and then the *Resources* tab. You should see a *View Logs* link next to the *Pod* entry.
+logs. From *Workloads -> Topology*, click the `parksmap` entry and then the *Resources* tab in the side panel. You should see a *View logs* link next to the *Pod* entry.
 
-image::parksmap-view-logs-link.png[View Logs for Pod]
+image::parksmap-view-logs-link.png[View logs for Pod]
 
-Click the *View Logs* link and you should see a nice view of the *Pod*'s logs:
+Click the *View logs* link and you should see a nice view of the *Pod*'s logs:
 
 image::parksmap-logging-console-logs.png[Application Logs]
 
@@ -52,8 +52,8 @@ oc get pods
 [.console-output]
 [source,bash]
 ----
-NAME               READY     STATUS    RESTARTS   AGE
-parksmap-1-hx0kv   1/1       Running   0          5h
+NAME                        READY   STATUS    RESTARTS   AGE
+parksmap-5d5f84ffcc-jbvh2   1/1     Running   0          5h
 ----
 
 And then use the `logs` command to view this *Pod*'s logs:
@@ -61,7 +61,7 @@ And then use the `logs` command to view this *Pod*'s logs:
 [.console-input]
 [source,bash,subs="+attributes,macros+"]
 ----
-oc logs parksmap-1-hx0kv
+oc logs parksmap-5d5f84ffcc-jbvh2
 ----
 
 You will see all of the application logs scroll on your screen:
@@ -69,20 +69,20 @@ You will see all of the application logs scroll on your screen:
 [.console-output]
 [source,bash]
 ----
-2019-05-22 19:37:01.433  INFO 1 --- [           main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
-2019-05-22 19:37:01.465  INFO 1 --- [           main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8080 (http)
-2019-05-22 19:37:01.468  INFO 1 --- [           main] c.o.evg.roadshow.ParksMapApplication     : Started ParksMapApplication in 3.97 seconds (JVM running
- for 4.418)
-2019-05-22 19:38:00.762  INFO 1 --- [MessageBroker-1] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(
+2026-09-11 09:08:14.343  INFO 1 --- [           main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2026-09-11 09:08:14.445  INFO 1 --- [           main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8080 (http)
+2026-09-11 09:08:14.449  INFO 1 --- [           main] c.o.evg.roadshow.ParksMapApplication     : Started ParksMapApplication in 15.093 seconds (JVM running
+ for 16.252)
+2026-09-11 09:08:48.147  INFO 1 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2026-09-11 09:08:48.148  INFO 1 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization sta
+rted
+2026-09-11 09:08:48.162  INFO 1 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization com
+pleted in 14 ms
+2026-09-11 09:08:48.265  INFO 1 --- [nio-8080-exec-1] c.o.e.roadshow.rest.BackendsController   : Backends: getAll
+2026-09-11 09:09:12.251  INFO 1 --- [MessageBroker-1] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(
 0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)]
 , stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active
  threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]
-2019-05-22 19:44:11.517  INFO 1 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
-2019-05-22 19:44:11.517  INFO 1 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization sta
-rted
-2019-05-22 19:44:11.533  INFO 1 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization com
-pleted in 16 ms
-2019-05-22 19:44:13.395  INFO 1 --- [nio-8080-exec-2] c.o.e.roadshow.rest.BackendsController   : Backends: getAll
 ----
 
 WARNING: If you scroll through the logs, you may notice an error that mentions a service account. What's that?  Never fear, we will cover that shortly.

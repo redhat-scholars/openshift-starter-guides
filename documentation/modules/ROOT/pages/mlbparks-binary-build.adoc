@@ -148,7 +148,7 @@ When the pod is torn down, the parksmap service removes the MLBParks map from th
 automatically gets added back with our new title.  This would not have happened with a rolling deployment because
 rolling spins up the new version of the pod before it takes down the old one. Rolling strategy enables a zero-downtime deployment.
 
-You can follow the deployment in progress from Topology view, and when it is completed, you will see the new content at:
+You can follow the deployment in progress from *Workloads* -> *Topology*, and when it is completed, you will see the new content at:
 
 [source,bash,role="copypaste",subs="+attributes"]
 ----

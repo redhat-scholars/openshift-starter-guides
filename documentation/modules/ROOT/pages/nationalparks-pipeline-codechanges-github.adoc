@@ -79,7 +79,7 @@ oc create -f +https://raw.githubusercontent.com/openshift-roadshow/nationalparks
 
 This will create a new Pod with a Route that we can use to setup our Webhook on GitHub to trigger the automatic start of the Pipeline.
 
-From left side menu, click on *Topology* to verify if a new Deployment *el-nationalparks* for the `EventListener` has ben created:
+From the left navigation, click on *Workloads* -> *Topology* to verify that a new Deployment *el-nationalparks* for the `EventListener` has been created:
 
 image::devops-pipeline-triggers-eventlistener.png[EventListener created]
 
@@ -108,7 +108,7 @@ image::devops-pipeline-triggers-eventlistener.png[EventListener created]
 Sandbox/ROSA/ARO/ROKS::
 +
 --
-From Topology, click to `el-nationalparks` Deployment, go into *Routes* section and and copy the *el-nationparks* Route URL.
+From *Workloads* -> *Topology*, click the `el-nationalparks` Deployment, then in the side panel open the *Resources* tab and copy the *el-nationalparks* Route URL from the *Routes* section.
 
 image::devops-pipeline-triggers-route.png[EventListener created]
 --
@@ -349,7 +349,7 @@ To
 Click on *Commit changes* at the bottom of the screen. Feel free to enter a commit message.
 
 Once you have committed your changes, a new *PipelineRun* should almost instantaneously be
-triggered in OpenShift. Click *Pipeline* in the left navigation menu then `nationalparks-pipeline`. You should see a new one running: 
+triggered in OpenShift. From the left navigation, click *Pipelines* -> *Pipelines*, then `nationalparks-pipeline` and open the *PipelineRuns* tab. You should see a new one running:
 
 image::nationalparks-codechanges-pipeline-running.png[Webhook]
 

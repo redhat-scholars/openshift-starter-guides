@@ -125,9 +125,9 @@ TIP: You'll notice apps are already inside `workshop` application group and they
 
 image::mlbparks-templates-complete-overview.png[Complete overview]
 
-In addition to being able to instantiate templates from the command line as we did above, templates can also be instantiated from the Developer Perspective in the web console. Click *+Add*, then *From Catalog* and search for `mlb`. You should see a result for `MLBparks`.
+In addition to being able to instantiate templates from the command line as we did above, templates can also be instantiated from the web console. From the left navigation, click *Ecosystem* -> *Software Catalog*, filter by the *Templates* catalog type and search for `mlb`. You should see a result for `MLBparks`.
 
-image::mlbparks-templates-dev-catalog.png[Template in Developer Catalog]
+image::mlbparks-templates-dev-catalog.png[Template in the Software Catalog]
 
 If you click on `MLBparks` and then click the *Instantiate Template* button, you'll see a form that guides you through the different required and optional parameters needed to instantiate this template.
 
@@ -142,7 +142,7 @@ resources for our *mlbparks* application.
 oc get template mlbparks -o yaml
 ----
 
-But as always, you can use the OpenShift web console to do the same. In the Developer Perspective, click *Advanced -> Search* in the left navigation, then select *Template* from the dropdown, and click *mlbparks*. 
+But as always, you can use the OpenShift web console to do the same. From the left navigation, click *Home* -> *Search*, then select *Template* from the *Resources* dropdown, and click *mlbparks*.
 
 image::mlbparks-templates-yaml-menu.png[Complete overview]
 

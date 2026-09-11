@@ -22,10 +22,10 @@ asciidoc:
     experimental: true
     parksmap-version: latest
     parksmap-image: quay.io/openshiftroadshow/parksmap
-    openshift-docs-url: https://docs.openshift.com/container-platform/4.11
-    openshift-version: 4.11
+    openshift-docs-url: https://docs.openshift.com/container-platform/4.21@
+    openshift-version: 4.21@
     project-namespace: workshop
-    kubernetes-version: v1.22.0
+    kubernetes-version: v1.34.9
     release-version: ocp
     roks-login-url: https://cloud.ibm.com/authorize/devcluster
     page-pagination: true

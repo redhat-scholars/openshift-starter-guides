@@ -14,11 +14,11 @@ The **default** service account is the one taking the responsibility of running 
 every pod that is launched. By changing the permissions for that service
 account, we can do interesting things.
 
-You can view current permissions in the web console, go to the Topology view in the Developer Perspective, click the `parksmap` entry, go to the *Details* tab, and then click the *Namespace*. 
+You can view current permissions in the web console: go to *Workloads -> Topology*, click the `parksmap` entry, open the *Details* tab in the side panel, and then click the *Namespace* link.
 
 image::parksmap-permissions-namespace.png[Namespace]
 
-Then, select *Role Bindings* tab and filter by *Namespace Role Binding* so see all permissions for selected project.
+Then select the *RoleBindings* tab to see all the permissions defined for the selected project.
 
 image::parksmap-permissions-membership.png[Membership]
 
@@ -36,15 +36,15 @@ Choose an approach represented by the following tabs to update the `default` *Se
 OpenShift Console::
 +
 --
-. From the *Workloads -> Deployments* page, click on the *Namespace*, then *Role Bindings* and then the *Create Binding* button.
+. From the `%PROJECT%` project page, open the *RoleBindings* tab and click the *Create binding* button.
 +
 image::parksmap-permissions-membership-serviceaccount-list.png[Service account list]
 +
-. Select *view* for the Role Binding Name *%PROJECT%* for the Namespace, *view* for the Role Name, *Service Account* for the Subject, *%PROJECT%* for the Subject Namespace, and *default* for the Subject Name.
+. Fill in the form: *view* as the *Name*, *view* as the *Role name*, *ServiceAccount* as the *Subject*, *%PROJECT%* as the *Subject namespace*, and *default* as the *Subject name*. The *Namespace* field is already set to `%PROJECT%` from the project selector.
 +
 image::parksmap-permissions-membership-serviceaccount-edit.png[Service account edit]
 +
-. Once you're finished editing permissions, click on the *Create* button.  You should then be able to see it on the `Role Bindings` list for the `%PROJECT%` project`
+. Once you're finished editing permissions, click on the *Create* button. You should then be able to see it on the *RoleBindings* list for the `%PROJECT%` project.
 +
 image::parksmap-permissions-membership-serviceaccount-done.png[Service account changed]
 --
@@ -92,7 +92,7 @@ NOTE: The `-z` flag will only work for service accounts in the *current* project
 oc rollout restart deployment/parksmap
 ----
 
-A new deployment is immediately started. Return to Topology view and click the `parksmap` entry again to watch it happen. You might not be fast enough! But it will be reflected in the *ReplicaSet* number.
+A new deployment is immediately started. Return to *Workloads -> Topology* and click the `parksmap` entry again to watch it happen. You might not be fast enough! But it will be reflected in the *ReplicaSet* number.
 
 image::parksmap-permissions-redeployed.png[Application deployed]
 

@@ -136,7 +136,7 @@ MongoDB Community Image::
 +
 --
 ////
-The first step is to create Kubernetes **Secrets** which are used to store database-related configuration and credentials. In the Developer perspective, choose Secrets in the left navigation menu, then click the **Create** button in the upper right and select **Key/value secret**.
+The first step is to create Kubernetes **Secrets** which are used to store database-related configuration and credentials. From the left navigation, choose **Workloads -> Secrets**, then click the **Create** button in the upper right and select **Key/value secret**.
 
 image::mongodb_create_secret.png[MongoDB Create K/V Secret]
  
@@ -152,7 +152,7 @@ image::mongodb_create_secret_dialog.png[MongoDB Create K/V Secret]
 
 Click the **Create** button at the bottom of the form.
 
-With the secret in place, click on **+Add** from the left navigation bar on the **Developer** perspective. Then choose the tile for adding **Container images** which will open up the *Deploy Image* dialog. Fill in the following details:
+With the secret in place, click the **Quick create** (**+**) button in the top-right masthead and choose **Container images**, which will open up the *Deploy Image* form. Fill in the following details:
 
 * Image section:
     - Image name from external registry -> `mongo:6.0.4`
@@ -166,34 +166,29 @@ image::mongodb_deploy_image_image.png[MongoDB Image Deployment Image Setting]
 
 image::mongodb_deploy_image_general.png[MongoDB Image Deployment General Settings]
 
-* Advanced options:
-    - Create route -> *uncheck* because no route is needed to the DB instance itself
-
-image::mongodb_deploy_image_advanced.png[MongoDB Image Deployment Advanced Settings]
-
-Click on **Resource type** to show its settings.
-
-image::mongodb_deploy_image_option_resource_type.png[MongoDB Image Deployment Resource Type Settings]
-
-Make sure that the drop-down for resource type is set to the **Deployment** option.
+* Deploy section:
+    - Resource type -> **Deployment**
 
 image::mongodb_deploy_image_resource_type.png[MongoDB Image Deployment Resource Type Settings]
 
-Click on **Deployment** to show its settings.
+IMPORTANT: If OpenShift Serverless is installed on the cluster, *Resource type* defaults to *Serverless Deployment*. Make sure you change it to *Deployment*.
 
-image::mongodb_deploy_image_option_deployment.png[MongoDB Image Deployment Deployment Settings]
+* Advanced options:
+    - Create a route to the application -> *uncheck* because no route is needed to the DB instance itself
 
-Here, we'll add the following two environment variables which will be sourced from the previously created secret named `mongodb-credentials`.
+image::mongodb_deploy_image_advanced.png[MongoDB Image Deployment Advanced Settings]
 
-Click *+Add from ConfigMap or Secret* and enter `MONGO_INITDB_ROOT_USERNAME` as the name. For the value, choose `mongodb-credentials` as resource and `admin-usr` as key.
+Still under *Advanced options*, click **Show advanced Deployment option**. Here, we'll add the following two environment variables which will be sourced from the previously created secret named `mongodb-credentials`.
 
-Again, click *+Add from ConfigMap or Secret* and enter `MONGO_INITDB_ROOT_PASSWORD` as the name. For the value, choose `mongodb-credentials` as resource and `admin-pwd` as key.
+Click *Add from ConfigMap or Secret* and enter `MONGO_INITDB_ROOT_USERNAME` as the name. For the value, choose `mongodb-credentials` as resource and `admin-usr` as key.
+
+Again, click *Add from ConfigMap or Secret* and enter `MONGO_INITDB_ROOT_PASSWORD` as the name. For the value, choose `mongodb-credentials` as resource and `admin-pwd` as key.
 
 image::mongodb_deploy_image_deployment_env_vars_secrets.png[MongoDB Image Deployment Environment Variable Settings]
 
 Finally click the **Create** button at the bottom of the page to deploy MongoDB into your topology.
 
-The next step is to create a specific user in this MongoDB instance which the nationalparks application will use to create a connection. For this click the **MongoDB deployment** in your topology view, then click on the corresponding **pod** shown in the right view pane.
+The next step is to create a specific user in this MongoDB instance which the nationalparks application will use to create a connection. For this, go to **Workloads -> Topology**, click the **mongodb deployment**, then in the side panel open the **Resources** tab and click on the corresponding **Pod**.
 
 image::mongodb_deployment_topology_pod.png[MongoDB Deployment Pod]
 
@@ -217,29 +212,29 @@ If the command is successful you'll see the output below:
 { ok: 1 }
 ----
 
-With that, everything regarding the database is prepared and we can switch our focus back to the nationalparks application. Go back to the **Topology View**, click the **nationalparks deployment** and choose _Actions > Edit Deployment_ from the drop-down in the right view pane. 
+With that, everything regarding the database is prepared and we can switch our focus back to the nationalparks application. Go back to **Workloads -> Topology**, click the **nationalparks deployment** and choose _Actions > Edit Deployment_ from the drop-down in the right view pane.
 
 image::nationalparks_deployment_edit.png[Edit Nationalparks Deployment]
 
-In the **Edit Deployment** dialog, scroll down to the **Environment Variables** section and add the following four entries. First set the server host and the database:
+The **Edit Deployment** page opens in *Form view*. Scroll down to the **Environment Variables** section and add the following four entries. First set the server host and the database, using *Add value*:
 
     - `MONGODB_SERVER_HOST`: `mongodb`
     - `MONGODB_DATABASE`: `parksapp`
 
 The other two are credentials which are sourced from the `mongodb-credentials` secret.
 
-Click *+Add from ConfigMap or Secret* and enter `MONGODB_USER` as the name. For the value, choose `mongodb-credentials` as resource and `app-usr` as key.
+Click *Add from ConfigMap or Secret* and enter `MONGODB_USER` as the name. For the value, choose `mongodb-credentials` as resource and `app-usr` as key.
 
-Again, click *+Add from ConfigMap or Secret* and enter `MONGODB_PASSWORD` as the name. For the value, choose `mongodb-credentials` as resource and `app-pwd` as key.
+Again, click *Add from ConfigMap or Secret* and enter `MONGODB_PASSWORD` as the name. For the value, choose `mongodb-credentials` as resource and `app-pwd` as key.
 
 image::nationalparks_deployment_env_vars_secrets.png[Nationalparks Deployment Env Vars Secrets]
 
-Finally hit the *Save* button at the bottom of the dialog. This will trigger a re-creation of a new pod and restart the application which should now be able to successfully talk to the MongoDB instance you just deployed earlier.
+Finally hit the *Save* button at the bottom of the form. This will trigger a re-creation of a new pod and restart the application which should now be able to successfully talk to the MongoDB instance you just deployed earlier.
 
 [#adding_labels]
 == Exercise: Adding Labels
 
-Next, let's fix the labels assigned to the MongoDB deployment. From the **Topology** view, select the MongoDB deployment and choose _Actions > Edit Labels_.
+Next, let's fix the labels assigned to the MongoDB deployment. From **Workloads -> Topology**, select the `mongodb` deployment and choose _Actions > Edit labels_.
 
 image::mongodb_deployment_labels.png[MongoDB Deployment Labels Option]
 
@@ -280,11 +275,11 @@ can verify this by looking at the output of `oc get rs`:
 [source,bash,subs="+macros,+attributes"]
 ----
 NAME                       DESIRED   CURRENT   READY   AGE
-nationalparks-58bd4758fc   0         0         0       4m58s
-nationalparks-7445576cd9   0         0         0       6m42s
-nationalparks-789c6bc4f4   1         1         1       41s
-parksmap-57df75c46d        1         1         1       8m24s
-parksmap-65c4f8b676        0         0         0       18m
+mongodb-6d77f5dd8f         1         1         1       9m12s
+nationalparks-5745847899   1         1         1       113s
+nationalparks-865c54b745   0         0         0       21m
+nationalparks-867b7d84f4   0         0         0       20m
+parksmap-5b66975f9b        1         1         1       51m
 ----
 
 We see that the DESIRED and CURRENT number of instances for the current deployment. The desired and current number of the other instances are 0.
@@ -400,27 +395,26 @@ oc describe route nationalparks
 ----
 Name:                   nationalparks
 Namespace:              %PROJECT%
-Created:                2 hours ago
+Created:                20 minutes ago
 Labels:                 app=workshop
                         app.kubernetes.io/component=nationalparks
                         app.kubernetes.io/instance=nationalparks
                         app.kubernetes.io/name=java
                         app.kubernetes.io/part-of=workshop
                         app.openshift.io/runtime=java
-                        app.openshift.io/runtime-version=11
                         component=nationalparks
-                        role=backend  
-Annotations:            openshift.io/host.generated=true                          
+                        role=backend
+Annotations:            openshift.io/host.generated=true
 Requested Host:         nationalparks-%PROJECT%.%CLUSTER_SUBDOMAIN%
-                        exposed on router router 2 hours ago
+                           exposed on router default 20 minutes ago
 Path:                   <none>
-TLS Termination:        <none>
+TLS Termination:        edge
 Insecure Policy:        <none>
 Endpoint Port:          8080-tcp
 
 Service:                nationalparks
 Weight:                 100 (100%)
-Endpoints:              10.1.9.8:8080
+Endpoints:              10.131.0.4:8080
 ----
 
 You see that it already has some labels. Now, use `oc label`:

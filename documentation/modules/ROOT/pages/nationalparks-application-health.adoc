@@ -42,31 +42,31 @@ We are going to add both a readiness and liveness probe to the existing
 instances to the service until they pass the readiness checks, and will ensure
 that unhealthy instances are restarted (if they fail the liveness checks).
 
-From the *Topology* view, click `nationalparks`. On the side panel, click the *Actions* dropdown menu and the select *Add Health Checks*.
+From *Workloads -> Topology*, click `nationalparks`. On the side panel, click the *Actions* dropdown menu and then select *Add Health Checks*.
 
 image::nationalparks-application-health-menu.png[Add Health Checks]
 
-Click to *Add Readiness Probe* and add in *Path* field: 
+On the *Add health checks* page, click *Add Readiness probe* and add in *Path* field:
 
 [source,role=copypaste]
 ----
 /ws/healthz/
 ----
 
-Leave all default settings like *Port* 8080 and *Type* HTTP GET. Click the little bottom-right confirmation gray tick to confirm:
+Leave all default settings like *Port* 8080 and *Type* HTTP GET. Click the little bottom-right confirmation gray tick (*✓*) to confirm:
 
 image::nationalparks-application-health-settings.png[Add Readiness and Liveness Probe]
 
-Repeat the same procedure for Liveness Probe, click to *Add Liveness Probe* and add in *Path* field: 
+Repeat the same procedure for the Liveness probe, click *Add Liveness probe* and add in *Path* field:
 
 [source,role=copypaste]
 ----
 /ws/healthz/
 ----
 
-Leave all default settings like *Port* 8080 and *Type* HTTP GET. Click the little bottom-right confirmation gray tick to confirm.
+Leave all default settings like *Port* 8080 and *Type* HTTP GET. Click the little bottom-right confirmation gray tick (*✓*) to confirm.
 
-Finally confirm all new changes clicking to *Add*:
+Both sections now show *Readiness probe added* and *Liveness probe added*. Finally confirm all new changes clicking to *Add*:
 
 image::nationalparks-application-health-add.png[Add Probes]
 

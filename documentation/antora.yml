@@ -1,6 +1,10 @@
 name: rhs-openshift-starter-guides
 title: OpenShift Starter Guides
-version: 4.11
+version: 4.21
+asciidoc:
+  attributes:
+    openshift-version: 4.21
+    openshift-docs-url: https://docs.openshift.com/container-platform/4.21
 nav:
   - modules/ROOT/nav.adoc
 

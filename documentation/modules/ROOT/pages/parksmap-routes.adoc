@@ -33,10 +33,10 @@ You can create a Route either from the OpenShift Console or using the `oc` CLI. 
 OpenShift Console::
 +
 --
-. Via the *Administrator Perspective*, just click *Networking -> Routes* and then the *Create Route* button.
-. Insert *parksmap* in *Name* field.
-. From *Service* field, select *parksmap*. For *Target Port*, select *8080*.
-. In *Security* section, check *Secure route*. Select *Edge* from *TLS Termination* list.
+. From the left navigation, click *Networking -> Routes* and then the *Create Route* button.
+. Insert *parksmap* in the *Name* field.
+. From the *Service* field, select *parksmap*. For *Target port*, select *8080 -> 8080 (TCP)*.
+. In the *Security* section, check *Secure Route*. Select *Edge* from the *TLS termination* list.
 . Leave all other fields blank and click *Create*:
 +
 image::parksmap-route-create-1.png[Create Route,align="center"]
@@ -60,7 +60,7 @@ oc get routes
 [.console-output]
 [source,bash]
 ----
-No resources found.
+No resources found in %PROJECT% namespace.
 ----
 
 Now we need to get the *Service* name to expose:
@@ -74,8 +74,8 @@ oc get services
 [.console-output]
 [source,bash]
 ----
-NAME       CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
-parksmap   172.30.169.213   <none>        8080/TCP   5h
+NAME       TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+parksmap   ClusterIP   172.30.208.102   <none>        8080/TCP   5h
 ----
 
 Once we know the *Service* name, creating a *Route* is a simple one-command task:
@@ -89,7 +89,7 @@ oc create route edge parksmap --service=parksmap
 [.console-output]
 [source,bash]
 ----
-route.route.openshift.io/parksmap exposed
+route.route.openshift.io/parksmap created
 ----
 
 --
@@ -110,11 +110,11 @@ NAME       HOST/PORT                            PATH      SERVICES   PORT       
 parksmap   parksmap-%PROJECT%.%CLUSTER_SUBDOMAIN%             parksmap   8080-tcp   edge          None
 ----
 
-You can also verify the *Route* in the *Developer Perspective* under the *Resources* tab for your `parksmap` deployment configuration. Also note that there is a decorator icon on the `parksmap` visualization now. If you click that, it will open the URL for your *Route* in a browser.
+You can also verify the *Route* from *Workloads -> Topology*: click the `parksmap` *Deployment* and open the *Resources* tab in the side panel, where the new *Route* is listed with its location. Also note that there is now a decorator icon in the top-right corner of the `parksmap` visualization. If you click that, it will open the URL for your *Route* in a browser.
 
 image::parksmap-route-created.png[Route created]
 
-This application is now available at the URL shown in the Developer Perspective. Click the link and you will see it.
+This application is now available at the URL shown in the *Routes* section. Click the link and you will see it.
 
 NOTE: If this is the first time opening this page, the browser will ask permission to get your position. This is needed by the Frontend app to center the world map to your location, if you don't allow it, it will just use a default location.
 

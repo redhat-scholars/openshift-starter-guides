@@ -10,7 +10,7 @@ content:
   sources:
     - url: git@github.com:redhat-scholars/openshift-starter-guides.git
       tags: []
-      branches: [ocp-4.8, ocp-4.9, ocp-4.11]
+      branches: [ocp-4.8, ocp-4.9, ocp-4.11, 4.21]
       start_path: documentation
 
 asciidoc:
@@ -19,8 +19,10 @@ asciidoc:
     experimental: true
     parksmap-version: latest
     parksmap-image: quay.io/openshiftroadshow/parksmap
-    openshift-docs-url: https://docs.openshift.com/container-platform/4.11
-    openshift-version: 4.11
+    # Soft-set (trailing @) so each branch's documentation/antora.yml can pin
+    # its own OpenShift version, whichever branch triggers the build.
+    openshift-docs-url: https://docs.openshift.com/container-platform/4.21@
+    openshift-version: 4.21@
     project-namespace: workshop
     release-version: roks
     roks-login-url: https://cloud.ibm.com/authorize/devcluster

@@ -1,7 +1,7 @@
 = GitHub Actions with OpenShift
 :navtitle: GitHub Actions with OpenShift
 
-OpenShift includes comprehensive features for automation in-cluster as seen in xref:nationalparks-{lab}-codechanges-github.adoc[Webhooks with OpenShift] and as you will see in the next chapter xref:nationalparks-{lab}-pipeline.adoc[Continuous Integration and Pipelines]. In addition to that, it provides great interoperability and integrations for external CI/CD systems such as Jenkins, GitLab, Azure DevOps and *GitHub Actions*.
+OpenShift includes comprehensive features for automation in-cluster as seen in xref:nationalparks-codechanges-github.adoc[Webhooks with OpenShift] and as you will see in the next chapter xref:nationalparks-pipeline.adoc[Continuous Integration and Pipelines]. In addition to that, it provides great interoperability and integrations for external CI/CD systems such as Jenkins, GitLab, Azure DevOps and *GitHub Actions*.
 
 image::openshift-cicd-integrations.png[OpenShift CI/CD Offering]
 
@@ -65,7 +65,7 @@ You will now configure two secrets that will be used by the GitHub Action to con
 
 You can retrieve both from your OpenShift cluster as shown in previous chapter: xref:common-explore.adoc#connect_to_the_cluster_with_cli[Connect to the OpenShift Cluster from CLI,window='_blank']:
 
-In another tab, go back to OpenShift Web Console. Then go to top-right menu bar and click to the dropdown menu containing your username, then click *Copy Login Command*:
+In another tab, go back to OpenShift Web Console. Then go to top-right menu bar and click to the dropdown menu containing your username, then click *Copy login command*:
 
 image::prerequisites_copy_login_command.png[Copy Login Command]
 
@@ -138,7 +138,7 @@ jobs:
     steps:
     - name: Checkout
       id: checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
     
    # https://github.com/redhat-actions/s2i-build#readme
     - name: S2I Build <5>
@@ -215,7 +215,7 @@ jobs:
     steps:
     - name: Checkout
       id: checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
     
    # https://github.com/redhat-actions/s2i-build#readme
     - name: S2I Build <5>
@@ -223,7 +223,7 @@ jobs:
       uses: redhat-actions/s2i-build@v2
       with:
         path_context: '.'
-        builder_image: 'registry.access.redhat.com/dotnet/dotnet-31-rhel7'
+        builder_image: 'registry.access.redhat.com/ubi8/dotnet-80'
         image: ${{ env.APP_NAME }}
         tags: ${{ env.IMAGE_TAGS }}
         
@@ -292,7 +292,7 @@ jobs:
     steps:
     - name: Checkout
       id: checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
     
    # https://github.com/redhat-actions/s2i-build#readme
     - name: S2I Build <5>
@@ -300,7 +300,7 @@ jobs:
       uses: redhat-actions/s2i-build@v2
       with:
         path_context: '.'
-        builder_image: 'registry.access.redhat.com/ubi8/nodejs-14'
+        builder_image: 'registry.access.redhat.com/ubi9/nodejs-20'
         image: ${{ env.APP_NAME }}
         tags: ${{ env.IMAGE_TAGS }}
         
@@ -369,7 +369,7 @@ jobs:
     steps:
     - name: Checkout
       id: checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
     
    # https://github.com/redhat-actions/s2i-build#readme
     - name: S2I Build <5>
@@ -377,7 +377,7 @@ jobs:
       uses: redhat-actions/s2i-build@v2
       with:
         path_context: '.'
-        builder_image: 'registry.access.redhat.com/ubi7/python-38'
+        builder_image: 'registry.access.redhat.com/ubi9/python-39'
         image: ${{ env.APP_NAME }}
         tags: ${{ env.IMAGE_TAGS }}
         
@@ -493,7 +493,7 @@ Congratulations! Any new change to the Nationalparks backend will be now managed
 
 If you are interested in bringing more automation to your OpenShift cluster with GitHub actions, please explore all available link:https://github.com/redhat-actions[Red Hat Actions, window=_blank] and link:https://docs.github.com/en/actions[GitHub Actions documentation, window=_blank].
 
-NOTE: Your workshop is completed at this point if you are using https://developers.redhat.com/developer-sandbox[Developer Sandbox for Red Hat OpenShift,window='_blank'], since in the following chapters there will be functionalities which are not available yet on Sandbox environments (OpenShift Pipelines Operator).
+NOTE: If you are using https://developers.redhat.com/developer-sandbox[Developer Sandbox for Red Hat OpenShift,window='_blank'] you can keep going: the OpenShift Pipelines Operator is now pre-installed cluster-wide on the Sandbox, so the following chapters work there too. You just need to skip the Operator installation step, since you don't have the permissions to install Operators yourself.
 
 [#enable_openshift_triggers]
 == Enable OpenShift Triggers
