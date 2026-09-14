@@ -216,7 +216,16 @@ With that, everything regarding the database is prepared and we can switch our f
 
 image::nationalparks_deployment_edit.png[Edit Nationalparks Deployment]
 
-The **Edit Deployment** page opens in *Form view*. Scroll down to the **Environment Variables** section and add the following four entries. First set the server host and the database, using *Add value*:
+The **Edit Deployment** page opens in *Form view*. Scroll down to the **Environment Variables** section and add the entries below.
+
+IMPORTANT: The variable names are *not* the same for every backend — each application reads its own set. Pick the tab matching the language you deployed in the previous module.
+
+[tabs, subs="attributes+,+macros"]
+====
+Java::
++
+--
+Set the server host and the database using *Add value*:
 
     - `MONGODB_SERVER_HOST`: `mongodb`
     - `MONGODB_DATABASE`: `parksapp`
@@ -228,6 +237,48 @@ Click *Add from ConfigMap or Secret* and enter `MONGODB_USER` as the name. For t
 Again, click *Add from ConfigMap or Secret* and enter `MONGODB_PASSWORD` as the name. For the value, choose `mongodb-credentials` as resource and `app-pwd` as key.
 
 image::nationalparks_deployment_env_vars_secrets.png[Nationalparks Deployment Env Vars Secrets]
+--
+.NET::
++
+--
+Set the server host and the database using *Add value*:
+
+    - `MONGODB_SERVER_HOST`: `mongodb`
+    - `MONGODB_DATABASE`: `parksapp`
+
+The other two are credentials which are sourced from the `mongodb-credentials` secret.
+
+Click *Add from ConfigMap or Secret* and enter `MONGODB_USER` as the name. For the value, choose `mongodb-credentials` as resource and `app-usr` as key.
+
+Again, click *Add from ConfigMap or Secret* and enter `MONGODB_PASSWORD` as the name. For the value, choose `mongodb-credentials` as resource and `app-pwd` as key.
+--
+Javascript::
++
+--
+Set the server host and the database using *Add value*:
+
+    - `MONGODB_SERVER_HOST`: `mongodb`
+    - `MONGODB_DATABASE`: `parksapp`
+
+The other two are credentials which are sourced from the `mongodb-credentials` secret.
+
+Click *Add from ConfigMap or Secret* and enter `MONGODB_USER` as the name. For the value, choose `mongodb-credentials` as resource and `app-usr` as key.
+
+Again, click *Add from ConfigMap or Secret* and enter `MONGODB_PASSWORD` as the name. For the value, choose `mongodb-credentials` as resource and `app-pwd` as key.
+--
+Python::
++
+--
+The Python application takes the database host from `DB_HOST`, and the user name from `MONGODB_USERNAME` (not `MONGODB_USER`). Using *Add value*, add:
+
+    - `DB_HOST`: `mongodb`
+    - `MONGODB_DATABASE`: `parksapp`
+
+Then click *Add from ConfigMap or Secret* and enter `MONGODB_USERNAME` as the name. For the value, choose `mongodb-credentials` as resource and `app-usr` as key.
+
+Again, click *Add from ConfigMap or Secret* and enter `MONGODB_PASSWORD` as the name. For the value, choose `mongodb-credentials` as resource and `app-pwd` as key.
+--
+====
 
 Finally hit the *Save* button at the bottom of the form. This will trigger a re-creation of a new pod and restart the application which should now be able to successfully talk to the MongoDB instance you just deployed earlier.
 
