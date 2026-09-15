@@ -41,7 +41,7 @@ In this step we will fork the original `nationalparks` repository to apply our c
 Java::
 +
 --
-Go to link:https://github.com/openshift-roadshow/nationalparks[Nationalparks,window='_blank'] repository. From top-right side, click to *Fork* to start forking it into your account.
+Go to link:https://github.com/openshift-roadshow/nationalparks-quarkus[nationalparks-quarkus,window='_blank'] repository. From top-right side, click to *Fork* to start forking it into your account.
 
 image::nationalparks-codechanges-github-fork-1.png[Fork Repository]
 
@@ -138,14 +138,12 @@ following path:
 src/main/java/com/openshift/evg/roadshow/parks/rest/
 ----
 
-Then click on the `BackendController.java` file.
+Then click on the `BackendController.java` file, which looks like this:
 
-Once you have the file on the screen, click the edit button in the top right
-hand corner as shown here:
+image::nationalparks-codechanges-github-change-code.png[Backend controller]
 
-image::nationalparks-codechanges-github-change-code.png[Webhook]
-
-Change line number 23:
+Click the edit button -- the pencil icon in the toolbar just above the code,
+next to *Raw* -- then change line number 23:
 
 [source,java]
 ----
