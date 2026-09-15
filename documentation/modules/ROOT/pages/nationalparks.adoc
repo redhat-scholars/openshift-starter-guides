@@ -193,7 +193,7 @@ Select *Builder Image* as we are going to create the container image from the so
 
 image::nationalparks-import-from-git-url-builder-js.png[Import from Git]
 
-Select *Node.js* as your Builder Image, and be sure to select *Builder Image version* *20-ubi9* for this lab.
+Select *Node.js* as your Builder Image, and be sure to select *Builder Image version* *22-ubi9* for this lab.
 --
 Python::
 +
@@ -231,7 +231,7 @@ Select *Builder Image* as we are going to create the container image from the so
 
 image::nationalparks-import-from-git-url-builder-py.png[Import from Git]
 
-Select *Python* as your Builder Image, and be sure to select *Builder Image version* *3.9-ubi9* for this lab.
+Select *Python* as your Builder Image, and be sure to select *Builder Image version* *3.12-ubi9* for this lab.
 --
 ====
 
