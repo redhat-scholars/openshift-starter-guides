@@ -155,10 +155,12 @@ Click the **Create** button at the bottom of the form.
 With the secret in place, click the **Quick create** (**+**) button in the top-right masthead and choose **Container images**, which will open up the *Deploy Image* form. Fill in the following details:
 
 * Image section:
-    - Image name from external registry -> `mongo:6.0.4`
+    - Image name from external registry -> `quay.io/mongodb/mongodb-community-server:8.0.32-ubi9-slim`
     - Runtime icon -> choose `mongodb`
 
 image::mongodb_deploy_image_image.png[MongoDB Image Deployment Image Setting]
+
+NOTE: This is MongoDB's own Community Server image, built on link:https://catalog.redhat.com/software/base-images[Red Hat UBI] and published on Quay. Earlier versions of this lab used `mongo:6.0.4` from Docker Hub; Quay has no anonymous pull rate limit, which matters when a whole room deploys at the same time.
 
 * General section:
     - Application -> `workshop`
