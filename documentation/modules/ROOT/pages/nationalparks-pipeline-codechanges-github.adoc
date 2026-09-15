@@ -45,7 +45,7 @@ Java::
 [.console-input]
 [source,bash,subs="+attributes,macros+"]
 ----
-oc create -f +https://raw.githubusercontent.com/openshift-roadshow/nationalparks-quarkus/master/pipeline/nationalparks-triggers.yaml+ -n %PROJECT%
+oc create -f +https://raw.githubusercontent.com/openshift-roadshow/nationalparks-quarkus/main/pipeline/nationalparks-triggers.yaml+ -n %PROJECT%
 ----
 --
 .NET::
@@ -201,7 +201,7 @@ Java::
 Click the *Code* tab in GitHub. This is GitHub's repository view.  
 
 CAUTION: Make sure that the drop-down menu at the upper right is set for 
-the *`master`* branch. 
+the *`main`* branch. 
 
 Navigate to the following path:
 

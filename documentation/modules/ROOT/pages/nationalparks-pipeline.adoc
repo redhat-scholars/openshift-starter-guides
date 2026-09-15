@@ -136,7 +136,7 @@ spec:
       description: The application git repository url
       name: APP_GIT_URL
       type: string
-    - default: master
+    - default: main
       description: The application git repository revision
       name: APP_GIT_REVISION
       type: string
