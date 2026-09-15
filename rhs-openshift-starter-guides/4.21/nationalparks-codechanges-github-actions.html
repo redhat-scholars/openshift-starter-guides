@@ -782,7 +782,7 @@ env: <i class="conum" data-value="2"></i><b>(2)</b>
 on:
   # https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows
   push: <i class="conum" data-value="3"></i><b>(3)</b>
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build-and-push: <i class="conum" data-value="4"></i><b>(4)</b>
@@ -805,7 +805,7 @@ jobs:
       uses: redhat-actions/s2i-build@v2
       with:
         path_context: '.'
-        builder_image: 'registry.access.redhat.com/ubi8/openjdk-11'
+        builder_image: 'registry.access.redhat.com/ubi8/openjdk-17'
         image: ${{ env.APP_NAME }}
         tags: ${{ env.IMAGE_TAGS }}
 
@@ -1079,7 +1079,7 @@ jobs:
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Here&#8217;s where you define which type of trigger you want for this workflow. In this case, any change to the repository (Push) to the <code>master</code> branch will trigger the action start. Check out the documentation for a full list of triggers that can be used: <a href="https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows" class="bare">https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows</a></td>
+<td>Here&#8217;s where you define which type of trigger you want for this workflow. In this case, any change to the repository (Push) to the default branch of your fork&#8201;&#8212;&#8201;the one listed under <code>branches</code>&#8201;&#8212;&#8201;will trigger the action start. Check out the documentation for a full list of triggers that can be used: <a href="https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows" class="bare">https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows</a></td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>

@@ -687,7 +687,7 @@ application. Now, let&#8217;s take a look at deploying a backend service.</p>
 <div class="paragraph">
 <p>Similar to how we used <strong>Quick create</strong> before with an existing image, we
 can do the same for specifying a source code repository. Since for this lab you
-have your own git repository, let&#8217;s use it with a simple <a href="https://github.com/openshift-roadshow/nationalparks.git">Java</a> S2I image.</p>
+have your own git repository, let&#8217;s use it with a simple <a href="https://github.com/openshift-roadshow/nationalparks-quarkus.git">Java</a> S2I image.</p>
 </div>
 <div class="paragraph">
 <p>From the masthead in the top-right corner of the web console, click the <strong>Quick create</strong> (<strong>+</strong>) button and choose <strong>Import from Git</strong>.</p>
@@ -705,7 +705,7 @@ have your own git repository, let&#8217;s use it with a simple <a href="https://
 </div>
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">https://github.com/openshift-roadshow/nationalparks.git</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">https://github.com/openshift-roadshow/nationalparks-quarkus.git</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -756,7 +756,19 @@ You could also use Dockerfile, the repo contains a multi-stage Dockerfile. For t
 </table>
 </div>
 <div class="paragraph">
-<p>Verify that <strong>Java</strong> has been selected as your Builder Image, and be sure to select <strong>Builder Image version</strong> <strong>openjdk-11-ubi8</strong> to have OpenJDK 11.</p>
+<p>Verify that <strong>Java</strong> has been selected as your Builder Image, and be sure to select <strong>Builder Image version</strong> <strong>openjdk-17-ubi8</strong> to have OpenJDK 17.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The Java backend used by this lab lives in <a href="https://github.com/openshift-roadshow/nationalparks-quarkus">nationalparks-quarkus</a> and is built with <a href="https://quarkus.io">Quarkus</a>, which requires Java 17 or newer, so the <code>openjdk-11-ubi8</code> tag used by previous versions of this lab will not work. The original <a href="https://github.com/openshift-roadshow/nationalparks">nationalparks</a> repository stays on Spring Boot for the workshops that still build it.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="tab-pane" aria-labelledby="tabset1_net">

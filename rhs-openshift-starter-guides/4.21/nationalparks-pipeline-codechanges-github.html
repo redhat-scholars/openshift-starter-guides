@@ -648,7 +648,7 @@ achieved.</p>
 <div class="tab-pane" aria-labelledby="tabset1_java">
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-triggers.yaml -n %PROJECT%</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create -f https://raw.githubusercontent.com/openshift-roadshow/nationalparks-quarkus/main/pipeline/nationalparks-triggers.yaml -n %PROJECT%</code></pre>
 </div>
 </div>
 </div>
@@ -840,7 +840,7 @@ this out.</p>
 </td>
 <td class="content">
 Make sure that the drop-down menu at the upper right is set for
-the <strong><code>master</code></strong> branch.
+the <strong><code>main</code></strong> branch.
 </td>
 </tr>
 </table>
@@ -854,19 +854,16 @@ the <strong><code>master</code></strong> branch.
 </div>
 </div>
 <div class="paragraph">
-<p>Then click on the <code>BackendController.java</code> file.</p>
-</div>
-<div class="paragraph">
-<p>Once you have the file on the screen, click the edit button in the top right
-hand corner as shown here:</p>
+<p>Then click on the <code>BackendController.java</code> file, which looks like this:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/nationalparks-codechanges-github-change-code.png" alt="Webhook">
+<img src="_images/nationalparks-codechanges-github-change-code.png" alt="Backend controller">
 </div>
 </div>
 <div class="paragraph">
-<p>Change line number 20:</p>
+<p>Click the edit button&#8201;&#8212;&#8201;the pencil icon in the toolbar just above the code,
+next to <strong>Raw</strong>&#8201;&#8212;&#8201;then change line number 23:</p>
 </div>
 <div class="listingblock">
 <div class="content">

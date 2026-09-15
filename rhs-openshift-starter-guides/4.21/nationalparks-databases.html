@@ -659,7 +659,7 @@ talk to the database using environment variables via a secret.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Image name from external registry &#8594; <code>mongo:6.0.4</code></p>
+<p>Image name from external registry &#8594; <code>quay.io/mongodb/mongodb-community-server:8.0.32-ubi9-slim</code></p>
 </li>
 <li>
 <p>Runtime icon &#8594; choose <code>mongodb</code></p>
@@ -673,6 +673,18 @@ talk to the database using environment variables via a secret.</p>
 <div class="content">
 <img src="_images/mongodb_deploy_image_image.png" alt="MongoDB Image Deployment Image Setting">
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This is MongoDB&#8217;s own Community Server image, built on <a href="https://catalog.redhat.com/software/base-images">Red Hat UBI</a> and published on Quay. Earlier versions of this lab used <code>mongo:6.0.4</code> from Docker Hub; Quay has no anonymous pull rate limit, which matters when a whole room deploys at the same time.
+</td>
+</tr>
+</table>
 </div>
 <div class="ulist">
 <ul>
@@ -804,7 +816,41 @@ If OpenShift Serverless is installed on the cluster, <strong>Resource type</stro
 </div>
 </div>
 <div class="paragraph">
-<p>The <strong>Edit Deployment</strong> page opens in <strong>Form view</strong>. Scroll down to the <strong>Environment Variables</strong> section and add the following four entries. First set the server host and the database, using <strong>Add value</strong>:</p>
+<p>The <strong>Edit Deployment</strong> page opens in <strong>Form view</strong>. Scroll down to the <strong>Environment Variables</strong> section and add the entries below.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The variable names are <strong>not</strong> the same for every backend — each application reads its own set. Pick the tab matching the language you deployed in the previous module.
+</td>
+</tr>
+</table>
+</div>
+<div class="tabset is-loading">
+<div class="ulist tabs">
+<ul>
+<li>
+<p><a id="tabset1_java"></a>Java</p>
+</li>
+<li>
+<p><a id="tabset1_net"></a>.NET</p>
+</li>
+<li>
+<p><a id="tabset1_javascript"></a>Javascript</p>
+</li>
+<li>
+<p><a id="tabset1_python"></a>Python</p>
+</li>
+</ul>
+</div>
+<div class="content">
+<div class="tab-pane" aria-labelledby="tabset1_java">
+<div class="paragraph">
+<p>Set the server host and the database using <strong>Add value</strong>:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -828,6 +874,78 @@ If OpenShift Serverless is installed on the cluster, <strong>Resource type</stro
 <div class="imageblock">
 <div class="content">
 <img src="_images/nationalparks_deployment_env_vars_secrets.png" alt="Nationalparks Deployment Env Vars Secrets">
+</div>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_net">
+<div class="paragraph">
+<p>Set the server host and the database using <strong>Add value</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>MONGODB_SERVER_HOST</code>: <code>mongodb</code></p>
+</li>
+<li>
+<p><code>MONGODB_DATABASE</code>: <code>parksapp</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The other two are credentials which are sourced from the <code>mongodb-credentials</code> secret.</p>
+</div>
+<div class="paragraph">
+<p>Click <strong>Add from ConfigMap or Secret</strong> and enter <code>MONGODB_USER</code> as the name. For the value, choose <code>mongodb-credentials</code> as resource and <code>app-usr</code> as key.</p>
+</div>
+<div class="paragraph">
+<p>Again, click <strong>Add from ConfigMap or Secret</strong> and enter <code>MONGODB_PASSWORD</code> as the name. For the value, choose <code>mongodb-credentials</code> as resource and <code>app-pwd</code> as key.</p>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_javascript">
+<div class="paragraph">
+<p>Set the server host and the database using <strong>Add value</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>MONGODB_SERVER_HOST</code>: <code>mongodb</code></p>
+</li>
+<li>
+<p><code>MONGODB_DATABASE</code>: <code>parksapp</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The other two are credentials which are sourced from the <code>mongodb-credentials</code> secret.</p>
+</div>
+<div class="paragraph">
+<p>Click <strong>Add from ConfigMap or Secret</strong> and enter <code>MONGODB_USER</code> as the name. For the value, choose <code>mongodb-credentials</code> as resource and <code>app-usr</code> as key.</p>
+</div>
+<div class="paragraph">
+<p>Again, click <strong>Add from ConfigMap or Secret</strong> and enter <code>MONGODB_PASSWORD</code> as the name. For the value, choose <code>mongodb-credentials</code> as resource and <code>app-pwd</code> as key.</p>
+</div>
+</div>
+<div class="tab-pane" aria-labelledby="tabset1_python">
+<div class="paragraph">
+<p>The Python application takes the database host from <code>DB_HOST</code>, and the user name from <code>MONGODB_USERNAME</code> (not <code>MONGODB_USER</code>). Using <strong>Add value</strong>, add:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>DB_HOST</code>: <code>mongodb</code></p>
+</li>
+<li>
+<p><code>MONGODB_DATABASE</code>: <code>parksapp</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Then click <strong>Add from ConfigMap or Secret</strong> and enter <code>MONGODB_USERNAME</code> as the name. For the value, choose <code>mongodb-credentials</code> as resource and <code>app-usr</code> as key.</p>
+</div>
+<div class="paragraph">
+<p>Again, click <strong>Add from ConfigMap or Secret</strong> and enter <code>MONGODB_PASSWORD</code> as the name. For the value, choose <code>mongodb-credentials</code> as resource and <code>app-pwd</code> as key.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="paragraph">
@@ -991,7 +1109,7 @@ here:</p>
 </div>
 <div class="listingblock copypaste">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">http://www.github.com/openshift-roadshow/nationalparks/blob/master/src/main/java/com/openshift/evg/roadshow/parks/db/MongoDBConnection.java#L44-l48</code></pre>
+<pre class="highlightjs highlight"><code class="language-none hljs">http://www.github.com/openshift-roadshow/nationalparks-quarkus/blob/main/src/main/java/com/openshift/evg/roadshow/parks/db/MongoDBConnection.java#L51-L57</code></pre>
 </div>
 </div>
 <div class="paragraph">
