@@ -115,7 +115,9 @@ image::nationalparks-import-strategy-build.png[Select Import Strategy]
 TIP: You could also use Dockerfile, the repo contains a multi-stage Dockerfile. For this exercise, we want to show the Build Image feature.
 
 
-Verify that *Java* has been selected as your Builder Image, and be sure to select *Builder Image version* *openjdk-11-ubi8* to have OpenJDK 11.
+Verify that *Java* has been selected as your Builder Image, and be sure to select *Builder Image version* *openjdk-17-ubi8* to have OpenJDK 17.
+
+NOTE: The application is built with link:https://quarkus.io[Quarkus], which requires Java 17 or newer, so the `openjdk-11-ubi8` tag used by previous versions of this lab will not work.
 --
 .NET::
 +

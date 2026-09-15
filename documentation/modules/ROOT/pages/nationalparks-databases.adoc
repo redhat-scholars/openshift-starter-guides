@@ -404,7 +404,7 @@ here:
 
 [source,role="copypaste"]
 ----
-http://www.github.com/openshift-roadshow/nationalparks/blob/master/src/main/java/com/openshift/evg/roadshow/parks/db/MongoDBConnection.java#L44-l48
+http://www.github.com/openshift-roadshow/nationalparks/blob/master/src/main/java/com/openshift/evg/roadshow/parks/db/MongoDBConnection.java#L51-L57
 ----
 
 In short summary: By referring to bindings to connect to services

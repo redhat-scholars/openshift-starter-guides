@@ -146,7 +146,7 @@ jobs:
       uses: redhat-actions/s2i-build@v2
       with:
         path_context: '.'
-        builder_image: 'registry.access.redhat.com/ubi8/openjdk-11'
+        builder_image: 'registry.access.redhat.com/ubi8/openjdk-17'
         image: ${{ env.APP_NAME }}
         tags: ${{ env.IMAGE_TAGS }}
         

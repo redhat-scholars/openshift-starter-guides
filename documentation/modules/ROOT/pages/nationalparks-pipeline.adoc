@@ -178,7 +178,7 @@ spec:
           value:
             - package
         - name: JAVA_VERSION
-          value: '11'
+          value: '17'
       runAfter:
         - git-clone
       taskRef:
