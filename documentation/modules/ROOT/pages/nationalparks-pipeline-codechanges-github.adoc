@@ -45,7 +45,7 @@ Java::
 [.console-input]
 [source,bash,subs="+attributes,macros+"]
 ----
-oc create -f +https://raw.githubusercontent.com/openshift-roadshow/nationalparks/master/pipeline/nationalparks-triggers.yaml+ -n %PROJECT%
+oc create -f +https://raw.githubusercontent.com/openshift-roadshow/nationalparks-quarkus/main/pipeline/nationalparks-triggers.yaml+ -n %PROJECT%
 ----
 --
 .NET::
@@ -90,7 +90,7 @@ image::devops-pipeline-triggers-eventlistener.png[EventListener created]
 
 // In this step we will fork the original `nationalparks` repository to apply our changes and automatically trigger the Pipeline through a link:https://docs.github.com/en/free-pro-team@latest/developers/webhooks-and-events/about-webhooks[GitHub Webhook,window='_blank'] that we're going to configure.
 
-// Go to link:https://github.com/openshift-roadshow/nationalparks[Nationalparks,window='_blank'] repository. From top-right side, click to *Fork* to start forking it into your account.
+// Go to link:https://github.com/openshift-roadshow/nationalparks-quarkus[Nationalparks,window='_blank'] repository. From top-right side, click to *Fork* to start forking it into your account.
 
 // image::nationalparks-codechanges-github-fork-1.png[Fork Repository]
 
@@ -201,7 +201,7 @@ Java::
 Click the *Code* tab in GitHub. This is GitHub's repository view.  
 
 CAUTION: Make sure that the drop-down menu at the upper right is set for 
-the *`master`* branch. 
+the *`main`* branch. 
 
 Navigate to the following path:
 
@@ -211,14 +211,12 @@ Navigate to the following path:
 src/main/java/com/openshift/evg/roadshow/parks/rest/
 ----
 
-Then click on the `BackendController.java` file.
+Then click on the `BackendController.java` file, which looks like this:
 
-Once you have the file on the screen, click the edit button in the top right
-hand corner as shown here:
+image::nationalparks-codechanges-github-change-code.png[Backend controller]
 
-image::nationalparks-codechanges-github-change-code.png[Webhook]
-
-Change line number 20:
+Click the edit button -- the pencil icon in the toolbar just above the code,
+next to *Raw* -- then change line number 23:
 
 [source,java]
 ----

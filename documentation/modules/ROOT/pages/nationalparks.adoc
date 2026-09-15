@@ -80,7 +80,7 @@ Java::
 --
 Similar to how we used *Quick create* before with an existing image, we
 can do the same for specifying a source code repository. Since for this lab you
-have your own git repository, let's use it with a simple link:https://github.com/openshift-roadshow/nationalparks.git[Java] S2I image.
+have your own git repository, let's use it with a simple link:https://github.com/openshift-roadshow/nationalparks-quarkus.git[Java] S2I image.
 
 From the masthead in the top-right corner of the web console, click the *Quick create* (*+*) button and choose *Import from Git*.
 
@@ -92,7 +92,7 @@ Enter the following for Git Repo URL:
 
 [source,bash,role=copypaste]
 ----
-https://github.com/openshift-roadshow/nationalparks.git
+https://github.com/openshift-roadshow/nationalparks-quarkus.git
 ----
 
 OpenShift will automatically guess the Git server type and the programming language used by the source code. You will be now asked to select an *Import Strategy*.
@@ -115,7 +115,9 @@ image::nationalparks-import-strategy-build.png[Select Import Strategy]
 TIP: You could also use Dockerfile, the repo contains a multi-stage Dockerfile. For this exercise, we want to show the Build Image feature.
 
 
-Verify that *Java* has been selected as your Builder Image, and be sure to select *Builder Image version* *openjdk-11-ubi8* to have OpenJDK 11.
+Verify that *Java* has been selected as your Builder Image, and be sure to select *Builder Image version* *openjdk-17-ubi8* to have OpenJDK 17.
+
+NOTE: The Java backend used by this lab lives in link:https://github.com/openshift-roadshow/nationalparks-quarkus[nationalparks-quarkus] and is built with link:https://quarkus.io[Quarkus], which requires Java 17 or newer, so the `openjdk-11-ubi8` tag used by previous versions of this lab will not work. The original link:https://github.com/openshift-roadshow/nationalparks[nationalparks] repository stays on Spring Boot for the workshops that still build it.
 --
 .NET::
 +
