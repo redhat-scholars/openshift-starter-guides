@@ -299,9 +299,41 @@ role=backend
 
 Click *Create* to submit.
 
-image::nationalparks-configure-service1.png[Select Builder]
+The first two screenshots below show the builder image you picked, so open the tab for the language you are deploying.
 
-image::nationalparks-configure-service2.png[Advanced Options]
+[tabs, subs="attributes+,+macros"]
+====
+Java::
++
+--
+image::nationalparks-configure-service1-java.png[Select Builder]
+
+image::nationalparks-configure-service2-java.png[Advanced Options]
+--
+.NET::
++
+--
+image::nationalparks-configure-service1-dotnet.png[Select Builder]
+
+image::nationalparks-configure-service2-dotnet.png[Advanced Options]
+--
+Javascript::
++
+--
+image::nationalparks-configure-service1-js.png[Select Builder]
+
+image::nationalparks-configure-service2-js.png[Advanced Options]
+--
+Python::
++
+--
+image::nationalparks-configure-service1-py.png[Select Builder]
+
+image::nationalparks-configure-service2-py.png[Advanced Options]
+--
+====
+
+The routing and labels sections are the same for every backend:
 
 image::nationalparks-configure-service3.png[Secure Route]
 
